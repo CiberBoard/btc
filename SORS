@@ -1,0 +1,15 @@
+bitcoin_scanner_project/
+├── main.py
+├── config.py
+├── utils/
+│   ├── __init__.py
+│   └── helpers.py
+├── core/
+│   ├── __init__.py
+│   ├── gpu_scanner.py
+│   └── cpu_scanner.py
+├── ui/
+│   ├── __init__.py
+│   └── main_window.py
+└── resources/ (опционально, для иконок, стилей и т.д.)
+    └── (пока пусто)
