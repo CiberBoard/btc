@@ -1,0 +1,22 @@
+{
+    "gpu_target": "",
+    "gpu_start_key": "1",
+    "gpu_end_key": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140",
+    "gpu_device": "0",
+    "blocks": "256",
+    "threads": "256",
+    "points": "256",
+    "gpu_random_mode": false,
+    "gpu_restart_interval": "300",
+    "gpu_min_range_size": "134217728",
+    "gpu_max_range_size": "536870912",
+    "gpu_priority": 0,
+    "cpu_target": "",
+    "cpu_start_key": "1",
+    "cpu_end_key": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140",
+    "cpu_prefix": 8,
+    "cpu_workers": 23,
+    "cpu_attempts": 10000000,
+    "cpu_mode": "sequential",
+    "cpu_priority": 3
+}

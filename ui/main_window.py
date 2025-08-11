@@ -1,5 +1,6 @@
 # ui/main_window.py
 import os
+import subprocess
 import sys
 import time
 import json

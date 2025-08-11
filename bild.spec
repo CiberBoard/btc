@@ -89,7 +89,7 @@ if os.path.exists('cuBitcrack.exe'):
 
 # Анализ основного файла
 a = Analysis(
-    ['DeepSeekChek.py'],  # Замените на имя вашего основного файла
+    ['main.py'],  # Замените на имя вашего основного файла
     pathex=[base_path],
     binaries=binaries,
     datas=datas,

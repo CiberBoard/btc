@@ -979,3 +979,746 @@
 [2025-08-12 02:13:56] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=13325303808, Progress=1.4%
 [2025-08-12 02:13:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (14,552,137,728 total) [00:00:20]
 [2025-08-12 02:13:56] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=14552137728, Progress=1.6%
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (15,778,971,648 total) [00:00:21]
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (15,778,971,648 total) [00:00:21]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (16,986,931,200 total) [00:00:23]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=677.06 MKey/s, Checked=15778971648, Progress=1.7%
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (18,194,890,752 total) [00:00:25]
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (16,986,931,200 total) [00:00:23]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (19,421,724,672 total) [00:00:27]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (20,610,809,856 total) [00:00:29]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (21,818,769,408 total) [00:00:30]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (23,026,728,960 total) [00:00:32]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (24,234,688,512 total) [00:00:34]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (25,442,648,064 total) [00:00:36]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (26,669,481,984 total) [00:00:38]
+[2025-08-12 02:14:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (27,877,441,536 total) [00:00:39]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=16986931200, Progress=1.8%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (18,194,890,752 total) [00:00:25]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=18194890752, Progress=2.0%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (19,421,724,672 total) [00:00:27]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=19421724672, Progress=2.1%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (20,610,809,856 total) [00:00:29]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=20610809856, Progress=2.2%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (21,818,769,408 total) [00:00:30]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=21818769408, Progress=2.4%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (23,026,728,960 total) [00:00:32]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=23026728960, Progress=2.5%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (24,234,688,512 total) [00:00:34]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=24234688512, Progress=2.6%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (25,442,648,064 total) [00:00:36]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=25442648064, Progress=2.7%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (26,669,481,984 total) [00:00:38]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=26669481984, Progress=2.9%
+[2025-08-12 02:14:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (27,877,441,536 total) [00:00:39]
+[2025-08-12 02:14:16] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=27877441536, Progress=3.0%
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (29,085,401,088 total) [00:00:41]
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (29,085,401,088 total) [00:00:41]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (30,293,360,640 total) [00:00:43]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=29085401088, Progress=3.1%
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (31,520,194,560 total) [00:00:45]
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (30,293,360,640 total) [00:00:43]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (32,728,154,112 total) [00:00:47]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (33,954,988,032 total) [00:00:49]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (35,181,821,952 total) [00:00:50]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 639.81 MKey/s (36,352,032,768 total) [00:00:52]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 635.40 MKey/s (37,503,369,216 total) [00:00:54]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 640.16 MKey/s (38,673,580,032 total) [00:00:56]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 635.04 MKey/s (39,824,916,480 total) [00:00:58]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (41,032,876,032 total) [00:01:00]
+[2025-08-12 02:14:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (42,221,961,216 total) [00:01:01]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=30293360640, Progress=3.3%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (31,520,194,560 total) [00:00:45]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=31520194560, Progress=3.4%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (32,728,154,112 total) [00:00:47]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=32728154112, Progress=3.5%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (33,954,988,032 total) [00:00:49]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=677.06 MKey/s, Checked=33954988032, Progress=3.7%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (35,181,821,952 total) [00:00:50]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=35181821952, Progress=3.8%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 639.81 MKey/s (36,352,032,768 total) [00:00:52]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=639.81 MKey/s, Checked=36352032768, Progress=3.9%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 635.40 MKey/s (37,503,369,216 total) [00:00:54]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=635.4 MKey/s, Checked=37503369216, Progress=4.0%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 640.16 MKey/s (38,673,580,032 total) [00:00:56]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=640.16 MKey/s, Checked=38673580032, Progress=4.2%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 635.04 MKey/s (39,824,916,480 total) [00:00:58]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=635.04 MKey/s, Checked=39824916480, Progress=4.3%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (41,032,876,032 total) [00:01:00]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=41032876032, Progress=4.4%
+[2025-08-12 02:14:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (42,221,961,216 total) [00:01:01]
+[2025-08-12 02:14:38] DEBUG [main_window:861]: GPU Update: Speed=650.48 MKey/s, Checked=42221961216, Progress=4.6%
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 645.81 MKey/s (43,392,172,032 total) [00:01:03]
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 645.81 MKey/s (43,392,172,032 total) [00:01:03]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (44,581,257,216 total) [00:01:05]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=645.81 MKey/s, Checked=43392172032, Progress=4.7%
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (45,770,342,400 total) [00:01:07]
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (44,581,257,216 total) [00:01:05]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.13 MKey/s (46,959,427,584 total) [00:01:09]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (48,148,512,768 total) [00:01:10]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (49,356,472,320 total) [00:01:12]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (50,545,557,504 total) [00:01:14]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (51,753,517,056 total) [00:01:16]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (52,961,476,608 total) [00:01:18]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (54,188,310,528 total) [00:01:20]
+[2025-08-12 02:14:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (55,415,144,448 total) [00:01:21]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=44581257216, Progress=4.8%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (45,770,342,400 total) [00:01:07]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=45770342400, Progress=4.9%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.13 MKey/s (46,959,427,584 total) [00:01:09]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=650.13 MKey/s, Checked=46959427584, Progress=5.1%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (48,148,512,768 total) [00:01:10]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=48148512768, Progress=5.2%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (49,356,472,320 total) [00:01:12]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=49356472320, Progress=5.3%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (50,545,557,504 total) [00:01:14]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=50545557504, Progress=5.4%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (51,753,517,056 total) [00:01:16]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=51753517056, Progress=5.6%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (52,961,476,608 total) [00:01:18]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=52961476608, Progress=5.7%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (54,188,310,528 total) [00:01:20]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=54188310528, Progress=5.8%
+[2025-08-12 02:14:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (55,415,144,448 total) [00:01:21]
+[2025-08-12 02:14:58] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=55415144448, Progress=6.0%
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (56,623,104,000 total) [00:01:23]
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (56,623,104,000 total) [00:01:23]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (57,849,937,920 total) [00:01:25]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=56623104000, Progress=6.1%
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (59,057,897,472 total) [00:01:27]
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (57,849,937,920 total) [00:01:25]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (60,246,982,656 total) [00:01:29]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (61,436,067,840 total) [00:01:30]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (62,625,153,024 total) [00:01:32]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (63,814,238,208 total) [00:01:34]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (65,003,323,392 total) [00:01:36]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (66,192,408,576 total) [00:01:38]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (67,400,368,128 total) [00:01:40]
+[2025-08-12 02:15:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (68,608,327,680 total) [00:01:41]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=57849937920, Progress=6.2%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (59,057,897,472 total) [00:01:27]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=59057897472, Progress=6.4%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (60,246,982,656 total) [00:01:29]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=60246982656, Progress=6.5%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (61,436,067,840 total) [00:01:30]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=61436067840, Progress=6.6%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (62,625,153,024 total) [00:01:32]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=62625153024, Progress=6.7%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (63,814,238,208 total) [00:01:34]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=63814238208, Progress=6.9%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (65,003,323,392 total) [00:01:36]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=650.48 MKey/s, Checked=65003323392, Progress=7.0%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (66,192,408,576 total) [00:01:38]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=66192408576, Progress=7.1%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (67,400,368,128 total) [00:01:40]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=67400368128, Progress=7.3%
+[2025-08-12 02:15:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (68,608,327,680 total) [00:01:41]
+[2025-08-12 02:15:18] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=68608327680, Progress=7.4%
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (69,835,161,600 total) [00:01:43]
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (69,835,161,600 total) [00:01:43]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (71,043,121,152 total) [00:01:45]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=69835161600, Progress=7.5%
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (72,251,080,704 total) [00:01:47]
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (71,043,121,152 total) [00:01:45]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (73,477,914,624 total) [00:01:49]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (74,685,874,176 total) [00:01:50]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (75,893,833,728 total) [00:01:52]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (77,082,918,912 total) [00:01:54]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (78,272,004,096 total) [00:01:56]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (79,479,963,648 total) [00:01:58]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (80,669,048,832 total) [00:02:00]
+[2025-08-12 02:15:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (81,858,134,016 total) [00:02:01]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=71043121152, Progress=7.7%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (72,251,080,704 total) [00:01:47]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=72251080704, Progress=7.8%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (73,477,914,624 total) [00:01:49]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=73477914624, Progress=7.9%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (74,685,874,176 total) [00:01:50]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=74685874176, Progress=8.0%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (75,893,833,728 total) [00:01:52]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=75893833728, Progress=8.2%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (77,082,918,912 total) [00:01:54]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=77082918912, Progress=8.3%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (78,272,004,096 total) [00:01:56]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=78272004096, Progress=8.4%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (79,479,963,648 total) [00:01:58]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=79479963648, Progress=8.6%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (80,669,048,832 total) [00:02:00]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=80669048832, Progress=8.7%
+[2025-08-12 02:15:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (81,858,134,016 total) [00:02:01]
+[2025-08-12 02:15:38] DEBUG [main_window:861]: GPU Update: Speed=650.48 MKey/s, Checked=81858134016, Progress=8.8%
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (83,066,093,568 total) [00:02:03]
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (83,066,093,568 total) [00:02:03]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (84,274,053,120 total) [00:02:05]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=83066093568, Progress=9.0%
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (85,482,012,672 total) [00:02:07]
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (84,274,053,120 total) [00:02:05]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (86,689,972,224 total) [00:02:09]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (87,879,057,408 total) [00:02:10]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (89,087,016,960 total) [00:02:12]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (90,313,850,880 total) [00:02:14]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (91,521,810,432 total) [00:02:16]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (92,729,769,984 total) [00:02:18]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (93,956,603,904 total) [00:02:20]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (95,164,563,456 total) [00:02:21]
+[2025-08-12 02:16:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (96,372,523,008 total) [00:02:23]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=84274053120, Progress=9.1%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (85,482,012,672 total) [00:02:07]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=85482012672, Progress=9.2%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (86,689,972,224 total) [00:02:09]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=86689972224, Progress=9.3%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (87,879,057,408 total) [00:02:10]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=87879057408, Progress=9.5%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (89,087,016,960 total) [00:02:12]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=89087016960, Progress=9.6%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (90,313,850,880 total) [00:02:14]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=90313850880, Progress=9.7%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (91,521,810,432 total) [00:02:16]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=91521810432, Progress=9.9%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (92,729,769,984 total) [00:02:18]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=92729769984, Progress=10.0%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (93,956,603,904 total) [00:02:20]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=93956603904, Progress=10.1%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (95,164,563,456 total) [00:02:21]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=95164563456, Progress=10.3%
+[2025-08-12 02:16:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (96,372,523,008 total) [00:02:23]
+[2025-08-12 02:16:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=96372523008, Progress=10.4%
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (97,580,482,560 total) [00:02:25]
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (97,580,482,560 total) [00:02:25]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (98,788,442,112 total) [00:02:27]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=97580482560, Progress=10.5%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (98,788,442,112 total) [00:02:27]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (100,015,276,032 total) [00:02:29]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (101,223,235,584 total) [00:02:30]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (102,431,195,136 total) [00:02:32]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (103,658,029,056 total) [00:02:34]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (104,865,988,608 total) [00:02:36]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (106,055,073,792 total) [00:02:38]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (107,263,033,344 total) [00:02:40]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (108,489,867,264 total) [00:02:41]
+[2025-08-12 02:16:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (109,716,701,184 total) [00:02:43]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=98788442112, Progress=10.6%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (100,015,276,032 total) [00:02:29]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=100015276032, Progress=10.8%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (101,223,235,584 total) [00:02:30]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=101223235584, Progress=10.9%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (102,431,195,136 total) [00:02:32]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=102431195136, Progress=11.0%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (103,658,029,056 total) [00:02:34]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=670.77 MKey/s, Checked=103658029056, Progress=11.2%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (104,865,988,608 total) [00:02:36]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=104865988608, Progress=11.3%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (106,055,073,792 total) [00:02:38]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=106055073792, Progress=11.4%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (107,263,033,344 total) [00:02:40]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=107263033344, Progress=11.6%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (108,489,867,264 total) [00:02:41]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=108489867264, Progress=11.7%
+[2025-08-12 02:16:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (109,716,701,184 total) [00:02:43]
+[2025-08-12 02:16:20] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=109716701184, Progress=11.8%
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (110,943,535,104 total) [00:02:45]
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (110,943,535,104 total) [00:02:45]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (112,151,494,656 total) [00:02:47]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=110943535104, Progress=12.0%
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (113,378,328,576 total) [00:02:49]
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (112,151,494,656 total) [00:02:47]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (114,586,288,128 total) [00:02:51]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (115,775,373,312 total) [00:02:52]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (116,983,332,864 total) [00:02:54]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (118,191,292,416 total) [00:02:56]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (119,399,251,968 total) [00:02:58]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (120,626,085,888 total) [00:03:00]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (121,852,919,808 total) [00:03:01]
+[2025-08-12 02:16:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (123,060,879,360 total) [00:03:03]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=112151494656, Progress=12.1%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (113,378,328,576 total) [00:02:49]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=113378328576, Progress=12.2%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (114,586,288,128 total) [00:02:51]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=114586288128, Progress=12.3%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (115,775,373,312 total) [00:02:52]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=115775373312, Progress=12.5%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (116,983,332,864 total) [00:02:54]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=116983332864, Progress=12.6%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (118,191,292,416 total) [00:02:56]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=118191292416, Progress=12.7%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (119,399,251,968 total) [00:02:58]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=119399251968, Progress=12.9%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (120,626,085,888 total) [00:03:00]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=120626085888, Progress=13.0%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (121,852,919,808 total) [00:03:01]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=121852919808, Progress=13.1%
+[2025-08-12 02:16:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (123,060,879,360 total) [00:03:03]
+[2025-08-12 02:16:40] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=123060879360, Progress=13.3%
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (124,287,713,280 total) [00:03:05]
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (124,287,713,280 total) [00:03:05]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (125,476,798,464 total) [00:03:07]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=124287713280, Progress=13.4%
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (126,684,758,016 total) [00:03:09]
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (125,476,798,464 total) [00:03:07]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (127,892,717,568 total) [00:03:11]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (129,100,677,120 total) [00:03:12]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (130,308,636,672 total) [00:03:14]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (131,516,596,224 total) [00:03:16]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (132,724,555,776 total) [00:03:18]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (133,932,515,328 total) [00:03:20]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (135,140,474,880 total) [00:03:21]
+[2025-08-12 02:17:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (136,348,434,432 total) [00:03:23]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=125476798464, Progress=13.5%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (126,684,758,016 total) [00:03:09]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=126684758016, Progress=13.7%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (127,892,717,568 total) [00:03:11]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=127892717568, Progress=13.8%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (129,100,677,120 total) [00:03:12]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=129100677120, Progress=13.9%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (130,308,636,672 total) [00:03:14]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=130308636672, Progress=14.0%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (131,516,596,224 total) [00:03:16]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=131516596224, Progress=14.2%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (132,724,555,776 total) [00:03:18]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=132724555776, Progress=14.3%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (133,932,515,328 total) [00:03:20]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=133932515328, Progress=14.4%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (135,140,474,880 total) [00:03:21]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=135140474880, Progress=14.6%
+[2025-08-12 02:17:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (136,348,434,432 total) [00:03:23]
+[2025-08-12 02:17:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=136348434432, Progress=14.7%
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (137,556,393,984 total) [00:03:25]
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (137,556,393,984 total) [00:03:25]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (138,764,353,536 total) [00:03:27]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=137556393984, Progress=14.8%
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (139,972,313,088 total) [00:03:29]
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (138,764,353,536 total) [00:03:27]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (141,180,272,640 total) [00:03:30]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (142,388,232,192 total) [00:03:32]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (143,596,191,744 total) [00:03:34]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (144,823,025,664 total) [00:03:36]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (146,030,985,216 total) [00:03:38]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.45 MKey/s (147,238,944,768 total) [00:03:40]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (148,446,904,320 total) [00:03:41]
+[2025-08-12 02:17:20] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (149,635,989,504 total) [00:03:43]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=138764353536, Progress=15.0%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (139,972,313,088 total) [00:03:29]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=139972313088, Progress=15.1%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (141,180,272,640 total) [00:03:30]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=141180272640, Progress=15.2%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (142,388,232,192 total) [00:03:32]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=142388232192, Progress=15.3%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (143,596,191,744 total) [00:03:34]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=143596191744, Progress=15.5%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (144,823,025,664 total) [00:03:36]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=144823025664, Progress=15.6%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (146,030,985,216 total) [00:03:38]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=146030985216, Progress=15.7%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.45 MKey/s (147,238,944,768 total) [00:03:40]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=660.45 MKey/s, Checked=147238944768, Progress=15.9%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (148,446,904,320 total) [00:03:41]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=148446904320, Progress=16.0%
+[2025-08-12 02:17:20] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (149,635,989,504 total) [00:03:43]
+[2025-08-12 02:17:20] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=149635989504, Progress=16.1%
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (150,862,823,424 total) [00:03:45]
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (150,862,823,424 total) [00:03:45]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (152,089,657,344 total) [00:03:47]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=150862823424, Progress=16.3%
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (153,278,742,528 total) [00:03:49]
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (152,089,657,344 total) [00:03:47]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (154,467,827,712 total) [00:03:51]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (155,675,787,264 total) [00:03:52]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (156,902,621,184 total) [00:03:54]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (158,129,455,104 total) [00:03:56]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (159,337,414,656 total) [00:03:58]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (160,545,374,208 total) [00:04:00]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (161,734,459,392 total) [00:04:01]
+[2025-08-12 02:17:40] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (162,942,418,944 total) [00:04:03]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=152089657344, Progress=16.4%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (153,278,742,528 total) [00:03:49]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=153278742528, Progress=16.5%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (154,467,827,712 total) [00:03:51]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=650.48 MKey/s, Checked=154467827712, Progress=16.6%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (155,675,787,264 total) [00:03:52]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=155675787264, Progress=16.8%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (156,902,621,184 total) [00:03:54]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=156902621184, Progress=16.9%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (158,129,455,104 total) [00:03:56]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=158129455104, Progress=17.0%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (159,337,414,656 total) [00:03:58]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=159337414656, Progress=17.2%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (160,545,374,208 total) [00:04:00]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=160545374208, Progress=17.3%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (161,734,459,392 total) [00:04:01]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=161734459392, Progress=17.4%
+[2025-08-12 02:17:40] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (162,942,418,944 total) [00:04:03]
+[2025-08-12 02:17:40] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=162942418944, Progress=17.6%
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (164,169,252,864 total) [00:04:05]
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (164,169,252,864 total) [00:04:05]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (165,377,212,416 total) [00:04:07]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=164169252864, Progress=17.7%
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (166,585,171,968 total) [00:04:09]
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (165,377,212,416 total) [00:04:07]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (167,812,005,888 total) [00:04:11]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (169,038,839,808 total) [00:04:12]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (170,246,799,360 total) [00:04:14]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (171,454,758,912 total) [00:04:16]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (172,643,844,096 total) [00:04:18]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (173,832,929,280 total) [00:04:20]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (175,040,888,832 total) [00:04:21]
+[2025-08-12 02:18:00] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (176,229,974,016 total) [00:04:23]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=165377212416, Progress=17.8%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (166,585,171,968 total) [00:04:09]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=166585171968, Progress=18.0%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (167,812,005,888 total) [00:04:11]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=167812005888, Progress=18.1%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (169,038,839,808 total) [00:04:12]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=169038839808, Progress=18.2%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (170,246,799,360 total) [00:04:14]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=170246799360, Progress=18.3%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (171,454,758,912 total) [00:04:16]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=171454758912, Progress=18.5%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (172,643,844,096 total) [00:04:18]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=172643844096, Progress=18.6%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (173,832,929,280 total) [00:04:20]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=173832929280, Progress=18.7%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (175,040,888,832 total) [00:04:21]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=175040888832, Progress=18.9%
+[2025-08-12 02:18:00] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (176,229,974,016 total) [00:04:23]
+[2025-08-12 02:18:00] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=176229974016, Progress=19.0%
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (177,419,059,200 total) [00:04:25]
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (177,419,059,200 total) [00:04:25]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (178,627,018,752 total) [00:04:27]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=177419059200, Progress=19.1%
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (179,834,978,304 total) [00:04:29]
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (178,627,018,752 total) [00:04:27]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (181,042,937,856 total) [00:04:31]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (182,250,897,408 total) [00:04:32]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (183,458,856,960 total) [00:04:34]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (184,666,816,512 total) [00:04:36]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (185,855,901,696 total) [00:04:38]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (187,063,861,248 total) [00:04:40]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (188,271,820,800 total) [00:04:41]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (189,479,780,352 total) [00:04:43]
+[2025-08-12 02:18:22] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (190,706,614,272 total) [00:04:45]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=178627018752, Progress=19.3%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (179,834,978,304 total) [00:04:29]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=179834978304, Progress=19.4%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (181,042,937,856 total) [00:04:31]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=181042937856, Progress=19.5%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (182,250,897,408 total) [00:04:32]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=182250897408, Progress=19.6%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (183,458,856,960 total) [00:04:34]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=183458856960, Progress=19.8%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (184,666,816,512 total) [00:04:36]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=184666816512, Progress=19.9%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (185,855,901,696 total) [00:04:38]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=650.48 MKey/s, Checked=185855901696, Progress=20.0%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (187,063,861,248 total) [00:04:40]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=187063861248, Progress=20.2%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (188,271,820,800 total) [00:04:41]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=188271820800, Progress=20.3%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (189,479,780,352 total) [00:04:43]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=189479780352, Progress=20.4%
+[2025-08-12 02:18:22] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (190,706,614,272 total) [00:04:45]
+[2025-08-12 02:18:22] DEBUG [main_window:861]: GPU Update: Speed=670.77 MKey/s, Checked=190706614272, Progress=20.6%
+[2025-08-12 02:18:24] INFO [gpu_scanner:177]: Остановка GPU процессов...
+[2025-08-12 02:18:24] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (191,933,448,192 total) [00:04:47]
+[2025-08-12 02:18:24] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (193,160,282,112 total) [00:04:49]
+[2025-08-12 02:18:24] INFO [gpu_scanner:193]: GPU процессы остановлены.
+[2025-08-12 02:18:24] DEBUG [main_window:1335]: Перезапуск GPU поиска с новым случайным диапазоном...
+[2025-08-12 02:18:24] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (191,933,448,192 total) [00:04:47]
+[2025-08-12 02:18:24] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=191933448192, Progress=20.7%
+[2025-08-12 02:18:24] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (193,160,282,112 total) [00:04:49]
+[2025-08-12 02:18:24] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=193160282112, Progress=20.8%
+[2025-08-12 02:18:24] DEBUG [main_window:1335]: GPU поиск завершен
+[2025-08-12 02:18:24] INFO [gpu_scanner:177]: Остановка GPU процессов...
+[2025-08-12 02:18:24] INFO [gpu_scanner:193]: GPU процессы остановлены.
+[2025-08-12 02:18:25] DEBUG [main_window:1335]: Новый случайный диапазон GPU: 0x70e4b9b073a9e68b1f - 0x70e4b9b16816559189
+[2025-08-12 02:18:25] INFO [gpu_scanner:122]: Запуск GPU поиска для диапазона 0x70e4b9b073a9e68b1f - 0x70e4b9b16816559189 на устройстве 0
+[2025-08-12 02:18:25] DEBUG [gpu_scanner:142]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B073A9E68B1F:70E4B9B16816559189 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-12 02:18:25] INFO [main_window:1330]: Запущено 1 GPU процессов
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:25] [Info] Compression: compressed
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:25] [Info] Compression: compressed
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:25] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B073A9E68B1F
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:25] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B073A9E68B1F
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:25] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B16816559189
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:25] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:25] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:25] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:30] [Info] 10.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:31] [Info] 20.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:31] [Info] 30.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:31] [Info] 40.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:31] [Info] 50.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:32] [Info] 60.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:32] [Info] 70.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:32] [Info] 80.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:32] [Info] 90.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:32] [Info] 100.0%
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: [2025-08-12.02:18:32] [Info] Done
+[2025-08-12 02:18:36] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (1,226,833,920 total) [00:00:00]
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:25] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B16816559189
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:25] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:25] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:25] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:30] [Info] 10.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:31] [Info] 20.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:31] [Info] 30.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:31] [Info] 40.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:31] [Info] 50.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:32] [Info] 60.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:32] [Info] 70.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:32] [Info] 80.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:32] [Info] 90.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:32] [Info] 100.0%
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: [2025-08-12.02:18:32] [Info] Done
+[2025-08-12 02:18:36] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (1,226,833,920 total) [00:00:00]
+[2025-08-12 02:18:36] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=1226833920, Progress=0.1%
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (2,453,667,840 total) [00:00:01]
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (2,453,667,840 total) [00:00:01]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (3,680,501,760 total) [00:00:03]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=670.77 MKey/s, Checked=2453667840, Progress=0.2%
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (4,907,335,680 total) [00:00:05]
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (3,680,501,760 total) [00:00:03]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (6,115,295,232 total) [00:00:07]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (7,304,380,416 total) [00:00:09]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (8,493,465,600 total) [00:00:10]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (9,701,425,152 total) [00:00:12]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 676.69 MKey/s (10,928,259,072 total) [00:00:14]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (12,136,218,624 total) [00:00:16]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (13,363,052,544 total) [00:00:18]
+[2025-08-12 02:18:56] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (14,589,886,464 total) [00:00:20]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=3680501760, Progress=0.4%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (4,907,335,680 total) [00:00:05]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=4907335680, Progress=0.5%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (6,115,295,232 total) [00:00:07]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=6115295232, Progress=0.6%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (7,304,380,416 total) [00:00:09]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=7304380416, Progress=0.7%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (8,493,465,600 total) [00:00:10]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=650.48 MKey/s, Checked=8493465600, Progress=0.8%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (9,701,425,152 total) [00:00:12]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=9701425152, Progress=0.9%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 676.69 MKey/s (10,928,259,072 total) [00:00:14]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=676.69 MKey/s, Checked=10928259072, Progress=1.0%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (12,136,218,624 total) [00:00:16]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=12136218624, Progress=1.2%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (13,363,052,544 total) [00:00:18]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=13363052544, Progress=1.3%
+[2025-08-12 02:18:56] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (14,589,886,464 total) [00:00:20]
+[2025-08-12 02:18:56] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=14589886464, Progress=1.4%
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 676.69 MKey/s (15,816,720,384 total) [00:00:21]
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 676.69 MKey/s (15,816,720,384 total) [00:00:21]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (17,024,679,936 total) [00:00:23]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=676.69 MKey/s, Checked=15816720384, Progress=1.5%
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (18,251,513,856 total) [00:00:25]
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (17,024,679,936 total) [00:00:23]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (19,459,473,408 total) [00:00:27]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (20,667,432,960 total) [00:00:29]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (21,875,392,512 total) [00:00:30]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (23,083,352,064 total) [00:00:32]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (24,310,185,984 total) [00:00:34]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (25,537,019,904 total) [00:00:36]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (26,744,979,456 total) [00:00:38]
+[2025-08-12 02:19:16] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (27,952,939,008 total) [00:00:40]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=17024679936, Progress=1.6%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (18,251,513,856 total) [00:00:25]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=18251513856, Progress=1.7%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (19,459,473,408 total) [00:00:27]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=19459473408, Progress=1.9%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (20,667,432,960 total) [00:00:29]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=20667432960, Progress=2.0%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (21,875,392,512 total) [00:00:30]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=21875392512, Progress=2.1%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (23,083,352,064 total) [00:00:32]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=23083352064, Progress=2.2%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (24,310,185,984 total) [00:00:34]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=670.77 MKey/s, Checked=24310185984, Progress=2.3%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (25,537,019,904 total) [00:00:36]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=25537019904, Progress=2.4%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (26,744,979,456 total) [00:00:38]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=26744979456, Progress=2.5%
+[2025-08-12 02:19:16] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (27,952,939,008 total) [00:00:40]
+[2025-08-12 02:19:16] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=27952939008, Progress=2.7%
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (29,179,772,928 total) [00:00:41]
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (29,179,772,928 total) [00:00:41]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (30,387,732,480 total) [00:00:43]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=29179772928, Progress=2.8%
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (31,595,692,032 total) [00:00:45]
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (30,387,732,480 total) [00:00:43]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (32,822,525,952 total) [00:00:47]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (34,011,611,136 total) [00:00:49]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (35,219,570,688 total) [00:00:50]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (36,427,530,240 total) [00:00:52]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (37,654,364,160 total) [00:00:54]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (38,862,323,712 total) [00:00:56]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (40,070,283,264 total) [00:00:58]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (41,278,242,816 total) [00:01:00]
+[2025-08-12 02:19:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (42,467,328,000 total) [00:01:01]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=30387732480, Progress=2.9%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (31,595,692,032 total) [00:00:45]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=31595692032, Progress=3.0%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 670.77 MKey/s (32,822,525,952 total) [00:00:47]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=670.77 MKey/s, Checked=32822525952, Progress=3.1%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (34,011,611,136 total) [00:00:49]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=34011611136, Progress=3.2%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (35,219,570,688 total) [00:00:50]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=35219570688, Progress=3.4%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (36,427,530,240 total) [00:00:52]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=36427530240, Progress=3.5%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (37,654,364,160 total) [00:00:54]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=37654364160, Progress=3.6%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (38,862,323,712 total) [00:00:56]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=38862323712, Progress=3.7%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (40,070,283,264 total) [00:00:58]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=40070283264, Progress=3.8%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (41,278,242,816 total) [00:01:00]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=41278242816, Progress=3.9%
+[2025-08-12 02:19:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (42,467,328,000 total) [00:01:01]
+[2025-08-12 02:19:38] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=42467328000, Progress=4.0%
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (43,675,287,552 total) [00:01:03]
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (43,675,287,552 total) [00:01:03]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (44,864,372,736 total) [00:01:05]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=43675287552, Progress=4.2%
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (46,072,332,288 total) [00:01:07]
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (44,864,372,736 total) [00:01:05]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (47,280,291,840 total) [00:01:09]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (48,488,251,392 total) [00:01:10]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (49,696,210,944 total) [00:01:12]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (50,904,170,496 total) [00:01:14]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (52,093,255,680 total) [00:01:16]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (53,301,215,232 total) [00:01:18]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 676.69 MKey/s (54,528,049,152 total) [00:01:20]
+[2025-08-12 02:19:58] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (55,736,008,704 total) [00:01:21]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=44864372736, Progress=4.3%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (46,072,332,288 total) [00:01:07]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=46072332288, Progress=4.4%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (47,280,291,840 total) [00:01:09]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=47280291840, Progress=4.5%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (48,488,251,392 total) [00:01:10]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=48488251392, Progress=4.6%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (49,696,210,944 total) [00:01:12]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=49696210944, Progress=4.7%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (50,904,170,496 total) [00:01:14]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=50904170496, Progress=4.8%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 655.87 MKey/s (52,093,255,680 total) [00:01:16]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=655.87 MKey/s, Checked=52093255680, Progress=5.0%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (53,301,215,232 total) [00:01:18]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=53301215232, Progress=5.1%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 676.69 MKey/s (54,528,049,152 total) [00:01:20]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=676.69 MKey/s, Checked=54528049152, Progress=5.2%
+[2025-08-12 02:19:58] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (55,736,008,704 total) [00:01:21]
+[2025-08-12 02:19:58] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=55736008704, Progress=5.3%
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.13 MKey/s (56,925,093,888 total) [00:01:23]
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.13 MKey/s (56,925,093,888 total) [00:01:23]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (58,114,179,072 total) [00:01:25]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=650.13 MKey/s, Checked=56925093888, Progress=5.4%
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (59,322,138,624 total) [00:01:27]
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (58,114,179,072 total) [00:01:25]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (60,548,972,544 total) [00:01:29]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (61,756,932,096 total) [00:01:30]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (62,964,891,648 total) [00:01:32]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (64,153,976,832 total) [00:01:34]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (65,343,062,016 total) [00:01:36]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (66,551,021,568 total) [00:01:38]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (67,758,981,120 total) [00:01:40]
+[2025-08-12 02:20:18] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (68,966,940,672 total) [00:01:41]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=58114179072, Progress=5.5%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (59,322,138,624 total) [00:01:27]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=59322138624, Progress=5.7%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (60,548,972,544 total) [00:01:29]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=60548972544, Progress=5.8%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (61,756,932,096 total) [00:01:30]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=61756932096, Progress=5.9%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (62,964,891,648 total) [00:01:32]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=62964891648, Progress=6.0%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (64,153,976,832 total) [00:01:34]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=64153976832, Progress=6.1%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 650.48 MKey/s (65,343,062,016 total) [00:01:36]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=650.48 MKey/s, Checked=65343062016, Progress=6.2%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (66,551,021,568 total) [00:01:38]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=66551021568, Progress=6.3%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (67,758,981,120 total) [00:01:40]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=67758981120, Progress=6.5%
+[2025-08-12 02:20:18] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (68,966,940,672 total) [00:01:41]
+[2025-08-12 02:20:18] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=68966940672, Progress=6.6%
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 1 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 2 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 3 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 0 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 7 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 9 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 10 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 5 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 8 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 6 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 4 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 11 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 13 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 12 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 14 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 15 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 16 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 17 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 18 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 22 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 19 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 20 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 23 успешно завершен
+[2025-08-12 02:20:26] DEBUG [main_window:1335]: Воркер 21 успешно завершен
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (70,174,900,224 total) [00:01:43]
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (70,174,900,224 total) [00:01:43]
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (71,363,985,408 total) [00:01:45]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=70174900224, Progress=6.7%
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (72,571,944,960 total) [00:01:47]
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 656.23 MKey/s (71,363,985,408 total) [00:01:45]
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (73,779,904,512 total) [00:01:49]
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (75,006,738,432 total) [00:01:50]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=656.23 MKey/s, Checked=71363985408, Progress=6.8%
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (76,214,697,984 total) [00:01:52]
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (72,571,944,960 total) [00:01:47]
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (77,441,531,904 total) [00:01:54]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=72571944960, Progress=6.9%
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (78,649,491,456 total) [00:01:56]
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (73,779,904,512 total) [00:01:49]
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (79,876,325,376 total) [00:01:58]
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (81,084,284,928 total) [00:02:00]
+[2025-08-12 02:20:38] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (82,292,244,480 total) [00:02:01]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=73779904512, Progress=7.0%
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (75,006,738,432 total) [00:01:50]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=75006738432, Progress=7.1%
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 660.81 MKey/s (76,214,697,984 total) [00:01:52]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=660.81 MKey/s, Checked=76214697984, Progress=7.3%
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (77,441,531,904 total) [00:01:54]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=77441531904, Progress=7.4%
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (78,649,491,456 total) [00:01:56]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=78649491456, Progress=7.5%
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (79,876,325,376 total) [00:01:58]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=671.13 MKey/s, Checked=79876325376, Progress=7.6%
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.28 MKey/s (81,084,284,928 total) [00:02:00]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=666.28 MKey/s, Checked=81084284928, Progress=7.7%
+[2025-08-12 02:20:38] DEBUG [main_window:1335]: NVIDIA GeForce R 2770 / 12287MB | 1 target 666.64 MKey/s (82,292,244,480 total) [00:02:01]
+[2025-08-12 02:20:38] DEBUG [main_window:861]: GPU Update: Speed=666.64 MKey/s, Checked=82292244480, Progress=7.8%
+[2025-08-12 02:20:39] INFO [gpu_scanner:177]: Остановка GPU процессов...
+[2025-08-12 02:20:39] DEBUG [gpu_scanner:75]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 671.13 MKey/s (83,519,078,400 total) [00:02:03]
+[2025-08-12 02:20:39] INFO [gpu_scanner:193]: GPU процессы остановлены.
+[2025-08-12 02:20:39] DEBUG [main_window:1335]: GPU поиск завершен
+[2025-08-12 02:30:49] INFO [main_window:1330]: Настройки загружены
+[2025-08-12 02:30:51] DEBUG [main_window:1335]: Параметры GPU установлены по умолчанию
+[2025-08-12 02:30:55] INFO [main_window:1330]: Настройки сохранены
+[2025-08-12 02:32:09] INFO [main_window:1352]: Настройки загружены
+[2025-08-12 02:32:11] DEBUG [main_window:590]: Попытка вызова: ['C:\\Users\\PC\\PycharmProjects\\btc\\cuBitcrack.exe', '--list-devices']
+[2025-08-12 02:32:11] ERROR [main_window:636]: Ошибка в блоке try-except auto_optimize_gpu_parameters: name 'subprocess' is not defined
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\main_window.py", line 591, in auto_optimize_gpu_parameters
+    gpu_info = subprocess.check_output(
+               ^^^^^^^^^^
+NameError: name 'subprocess' is not defined. Did you forget to import 'subprocess'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\main_window.py", line 599, in auto_optimize_gpu_parameters
+    except subprocess.TimeoutExpired:
+           ^^^^^^^^^^
+NameError: name 'subprocess' is not defined. Did you forget to import 'subprocess'?
+[2025-08-12 02:32:11] ERROR [main_window:1349]: Ошибка оптимизации GPU: name 'subprocess' is not defined
+[2025-08-12 02:32:53] INFO [main_window:1331]: Настройки загружены
+[2025-08-12 02:32:54] INFO [main_window:1331]: Параметры GPU оптимизированы для RTX 30/40 серии
+[2025-08-12 02:33:03] INFO [main_window:1331]: Настройки сохранены
