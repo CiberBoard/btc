@@ -11,12 +11,12 @@
     "gpu_min_range_size": "734217728",
     "gpu_max_range_size": "53687091277782738",
     "gpu_priority": 0,
-    "cpu_target": "1ARTURvpY4UQxd81623K1ZAx1VLGL6cWg",
-    "cpu_start_key": "000000000000000000000000000000000000000000000070e4b00000231c0cc5",
-    "cpu_end_key": "000000000000000000000000000000000010000000000070e4b9b060235c0cc5",
-    "cpu_prefix": 5,
+    "cpu_target": "1MoNeYvpY4UQxd81623K1ZAx1VLGL6cWg",
+    "cpu_start_key": "000000000000000000000000000000000000000000000000e4b00000231c0cc5",
+    "cpu_end_key": "100000000000000000000100000000000010000000000070e4b9b060235c0cc5",
+    "cpu_prefix": 6,
     "cpu_workers": 24,
-    "cpu_attempts": 1000000,
+    "cpu_attempts": 10000000,
     "cpu_mode": "random",
     "cpu_priority": 5
 }
