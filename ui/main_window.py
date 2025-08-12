@@ -426,7 +426,28 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_status_label = QLabel("Ожидание запуска")
         sys_info_layout.addWidget(self.cpu_status_label, 1, 3)
         cpu_layout.addLayout(sys_info_layout)
+        # =============== НОВОЕ: CPU Hardware Status Group ===============
+        cpu_hw_status_group = QGroupBox("CPU: Аппаратный статус")
+        cpu_hw_status_layout = QGridLayout(cpu_hw_status_group)
+        cpu_hw_status_layout.setSpacing(6)
 
+        self.cpu_temp_label = QLabel("Температура: - °C")
+        self.cpu_temp_label.setStyleSheet("color: #e74c3c;")  # Красный цвет по умолчанию
+        cpu_hw_status_layout.addWidget(self.cpu_temp_label, 0, 0)
+
+        # Добавляем прогресс-бар для температуры (опционально)
+        self.cpu_temp_bar = QProgressBar()
+        self.cpu_temp_bar.setRange(0, 100)  # Диапазон от 0 до 100°C для примера
+        self.cpu_temp_bar.setValue(0)
+        self.cpu_temp_bar.setFormat("Темп: %p°C")
+        self.cpu_temp_bar.setStyleSheet("""
+                            QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                            QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #27ae60, stop:1 #219653);} /* Зеленый градиент */
+                        """)
+        cpu_hw_status_layout.addWidget(self.cpu_temp_bar, 1, 0)
+
+        cpu_layout.addWidget(cpu_hw_status_group)
+        # =============== КОНЕЦ НОВОГО ===============
         # CPU параметры поиска
         cpu_params_group = QGroupBox("CPU: Параметры поиска")
         cpu_params_layout = QGridLayout(cpu_params_group)
@@ -667,6 +688,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def update_system_info(self):
         try:
+            # --- Существующий код обновления системной информации ---
             mem = psutil.virtual_memory()
             self.mem_label.setText(f"{mem.used // (1024 * 1024)}/{mem.total // (1024 * 1024)} MB")
             self.cpu_usage.setText(f"{psutil.cpu_percent()}%")
@@ -675,10 +697,92 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 self.cpu_status_label.setText(f"{status} ({len(self.processes)} воркеров)")
             else:
                 self.cpu_status_label.setText("Ожидание запуска")
+            # --- Конец существующего кода ---
+
+            # =============== НОВОЕ: Обновление температуры CPU ===============
+            # Попытка получить температуру CPU
+            cpu_temp = None
+            try:
+                temps = psutil.sensors_temperatures()
+                if temps:
+                    # Обычно основная температура CPU находится под ключом 'coretemp' (Intel) или 'k10temp' (AMD)
+                    # Можно перебирать все, но для простоты возьмем первую подходящую
+                    for name, entries in temps.items():
+                        # Ищем наиболее вероятные источники температуры CPU
+                        if name.lower() in ['coretemp', 'k10temp', 'cpu_thermal', 'acpi']:
+                            for entry in entries:
+                                # Ищем основную температуру (обычно без суффиксов или с 'package')
+                                # или просто первую доступную
+                                if entry.current is not None:
+                                    if cpu_temp is None or 'package' in entry.label.lower() or entry.label == '':
+                                        cpu_temp = entry.current
+                                    # Если уже нашли Package, дальше не ищем
+                                    if 'package' in entry.label.lower():
+                                        break
+                            # Если нашли температуру для этого сенсора, выходим
+                            if cpu_temp is not None:
+                                break
+                    # Если не нашли по ключевым словам, берем первую попавшуюся температуру из любого сенсора
+                    if cpu_temp is None:
+                        for entries in temps.values():
+                            for entry in entries:
+                                if entry.current is not None:
+                                    cpu_temp = entry.current
+                                    break
+                            if cpu_temp is not None:
+                                break
+
+            except (AttributeError, NotImplementedError):
+                # sensors_temperatures может не поддерживаться на некоторых системах (например, Windows без WMI)
+                pass
+
+            if cpu_temp is not None:
+                self.cpu_temp_label.setText(f"Температура: {cpu_temp:.1f} °C")
+                # Установка диапазона прогрессбара от 0 до 100°C (можно адаптировать)
+                self.cpu_temp_bar.setRange(0, 100)
+                self.cpu_temp_bar.setValue(int(cpu_temp))
+                self.cpu_temp_bar.setFormat(f"Темп: {cpu_temp:.1f}°C")
+
+                # Цветовая индикация температуры
+                if cpu_temp > 80:
+                    self.cpu_temp_label.setStyleSheet("color: #e74c3c; font-weight: bold;") # Красный
+                    self.cpu_temp_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e74c3c, stop:1 #c0392b);} /* Красный градиент */
+                    """)
+                elif cpu_temp > 65:
+                    self.cpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;") # Оранжевый
+                    self.cpu_temp_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f39c12, stop:1 #d35400);} /* Оранжевый градиент */
+                    """)
+                else:
+                    self.cpu_temp_label.setStyleSheet("color: #27ae60;") # Зеленый
+                    self.cpu_temp_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #27ae60, stop:1 #219653);} /* Зеленый градиент */
+                    """)
+            else:
+                self.cpu_temp_label.setText("Температура: N/A")
+                self.cpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+                self.cpu_temp_bar.setValue(0)
+                self.cpu_temp_bar.setFormat("Темп: N/A")
+            # =============== КОНЕЦ НОВОГО ===============
+
         except Exception as e:
+            logger.exception("Ошибка обновления системной информации")
+            # --- Существующий код обработки ошибок ---
             self.mem_label.setText("Ошибка данных")
             self.cpu_usage.setText("Ошибка данных")
             self.cpu_status_label.setText("Ошибка данных")
+            # --- Конец существующего кода обработки ошибок ---
+
+            # =============== НОВОЕ: Обработка ошибок для температуры ===============
+            self.cpu_temp_label.setText("Температура: Ошибка")
+            self.cpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+            self.cpu_temp_bar.setValue(0)
+            self.cpu_temp_bar.setFormat("Темп: Ошибка")
+            # =============== КОНЕЦ НОВОГО ===============
 
     # ============ GPU METHODS ============
     def auto_optimize_gpu_parameters(self):
