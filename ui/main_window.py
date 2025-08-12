@@ -1,38 +1,62 @@
 # ui/main_window.py
 import os
 import subprocess
-import sys
 import time
 import json
-import random
 import platform
 import psutil
 import multiprocessing
 import queue
-from collections import deque
-from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal, QObject, QRegExp
-from PyQt5.QtGui import QFont, QColor, QPalette, QIcon, QKeySequence, QRegExpValidator
+from PyQt5.QtCore import Qt, QTimer, QRegExp
+from PyQt5.QtGui import QFont, QColor, QPalette, QKeySequence, QRegExpValidator
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QHBoxLayout, QLabel, QLineEdit, QPushButton,
                              QTextEdit, QMessageBox, QGroupBox, QGridLayout,
                              QTableWidget, QTableWidgetItem, QHeaderView,
                              QMenu, QProgressBar, QCheckBox, QComboBox, QTabWidget,
-                             QFileDialog, QSpinBox, QSplitter, QSizePolicy)
+                             QFileDialog, QSpinBox)
 
-import config
+from logger import config
 from utils.helpers import setup_logger, validate_key_range, format_time, is_coincurve_available, make_combo32
 import core.gpu_scanner as gpu_core
 import core.cpu_scanner as cpu_core
 
-logger = setup_logger()
+# Импорт pynvml (предполагается, что он установлен)
+try:
+    import pynvml
+    PYNVML_AVAILABLE = True
+except ImportError:
+    PYNVML_AVAILABLE = False
+    pynvml = None
 
+logger = setup_logger()
 
 class BitcoinGPUCPUScanner(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        # --- Инициализация pynvml для мониторинга GPU ---
+        self.gpu_monitor_available = False
+        if PYNVML_AVAILABLE:
+            try:
+                pynvml.nvmlInit()
+                self.gpu_monitor_available = True
+                device_count = pynvml.nvmlDeviceGetCount()
+                if device_count > 0:
+                    logger.info(f"Найдено {device_count} NVIDIA GPU устройств для мониторинга.")
+                else:
+                    logger.warning("NVIDIA GPU устройства не найдены.")
+                    self.gpu_monitor_available = False
+            except Exception as e:
+                logger.error(f"Ошибка инициализации pynvml: {e}")
+                self.gpu_monitor_available = False
+        else:
+            logger.warning("Библиотека pynvml не установлена. Мониторинг GPU недоступен.")
+
+        # --- Инициализация ВСЕХ переменных, используемых в setup_ui и далее ---
         # GPU variables
         self.gpu_range_label = None
-        self.gpu_processes = []  # Список кортежей (process, reader)
+        self.gpu_processes = [] # Список кортежей (process, reader)
         self.gpu_is_running = False
         self.gpu_start_time = None
         self.gpu_keys_checked = 0
@@ -43,15 +67,19 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.current_random_start = None
         self.current_random_end = None
         self.used_ranges = set()
-        self.gpu_last_update_time = 0  # Для отслеживания времени последнего обновления
+        self.gpu_last_update_time = 0
         self.gpu_start_range_key = 0
         self.gpu_end_range_key = 0
         self.gpu_total_keys_in_range = 0
+        # Для таймера перезапуска случайного режима
+        self.gpu_restart_timer = QTimer()
+        self.gpu_restart_timer.timeout.connect(self.start_gpu_random_search)
+        self.gpu_restart_delay = 1000 # 1 секунда по умолчанию
 
-        # CPU variables
+        # CPU variables - ИНИЦИАЛИЗИРУЕМ РАНЬШЕ setup_ui
         self.optimal_workers = max(1, multiprocessing.cpu_count() - 1)
         self.cpu_signals = cpu_core.WorkerSignals()
-        self.processes = {}  # {worker_id: process}
+        self.processes = {} # {worker_id: process}
         self.cpu_stop_requested = False
         self.cpu_pause_requested = False
         self.cpu_start_time = 0
@@ -65,11 +93,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_mode = "sequential"
         self.worker_chunks = {}
         self.queue_active = True
+        # Очередь и событие остановки для CPU
         self.process_queue = multiprocessing.Queue()
         self.shutdown_event = multiprocessing.Event()
 
+        # --- Основная инициализация UI и подключений ---
         self.set_dark_theme()
-        self.setup_ui()
+        self.setup_ui() # <-- Теперь setup_ui может безопасно использовать все инициализированные атрибуты
         self.setup_connections()
         self.load_settings()
 
@@ -77,13 +107,30 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if not os.path.exists(config.FOUND_KEYS_FILE):
             open(config.FOUND_KEYS_FILE, 'w').close()
 
+        # --- Инициализация таймеров и системной информации ---
         # CPU queue timer
         self.queue_timer = QTimer()
         self.queue_timer.timeout.connect(self.process_queue_messages)
-        self.queue_timer.start(100)  # Увеличили частоту обработки до 10 раз в секунду
+        self.queue_timer.start(100) # Увеличили частоту обработки до 10 раз в секунду
 
         # Инициализация системной информации
-        self.update_system_info()
+        self.sysinfo_timer = QTimer()
+        self.sysinfo_timer.timeout.connect(self.update_system_info)
+        self.sysinfo_timer.start(2000)
+
+        # =============== GPU Status Timer (если используется pynvml) ===============
+        if self.gpu_monitor_available:
+            self.gpu_status_timer = QTimer()
+            self.gpu_status_timer.timeout.connect(self.update_gpu_status)
+            self.gpu_status_timer.start(1500) # 1.5 секунды
+        else:
+            self.gpu_status_timer = None
+        # =============== КОНЕЦ GPU Status Timer ===============
+
+        # --- Дополнительная инициализация ---
+        # Заголовок окна
+        self.setWindowTitle("Bitcoin GPU/CPU Scanner")
+        self.resize(1200, 900) # Размер окна, если не задан в setup_ui
 
     def set_dark_theme(self):
         palette = QPalette()
@@ -315,6 +362,47 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_range_label.setStyleSheet("font-weight: bold; color: #e67e22;")
         gpu_layout.addWidget(self.gpu_range_label)
         self.main_tabs.addTab(gpu_tab, "GPU Поиск")
+        # =============== НОВОЕ: GPU Status Group ===============
+        if PYNVML_AVAILABLE:
+            self.gpu_hw_status_group = QGroupBox("GPU: Аппаратный статус")
+            gpu_hw_status_layout = QGridLayout(self.gpu_hw_status_group)
+            gpu_hw_status_layout.setSpacing(6)
+
+            self.gpu_util_label = QLabel("Загрузка GPU: - %")
+            self.gpu_util_label.setStyleSheet("color: #f1c40f;")  # Желтый цвет
+            gpu_hw_status_layout.addWidget(self.gpu_util_label, 0, 0)
+
+            self.gpu_mem_label = QLabel("Память GPU: - / - MB")
+            self.gpu_mem_label.setStyleSheet("color: #9b59b6;")  # Фиолетовый цвет
+            gpu_hw_status_layout.addWidget(self.gpu_mem_label, 0, 1)
+
+            self.gpu_temp_label = QLabel("Температура: - °C")
+            self.gpu_temp_label.setStyleSheet("color: #e74c3c;")  # Красный цвет
+            gpu_hw_status_layout.addWidget(self.gpu_temp_label, 1, 0)
+
+            # Добавляем прогресс-бары для наглядности
+            self.gpu_util_bar = QProgressBar()
+            self.gpu_util_bar.setRange(0, 100)
+            self.gpu_util_bar.setValue(0)
+            self.gpu_util_bar.setFormat("Загрузка: %p%")
+            self.gpu_util_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f1c40f, stop:1 #f39c12);} /* Оранжевый градиент */
+                    """)
+            gpu_hw_status_layout.addWidget(self.gpu_util_bar, 2, 0)
+
+            self.gpu_mem_bar = QProgressBar()
+            self.gpu_mem_bar.setRange(0, 100)
+            self.gpu_mem_bar.setValue(0)
+            self.gpu_mem_bar.setFormat("Память: %p%")
+            self.gpu_mem_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #9b59b6, stop:1 #8e44ad);} /* Фиолетовый градиент */
+                    """)
+            gpu_hw_status_layout.addWidget(self.gpu_mem_bar, 2, 1)
+
+            gpu_layout.addWidget(self.gpu_hw_status_group)
+        # =============== КОНЕЦ НОВОГО ===============
 
         # =============== CPU TAB ===============
         cpu_tab = QWidget()
@@ -361,7 +449,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_end_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self))
         cpu_keys_layout.addWidget(self.cpu_end_key_edit, 0, 3)
         cpu_params_layout.addWidget(cpu_keys_group, 1, 0, 1, 4)
-
         # Параметры сканирования для CPU
         cpu_scan_params_group = QGroupBox("Параметры сканирования")
         cpu_scan_params_layout = QGridLayout(cpu_scan_params_group)
@@ -559,6 +646,19 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.sysinfo_timer = QTimer()
         self.sysinfo_timer.timeout.connect(self.update_system_info)
         self.sysinfo_timer.start(2000)
+        self.sysinfo_timer = QTimer()
+        self.sysinfo_timer.timeout.connect(self.update_system_info)
+        self.sysinfo_timer.start(2000)
+    # =============== GPU Status Timer ===============
+        if self.gpu_monitor_available:
+         self.gpu_status_timer = QTimer()
+         self.gpu_status_timer.timeout.connect(self.update_gpu_status)
+         self.gpu_status_timer.start(1500)  # 1.5 секунды
+         self.selected_gpu_device_id = 0
+        else:
+         self.gpu_status_timer = None
+
+    # =============== КОНЕЦ GPU Status Timer ===============
 
     def on_cpu_mode_changed(self, index):
         is_random = (index == 1)
@@ -1429,6 +1529,75 @@ class BitcoinGPUCPUScanner(QMainWindow):
         except Exception as e:
             logger.error(f"Ошибка закрытия очереди: {str(e)}")
 
+    # =============== НОВОЕ: Метод обновления статуса GPU ===============
+    def update_gpu_status(self):
+        """Обновляет отображение аппаратного статуса GPU"""
+        if not self.gpu_monitor_available or not PYNVML_AVAILABLE:
+            return
+
+        # Определяем ID устройства для мониторинга.
+        # Можно брать из self.gpu_device_combo, но там может быть список.
+        # Для простоты будем мониторить первое указанное устройство.
+        try:
+            device_str = self.gpu_device_combo.currentText().split(',')[0].strip()
+            if device_str.isdigit():
+                device_id = int(device_str)
+            else:
+                device_id = 0 # По умолчанию
+        except:
+            device_id = 0
+
+        # Вызываем функцию получения статуса (можно перенести её сюда напрямую)
+        # gpu_status = gpu_core.get_gpu_status(device_id) # Если функция в core/gpu_scanner.py
+        # Или реализовать прямо здесь:
+
+        try:
+            handle = pynvml.nvmlDeviceGetHandleByIndex(device_id)
+            util_info = pynvml.nvmlDeviceGetUtilizationRates(handle)
+            gpu_util = util_info.gpu
+            mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+            mem_used_mb = mem_info.used / (1024 * 1024)
+            mem_total_mb = mem_info.total / (1024 * 1024)
+            mem_util = (mem_info.used / mem_info.total) * 100 if mem_info.total > 0 else 0
+            try:
+                temp_info = pynvml.nvmlDeviceGetTemperature(handle, pynvml.NVML_TEMPERATURE_GPU)
+                temperature = temp_info
+            except pynvml.NVMLError:
+                temperature = None
+
+            # Обновляем UI
+            self.gpu_util_label.setText(f"Загрузка GPU: {gpu_util} %")
+            self.gpu_util_bar.setValue(gpu_util)
+
+            self.gpu_mem_label.setText(f"Память GPU: {mem_used_mb:.0f} / {mem_total_mb:.0f} MB ({mem_util:.1f}%)")
+            self.gpu_mem_bar.setValue(int(mem_util))
+
+            if temperature is not None:
+                self.gpu_temp_label.setText(f"Температура: {temperature} °C")
+                # Можно добавить цветовую индикацию температуры
+                if temperature > 80:
+                    self.gpu_temp_label.setStyleSheet("color: #e74c3c; font-weight: bold;") # Красный при высокой температуре
+                elif temperature > 65:
+                    self.gpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;") # Оранжевый
+                else:
+                    self.gpu_temp_label.setStyleSheet("color: #27ae60;") # Зеленый
+            else:
+                self.gpu_temp_label.setText("Температура: - °C")
+                self.gpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+
+        except Exception as e:
+            # logger.debug(f"Не удалось обновить статус GPU {device_id}: {e}") # Часто логгировать не нужно
+            # Можно сбросить значения на "N/A" или скрыть виджеты
+             self.gpu_util_label.setText("Загрузка GPU: N/A")
+             self.gpu_util_bar.setValue(0)
+             self.gpu_mem_label.setText("Память GPU: N/A")
+             self.gpu_mem_bar.setValue(0)
+             self.gpu_temp_label.setText("Температура: N/A")
+             # Остановить таймер, если GPU больше не доступен? Не обязательно.
+             # self.gpu_status_timer.stop() # Лучше оставить, вдруг появится снова
+
+    # =============== КОНЕЦ НОВОГО ===============
+
     def closeEvent(self, event):
         # Проверка активных процессов
         active_processes = False
@@ -1452,4 +1621,20 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if self.processes:
             self.stop_cpu_search()
         self.close_queue()
+        # Корректное завершение
+        self.save_settings()
+        if self.gpu_is_running:
+            self.stop_gpu_search()
+        if self.processes:
+            self.stop_cpu_search()
+        self.close_queue()
+        # =============== НОВОЕ: Остановка pynvml ===============
+        if PYNVML_AVAILABLE and self.gpu_monitor_available:
+            try:
+                pynvml.nvmlShutdown()
+                logger.info("pynvml выключен.")
+            except Exception as e:
+                logger.error(f"Ошибка выключения pynvml: {e}")
+        # =============== КОНЕЦ НОВОГО ===============
         event.accept()
+

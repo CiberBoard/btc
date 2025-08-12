@@ -1,5 +1,4 @@
 # core/cpu_scanner.py
-import multiprocessing
 import random
 import time
 import logging
@@ -12,8 +11,8 @@ try:
 except ImportError:
     COINCURVE_AVAILABLE = False
 
-import config
-from utils.helpers import private_key_to_wif, _generate_p2pkh, _generate_p2sh, safe_queue_put, validate_key_range
+from logger import config
+from utils.helpers import private_key_to_wif, _generate_p2pkh, _generate_p2sh, safe_queue_put
 import utils.helpers as helpers
 
 logger = logging.getLogger('bitcoin_scanner')

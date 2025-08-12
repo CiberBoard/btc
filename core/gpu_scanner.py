@@ -1,11 +1,21 @@
-# core/gpu_scanner.py
-import os
 import subprocess
 import time
 import random
 import platform
 import logging
+
+import logger
 from PyQt5.QtCore import QThread, pyqtSignal
+
+
+try:
+    import pynvml
+    PYNVML_AVAILABLE = True
+except ImportError:
+    PYNVML_AVAILABLE = False
+    pynvml = None
+    logger.warning("pynvml не найден. Мониторинг GPU будет недоступен.")
+
 
 try:
     import win32process
@@ -15,9 +25,8 @@ try:
 except ImportError:
     WIN32_AVAILABLE = False
 
-import config
-from utils.helpers import validate_key_range, private_key_to_wif, format_time
-import utils.helpers as helpers  # Для доступа к логгеру
+from logger import config
+from utils.helpers import validate_key_range, private_key_to_wif
 
 logger = logging.getLogger('bitcoin_scanner')
 
@@ -193,10 +202,6 @@ def stop_gpu_search_internal(processes):
     logger.info("GPU процессы остановлены.")
 
 
-# core/gpu_scanner.py
-
-# ... (остальной код файла без изменений) ...
-
 def generate_gpu_random_range(global_start_hex, global_end_hex, min_range_size_str, max_range_size_str, used_ranges,
                               max_saved_random):
     """Генерирует уникальный случайный диапазон в пределах пользовательского диапазона"""
@@ -312,4 +317,52 @@ def generate_gpu_random_range(global_start_hex, global_end_hex, min_range_size_s
         logger.exception(error_msg)
         return None, None, error_msg  # Возвращаем ошибку для отображения в UI
 
-# ... (остальной код файла без изменений) ...
+
+# В конце файла добавьте вспомогательную функцию (или лучше перенесите её в utils/helpers.py)
+def get_gpu_status(device_id=0):
+    """
+    Получает статус GPU (загрузка, память и т.д.) через pynvml.
+    :param device_id: ID устройства GPU (по умолчанию 0)
+    :return: dict с информацией о GPU или None при ошибке
+    """
+    if not PYNVML_AVAILABLE:
+        return None
+
+    try:
+        # Инициализация, если ещё не была выполнена
+        # Лучше сделать это один раз при запуске приложения, например в __init__ главного окна
+        # if not hasattr(get_gpu_status, '_initialized'):
+        #     pynvml.nvmlInit()
+        #     get_gpu_status._initialized = True
+
+        # Получаем handle устройства
+        handle = pynvml.nvmlDeviceGetHandleByIndex(device_id)
+
+        # Получаем утилизацию (загрузку)
+        util_info = pynvml.nvmlDeviceGetUtilizationRates(handle)
+        gpu_util = util_info.gpu  # Загрузка в %
+
+        # Получаем информацию о памяти
+        mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+        mem_used_mb = mem_info.used / (1024 * 1024)
+        mem_total_mb = mem_info.total / (1024 * 1024)
+        mem_util = (mem_info.used / mem_info.total) * 100 if mem_info.total > 0 else 0
+
+        # Получаем температуру (опционально)
+        try:
+            temp_info = pynvml.nvmlDeviceGetTemperature(handle, pynvml.NVML_TEMPERATURE_GPU)
+            temperature = temp_info
+        except pynvml.NVMLError:
+            temperature = None # Температура может быть недоступна
+
+        return {
+            'device_id': device_id,
+            'gpu_utilization': gpu_util,
+            'memory_used_mb': mem_used_mb,
+            'memory_total_mb': mem_total_mb,
+            'memory_utilization': mem_util,
+            'temperature': temperature
+        }
+    except Exception as e:
+        logger.debug(f"Не удалось получить статус GPU {device_id}: {e}")
+        return None
