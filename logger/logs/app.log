@@ -1954,3 +1954,1963 @@
 [2025-08-13 01:39:40] DEBUG [main_window:1560]: Воркер 20 успешно завершен
 [2025-08-13 01:39:40] DEBUG [main_window:1560]: Воркер 22 успешно завершен
 [2025-08-13 01:39:40] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:40:09] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:40:09] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 0 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 8 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 5 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 6 started in random mode
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 3 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 1 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 9 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 12 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 7 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 2 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 11 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 13 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 4 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 10 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 15 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 19 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 14 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 16 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 18 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 20 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 22 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 17 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 21 started in random mode
+[2025-08-13 01:40:10] INFO [cpu_scanner:184]: Worker 23 started in random mode
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:10] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:40:24] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:40:26] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:40:26] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 0 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 1 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 2 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 6 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 4 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 5 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 3 started in random mode
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 10 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 8 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 7 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 9 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 11 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 12 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 14 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 15 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 13 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 16 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 17 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 20 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 18 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 19 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 21 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 22 started in random mode
+[2025-08-13 01:40:27] INFO [cpu_scanner:184]: Worker 23 started in random mode
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:27] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:40:41] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:40:43] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 1 started in random mode
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 3 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 8 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 0 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 2 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 4 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 5 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 7 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 6 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 10 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 13 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 18 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 12 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 19 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 15 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 11 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 9 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 14 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 22 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 21 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 16 started in random mode
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:43] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 20 started in random mode
+[2025-08-13 01:40:43] INFO [cpu_scanner:184]: Worker 23 started in random mode
+[2025-08-13 01:40:44] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:44] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:40:57] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:41:00] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 1 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 6 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 0 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 4 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 2 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 3 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 5 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 14 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 15 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 10 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 9 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 7 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 11 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 13 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 8 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 18 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 20 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 16 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 12 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 17 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 21 started in random mode
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 22 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 19 started in random mode
+[2025-08-13 01:41:00] INFO [cpu_scanner:184]: Worker 23 started in random mode
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:00] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:41:14] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:42:25] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:42:25] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 0 started in random mode
+[2025-08-13 01:42:25] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 4 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 2 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 6 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 7 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 1 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 8 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 3 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 11 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 10 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 5 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 14 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 9 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 13 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 15 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 12 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 17 started in random mode
+[2025-08-13 01:42:25] INFO [cpu_scanner:184]: Worker 18 started in random mode
+[2025-08-13 01:42:26] INFO [cpu_scanner:184]: Worker 16 started in random mode
+[2025-08-13 01:42:26] INFO [cpu_scanner:184]: Worker 20 started in random mode
+[2025-08-13 01:42:26] INFO [cpu_scanner:184]: Worker 19 started in random mode
+[2025-08-13 01:42:26] INFO [cpu_scanner:184]: Worker 21 started in random mode
+[2025-08-13 01:42:26] INFO [cpu_scanner:184]: Worker 22 started in random mode
+[2025-08-13 01:42:26] INFO [cpu_scanner:184]: Worker 23 started in random mode
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:26] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:42:39] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:42:53] INFO [main_window:46]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-13 01:42:53] INFO [main_window:1555]: Настройки загружены
+[2025-08-13 01:42:57] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 2 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 0 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 3 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 1 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 6 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 5 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 4 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 7 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 9 started in random mode
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 8 started in random mode
+
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 10 started in random mode
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 13 started in random mode
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 15 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 14 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 11 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 18 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 20 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 17 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 22 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 19 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 21 started in random mode
+[2025-08-13 01:42:58] INFO [cpu_scanner:155]: Worker 23 started in random mode
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:58] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:42:59] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:03] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:05] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:06] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:07] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:08] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:08] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:09] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:10] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:10] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:11] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:12] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:13] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:14] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:15] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:15] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:16] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:17] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:43:17] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:45:07] INFO [main_window:46]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-13 01:45:07] INFO [main_window:1555]: Настройки загружены
+[2025-08-13 01:49:34] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:49:34] INFO [gpu_scanner:186]: Остановка GPU процессов...
+[2025-08-13 01:49:34] INFO [gpu_scanner:202]: GPU процессы остановлены.
+[2025-08-13 01:49:34] INFO [gpu_scanner:131]: Запуск GPU поиска для диапазона 0x70e4b9b0618a2176c3 - 0x70e4b9b0bd444bf387 на устройстве 0
+[2025-08-13 01:49:34] DEBUG [gpu_scanner:151]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\logger\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B0618A2176C3:70E4B9B0BD444BF387 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-13 01:49:34] INFO [main_window:1555]: Запущено 1 GPU процессов
+[2025-08-13 01:49:40] INFO [gpu_scanner:186]: Остановка GPU процессов...
+[2025-08-13 01:49:40] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-13.01:49:34] [Info] Compression: compressed
+[2025-08-13 01:49:40] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-13.01:49:34] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0618A2176C3
+[2025-08-13 01:49:40] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-13.01:49:34] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0BD444BF387
+[2025-08-13 01:49:40] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-13.01:49:34] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-13 01:49:40] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-13.01:49:34] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-13 01:49:40] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-13.01:49:34] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-13 01:49:40] INFO [gpu_scanner:202]: GPU процессы остановлены.
+[2025-08-13 01:49:40] DEBUG [main_window:1560]: GPU поиск завершен
+[2025-08-13 01:50:06] INFO [main_window:46]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-13 01:50:07] INFO [main_window:1555]: Настройки загружены
+[2025-08-13 01:50:14] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:50:14] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:14] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:50:28] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:50:31] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:50:31] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:31] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:50:32] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:33] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:34] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:35] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:35] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:36] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:37] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:38] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:39] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:50:45] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:50:45] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:50:47] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:51:05] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:51:05] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:51:06] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:06] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:19] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:51:19] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:51:19] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:51:20] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:51:20] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:51:21] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:21] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:22] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:51:35] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:51:38] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:51:38] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:51:38] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:51:38] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:38] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:51:38] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:51:38] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:38] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:38] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:51:39] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:39] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:51:52] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:51:53] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:51:54] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:51:54] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:51:55] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:51:55] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:08] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:52:09] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:52:13] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:52:14] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:14] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:52:28] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:52:29] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:52:29] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:52:29] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:30] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:52:40] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:52:43] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:52:44] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:52:49] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:52:49] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:52:49] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:53:03] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:53:16] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:53:16] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:53:17] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:17] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:30] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:53:31] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:53:34] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:53:34] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:34] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:53:48] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:53:49] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:53:50] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:53:50] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:53:51] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:53:51] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:05] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:07] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:54:07] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:07] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:21] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:22] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:54:22] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:22] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:36] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:38] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:54:38] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:54:38] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:54:38] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:54:38] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:54:39] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:39] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:49] INFO [main_window:1555]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:58] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:54:59] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:54:59] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:54:59] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:55:13] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:55:14] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:14] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:55:14] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:55:15] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:15] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:15] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:15] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:15] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:55:29] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:55:30] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 1 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:30] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:55:30] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:55:44] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:55:45] INFO [main_window:1555]: Настройки сохранены
+[2025-08-13 01:55:45] DEBUG [main_window:1560]: Запущено 24 CPU воркеров в режиме случайного поиска
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 9 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 0 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 3 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 4 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 6 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 5 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 8 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 7 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 14 started in random mode
+чайный поиск: 41667 попыток
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 2 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 10 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 11 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 14 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 12 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 20 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 22 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 21 started in random mode
+[2025-08-13 01:55:46] INFO [cpu_scanner:190]: Worker 23 started in random mode
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 15 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 13 начал случайный поиск: 41667 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 16 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 20 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 17 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 19 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 22 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 18 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 21 начал случайный поиск: 41666 попыток
+[2025-08-13 01:55:46] DEBUG [main_window:1560]: Воркер 23 начал случайный поиск: 41666 попыток
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 7 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 4 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 2 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 15 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 5 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 9 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 0 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 12 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 10 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 1 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 13 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 6 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 23 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 8 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 3 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 14 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 11 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 16 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 22 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 21 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 18 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 20 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 17 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Воркер 19 успешно завершен
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
+[2025-08-13 01:56:00] DEBUG [main_window:1560]: Все CPU воркеры завершили работу
