@@ -14,9 +14,9 @@
     "cpu_target": "1PWo3JovpY4UQxd81623K1ZAx1VLGL6cWg",
     "cpu_start_key": "000000000000000000000000000000000000000000000070e4b9b060231c0cc5",
     "cpu_end_key": "000000000000000000000000000000000000000000000070e4b9b060235c0cc5",
-    "cpu_prefix": 6,
+    "cpu_prefix": 5,
     "cpu_workers": 24,
-    "cpu_attempts": 10000000,
+    "cpu_attempts": 1000000,
     "cpu_mode": "random",
     "cpu_priority": 5
 }

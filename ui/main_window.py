@@ -1363,19 +1363,31 @@ class BitcoinGPUCPUScanner(QMainWindow):
             f"Время работы: {time.strftime('%H:%M:%S', time.gmtime(elapsed))}"
         )
 
+    # Замените существующую функцию cpu_worker_finished на эту:
     def cpu_worker_finished(self, worker_id):
+        """Обработчик завершения отдельного CPU воркера"""
+        # Удаляем завершенный процесс из словаря
         if worker_id in self.processes:
-            if not self.processes[worker_id].is_alive():
-                self.processes[worker_id].join()
-                del self.processes[worker_id]
-        if not self.processes:
+            process = self.processes[worker_id]
+            if process.is_alive():
+                process.join(timeout=0.1)  # Небольшое ожидание завершения
+            del self.processes[worker_id]
+
+        # Проверяем, остались ли еще активные воркеры
+        if not self.processes:  # Все воркеры завершены
             self.append_log("Все CPU воркеры завершили работу")
+            # Восстанавливаем состояние UI
             self.cpu_start_stop_btn.setText("Старт CPU (Ctrl+S)")
             self.cpu_start_stop_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
             self.cpu_pause_resume_btn.setEnabled(False)
             self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
             self.cpu_pause_resume_btn.setStyleSheet("background: #3a3a45;")
             self.cpu_eta_label.setText("Оставшееся время: -")
+            # Сброс статуса
+            self.cpu_status_label.setText("Ожидание запуска")
+            # Сброс прогресса
+            self.cpu_total_progress.setValue(0)
+            self.cpu_total_stats_label.setText("Статус: Завершено")
 
     def pause_cpu_search(self):
         self.cpu_pause_requested = True
@@ -1395,15 +1407,23 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
         self.cpu_pause_resume_btn.setStyleSheet("background: #f39c12; font-weight: bold;")
 
+    # Обновленная функция stop_cpu_search
     def stop_cpu_search(self):
         cpu_core.stop_cpu_search(self.processes, self.shutdown_event)
         self.append_log("CPU поиск остановлен")
+        # Восстанавливаем состояние UI
         self.cpu_start_stop_btn.setText("Старт CPU (Ctrl+S)")
         self.cpu_start_stop_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
         self.cpu_pause_resume_btn.setEnabled(False)
         self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
         self.cpu_pause_resume_btn.setStyleSheet("background: #3a3a45;")
         self.cpu_eta_label.setText("Оставшееся время: -")
+        self.cpu_status_label.setText("Остановлено пользователем")
+        # Очищаем таблицу статистики воркеров
+        self.cpu_workers_table.setRowCount(0)
+        # Сброс прогресса
+        self.cpu_total_progress.setValue(0)
+        self.cpu_total_stats_label.setText("Статус: Остановлено")
 
     # ============ COMMON METHODS ============
     def export_keys_csv(self):
