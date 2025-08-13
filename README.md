@@ -1,155 +1,303 @@
-Bitcoin GPU/CPU Scanner
-Версия: 5.0 (Улучшенная)
+# Bitcoin GPU/CPU Scanner
 
-Описание:
-Это приложение для поиска приватных ключей Bitcoin, соответствующих заданному адресу. Оно поддерживает два режима поиска:
+<div align="center">
 
-GPU поиск: Использует cuBitcrack.exe для высокопроизводительного поиска на графических процессорах (NVIDIA CUDA).
-CPU поиск: Использует многопроцессорность (multiprocessing) и библиотеку coincurve для поиска на центральном процессоре.
-Приложение предоставляет расширенные возможности настройки, включая случайный и последовательный режимы поиска, управление приоритетами процессов, автоматическую оптимизацию параметров GPU и подробную статистику.
+![Version](https://img.shields.io/badge/version-5.0-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
+![Python](https://img.shields.io/badge/python-3.7--3.11-green.svg)
+![License](https://img.shields.io/badge/license-As--Is-red.svg)
 
-Особенности
-Два режима поиска: GPU (через cuBitcrack) и CPU (через coincurve).
-Поддержка нескольких GPU: Возможность выбора и использования нескольких устройств NVIDIA одновременно.
-Случайный и последовательный поиск: Гибкость в определении стратегии сканирования.
-Автоматическая оптимизация GPU: Автоматический подбор параметров (blocks, threads, points) под вашу видеокарту.
-Управление приоритетами: Настройка приоритета процессов GPU и CPU в Windows.
-Расширенная статистика: Отслеживание скорости, прогресса, времени работы и оставшегося времени (ETA).
-Уникальные случайные диапазоны: В режиме случайного поиска GPU генерируются уникальные диапазоны для предотвращения повторной проверки.
-Темный интерфейс: Современный и удобный темный интерфейс на PyQt5.
-Логирование: Запись событий и ошибок в файл и отображение в реальном времени.
-Найденные ключи: Автоматическое сохранение найденных ключей в файл и таблицу внутри приложения.
-Экспорт: Возможность экспорта найденных ключей в CSV.
-Требования
-Python 3.7 - 3.11 (Рекомендуется 3.9, 3.10 или 3.11 для совместимости с PyQt5)
-Windows (Основная разработка и тестирование велась под Windows. Может работать под Linux/macOS с изменениями).
-NVIDIA GPU (Для GPU поиска, требуется поддержка CUDA).
-cuBitcrack.exe (Должен находиться в корневой папке проекта).
-Библиотеки Python:
-PyQt5
-psutil
-coincurve (Для CPU поиска)
-pywin32 (опционально, для лучшего управления приоритетами процессов в Windows: pip install pywin32)
-Установка
-Клонируйте или скачайте репозиторий:
-Поместите все файлы проекта (main.py, config.py, папки ui, core, utils, а также cuBitcrack.exe) в одну папку, например BTCScanner.
-Установите Python:
-Убедитесь, что на вашем компьютере установлена подходящая версия Python (3.7 - 3.11). Рекомендуется использовать python.org .
-Создайте виртуальное окружение (рекомендуется):
-Откройте терминал/командную строку в папке проекта и выполните:
-bash
+*Advanced Bitcoin private key scanner with GPU and CPU support*
 
+</div>
 
-1
-2
-3
-4
-5
-6
+## 📋 Overview
+
+Bitcoin GPU/CPU Scanner is a professional-grade application designed to search for Bitcoin private keys that correspond to specified addresses. The application features dual-mode operation with comprehensive configuration options and real-time monitoring capabilities.
+
+## ✨ Key Features
+
+### 🚀 **Dual-Mode Operation**
+
+- **GPU Mode**: High-performance scanning using NVIDIA CUDA via `cuBitcrack.exe`
+- **CPU Mode**: Multi-threaded scanning using `coincurve` library with multiprocessing
+
+### ⚡ **Advanced GPU Support**
+
+- Multi-GPU support with device selection
+- Automatic parameter optimization (blocks, threads, points)
+- Custom configuration for experienced users
+- NVIDIA CUDA acceleration
+
+### 🎯 **Flexible Search Strategies**
+
+- **Sequential Mode**: Systematic key space exploration
+- **Random Mode**: Probabilistic search with unique range generation
+- Configurable search ranges and intervals
+
+### 🛠️ **System Optimization**
+
+- Process priority management (Windows)
+- Resource usage monitoring
+- Automatic performance tuning
+
+### 📊 **Real-Time Analytics**
+
+- Speed monitoring (keys/sec)
+- Progress tracking with ETA
+- Comprehensive statistics dashboard
+- Live logging with file output
+
+### 💾 **Data Management**
+
+- Automatic key discovery logging
+- CSV export functionality
+- Settings persistence
+- Search history tracking
+
+### 🎨 **Modern Interface**
+
+- Dark-themed PyQt5 interface
+- Tabbed navigation
+- Real-time status updates
+- Keyboard shortcuts
+
+## 📋 System Requirements
+
+### **Operating System**
+
+- Windows 10/11 (Primary support)
+- Linux/macOS (Limited compatibility)
+
+### **Hardware**
+
+- **GPU Mode**: NVIDIA GPU with CUDA support
+- **CPU Mode**: Multi-core processor recommended
+- Minimum 4GB RAM
+- 1GB free disk space
+
+### **Software Dependencies**
+
+- Python 3.7 - 3.11 (Recommended: 3.9-3.11)
+- NVIDIA CUDA Toolkit (for GPU mode)
+- cuBitcrack.exe (included separately)
+
+## 🚀 Installation
+
+### **Step 1: Download Project**
+
+```bash
+git clone https://github.com/Jasst/bitcoin-scanner.git
+cd bitcoin-scanner
+```
+
+### **Step 2: Python Environment Setup**
+
+```bash
+# Create virtual environment
 python -m venv venv
-# Активируйте виртуальное окружение:
+
+# Activate virtual environment
 # Windows:
 venv\Scripts\activate
 # Linux/macOS:
-# source venv/bin/activate
-Установите зависимости:
-В активированном виртуальном окружении выполните:
-bash
+source venv/bin/activate
+```
 
+### **Step 3: Install Dependencies**
 
-1
-2
-3
-4
-5
-6
+```bash
+# Upgrade pip
 pip install --upgrade pip
+
+# Core dependencies
 pip install PyQt5 psutil
-# Для CPU поиска:
+
+# CPU scanning support
 pip install coincurve
-# Для управления приоритетами в Windows (опционально):
+
+# Windows process management (optional)
 pip install pywin32
-Поместите cuBitcrack.exe:
-Скачайте cuBitcrack.exe (например, с GitHub репозитория ) и поместите его в корневую папку проекта (BTCScanner).
-Использование
-Запустите приложение:
-Убедитесь, что виртуальное окружение активировано (если вы его используете). В терминале в папке проекта выполните:
-bash
+```
 
+### **Step 4: cuBitcrack Setup**
 
-1
+1. Download `cuBitcrack.exe` from the [official repository](https://github.com/brichard19/cuBitcrack)
+1. Place the executable in the project root directory
+1. Ensure CUDA drivers are installed and up to date
+
+## 🎮 Usage Guide
+
+### **Application Launch**
+
+```bash
+# Ensure virtual environment is active
 python main.py
-Выберите режим поиска:
-Переключайтесь между вкладками "GPU Поиск" и "CPU Поиск".
-Настройте параметры:
-GPU Поиск:
-Введите целевой Bitcoin адрес (начинающийся с 1 или 3).
-Укажите диапазон ключей (HEX) для поиска.
-Выберите GPU устройство(а).
-Настройте параметры blocks, threads, points (или используйте "Авто-оптимизация").
-(Опционально) Включите "Случайный поиск в диапазоне" и настройте размеры поддиапазонов и интервал перезапуска.
-(Опционально) Выберите приоритет процесса GPU.
-CPU Поиск:
-Введите целевой Bitcoin адрес.
-Укажите диапазон ключей (HEX).
-Выберите режим поиска (Последовательный/Случайный).
-Укажите количество "Попыток" (для случайного режима).
-Выберите количество "Рабочих" (воркеров, рекомендуется Количество ядер CPU - 1).
-(Опционально) Выберите приоритет процесса CPU.
-Запустите поиск:
-Нажмите кнопку "Запустить GPU поиск" или "Старт CPU (Ctrl+S)".
-Мониторинг:
-Наблюдайте за статистикой, логами и прогрессом на соответствующих вкладках.
-Остановка:
-Нажмите кнопку "Остановить GPU" или "Стоп CPU (Ctrl+Q)" для остановки поиска.
-Найденные ключи:
-Найденные ключи отображаются на вкладке "Найденные ключи" и автоматически сохраняются в файл Found_key_CUDA.txt в папке проекта. Вы можете копировать ключи из таблицы или экспортировать всё в CSV.
-Структура проекта
+```
 
+### **GPU Search Configuration**
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
+1. **Basic Setup**
+- Enter target Bitcoin address (1xxx or 3xxx format)
+- Specify search range in hexadecimal format
+- Select GPU device(s) from dropdown
+1. **Performance Optimization**
+- Enable “Auto-optimization” for automatic tuning
+- Manual configuration: adjust blocks, threads, points
+- Set process priority for resource management
+1. **Advanced Options**
+- Random search mode with configurable sub-ranges
+- Restart intervals for continuous operation
+- Unique range generation to prevent overlap
+
+### **CPU Search Configuration**
+
+1. **Search Parameters**
+- Target Bitcoin address input
+- Hexadecimal range specification
+- Mode selection (Sequential/Random)
+1. **Performance Tuning**
+- Worker count (recommended: CPU cores - 1)
+- Attempt count for random mode
+- Process priority adjustment
+1. **Execution Control**
+- Start: `Ctrl+S`
+- Stop: `Ctrl+Q`
+
+### **Monitoring & Results**
+
+- **Statistics Tab**: Real-time performance metrics
+- **Logs Tab**: Detailed operation logging
+- **Found Keys Tab**: Discovery results with export options
+- **Progress Tracking**: ETA calculations and completion status
+
+## 📁 Project Structure
+
+```
 BTCScanner/
-├── main.py                 # Точка входа в приложение
-├── config.py               # Глобальные константы и настройки
-├── cuBitcrack.exe          # Внешний инструмент для GPU поиска (должен быть скачан отдельно)
-├── Found_key_CUDA.txt      # Файл для сохранения найденных ключей (создается автоматически)
-├── settings.json           # Файл для сохранения пользовательских настроек (создается автоматически)
-├── logs/                   # Папка для лог-файлов (создается автоматически)
-│   └── app.log
-├── ui/                     # Модуль пользовательского интерфейса
-│   ├── __init__.py
-│   └── main_window.py      # Основное окно и логика UI
-├── core/                   # Модуль основной логики приложения
-│   ├── __init__.py
-│   ├── gpu_scanner.py      # Логика GPU поиска (запуск/остановка cuBitcrack, обработка вывода)
-│   └── cpu_scanner.py      # Логика CPU поиска (воркеры, обработка ключей)
-├── utils/                  # Модуль вспомогательных функций
-│   ├── __init__.py
-│   └── helpers.py          # Вспомогательные функции и константы
-└── README.md               # Этот файл
-Лицензия
-Этот проект распространяется "как есть", без каких-либо гарантий. Используйте на свой страх и риск. Автор не несет ответственности за любые последствия, связанные с использованием этого программного обеспечения.
+│
+├── 📄 main.py                    # Application entry point
+├── ⚙️ config.py                 # Global configuration
+├── 🔧 cuBitcrack.exe            # GPU scanning executable
+├── 💾 Found_key_CUDA.txt        # Key discovery log
+├── 🔧 settings.json             # User preferences
+│
+├── 📁 logs/                     # Application logs
+│   └── 📄 app.log
+│
+├── 📁 ui/                       # User interface module
+│   ├── 📄 __init__.py
+│   └── 📄 main_window.py        # Main UI logic
+│
+├── 📁 core/                     # Core functionality
+│   ├── 📄 __init__.py
+│   ├── 📄 gpu_scanner.py        # GPU search engine
+│   └── 📄 cpu_scanner.py        # CPU search engine
+│
+├── 📁 utils/                    # Utility functions
+│   ├── 📄 __init__.py
+│   └── 📄 helpers.py            # Helper functions
+│
+└── 📄 README.md                 # Documentation
+```
 
-Автор
-Jasst
+## 🔧 Configuration Options
 
-GitHub: https://github.com/Jasst
+### **GPU Parameters**
 
+|Parameter|Description      |Default|Range  |
+|---------|-----------------|-------|-------|
+|Blocks   |CUDA blocks      |Auto   |1-65535|
+|Threads  |Threads per block|Auto   |1-1024 |
+|Points   |Points per thread|Auto   |1-2^20 |
+
+### **CPU Parameters**
+
+|Parameter|Description      |Recommended  |
+|---------|-----------------|-------------|
+|Workers  |Process count    |CPU cores - 1|
+|Attempts |Random iterations|1000000+     |
+|Priority |Process priority |Normal       |
+
+## 🐛 Troubleshooting
+
+### **Common Issues**
+
+**cuBitcrack.exe not found**
+
+- Ensure the executable is in the project root
+- Check file permissions and antivirus exclusions
+
+**CUDA errors**
+
+- Update NVIDIA drivers
+- Verify GPU compatibility
+- Check available VRAM
+
+**Python dependency errors**
+
+- Verify Python version (3.7-3.11)
+- Reinstall dependencies in virtual environment
+- Check for conflicting packages
+
+**Performance issues**
+
+- Enable auto-optimization
+- Adjust worker count
+- Monitor system resources
+
+### **Logging**
+
+All application events are logged to:
+
+- Console output (real-time)
+- `logs/app.log` (persistent)
+- Found keys: `Found_key_CUDA.txt`
+
+## ⚠️ Legal Disclaimer
+
+This software is provided “as-is” without any warranties or guarantees. Users assume all responsibility and risk associated with its use. The software is intended for educational and research purposes only.
+
+**Important Notice**:
+
+- Only scan addresses you own or have explicit permission to test
+- Respect applicable laws and regulations in your jurisdiction
+- The author disclaims all liability for misuse or illegal activities
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
+
+### **Development Setup**
+
+```bash
+git clone https://github.com/Jasst/bitcoin-scanner.git
+cd bitcoin-scanner
+pip install -r requirements.txt
+```
+
+## 📞 Support & Contact
+
+- **GitHub**: [@Jasst](https://github.com/Jasst)
+- **Issues**: [Report bugs or request features](https://github.com/Jasst/bitcoin-scanner/issues)
+
+## 📜 Version History
+
+### **v5.0 - Enhanced Edition**
+
+- Dual-mode GPU/CPU support
+- Auto-optimization features
+- Modern dark UI theme
+- Comprehensive logging system
+- Multi-GPU support
+- Advanced statistics tracking
+
+-----
+
+<div align="center">
+
+**Bitcoin GPU/CPU Scanner** - Professional Bitcoin Key Discovery Tool
+
+Made with ❤️ by [Jasst](https://github.com/Jasst)
+
+</div>
