@@ -321,5 +321,3 @@ Made with ❤️ by [Jasst](https://github.com/Jasst)
 
 </div>
 ```
-
----
