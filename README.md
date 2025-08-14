@@ -25,26 +25,28 @@ Bitcoin GPU/CPU Scanner is a professional-grade application designed to search f
 ### ⚡ **Advanced GPU Support**
 
 - Multi-GPU support with device selection
+- Multiple **workers (instances) per GPU device** for increased throughput
 - Automatic parameter optimization (blocks, threads, points)
 - Custom configuration for experienced users
 - NVIDIA CUDA acceleration
 
 ### 🎯 **Flexible Search Strategies**
 
-- **Sequential Mode**: Systematic key space exploration
-- **Random Mode**: Probabilistic search with unique range generation
+- **Sequential Mode**: Systematic key space exploration with **automatic range splitting** for multiple workers
+- **Random Mode**: Probabilistic search with unique range generation and optional auto-restart
 - Configurable search ranges and intervals
 
 ### 🛠️ **System Optimization**
 
 - Process priority management (Windows)
+- Real-time GPU hardware monitoring (utilization, memory, temperature)
 - Resource usage monitoring
 - Automatic performance tuning
 
 ### 📊 **Real-Time Analytics**
 
-- Speed monitoring (keys/sec)
-- Progress tracking with ETA
+- Aggregated speed monitoring (keys/sec) from all workers
+- Progress tracking with ETA (for sequential mode)
 - Comprehensive statistics dashboard
 - Live logging with file output
 
@@ -80,15 +82,15 @@ Bitcoin GPU/CPU Scanner is a professional-grade application designed to search f
 
 - Python 3.7 - 3.11 (Recommended: 3.9-3.11)
 - NVIDIA CUDA Toolkit (for GPU mode)
-- cuBitcrack.exe (included separately)
+- `cuBitcrack.exe` (included separately or downloaded)
 
 ## 🚀 Installation
 
 ### **Step 1: Download Project**
 
 ```bash
-git clone https://github.com/Jasst/bitcoin-scanner.git
-cd bitcoin-scanner
+git clone https://github.com/Jasst/BTCScanner.git
+cd BTCScanner
 ```
 
 ### **Step 2: Python Environment Setup**
@@ -116,15 +118,18 @@ pip install PyQt5 psutil
 # CPU scanning support
 pip install coincurve
 
-# Windows process management (optional)
+# Windows process management (optional but recommended for priority control)
 pip install pywin32
+
+# GPU Monitoring (optional, for hardware stats)
+pip install pynvml
 ```
 
 ### **Step 4: cuBitcrack Setup**
 
-1. Download `cuBitcrack.exe` from the [official repository](https://github.com/brichard19/cuBitcrack)
-1. Place the executable in the project root directory
-1. Ensure CUDA drivers are installed and up to date
+1. Download `cuBitcrack.exe` (e.g., from [https://github.com/brichard19/BitCrack](https://github.com/brichard19/BitCrack) or a similar source).
+2. Place the executable in the project root directory (next to `main.py`).
+3. Ensure NVIDIA CUDA drivers are installed and up to date.
 
 ## 🎮 Usage Guide
 
@@ -137,39 +142,42 @@ python main.py
 
 ### **GPU Search Configuration**
 
-1. **Basic Setup**
-- Enter target Bitcoin address (1xxx or 3xxx format)
-- Specify search range in hexadecimal format
-- Select GPU device(s) from dropdown
-1. **Performance Optimization**
-- Enable “Auto-optimization” for automatic tuning
-- Manual configuration: adjust blocks, threads, points
-- Set process priority for resource management
-1. **Advanced Options**
-- Random search mode with configurable sub-ranges
-- Restart intervals for continuous operation
-- Unique range generation to prevent overlap
+1.  **Basic Setup**
+    -   Enter target Bitcoin address (1xxx or 3xxx format).
+    -   Specify the overall search range in hexadecimal format.
+    -   Select GPU device(s) from the dropdown (e.g., `0`, `0,1`).
+2.  **Worker Configuration**
+    -   Use the **"Воркеры/устройство"** spin box to specify how many `cuBitcrack.exe` instances to run on *each* selected GPU.
+    -   The application will **automatically split the total range** among all launched workers for efficient, non-overlapping search in sequential mode.
+3.  **Performance Optimization**
+    -   Enable “Авто-оптимизация” for automatic tuning of blocks, threads, and points.
+    -   Manual configuration: adjust blocks, threads, points.
+    -   Set process priority for resource management.
+4.  **Advanced Options**
+    -   **Random search mode**: Generates a unique random sub-range for each run. The generated range is then split among workers.
+    -   Configure restart intervals for continuous random scanning.
+    -   Set minimum and maximum size for random sub-ranges.
 
 ### **CPU Search Configuration**
 
-1. **Search Parameters**
-- Target Bitcoin address input
-- Hexadecimal range specification
-- Mode selection (Sequential/Random)
-1. **Performance Tuning**
-- Worker count (recommended: CPU cores - 1)
-- Attempt count for random mode
-- Process priority adjustment
-1. **Execution Control**
-- Start: `Ctrl+S`
-- Stop: `Ctrl+Q`
+1.  **Search Parameters**
+    -   Target Bitcoin address input.
+    -   Hexadecimal range specification.
+    -   Mode selection (Sequential/Random).
+2.  **Performance Tuning**
+    -   Worker count (recommended: CPU cores - 1).
+    -   Attempt count for random mode.
+    -   Process priority adjustment.
+3.  **Execution Control**
+    -   Start: `Ctrl+S`
+    -   Stop: `Ctrl+Q`
 
 ### **Monitoring & Results**
 
-- **Statistics Tab**: Real-time performance metrics
-- **Logs Tab**: Detailed operation logging
-- **Found Keys Tab**: Discovery results with export options
-- **Progress Tracking**: ETA calculations and completion status
+-   **Statistics Tab**: Real-time performance metrics (aggregated for GPU).
+-   **Logs Tab**: Detailed operation logging.
+-   **Found Keys Tab**: Discovery results with export options (CSV).
+-   **Progress Tracking**: ETA calculations and completion status (for sequential GPU/CPU).
 
 ## 📁 Project Structure
 
@@ -178,7 +186,7 @@ BTCScanner/
 │
 ├── 📄 main.py                    # Application entry point
 ├── ⚙️ config.py                 # Global configuration
-├── 🔧 cuBitcrack.exe            # GPU scanning executable
+├── 🔧 cuBitcrack.exe            # GPU scanning executable (place here)
 ├── 💾 Found_key_CUDA.txt        # Key discovery log
 ├── 🔧 settings.json             # User preferences
 │
@@ -191,7 +199,7 @@ BTCScanner/
 │
 ├── 📁 core/                     # Core functionality
 │   ├── 📄 __init__.py
-│   ├── 📄 gpu_scanner.py        # GPU search engine
+│   ├── 📄 gpu_scanner.py        # GPU search engine & process management
 │   └── 📄 cpu_scanner.py        # CPU search engine
 │
 ├── 📁 utils/                    # Utility functions
@@ -205,19 +213,20 @@ BTCScanner/
 
 ### **GPU Parameters**
 
-|Parameter|Description      |Default|Range  |
-|---------|-----------------|-------|-------|
-|Blocks   |CUDA blocks      |Auto   |1-65535|
-|Threads  |Threads per block|Auto   |1-1024 |
-|Points   |Points per thread|Auto   |1-2^20 |
+| Parameter | Description         | Default | Range   |
+| :-------- | :------------------ | :------ | :------ |
+| Blocks    | CUDA blocks         | Auto    | 1-65535 |
+| Threads   | Threads per block   | Auto    | 1-1024  |
+| Points    | Points per thread   | Auto    | 1-2^20  |
+| Workers/Device | Instances per GPU | 1       | 1-16    |
 
 ### **CPU Parameters**
 
-|Parameter|Description      |Recommended  |
-|---------|-----------------|-------------|
-|Workers  |Process count    |CPU cores - 1|
-|Attempts |Random iterations|1000000+     |
-|Priority |Process priority |Normal       |
+| Parameter | Description         | Recommended     |
+| :-------- | :------------------ | :-------------- |
+| Workers   | Process count       | CPU cores - 1   |
+| Attempts  | Random iterations   | 1000000+        |
+| Priority  | Process priority    | Normal          |
 
 ## 🐛 Troubleshooting
 
@@ -225,26 +234,32 @@ BTCScanner/
 
 **cuBitcrack.exe not found**
 
-- Ensure the executable is in the project root
-- Check file permissions and antivirus exclusions
+- Ensure the executable is named `cuBitcrack.exe` and is in the project root directory.
+- Check file permissions and antivirus exclusions.
 
 **CUDA errors**
 
-- Update NVIDIA drivers
-- Verify GPU compatibility
-- Check available VRAM
+- Update NVIDIA drivers.
+- Verify GPU compatibility with CUDA.
+- Check available VRAM (especially with multiple workers).
 
 **Python dependency errors**
 
-- Verify Python version (3.7-3.11)
-- Reinstall dependencies in virtual environment
-- Check for conflicting packages
+- Verify Python version (3.7-3.11).
+- Reinstall dependencies in a clean virtual environment.
+- Check for conflicting packages.
 
 **Performance issues**
 
-- Enable auto-optimization
-- Adjust worker count
-- Monitor system resources
+- Enable auto-optimization.
+- Adjust worker count per GPU.
+- Monitor system resources (GPU Utilization, Memory).
+- Ensure no other heavy GPU tasks are running.
+
+**Only one worker starts even if more are requested**
+
+- Check the application log (`logs/app.log` or the Log tab) for errors during worker startup.
+- Ensure the total key range is large enough to be split among the requested number of workers.
 
 ### **Logging**
 
@@ -260,9 +275,9 @@ This software is provided “as-is” without any warranties or guarantees. User
 
 **Important Notice**:
 
-- Only scan addresses you own or have explicit permission to test
-- Respect applicable laws and regulations in your jurisdiction
-- The author disclaims all liability for misuse or illegal activities
+- Only scan addresses you own or have explicit permission to test.
+- Respect applicable laws and regulations in your jurisdiction.
+- The author disclaims all liability for misuse or illegal activities.
 
 ## 🤝 Contributing
 
@@ -271,26 +286,30 @@ Contributions are welcome! Please feel free to submit issues, feature requests, 
 ### **Development Setup**
 
 ```bash
-git clone https://github.com/Jasst/bitcoin-scanner.git
-cd bitcoin-scanner
-pip install -r requirements.txt
+git clone https://github.com/Jasst/BTCScanner.git
+cd BTCScanner
+pip install -r requirements.txt # (Create this file based on the pip install commands above)
 ```
 
 ## 📞 Support & Contact
 
 - **GitHub**: [@Jasst](https://github.com/Jasst)
-- **Issues**: [Report bugs or request features](https://github.com/Jasst/bitcoin-scanner/issues)
+- **Issues**: [Report bugs or request features](https://github.com/Jasst/BTCScanner/issues)
 
 ## 📜 Version History
 
 ### **v5.0 - Enhanced Edition**
 
 - Dual-mode GPU/CPU support
+- Multi-worker per GPU device capability
 - Auto-optimization features
+- Automatic range splitting for GPU workers
+- Aggregated GPU statistics
 - Modern dark UI theme
 - Comprehensive logging system
 - Multi-GPU support
 - Advanced statistics tracking
+- Real-time GPU hardware monitoring
 
 -----
 
@@ -301,3 +320,20 @@ pip install -r requirements.txt
 Made with ❤️ by [Jasst](https://github.com/Jasst)
 
 </div>
+```
+
+---
+
+**Основные изменения:**
+
+1.  **Исправлена ссылка на репозиторий** в инструкции по клонированию и в разделе поддержки: `https://github.com/Jasst/BTCScanner.git`.
+2.  **Обновлены "Key Features"**:
+    *   Добавлен пункт о **множественных воркерах на устройство**.
+    *   Уточнено, что **диапазоны разделяются** для эффективности.
+    *   Упомянута **агрегация статистики**.
+3.  **Обновлен раздел "Usage Guide"**:
+    *   Добавлен подраздел **"Worker Configuration"**, объясняющий новую функцию.
+    *   Уточнено, как работает разделение диапазонов.
+4.  **Обновлена таблица параметров GPU**, добавив `Workers/Device`.
+5.  **Добавлен пункт в "Troubleshooting"** о проблеме с запуском нескольких воркеров.
+6.  **Обновлена история версий**, отразив ключевые улучшения v5.0.
