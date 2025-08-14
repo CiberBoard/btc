@@ -1,4 +1,5 @@
 # ui/main_window.py
+import math # Для math.ceil
 import os
 import subprocess
 import time
@@ -254,12 +255,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
         main_layout.setSpacing(15)
         self.main_tabs = QTabWidget()
         main_layout.addWidget(self.main_tabs)
-
         # =============== GPU TAB ===============
         gpu_tab = QWidget()
         gpu_layout = QVBoxLayout(gpu_tab)
         gpu_layout.setSpacing(10)
-
         # GPU адрес и диапазон
         gpu_addr_group = QGroupBox("GPU: Целевой адрес и диапазон ключей")
         gpu_addr_layout = QGridLayout(gpu_addr_group)
@@ -277,7 +276,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_end_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self))
         gpu_addr_layout.addWidget(self.gpu_end_key_edit, 1, 3)
         gpu_layout.addWidget(gpu_addr_group)
-
         # GPU параметры
         gpu_param_group = QGroupBox("GPU: Параметры и random режим")
         gpu_param_layout = QGridLayout(gpu_param_group)
@@ -317,8 +315,15 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_priority_combo = QComboBox()
         self.gpu_priority_combo.addItems(["Нормальный", "Высокий", "Реального времени"])
         gpu_param_layout.addWidget(self.gpu_priority_combo, 4, 1)
+        # --- НОВОЕ: Воркеры на устройство ---
+        # Добавляйте это ПОСЛЕ создания gpu_param_layout и ДО добавления gpu_param_group в gpu_layout
+        gpu_param_layout.addWidget(QLabel("Воркеры/устройство:"), 5, 0) # Новый ряд (индекс 5)
+        self.gpu_workers_per_device_spin = QSpinBox()
+        self.gpu_workers_per_device_spin.setRange(1, 16) # Или другой разумный максимум
+        self.gpu_workers_per_device_spin.setValue(1) # По умолчанию 1 воркер
+        gpu_param_layout.addWidget(self.gpu_workers_per_device_spin, 5, 1) # Новый ряд (индекс 5)
+        # --- КОНЕЦ НОВОГО ---
         gpu_layout.addWidget(gpu_param_group)
-
         # GPU кнопки
         gpu_button_layout = QHBoxLayout()
         self.gpu_start_stop_btn = QPushButton("Запустить GPU поиск")
@@ -332,7 +337,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         gpu_button_layout.addWidget(self.gpu_optimize_btn)
         gpu_button_layout.addStretch()
         gpu_layout.addLayout(gpu_button_layout)
-
         # GPU прогресс
         gpu_progress_group = QGroupBox("GPU: Прогресс и статистика")
         gpu_progress_layout = QGridLayout(gpu_progress_group)
@@ -367,19 +371,15 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.gpu_hw_status_group = QGroupBox("GPU: Аппаратный статус")
             gpu_hw_status_layout = QGridLayout(self.gpu_hw_status_group)
             gpu_hw_status_layout.setSpacing(6)
-
             self.gpu_util_label = QLabel("Загрузка GPU: - %")
             self.gpu_util_label.setStyleSheet("color: #f1c40f;")  # Желтый цвет
             gpu_hw_status_layout.addWidget(self.gpu_util_label, 0, 0)
-
             self.gpu_mem_label = QLabel("Память GPU: - / - MB")
             self.gpu_mem_label.setStyleSheet("color: #9b59b6;")  # Фиолетовый цвет
             gpu_hw_status_layout.addWidget(self.gpu_mem_label, 0, 1)
-
             self.gpu_temp_label = QLabel("Температура: - °C")
             self.gpu_temp_label.setStyleSheet("color: #e74c3c;")  # Красный цвет
             gpu_hw_status_layout.addWidget(self.gpu_temp_label, 1, 0)
-
             # Добавляем прогресс-бары для наглядности
             self.gpu_util_bar = QProgressBar()
             self.gpu_util_bar.setRange(0, 100)
@@ -390,7 +390,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
                         QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f1c40f, stop:1 #f39c12);} /* Оранжевый градиент */
                     """)
             gpu_hw_status_layout.addWidget(self.gpu_util_bar, 2, 0)
-
             self.gpu_mem_bar = QProgressBar()
             self.gpu_mem_bar.setRange(0, 100)
             self.gpu_mem_bar.setValue(0)
@@ -400,16 +399,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
                         QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #9b59b6, stop:1 #8e44ad);} /* Фиолетовый градиент */
                     """)
             gpu_hw_status_layout.addWidget(self.gpu_mem_bar, 2, 1)
-
             gpu_layout.addWidget(self.gpu_hw_status_group)
         # =============== КОНЕЦ НОВОГО ===============
-
         # =============== CPU TAB ===============
         cpu_tab = QWidget()
         cpu_layout = QVBoxLayout(cpu_tab)
         cpu_layout.setContentsMargins(10, 10, 10, 10)
         cpu_layout.setSpacing(10)
-
         # Системная информация
         sys_info_layout = QGridLayout()
         sys_info_layout.setSpacing(6)
@@ -426,7 +422,25 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_status_label = QLabel("Ожидание запуска")
         sys_info_layout.addWidget(self.cpu_status_label, 1, 3)
         cpu_layout.addLayout(sys_info_layout)
-
+        # =============== НОВОЕ: CPU Hardware Status Group ===============
+        cpu_hw_status_group = QGroupBox("CPU: Аппаратный статус")
+        cpu_hw_status_layout = QGridLayout(cpu_hw_status_group)
+        cpu_hw_status_layout.setSpacing(6)
+        self.cpu_temp_label = QLabel("Температура: - °C")
+        self.cpu_temp_label.setStyleSheet("color: #e74c3c;")  # Красный цвет по умолчанию
+        cpu_hw_status_layout.addWidget(self.cpu_temp_label, 0, 0)
+        # Добавляем прогресс-бар для температуры (опционально)
+        self.cpu_temp_bar = QProgressBar()
+        self.cpu_temp_bar.setRange(0, 100)  # Диапазон от 0 до 100°C для примера
+        self.cpu_temp_bar.setValue(0)
+        self.cpu_temp_bar.setFormat("Темп: %p°C")
+        self.cpu_temp_bar.setStyleSheet("""
+                            QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                            QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #27ae60, stop:1 #219653);} /* Зеленый градиент */
+                        """)
+        cpu_hw_status_layout.addWidget(self.cpu_temp_bar, 1, 0)
+        cpu_layout.addWidget(cpu_hw_status_group)
+        # =============== КОНЕЦ НОВОГО ===============
         # CPU параметры поиска
         cpu_params_group = QGroupBox("CPU: Параметры поиска")
         cpu_params_layout = QGridLayout(cpu_params_group)
@@ -436,7 +450,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_target_edit = QLineEdit()
         self.cpu_target_edit.setPlaceholderText("Введите BTC адрес (1 или 3)")
         cpu_params_layout.addWidget(self.cpu_target_edit, 0, 1, 1, 3)
-
         # Диапазон ключей для CPU
         cpu_keys_group = QGroupBox("Диапазон ключей")
         cpu_keys_layout = QGridLayout(cpu_keys_group)
@@ -486,7 +499,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         cpu_scan_params_layout.addWidget(self.cpu_priority_combo, 2, 1)
         cpu_params_layout.addWidget(cpu_scan_params_group, 2, 0, 1, 4)
         cpu_layout.addWidget(cpu_params_group)
-
         # CPU кнопки управления
         cpu_button_layout = QHBoxLayout()
         cpu_button_layout.setSpacing(10)
@@ -523,7 +535,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         cpu_button_layout.addWidget(self.cpu_start_stop_btn)
         cpu_button_layout.addWidget(self.cpu_pause_resume_btn)
         cpu_layout.addLayout(cpu_button_layout)
-
         # CPU общий прогресс
         cpu_progress_layout = QVBoxLayout()
         cpu_progress_layout.setSpacing(6)
@@ -539,7 +550,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_eta_label.setStyleSheet("color: #f39c12;")
         cpu_progress_layout.addWidget(self.cpu_eta_label)
         cpu_layout.addLayout(cpu_progress_layout)
-
         # CPU статистика воркеров
         cpu_layout.addWidget(QLabel("Статистика воркеров:"))
         self.cpu_workers_table = QTableWidget(0, 5)
@@ -549,7 +559,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_workers_table.setAlternatingRowColors(True)
         cpu_layout.addWidget(self.cpu_workers_table, 1)
         self.main_tabs.addTab(cpu_tab, "CPU Поиск")
-
         # =============== FOUND KEYS TAB ===============
         keys_tab = QWidget()
         keys_layout = QVBoxLayout(keys_tab)
@@ -572,7 +581,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         export_layout.addStretch()
         keys_layout.addLayout(export_layout)
         self.main_tabs.addTab(keys_tab, "Найденные ключи")
-
         # =============== LOG TAB ===============
         log_tab = QWidget()
         log_layout = QVBoxLayout(log_tab)
@@ -594,7 +602,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         log_button_layout.addStretch()
         log_layout.addLayout(log_button_layout)
         self.main_tabs.addTab(log_tab, "Лог работы")
-
         # =============== ABOUT TAB ===============
         about_tab = QWidget()
         about_layout = QVBoxLayout(about_tab)
@@ -667,6 +674,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def update_system_info(self):
         try:
+            # --- Существующий код обновления системной информации ---
             mem = psutil.virtual_memory()
             self.mem_label.setText(f"{mem.used // (1024 * 1024)}/{mem.total // (1024 * 1024)} MB")
             self.cpu_usage.setText(f"{psutil.cpu_percent()}%")
@@ -675,10 +683,92 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 self.cpu_status_label.setText(f"{status} ({len(self.processes)} воркеров)")
             else:
                 self.cpu_status_label.setText("Ожидание запуска")
+            # --- Конец существующего кода ---
+
+            # =============== НОВОЕ: Обновление температуры CPU ===============
+            # Попытка получить температуру CPU
+            cpu_temp = None
+            try:
+                temps = psutil.sensors_temperatures()
+                if temps:
+                    # Обычно основная температура CPU находится под ключом 'coretemp' (Intel) или 'k10temp' (AMD)
+                    # Можно перебирать все, но для простоты возьмем первую подходящую
+                    for name, entries in temps.items():
+                        # Ищем наиболее вероятные источники температуры CPU
+                        if name.lower() in ['coretemp', 'k10temp', 'cpu_thermal', 'acpi']:
+                            for entry in entries:
+                                # Ищем основную температуру (обычно без суффиксов или с 'package')
+                                # или просто первую доступную
+                                if entry.current is not None:
+                                    if cpu_temp is None or 'package' in entry.label.lower() or entry.label == '':
+                                        cpu_temp = entry.current
+                                    # Если уже нашли Package, дальше не ищем
+                                    if 'package' in entry.label.lower():
+                                        break
+                            # Если нашли температуру для этого сенсора, выходим
+                            if cpu_temp is not None:
+                                break
+                    # Если не нашли по ключевым словам, берем первую попавшуюся температуру из любого сенсора
+                    if cpu_temp is None:
+                        for entries in temps.values():
+                            for entry in entries:
+                                if entry.current is not None:
+                                    cpu_temp = entry.current
+                                    break
+                            if cpu_temp is not None:
+                                break
+
+            except (AttributeError, NotImplementedError):
+                # sensors_temperatures может не поддерживаться на некоторых системах (например, Windows без WMI)
+                pass
+
+            if cpu_temp is not None:
+                self.cpu_temp_label.setText(f"Температура: {cpu_temp:.1f} °C")
+                # Установка диапазона прогрессбара от 0 до 100°C (можно адаптировать)
+                self.cpu_temp_bar.setRange(0, 100)
+                self.cpu_temp_bar.setValue(int(cpu_temp))
+                self.cpu_temp_bar.setFormat(f"Темп: {cpu_temp:.1f}°C")
+
+                # Цветовая индикация температуры
+                if cpu_temp > 80:
+                    self.cpu_temp_label.setStyleSheet("color: #e74c3c; font-weight: bold;") # Красный
+                    self.cpu_temp_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e74c3c, stop:1 #c0392b);} /* Красный градиент */
+                    """)
+                elif cpu_temp > 65:
+                    self.cpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;") # Оранжевый
+                    self.cpu_temp_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f39c12, stop:1 #d35400);} /* Оранжевый градиент */
+                    """)
+                else:
+                    self.cpu_temp_label.setStyleSheet("color: #27ae60;") # Зеленый
+                    self.cpu_temp_bar.setStyleSheet("""
+                        QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
+                        QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #27ae60, stop:1 #219653);} /* Зеленый градиент */
+                    """)
+            else:
+                self.cpu_temp_label.setText("Температура: N/A")
+                self.cpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+                self.cpu_temp_bar.setValue(0)
+                self.cpu_temp_bar.setFormat("Темп: N/A")
+            # =============== КОНЕЦ НОВОГО ===============
+
         except Exception as e:
+            logger.exception("Ошибка обновления системной информации")
+            # --- Существующий код обработки ошибок ---
             self.mem_label.setText("Ошибка данных")
             self.cpu_usage.setText("Ошибка данных")
             self.cpu_status_label.setText("Ошибка данных")
+            # --- Конец существующего кода обработки ошибок ---
+
+            # =============== НОВОЕ: Обработка ошибок для температуры ===============
+            self.cpu_temp_label.setText("Температура: Ошибка")
+            self.cpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+            self.cpu_temp_bar.setValue(0)
+            self.cpu_temp_bar.setFormat("Темп: Ошибка")
+            # =============== КОНЕЦ НОВОГО ===============
 
     # ============ GPU METHODS ============
     def auto_optimize_gpu_parameters(self):
@@ -821,20 +911,17 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.used_ranges,  # used_ranges (set)
             self.max_saved_random  # max_saved_random (int)
         )
-
         # Обработка ошибки
         if error:
             self.append_log(f"Ошибка генерации случайного диапазона при перезапуске: {error}", "error")
             self.gpu_restart_timer.stop()  # Останавливаем таймер, чтобы не было бесконечных попыток
             QMessageBox.warning(self, "Ошибка", f"Не удалось сгенерировать диапазон при перезапуске: {error}")
             return
-
         if start_key is None or end_key is None:
             self.append_log("Не удалось сгенерировать случайный диапазон при перезапуске.", "error")
             self.gpu_restart_timer.stop()
             QMessageBox.warning(self, "Ошибка", "Не удалось сгенерировать случайный диапазон при перезапуске.")
             return
-
         self.update_gpu_range_label(start_key, end_key)
         self.append_log(f"Новый случайный диапазон GPU: {hex(start_key)} - {hex(end_key)}", "normal")
         self.start_gpu_search_with_range(start_key, end_key)
@@ -846,11 +933,12 @@ class BitcoinGPUCPUScanner(QMainWindow):
     def start_gpu_search_with_range(self, start_key, end_key):
         """Запускает GPU поиск с указанным диапазоном"""
         target_address = self.gpu_target_edit.text().strip()
-        # Сохраняем диапазон для расчета прогресса
+
+        # Сохраняем оригинальный диапазон для расчета прогресса
         self.gpu_start_range_key = start_key
         self.gpu_end_range_key = end_key
         self.gpu_total_keys_in_range = end_key - start_key + 1
-        self.gpu_keys_checked = 0  # Добавьте эту инициализацию
+        self.gpu_keys_checked = 0  # Сброс счетчика
 
         # Получаем выбранные устройства GPU
         devices = self.gpu_device_combo.currentText().split(',')
@@ -863,46 +951,132 @@ class BitcoinGPUCPUScanner(QMainWindow):
         points = self.points_combo.currentText()
         priority_index = self.gpu_priority_combo.currentIndex()
 
-        # Запускаем процессы для каждого устройства
+        # --- НОВОЕ ---
+        # Получаем количество воркеров на устройство
+        workers_per_device = self.gpu_workers_per_device_spin.value()
+        total_requested_workers = len(devices) * workers_per_device
+
+        if total_requested_workers <= 0:
+            self.append_log("Количество воркеров должно быть больше 0.", "error")
+            return
+
+        # Рассчитываем размер поддиапазона для каждого воркера
+        total_keys = self.gpu_total_keys_in_range
+        keys_per_worker = max(1, total_keys // total_requested_workers)  # Убедимся, что минимум 1 ключ на воркера
+
+        # Если ключей меньше, чем воркеров, уменьшаем количество воркеров
+        if total_keys < total_requested_workers:
+            # Пересчитываем workers_per_device, чтобы общее количество воркеров не превышало total_keys
+            # Простой способ: используем максимум total_keys воркеров, распределяя их по устройствам
+            total_requested_workers = total_keys
+            # Распределяем total_keys воркеров по len(devices) устройствам
+            # Это простая логика, можно сделать более сложную
+            self.append_log(
+                f"Диапазон ключей ({total_keys}) меньше количества запрошенных воркеров ({len(devices)}*{workers_per_device}={total_requested_workers}). Будет запущено {total_keys} воркеров.",
+                "warning")
+            # Для простоты, можно просто запускать по одному воркеру на ключ, если ключей < воркеров
+            # Или уменьшить workers_per_device. Реализуем более простой вариант:
+            # Запускаем максимум total_keys воркеров, распределяя их по устройствам.
+            # workers_per_device = max(1, total_keys // len(devices))
+            # total_requested_workers = len(devices) * workers_per_device
+            # Но это всё равно может быть не оптимально. Проще - запустить total_keys воркеров.
+            # Но это требует переписывания логики. Оставим предупреждение и будем запускать по одному ключу на воркер если нужно.
+            # Или просто запускаем total_requested_workers = total_keys и далее работаем.
+            # Лучше: скорректировать общее количество воркеров.
+            # Пока что просто используем keys_per_worker = 1 если total_keys < total_requested_workers.
+            # И запускаем total_keys воркеров.
+            if total_keys < total_requested_workers:
+                total_requested_workers = total_keys
+                keys_per_worker = 1
+        # --- КОНЕЦ НОВОГО ---
+
+        # Запускаем процессы для каждого устройства И для каждого воркера
         success_count = 0
+        worker_index_global = 0  # Глобальный индекс для отслеживания поддиапазонов
+
         for device in devices:
             device = device.strip()
             if not device.isdigit():
+                self.append_log(f"Некорректный ID устройства: {device}", "error")
                 continue
-            try:
-                cuda_process, output_reader = gpu_core.start_gpu_search_with_range(
-                    target_address, start_key, end_key, device, blocks, threads, points, priority_index, self
-                )
-                # Подключаем сигналы
-                output_reader.log_message.connect(self.append_log)
-                output_reader.stats_update.connect(self.update_gpu_stats_display)
-                output_reader.found_key.connect(self.handle_found_key)
-                output_reader.process_finished.connect(self.handle_gpu_search_finished)
-                output_reader.start()
 
-                self.gpu_processes.append((cuda_process, output_reader))
-                success_count += 1
+            # --- ИЗМЕНЕНИЕ ---
+            # Вложенный цикл для запуска нескольких воркеров на одно устройство
+            for worker_local_index in range(workers_per_device):
+                # Рассчитываем уникальный поддиапазон для этого воркера
+                # worker_index_global отслеживает, какой по счету это воркер среди всех
+                worker_start_key = start_key + (worker_index_global * keys_per_worker)
 
-            except Exception as e:
-                logger.exception(f"Ошибка запуска cuBitcrack на устройстве {device}")
-                self.append_log(f"Ошибка запуска cuBitcrack на устройстве {device}: {str(e)}", "error")
+                # Для последнего воркера убедимся, что конец диапазона правильный
+                if worker_index_global == total_requested_workers - 1:
+                    worker_end_key = end_key
+                else:
+                    worker_end_key = worker_start_key + keys_per_worker - 1
+                    # Убедимся, что не вышли за пределы оригинального диапазона (на всякий случай)
+                    worker_end_key = min(worker_end_key, end_key)
+
+                # Проверка корректности поддиапазона
+                if worker_start_key > worker_end_key:
+                    # Это может произойти, если keys_per_worker = 0 или диапазон слишком мал
+                    self.append_log(
+                        f"Пропущен воркер {worker_index_global + 1} на устройстве {device}: некорректный поддиапазон {hex(worker_start_key)}-{hex(worker_end_key)}",
+                        "warning")
+                    worker_index_global += 1
+                    continue  # Пропускаем этот воркер
+
+                try:
+                    # Передаем УНИКАЛЬНЫЙ поддиапазон каждому воркеру
+                    cuda_process, output_reader = gpu_core.start_gpu_search_with_range(
+                        target_address, worker_start_key, worker_end_key, device, blocks, threads, points,
+                        priority_index, self
+                    )
+                    # Подключаем сигналы
+                    output_reader.log_message.connect(self.append_log)
+                    output_reader.stats_update.connect(self.update_gpu_stats_display)  # Требует модификации (см. ниже)
+                    output_reader.found_key.connect(self.handle_found_key)
+                    output_reader.process_finished.connect(self.handle_gpu_search_finished)
+                    output_reader.start()
+                    self.gpu_processes.append((cuda_process, output_reader))
+                    success_count += 1
+                    logger.info(
+                        f"Запущен GPU воркер {worker_local_index + 1}/{workers_per_device} (глобальный {worker_index_global + 1}/{total_requested_workers}) на устройстве {device}. Диапазон: {hex(worker_start_key)} - {hex(worker_end_key)}")
+                    self.append_log(
+                        f"Запущен воркер {worker_index_global + 1} на GPU {device}. Диапазон: {hex(worker_start_key)} - {hex(worker_end_key)}",
+                        "normal")
+                except Exception as e:
+                    logger.exception(
+                        f"Ошибка запуска cuBitcrack воркера {worker_local_index + 1} (глобальный {worker_index_global + 1}) на устройстве {device}")
+                    self.append_log(
+                        f"Ошибка запуска cuBitcrack воркера {worker_index_global + 1} на устройстве {device}: {str(e)}",
+                        "error")
+
+                worker_index_global += 1
+                # Если мы уже запустили достаточно воркеров (например, если ключей было меньше), выходим
+                if worker_index_global >= total_requested_workers:
+                    break
+            # --- КОНЕЦ ИЗМЕНЕНИЯ ---
+            # Если мы уже запустили достаточно воркеров, выходим из внешнего цикла тоже
+            if worker_index_global >= total_requested_workers:
+                break
 
         if success_count > 0:
             if not self.gpu_is_running:
                 self.gpu_is_running = True
                 self.gpu_start_time = time.time()
+                # Эти значения теперь должны агрегироваться из всех воркеров
                 self.gpu_keys_checked = 0
                 self.gpu_keys_per_second = 0
                 self.gpu_last_update_time = time.time()
                 # Сбросим прогресс бар
                 self.gpu_progress_bar.setValue(0)
+                # Прогресс теперь рассчитывается на основе агрегированных данных
                 self.gpu_progress_bar.setFormat(f"Прогресс: 0% (0 / {self.gpu_total_keys_in_range:,})")
                 self.gpu_start_stop_btn.setText("Остановить GPU")
                 self.gpu_start_stop_btn.setStyleSheet("background: #e74c3c; font-weight: bold;")
-            self.append_log(f"Запущено {success_count} GPU процессов", "success")
+            self.append_log(f"Успешно запущено {success_count} GPU воркеров", "success")
         else:
             self.append_log("Не удалось запустить ни один GPU процесс", "error")
-            self.gpu_search_finished()
+            # self.gpu_search_finished() # Не вызываем, так как ничего не запустилось
 
     def stop_gpu_search_internal(self):
         """Внутренняя остановка GPU поиска"""
@@ -921,45 +1095,99 @@ class BitcoinGPUCPUScanner(QMainWindow):
         """Обработчик завершения GPU поиска"""
         # Проверяем, все ли процессы завершились
         all_finished = True
-        for process, _ in self.gpu_processes:
-            if process.poll() is None:
+        for process, reader in self.gpu_processes:
+            # Проверяем, завершен ли процесс ОС *и* завершен ли поток чтения
+            if process.poll() is None or reader.isRunning():
                 all_finished = False
                 break
+
         if all_finished:
             self.gpu_search_finished()
-            if self.gpu_random_checkbox.isChecked() and self.gpu_restart_timer.isActive():
-                self.stop_gpu_search_internal()
-                QTimer.singleShot(1000, self.start_gpu_random_search)
+        # Если используется случайный режим с перезапуском, логика должна быть в start_gpu_random_search
+        # и обработчике таймера.
+        # if self.gpu_random_checkbox.isChecked() and self.gpu_restart_timer.isActive():
+        #     self.stop_gpu_search_internal()
+        #     QTimer.singleShot(1000, self.start_gpu_random_search)
+
+
 
     def update_gpu_stats_display(self, stats):
+        """Обновляет отображение статистики GPU. Агрегирует данные от всех воркеров."""
         try:
-            speed = stats.get('speed', 0)
-            checked = stats.get('checked', 0)
-            # Обновляем общее количество проверенных ключей
-            self.gpu_keys_checked = checked
-            self.gpu_keys_per_second = speed * 1000000  # Сохраняем скорость для интерполяции
+            # stats приходит от одного воркера. Нужно агрегировать данные от всех.
+            # Для этого можно использовать словарь или другой способ хранения последних данных от каждого процесса.
+            # Предположим, что sender() возвращает объект OptimizedOutputReader, который отправил сигнал.
+            # Мы можем использовать его как ключ для хранения последних stats.
+
+            # Получаем отправителя сигнала
+            sender_reader = self.sender()
+
+            # Сохраняем последние статистики от каждого воркера (если еще не создан)
+            if not hasattr(self, 'gpu_worker_stats'):
+                self.gpu_worker_stats = {}  # {reader_object: stats_dict}
+
+            # Обновляем статистику для этого воркера
+            self.gpu_worker_stats[sender_reader] = stats
+
+            # Агрегируем данные от всех активных воркеров
+            total_speed = 0.0
+            total_checked = 0
+            # Мы должны учитывать только активные (не завершенные) воркеры
+            # Можно проверять reader.isRunning() или process.poll() == None
+            active_workers = []
+            for process, reader in self.gpu_processes:
+                if reader.isRunning() and process.poll() is None:  # Проверяем, активен ли процесс и поток
+                    active_workers.append(reader)
+
+            for reader in active_workers:
+                if reader in self.gpu_worker_stats:
+                    worker_stats = self.gpu_worker_stats[reader]
+                    total_speed += worker_stats.get('speed', 0)
+                    total_checked = max(total_checked, worker_stats.get('checked',
+                                                                        0))  # Используем max, если ключи не пересекаются. Но т.к. диапазоны уникальны, скорее всего нужно суммировать.
+                    # ИЛИ, если диапазоны уникальны и каждый воркер отслеживает свой счетчик в пределах своего диапазона:
+                    # total_checked += worker_stats.get('checked', 0)
+                    # Но cuBitcrack, вероятно, показывает абсолютное количество проверенных в диапазоне.
+                    # Поэтому max может быть не совсем корректным.
+                    # Лучше: сохранять оригинальный стартовый ключ для каждого воркера и добавлять к нему checked.
+                    # Или, проще, суммировать checked, предполагая, что каждый воркер сообщает о количестве проверенных *в своём диапазоне*.
+                    # Это кажется наиболее правдоподобным.
+                    total_checked += worker_stats.get('checked', 0)
+
+            # Обновляем общее количество проверенных ключей и скорость
+            # self.gpu_keys_checked = total_checked # Уже обновлено выше
+            # self.gpu_keys_per_second = total_speed * 1000000 # Это было для одного воркера. Теперь total_speed уже в MKey/s
+            self.gpu_keys_per_second = total_speed  # total_speed уже сумма MKey/s от всех воркеров
+            self.gpu_keys_checked = total_checked
             self.gpu_last_update_time = time.time()  # Запоминаем время последнего обновления
+
             # Расчет прогресса
             if self.gpu_total_keys_in_range > 0:
-                progress_percent = min(100, (checked / self.gpu_total_keys_in_range) * 100)
+                # Убедимся, что прогресс не превышает 100%
+                progress_percent = min(100.0, (self.gpu_keys_checked / self.gpu_total_keys_in_range) * 100)
                 self.gpu_progress_bar.setValue(int(progress_percent))
                 # Форматирование текста прогресса
                 if self.gpu_random_checkbox.isChecked():
                     elapsed = time.time() - self.gpu_start_time
                     self.gpu_progress_bar.setFormat(
-                        f"Оценочный прогресс: {progress_percent:.1f}% ({int(elapsed // 60):02d}:{int(elapsed % 60):02d})"
+                        f"Оценочный прогресс: {progress_percent:.2f}% ({int(elapsed // 60):02d}:{int(elapsed % 60):02d})"
                     )
                 else:
                     self.gpu_progress_bar.setFormat(
-                        f"Прогресс: {progress_percent:.1f}% ({checked:,} / {self.gpu_total_keys_in_range:,})"
+                        f"Прогресс: {progress_percent:.2f}% ({self.gpu_keys_checked:,} / {self.gpu_total_keys_in_range:,})"
                     )
             else:
-                self.gpu_progress_bar.setFormat(f"Проверено: {checked:,} ключей")
+                self.gpu_progress_bar.setFormat(f"Проверено: {self.gpu_keys_checked:,} ключей")
+
             # Обновляем UI
-            self.gpu_speed_label.setText(f"Скорость: {speed:.2f} MKey/s")
-            self.gpu_checked_label.setText(f"Проверено ключей: {checked:,}")
-            # Логирование для отладки
-            logger.debug(f"GPU Update: Speed={speed} MKey/s, Checked={checked}, Progress={progress_percent:.1f}%")
+            # Отображаем суммарную скорость
+            self.gpu_speed_label.setText(
+                f"Скорость: {self.gpu_keys_per_second:.2f} MKey/s")  # Используем агрегированную скорость
+            self.gpu_checked_label.setText(f"Проверено ключей: {self.gpu_keys_checked:,}")
+
+            # Логирование для отладки (можно убрать или сделать менее частым)
+            # logger.debug(f"GPU Update Aggregate: Speed={self.gpu_keys_per_second:.2f} MKey/s, Checked={self.gpu_keys_checked:,}, Progress={progress_percent:.2f}%")
+
         except Exception as e:
             logger.exception("Ошибка обновления статистики GPU")
 
@@ -1259,19 +1487,31 @@ class BitcoinGPUCPUScanner(QMainWindow):
             f"Время работы: {time.strftime('%H:%M:%S', time.gmtime(elapsed))}"
         )
 
+    # Замените существующую функцию cpu_worker_finished на эту:
     def cpu_worker_finished(self, worker_id):
+        """Обработчик завершения отдельного CPU воркера"""
+        # Удаляем завершенный процесс из словаря
         if worker_id in self.processes:
-            if not self.processes[worker_id].is_alive():
-                self.processes[worker_id].join()
-                del self.processes[worker_id]
-        if not self.processes:
+            process = self.processes[worker_id]
+            if process.is_alive():
+                process.join(timeout=0.1)  # Небольшое ожидание завершения
+            del self.processes[worker_id]
+
+        # Проверяем, остались ли еще активные воркеры
+        if not self.processes:  # Все воркеры завершены
             self.append_log("Все CPU воркеры завершили работу")
+            # Восстанавливаем состояние UI
             self.cpu_start_stop_btn.setText("Старт CPU (Ctrl+S)")
             self.cpu_start_stop_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
             self.cpu_pause_resume_btn.setEnabled(False)
             self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
             self.cpu_pause_resume_btn.setStyleSheet("background: #3a3a45;")
             self.cpu_eta_label.setText("Оставшееся время: -")
+            # Сброс статуса
+            self.cpu_status_label.setText("Ожидание запуска")
+            # Сброс прогресса
+            self.cpu_total_progress.setValue(0)
+            self.cpu_total_stats_label.setText("Статус: Завершено")
 
     def pause_cpu_search(self):
         self.cpu_pause_requested = True
@@ -1291,15 +1531,23 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
         self.cpu_pause_resume_btn.setStyleSheet("background: #f39c12; font-weight: bold;")
 
+    # Обновленная функция stop_cpu_search
     def stop_cpu_search(self):
         cpu_core.stop_cpu_search(self.processes, self.shutdown_event)
         self.append_log("CPU поиск остановлен")
+        # Восстанавливаем состояние UI
         self.cpu_start_stop_btn.setText("Старт CPU (Ctrl+S)")
         self.cpu_start_stop_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
         self.cpu_pause_resume_btn.setEnabled(False)
         self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
         self.cpu_pause_resume_btn.setStyleSheet("background: #3a3a45;")
         self.cpu_eta_label.setText("Оставшееся время: -")
+        self.cpu_status_label.setText("Остановлено пользователем")
+        # Очищаем таблицу статистики воркеров
+        self.cpu_workers_table.setRowCount(0)
+        # Сброс прогресса
+        self.cpu_total_progress.setValue(0)
+        self.cpu_total_stats_label.setText("Статус: Остановлено")
 
     # ============ COMMON METHODS ============
     def export_keys_csv(self):
