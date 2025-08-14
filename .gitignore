@@ -1,0 +1,6 @@
+*.pkg
+*.toc
+*.zip
+*.pyz
+/build
+/build/bild2
