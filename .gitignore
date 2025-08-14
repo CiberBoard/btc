@@ -4,3 +4,4 @@
 *.pyz
 /build
 /build/bild2
+/dist
