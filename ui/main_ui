@@ -1,0 +1,71 @@
+# ui/main_window.py
+import os
+import json
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
+from .gpu_tab import GPUTab
+from .cpu_tab import CPUTab
+from .found_keys_tab import FoundKeysTab
+from .log_tab import LogTab
+from .about_tab import AboutTab
+from .system_monitor import SystemMonitor
+from utils.helpers import setup_logger
+import config
+
+logger = setup_logger()
+
+class BitcoinGPUCPUScanner(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Bitcoin GPU/CPU Scanner")
+        self.resize(1200, 900)
+        self.set_dark_theme()
+        self.setup_ui()
+        self.load_settings()
+        
+        # Создаем файл для найденных ключей
+        if not os.path.exists(config.FOUND_KEYS_FILE):
+            open(config.FOUND_KEYS_FILE, 'w').close()
+
+    def set_dark_theme(self):
+        # ... (код темы без изменений)
+
+    def setup_ui(self):
+        main_widget = QWidget()
+        self.setCentralWidget(main_widget)
+        main_layout = QVBoxLayout(main_widget)
+        main_layout.setContentsMargins(10, 10, 10, 10)
+        main_layout.setSpacing(15)
+        
+        self.main_tabs = QTabWidget()
+        main_layout.addWidget(self.main_tabs)
+        
+        # Инициализация вкладок
+        self.gpu_tab = GPUTab(self)
+        self.cpu_tab = CPUTab(self)
+        self.found_keys_tab = FoundKeysTab(self)
+        self.log_tab = LogTab(self)
+        self.about_tab = AboutTab(self)
+        self.sys_monitor = SystemMonitor(self)
+        
+        # Добавление вкладок
+        self.main_tabs.addTab(self.gpu_tab, "GPU Поиск")
+        self.main_tabs.addTab(self.cpu_tab, "CPU Поиск")
+        self.main_tabs.addTab(self.found_keys_tab, "Найденные ключи")
+        self.main_tabs.addTab(self.log_tab, "Лог работы")
+        self.main_tabs.addTab(self.about_tab, "О программе")
+
+    def append_log(self, message, level="normal"):
+        self.log_tab.append_log(message, level)
+
+    def handle_found_key(self, key_data):
+        self.found_keys_tab.add_key(key_data)
+        self.gpu_tab.update_found_count() if key_data.get('source') == 'GPU' else self.cpu_tab.update_found_count()
+
+    def load_settings(self):
+        # ... (код загрузки настроек)
+
+    def save_settings(self):
+        # ... (код сохранения настроек)
+
+    def closeEvent(self, event):
+        # ... (код обработки закрытия окна)
