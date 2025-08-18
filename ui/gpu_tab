@@ -1,0 +1,44 @@
+# ui/gpu_tab.py
+import os
+import time
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit, QPushButton, 
+                             QGroupBox, QComboBox, QProgressBar, QCheckBox, QSpinBox
+import core.gpu_scanner as gpu_core
+import config
+
+class GPUTab(QWidget):
+    def __init__(self, parent):
+        super().__init__()
+        self.parent = parent
+        self.gpu_processes = []
+        self.gpu_is_running = False
+        self.gpu_start_time = None
+        self.gpu_keys_checked = 0
+        self.gpu_keys_per_second = 0
+        self.setup_ui()
+        
+        # Таймеры
+        self.gpu_stats_timer = QTimer()
+        self.gpu_stats_timer.timeout.connect(self.update_gpu_time_display)
+        self.gpu_stats_timer.start(500)
+        
+        self.gpu_restart_timer = QTimer()
+        self.gpu_restart_timer.timeout.connect(self.restart_gpu_random_search)
+
+    def setup_ui(self):
+        # ... (код UI для GPU вкладки)
+    
+    def auto_optimize_gpu_parameters(self):
+        # ... (код оптимизации параметров)
+    
+    def validate_gpu_inputs(self):
+        # ... (код валидации ввода)
+    
+    def toggle_gpu_search(self):
+        # ... (код управления поиском)
+    
+    # Остальные методы GPU...
+    
+    def update_found_count(self):
+        found_count = self.parent.found_keys_tab.rowCount()
+        self.gpu_found_label.setText(f"Найдено ключей: {found_count}")
