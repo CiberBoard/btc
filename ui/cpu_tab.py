@@ -8,12 +8,13 @@ import platform
 from PyQt5.QtCore import Qt, QTimer, QRegExp
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QGridLayout, QLabel, QLineEdit,
-                             QPushButton, QGroupBox, QSpinBox, QComboBox, 
-                             QTableWidget, QTableWidgetItem, QHeaderView, 
-                             QProgressBar, QMessageBox)
+                             QPushButton, QGroupBox, QSpinBox, QComboBox,
+                             QTableWidget, QTableWidgetItem, QHeaderView,
+                             QProgressBar, QMessageBox, QHBoxLayout)
 
 import core.cpu_scanner as cpu_core
-import config
+from logger import config
+from ui.main_ui import logger
 from utils.helpers import validate_key_range, is_coincurve_available
 
 class CPUTab(QWidget):

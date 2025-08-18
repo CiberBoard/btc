@@ -1,13 +1,13 @@
 import os
 import json
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget, QMessageBox
 from .gpu_tab import GPUTab
 from .cpu_tab import CPUTab
 from .found_keys_tab import FoundKeysTab
 from .log_tab import LogTab
 from .about_tab import AboutTab
 from utils.helpers import setup_logger
-import config
+from logger import config
 
 logger = setup_logger()
 

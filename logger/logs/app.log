@@ -13060,3 +13060,283 @@ AttributeError: 'collections.deque' object has no attribute 'add'
 [2025-08-14 02:11:50] INFO [main_window:1751]: Настройки сохранены
 [2025-08-14 02:11:50] INFO [main_window:1955]: pynvml выключен.
 >>>>>>> Stashed changes
+[2025-08-18 21:38:32] INFO [main_window:47]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-18 21:38:32] ERROR [main_window:1735]: Ошибка загрузки настроек: Expecting property name enclosed in double quotes: line 9 column 1 (char 321)
+[2025-08-18 21:38:32] ERROR [main_window:1676]: Ошибка загрузки настроек: Expecting property name enclosed in double quotes: line 9 column 1 (char 321)
+[2025-08-18 21:38:57] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:38:57] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:38:57] INFO [main_window:1883]: pynvml выключен.
+[2025-08-18 21:39:06] INFO [main_window:47]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-18 21:39:06] INFO [main_window:1679]: Настройки загружены
+[2025-08-18 21:40:29] INFO [main_window:47]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-18 21:40:30] INFO [main_window:1679]: Настройки загружены
+[2025-08-18 21:40:42] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:40:42] DEBUG [main_window:1684]: Запущено 2 CPU воркеров в режиме последовательного поиска
+[2025-08-18 21:40:42] INFO [cpu_scanner:190]: Worker 1 started in sequential mode
+[2025-08-18 21:40:42] INFO [cpu_scanner:190]: Worker 0 started in sequential mode
+[2025-08-18 21:40:42] DEBUG [main_window:1684]: Воркер 1 начал последовательный поиск: 2082516734493763308741-2082516734493765405893 (2097153 ключей)
+[2025-08-18 21:40:42] DEBUG [main_window:1684]: Воркер 0 начал последовательный поиск: 2082516734493761211589-2082516734493763308740 (2097152 ключей)
+[2025-08-18 21:41:06] INFO [cpu_scanner:326]: Остановка CPU процессов...
+[2025-08-18 21:41:06] INFO [cpu_scanner:362]: CPU процессы остановлены.
+[2025-08-18 21:41:06] DEBUG [main_window:1684]: CPU поиск остановлен
+[2025-08-18 21:41:06] DEBUG [main_window:1684]: Воркер 0 успешно завершен
+[2025-08-18 21:41:06] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:41:06] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:41:06] DEBUG [main_window:1684]: Воркер 1 успешно завершен
+[2025-08-18 21:41:06] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:41:06] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:41:11] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:41:11] DEBUG [main_window:1684]: Запущено 20 CPU воркеров в режиме последовательного поиска
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 0 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 3 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 2 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 1 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 5 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 4 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 7 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 6 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 9 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 8 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 10 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 11 started in sequential mode
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 0 начал последовательный поиск: 2082516734493761211589-2082516734493761421303 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 2 начал последовательный поиск: 2082516734493761631019-2082516734493761840733 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 3 начал последовательный поиск: 2082516734493761840734-2082516734493762050448 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 1 начал последовательный поиск: 2082516734493761421304-2082516734493761631018 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 5 начал последовательный поиск: 2082516734493762260164-2082516734493762469878 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 4 начал последовательный поиск: 2082516734493762050449-2082516734493762260163 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 7 начал последовательный поиск: 2082516734493762679594-2082516734493762889308 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 6 начал последовательный поиск: 2082516734493762469879-2082516734493762679593 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 9 начал последовательный поиск: 2082516734493763099024-2082516734493763308738 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 8 начал последовательный поиск: 2082516734493762889309-2082516734493763099023 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 10 начал последовательный поиск: 2082516734493763308739-2082516734493763518453 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 11 начал последовательный поиск: 2082516734493763518454-2082516734493763728168 (209715 ключей)
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 13 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 14 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 16 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 12 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 15 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 18 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 17 started in sequential mode
+[2025-08-18 21:41:12] INFO [cpu_scanner:190]: Worker 19 started in sequential mode
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 13 начал последовательный поиск: 2082516734493763937884-2082516734493764147598 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 14 начал последовательный поиск: 2082516734493764147599-2082516734493764357313 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 16 начал последовательный поиск: 2082516734493764567029-2082516734493764776743 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 12 начал последовательный поиск: 2082516734493763728169-2082516734493763937883 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 15 начал последовательный поиск: 2082516734493764357314-2082516734493764567028 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 18 начал последовательный поиск: 2082516734493764986459-2082516734493765196173 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 17 начал последовательный поиск: 2082516734493764776744-2082516734493764986458 (209715 ключей)
+[2025-08-18 21:41:12] DEBUG [main_window:1684]: Воркер 19 начал последовательный поиск: 2082516734493765196174-2082516734493765405893 (209720 ключей)
+[2025-08-18 21:41:54] INFO [main_window:1679]: Параметры GPU оптимизированы для RTX 30/40 серии
+[2025-08-18 21:42:00] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:42:00] INFO [gpu_scanner:186]: Остановка GPU процессов...
+[2025-08-18 21:42:00] INFO [gpu_scanner:202]: GPU процессы остановлены.
+[2025-08-18 21:42:00] INFO [gpu_scanner:131]: Запуск GPU поиска для диапазона 0x70e4b9b06d763a4da3 - 0x70e4b9b06d86352151 на устройстве 0
+[2025-08-18 21:42:00] DEBUG [gpu_scanner:151]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\logger\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B06D763A4DA3:70E4B9B06D86352151 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-18 21:42:00] INFO [main_window:1041]: Запущен GPU воркер 1/2 (глобальный 1/2) на устройстве 0. Диапазон: 0x70e4b9b06d763a4da3 - 0x70e4b9b06d86352151
+[2025-08-18 21:42:00] DEBUG [main_window:1684]: Запущен воркер 1 на GPU 0. Диапазон: 0x70e4b9b06d763a4da3 - 0x70e4b9b06d86352151
+[2025-08-18 21:42:00] INFO [gpu_scanner:131]: Запуск GPU поиска для диапазона 0x70e4b9b06d86352152 - 0x70e4b9b06d962ff501 на устройстве 0
+[2025-08-18 21:42:00] DEBUG [gpu_scanner:151]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\logger\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B06D86352152:70E4B9B06D962FF501 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-18 21:42:00] INFO [main_window:1041]: Запущен GPU воркер 2/2 (глобальный 2/2) на устройстве 0. Диапазон: 0x70e4b9b06d86352152 - 0x70e4b9b06d962ff501
+[2025-08-18 21:42:00] DEBUG [main_window:1684]: Запущен воркер 2 на GPU 0. Диапазон: 0x70e4b9b06d86352152 - 0x70e4b9b06d962ff501
+[2025-08-18 21:42:00] INFO [main_window:1679]: Успешно запущено 2 GPU воркеров
+[2025-08-18 21:42:09] DEBUG [main_window:1684]: Воркер 0 успешно завершен
+[2025-08-18 21:42:09] DEBUG [main_window:1684]: Воркер 13 успешно завершен
+[2025-08-18 21:42:09] DEBUG [main_window:1684]: Воркер 14 успешно завершен
+[2025-08-18 21:42:09] DEBUG [main_window:1684]: Воркер 17 успешно завершен
+[2025-08-18 21:42:09] DEBUG [main_window:1684]: Воркер 15 успешно завершен
+[2025-08-18 21:42:09] DEBUG [main_window:1684]: Воркер 1 успешно завершен
+[2025-08-18 21:42:09] DEBUG [main_window:1684]: Воркер 9 успешно завершен
+[2025-08-18 21:42:09] INFO [main_window:1679]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 19 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 12 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 10 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 6 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 2 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 8 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 16 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 7 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 5 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 4 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 3 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 11 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Воркер 18 успешно завершен
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:42:17] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:42:25] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Запущено 20 CPU воркеров в режиме случайного поиска
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 4 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 0 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 6 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 2 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 1 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 3 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 7 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 5 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 8 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 11 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 9 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 12 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 10 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 13 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 15 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 14 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 19 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 16 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 17 started in random mode
+[2025-08-18 21:42:26] INFO [cpu_scanner:190]: Worker 18 started in random mode
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 3 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 6 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 2 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 4 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 1 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 0 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 7 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 5 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 8 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 11 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 9 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 12 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 10 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 13 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 15 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 14 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 19 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 16 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 17 начал случайный поиск: 500000 попыток
+[2025-08-18 21:42:26] DEBUG [main_window:1684]: Воркер 18 начал случайный поиск: 500000 попыток
+[2025-08-18 21:43:04] INFO [main_window:1679]: Ключ сохранен в C:\Users\PC\PycharmProjects\btc\logger\Found_key_CUDA.txt
+[2025-08-18 21:43:20] INFO [cpu_scanner:326]: Остановка CPU процессов...
+[2025-08-18 21:43:20] INFO [cpu_scanner:362]: CPU процессы остановлены.
+[2025-08-18 21:43:20] DEBUG [main_window:1684]: CPU поиск остановлен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 9 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 12 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 15 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 17 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 8 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 6 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 18 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 10 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 13 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 7 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Воркер 4 успешно завершен
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:43:22] DEBUG [main_window:1684]: Все CPU воркеры завершили работу
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Compression: compressed
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:00] [Info] Compression: compressed
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B06D86352152
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:00] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B06D86352152
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B06D962FF501
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:01] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:08] [Info] 10.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:08] [Info] 20.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:29] [Info] 30.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:41] [Info] 40.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:57] [Info] 50.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:43:12] [Info] 60.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:43:29] [Info] 70.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:43:45] [Info] 80.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:43:57] [Info] 90.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:44:14] [Info] 100.0%
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:44:14] [Info] Done
+[2025-08-18 21:44:28] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:44:24] [Info] Reached end of keyspace
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:00] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B06D962FF501
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:00] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:00] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:01] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:08] [Info] 10.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:08] [Info] 20.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:29] [Info] 30.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:41] [Info] 40.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:42:57] [Info] 50.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:43:12] [Info] 60.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:43:29] [Info] 70.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:43:45] [Info] 80.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:43:57] [Info] 90.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:44:14] [Info] 100.0%
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:44:14] [Info] Done
+[2025-08-18 21:44:28] DEBUG [main_window:1684]: [2025-08-18.21:44:24] [Info] Reached end of keyspace
+[2025-08-18 21:45:02] INFO [gpu_scanner:186]: Остановка GPU процессов...
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Compression: compressed
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B06D763A4DA3
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B06D86352151
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:00] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:01] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:08] [Info] 10.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:42:15] [Info] 20.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:43:00] [Info] 30.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:43:25] [Info] 40.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:43:53] [Info] 50.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:44:18] [Info] 60.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:44:35] [Info] 70.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:44:47] [Info] 80.0%
+[2025-08-18 21:45:02] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:44:58] [Info] 90.0%
+[2025-08-18 21:45:02] INFO [gpu_scanner:202]: GPU процессы остановлены.
+[2025-08-18 21:45:02] DEBUG [main_window:1684]: GPU поиск завершен
+[2025-08-18 21:45:29] INFO [main_window:47]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-18 21:45:30] INFO [main_window:1679]: Настройки загружены
+[2025-08-18 21:45:47] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:45:47] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:45:47] INFO [main_window:1883]: pynvml выключен.
+[2025-08-18 21:46:23] INFO [main_window:47]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-18 21:46:24] INFO [main_window:1679]: Настройки загружены
+[2025-08-18 21:47:09] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:47:09] INFO [gpu_scanner:186]: Остановка GPU процессов...
+[2025-08-18 21:47:09] INFO [gpu_scanner:202]: GPU процессы остановлены.
+[2025-08-18 21:47:09] INFO [gpu_scanner:131]: Запуск GPU поиска для диапазона 0x70e4b9b0b4d01b701b - 0x70e4b9b0f8ba06d02f на устройстве 0
+[2025-08-18 21:47:09] DEBUG [gpu_scanner:151]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\logger\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B0B4D01B701B:70E4B9B0F8BA06D02F 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-18 21:47:09] INFO [main_window:1041]: Запущен GPU воркер 1/2 (глобальный 1/2) на устройстве 0. Диапазон: 0x70e4b9b0b4d01b701b - 0x70e4b9b0f8ba06d02f
+[2025-08-18 21:47:09] DEBUG [main_window:1684]: Запущен воркер 1 на GPU 0. Диапазон: 0x70e4b9b0b4d01b701b - 0x70e4b9b0f8ba06d02f
+[2025-08-18 21:47:09] INFO [gpu_scanner:131]: Запуск GPU поиска для диапазона 0x70e4b9b0f8ba06d030 - 0x70e4b9b13ca3f23044 на устройстве 0
+[2025-08-18 21:47:09] DEBUG [gpu_scanner:151]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\logger\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B0F8BA06D030:70E4B9B13CA3F23044 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-18 21:47:09] INFO [main_window:1041]: Запущен GPU воркер 2/2 (глобальный 2/2) на устройстве 0. Диапазон: 0x70e4b9b0f8ba06d030 - 0x70e4b9b13ca3f23044
+[2025-08-18 21:47:09] DEBUG [main_window:1684]: Запущен воркер 2 на GPU 0. Диапазон: 0x70e4b9b0f8ba06d030 - 0x70e4b9b13ca3f23044
+[2025-08-18 21:47:09] INFO [main_window:1679]: Успешно запущено 2 GPU воркеров
+[2025-08-18 21:48:48] INFO [gpu_scanner:186]: Остановка GPU процессов...
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Compression: compressed
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0B4D01B701B
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0F8BA06D02F
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:48:41] [Info] 10.0%
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Compression: compressed
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0F8BA06D030
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B13CA3F23044
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:47:10] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:48:02] [Info] 10.0%
+[2025-08-18 21:48:50] DEBUG [gpu_scanner:84]: GPU Output: [2025-08-18.21:48:42] [Info] 20.0%
+[2025-08-18 21:48:50] INFO [gpu_scanner:202]: GPU процессы остановлены.
+[2025-08-18 21:48:50] DEBUG [main_window:1684]: GPU поиск завершен
+[2025-08-18 21:49:04] INFO [main_window:47]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-18 21:49:05] INFO [main_window:1679]: Настройки загружены
+[2025-08-18 21:49:13] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:49:13] INFO [main_window:1679]: Настройки сохранены
+[2025-08-18 21:49:13] INFO [main_window:1883]: pynvml выключен.
+[2025-08-18 21:49:48] INFO [main_window:47]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-18 21:49:48] INFO [main_window:1679]: Настройки загружены

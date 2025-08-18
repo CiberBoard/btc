@@ -1,8 +1,9 @@
 import os
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem, QHeaderView, QPushButton, QFileDialog, QMenu
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem, QHeaderView, QPushButton, \
+    QFileDialog, QMenu, QApplication
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-import config
+from logger import config
 
 class FoundKeysTab(QWidget):
     def __init__(self, parent):
