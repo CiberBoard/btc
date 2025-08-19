@@ -1,15 +1,19 @@
 # main.py
 import sys
-import os
-# Добавляем корневую директорию проекта в sys.path, если нужно
-# Это позволяет импортировать модули из корня, если main.py находится там же или глубже
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import multiprocessing
+
+# Эта строка КРИТИЧЕСКИ ВАЖНА для корректной работы multiprocessing в PyInstaller .exe
+multiprocessing.freeze_support()
 
 from PyQt5.QtWidgets import QApplication
 from ui.main_window import BitcoinGPUCPUScanner
+import config # Импортируем config для инициализации путей, если нужно
 
-if __name__ == '__main__':
+def main():
     app = QApplication(sys.argv)
     window = BitcoinGPUCPUScanner()
     window.show()
     sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    main()

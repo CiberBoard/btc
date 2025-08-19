@@ -10613,3 +10613,11 @@ TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
 [2025-08-19 22:54:32] DEBUG [gpu_scanner:84]: GPU Output: NVIDIA GeForce R 1234 / 12287MB | 1 target 106.48 MKey/s (2,116,026,368 total) [00:00:18]
 [2025-08-19 22:54:32] INFO [gpu_scanner:202]: GPU процессы остановлены.
 [2025-08-19 22:54:32] DEBUG [main_window:1036]: GPU поиск завершен
+[2025-08-19 23:07:34] INFO [main_window:48]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-19 23:07:34] INFO [main_window:1031]: Настройки загружены
+[2025-08-19 23:07:36] INFO [main_window:1031]: Настройки сохранены
+[2025-08-19 23:07:36] INFO [main_window:1230]: pynvml выключен.
+[2025-08-19 23:21:53] INFO [main_window:48]: Найдено 1 NVIDIA GPU устройств для мониторинга.
+[2025-08-19 23:21:54] INFO [main_window:1031]: Настройки загружены
+[2025-08-19 23:21:57] INFO [main_window:1031]: Настройки сохранены
+[2025-08-19 23:21:57] INFO [main_window:1230]: pynvml выключен.
