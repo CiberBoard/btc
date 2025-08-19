@@ -3,19 +3,20 @@ import time
 import random
 import platform
 import logging
+from typing import Tuple, Optional, Dict, Any, Set, List
+from collections import deque
+from threading import Thread
 
-import logger
 from PyQt5.QtCore import QThread, pyqtSignal
-
 
 try:
     import pynvml
+
     PYNVML_AVAILABLE = True
 except ImportError:
     PYNVML_AVAILABLE = False
     pynvml = None
-    btc.warning("pynvml не найден. Мониторинг GPU будет недоступен.")
-
+    logging.getLogger('bitcoin_scanner').warning("pynvml не найден. Мониторинг GPU будет недоступен.")
 
 try:
     import win32process
@@ -30,6 +31,11 @@ from utils.helpers import validate_key_range, private_key_to_wif
 
 logger = logging.getLogger('bitcoin_scanner')
 
+# Константы для улучшения читаемости
+GPU_STATUS_INITIALIZED = False
+MAX_RETRY_ATTEMPTS = 100
+DEFAULT_PRIORITY_CLASS = 0x00000020  # NORMAL_PRIORITY_CLASS
+
 
 class OptimizedOutputReader(QThread):
     """Чтение вывода GPU процесса"""
@@ -38,66 +44,124 @@ class OptimizedOutputReader(QThread):
     found_key = pyqtSignal(dict)  # key_data dict
     process_finished = pyqtSignal()
 
-    def __init__(self, process, parent=None):
+    def __init__(self, process: subprocess.Popen, parent=None):
         super().__init__(parent)
         self.process = process
-        self.current_address = None
-        self.current_private_key = None
-        self.last_speed = 0.0
-        self.last_checked = 0
+        self.current_address: Optional[str] = None
+        self.current_private_key: Optional[str] = None
+        self.last_speed: float = 0.0
+        self.last_checked: int = 0
+        self._running = True
 
-    def run(self):
+    def run(self) -> None:
+        """Основной цикл чтения вывода процесса"""
         buffer = ""
         try:
-            while self.process and self.process.poll() is None:
-                chunk = self.process.stdout.read(1024)
+            while self._running and self.process and self.process.poll() is None:
+                chunk = self._read_process_output()
                 if chunk:
-                    buffer += chunk
-                    lines = buffer.split('\n')
-                    buffer = lines[-1]
-                    for line in lines[:-1]:
-                        if line.strip():
-                            self.process_line(line.strip())
-                # Обрабатываем буфер чаще
-                # QApplication.processEvents() - не используем, так как это не UI поток
+                    buffer = self._process_buffer(buffer + chunk)
                 time.sleep(0.01)  # Небольшая задержка для снижения нагрузки
+
+            # Обработка оставшегося буфера
             if buffer.strip():
-                for line in buffer.strip().split('\n'):
-                    self.process_line(line.strip())
+                self._process_remaining_buffer(buffer)
+
         except Exception as e:
             logger.exception("Ошибка чтения вывода GPU")
             self.log_message.emit(f"Ошибка чтения вывода: {str(e)}", "error")
         finally:
             self.process_finished.emit()
 
-    def process_line(self, line):
-        """Обработка строки вывода GPU"""
-        line_lower = line.lower()
-        if "ошибка" in line or "error" in line_lower:
-            self.log_message.emit(line, "error")
-            logger.error(f"GPU Error: {line}")
-        elif "найден ключ" in line or "found key" in line_lower:
-            self.log_message.emit(line, "success")
-            logger.info(f"GPU Key Found: {line}")
-        else:
-            self.log_message.emit(line, "normal")
-            logger.debug(f"GPU Output: {line}")
+    def _read_process_output(self) -> str:
+        """Чтение данных из stdout процесса"""
+        try:
+            return self.process.stdout.read(1024) or ""
+        except Exception:
+            return ""
 
-        # Обработка статистики
+    def _process_buffer(self, buffer: str) -> str:
+        """Обработка буфера вывода"""
+        lines = buffer.split('\n')
+        remaining_buffer = lines[-1]
+
+        for line in lines[:-1]:
+            if line.strip():
+                self.process_line(line.strip())
+
+        return remaining_buffer
+
+    def _process_remaining_buffer(self, buffer: str) -> None:
+        """Обработка оставшегося буфера"""
+        for line in buffer.strip().split('\n'):
+            if line.strip():
+                self.process_line(line.strip())
+
+    def process_line(self, line: str) -> None:
+        """Обработка строки вывода GPU"""
+        if not line.strip():
+            return
+
+        line_lower = line.lower()
+
+        # Определение типа сообщения
+        if self._is_error_message(line_lower):
+            self._handle_error_message(line)
+        elif self._is_found_key_message(line_lower):
+            self._handle_found_key_message(line)
+        else:
+            self._handle_normal_message(line)
+
+        # Обработка статистики и найденных ключей
+        self._process_statistics(line)
+        self._process_key_finding(line)
+
+    def _is_error_message(self, line_lower: str) -> bool:
+        """Проверка, является ли сообщение ошибкой"""
+        return "ошибка" in line_lower or "error" in line_lower
+
+    def _is_found_key_message(self, line_lower: str) -> bool:
+        """Проверка, содержит ли сообщение информацию о найденном ключе"""
+        return "найден ключ" in line_lower or "found key" in line_lower
+
+    def _handle_error_message(self, line: str) -> None:
+        """Обработка сообщения об ошибке"""
+        self.log_message.emit(line, "error")
+        logger.error(f"GPU Error: {line}")
+
+    def _handle_found_key_message(self, line: str) -> None:
+        """Обработка сообщения о найденном ключе"""
+        self.log_message.emit(line, "success")
+        logger.info(f"GPU Key Found: {line}")
+
+    def _handle_normal_message(self, line: str) -> None:
+        """Обработка обычного сообщения"""
+        self.log_message.emit(line, "normal")
+        logger.debug(f"GPU Output: {line}")
+
+    def _process_statistics(self, line: str) -> None:
+        """Обработка статистики из строки"""
         speed_match = config.SPEED_REGEX.search(line)
         total_match = config.TOTAL_REGEX.search(line)
+
         if speed_match or total_match:
             speed = float(speed_match.group(1)) if speed_match else self.last_speed
             checked = int(total_match.group(1).replace(',', '')) if total_match else self.last_checked
+
             # Сохраняем последние значения
-            if speed_match: self.last_speed = speed
-            if total_match: self.last_checked = checked
+            if speed_match:
+                self.last_speed = speed
+            if total_match:
+                self.last_checked = checked
+
             self.stats_update.emit({'speed': speed, 'checked': checked})
 
-        # Обработка найденного ключа
+    def _process_key_finding(self, line: str) -> None:
+        """Обработка нахождения адреса и ключа"""
         addr_match = config.ADDR_REGEX.search(line)
         if addr_match:
             self.current_address = addr_match.group(1)
+
         key_match = config.KEY_REGEX.search(line)
         if key_match:
             self.current_private_key = key_match.group(1)
@@ -105,9 +169,12 @@ class OptimizedOutputReader(QThread):
         if self.current_address and self.current_private_key:
             self.process_found_key()
 
-    def process_found_key(self):
+    def process_found_key(self) -> None:
         """Обработка найденного ключа"""
         try:
+            if not self.current_private_key:
+                return
+
             wif_key = private_key_to_wif(self.current_private_key)
             found_data = {
                 'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
@@ -118,15 +185,31 @@ class OptimizedOutputReader(QThread):
             }
             self.found_key.emit(found_data)
             self.log_message.emit(f"🔑 НАЙДЕН КЛЮЧ! Адрес: {self.current_address}", "success")
+
+            # Сброс текущих значений
             self.current_address = None
             self.current_private_key = None
+
         except Exception as e:
             logger.exception("Ошибка обработки найденного ключа")
             self.log_message.emit(f"Ошибка обработки найденного ключа: {str(e)}", "error")
 
+    def stop(self) -> None:
+        """Остановка чтения вывода"""
+        self._running = False
 
-def start_gpu_search_with_range(target_address, start_key, end_key, device, blocks, threads, points, priority_index,
-                                parent_window):
+
+def start_gpu_search_with_range(
+        target_address: str,
+        start_key: int,
+        end_key: int,
+        device: int,
+        blocks: int,
+        threads: int,
+        points: int,
+        priority_index: int,
+        parent_window: Any
+) -> Tuple[Optional[subprocess.Popen], Optional[OptimizedOutputReader]]:
     """Запускает GPU поиск с указанным диапазоном"""
     logger.info(f"Запуск GPU поиска для диапазона {hex(start_key)} - {hex(end_key)} на устройстве {device}")
 
@@ -140,12 +223,8 @@ def start_gpu_search_with_range(target_address, start_key, end_key, device, bloc
         target_address
     ]
 
-    # Установка приоритета процесса (Windows)
-    creationflags = 0
-    if platform.system() == 'Windows':
-        priority_value = config.WINDOWS_GPU_PRIORITY_MAP.get(priority_index,
-                                                             0x00000020)  # NORMAL_PRIORITY_CLASS по умолчанию
-        creationflags = subprocess.CREATE_NEW_PROCESS_GROUP | priority_value
+    # Установка приоритета процесса
+    creationflags = _get_process_creation_flags(priority_index)
 
     try:
         logger.debug(f"Команда запуска cuBitcrack: {' '.join(cmd)}")
@@ -160,209 +239,275 @@ def start_gpu_search_with_range(target_address, start_key, end_key, device, bloc
         )
 
         output_reader = OptimizedOutputReader(cuda_process)
-        # output_reader.log_message.connect(parent_window.append_log) # Будет подключено в UI
-        # output_reader.stats_update.connect(parent_window.update_gpu_stats_display)
-        # output_reader.found_key.connect(parent_window.handle_found_key)
-        # output_reader.process_finished.connect(parent_window.handle_gpu_search_finished)
 
-        # Установка приоритета для Windows (дополнительно)
-        if platform.system() == 'Windows' and priority_index > 0 and WIN32_AVAILABLE:
-            try:
-                priority_value = config.WINDOWS_GPU_PRIORITY_MAP.get(priority_index, 0x00000020)
-                handle = win32api.OpenProcess(win32process.PROCESS_ALL_ACCESS, True, cuda_process.pid)
-                win32process.SetPriorityClass(handle, priority_value)
-            except Exception as e:
-                logger.error(f"Ошибка установки приоритета: {str(e)}")
+        # Установка приоритета для Windows
+        _set_windows_process_priority(cuda_process, priority_index)
 
         return cuda_process, output_reader
 
     except Exception as e:
         logger.exception(f"Ошибка запуска cuBitcrack на устройстве {device}")
-        raise e  # Передаем исключение в вызывающий код
+        return None, None
 
 
-def stop_gpu_search_internal(processes):
+def _get_process_creation_flags(priority_index: int) -> int:
+    """Получение флагов создания процесса"""
+    if platform.system() != 'Windows':
+        return 0
+
+    priority_value = config.WINDOWS_GPU_PRIORITY_MAP.get(priority_index, DEFAULT_PRIORITY_CLASS)
+    return subprocess.CREATE_NEW_PROCESS_GROUP | priority_value
+
+
+def _set_windows_process_priority(process: subprocess.Popen, priority_index: int) -> None:
+    """Установка приоритета процесса для Windows"""
+    if platform.system() != 'Windows' or not WIN32_AVAILABLE or priority_index <= 0:
+        return
+
+    try:
+        priority_value = config.WINDOWS_GPU_PRIORITY_MAP.get(priority_index, DEFAULT_PRIORITY_CLASS)
+        handle = win32api.OpenProcess(win32process.PROCESS_ALL_ACCESS, True, process.pid)
+        win32process.SetPriorityClass(handle, priority_value)
+    except Exception as e:
+        logger.error(f"Ошибка установки приоритета: {str(e)}")
+
+
+def stop_gpu_search_internal(processes: List[Tuple[subprocess.Popen, OptimizedOutputReader]]) -> None:
     """Внутренняя остановка GPU поиска"""
     logger.info("Остановка GPU процессов...")
+
     for process, reader in processes:
         try:
-            process.terminate()
-            process.wait(timeout=5)
-        except:
-            try:
-                process.kill()
-            except:
-                pass
-        try:
-            reader.quit()
-            reader.wait(1000)
-        except:
-            pass
+            _stop_single_process(process, reader)
+        except Exception as e:
+            logger.warning(f"Ошибка остановки процесса: {str(e)}")
+
     processes.clear()
     logger.info("GPU процессы остановлены.")
 
 
-def generate_gpu_random_range(global_start_hex, global_end_hex, min_range_size_str, max_range_size_str, used_ranges,
-                              max_saved_random):
+def _stop_single_process(process: subprocess.Popen, reader: OptimizedOutputReader) -> None:
+    """Остановка одного GPU процесса"""
+    # Остановка чтения вывода
+    reader.stop()
+
+    # Попытка мягкой остановки
+    try:
+        process.terminate()
+        process.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        # Принудительная остановка
+        try:
+            process.kill()
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+    # Ожидание завершения потока чтения
+    try:
+        reader.quit()
+        reader.wait(1000)
+    except Exception:
+        pass
+
+
+def generate_gpu_random_range(
+        global_start_hex: str,
+        global_end_hex: str,
+        min_range_size_str: str,
+        max_range_size_str: str,
+        used_ranges: Set[str],
+        max_saved_random: int
+) -> Tuple[Optional[int], Optional[int], Optional[str]]:
     """Генерирует уникальный случайный диапазон в пределах пользовательского диапазона"""
     try:
-        # Получаем глобальные границы
+        # Валидация глобального диапазона
         global_result, error = validate_key_range(global_start_hex, global_end_hex)
         if global_result is None:
             logger.error(f"Ошибка глобального диапазона: {error}")
-            # Возвращаем ошибку, чтобы UI мог ее отобразить
             return None, None, error
+
         global_start, global_end, total_keys = global_result
 
-        # Получаем размеры диапазона
-        try:
-            min_range_size = int(min_range_size_str)
-            max_range_size = int(max_range_size_str)
-        except ValueError:
-            error_msg = "Минимальный и максимальный диапазон должны быть числами"
-            logger.error(error_msg)
-            return None, None, error_msg
+        # Валидация размеров диапазона
+        min_range_size, max_range_size, error = _validate_range_sizes(
+            min_range_size_str, max_range_size_str, total_keys
+        )
+        if error:
+            return None, None, error
 
-        # Корректируем размеры диапазона
-        if min_range_size <= 0 or max_range_size <= 0:
-            error_msg = "Размеры диапазона должны быть положительными числами"
-            logger.error(error_msg)
-            return None, None, error_msg
-        if min_range_size > total_keys:
-            min_range_size = total_keys
-        if max_range_size > total_keys:
-            max_range_size = total_keys
-        if min_range_size > max_range_size:
-            min_range_size, max_range_size = max_range_size, min_range_size
+        # Генерация уникального диапазона
+        start_key, end_key = _generate_unique_range(
+            global_start, global_end, min_range_size, max_range_size,
+            used_ranges, max_saved_random
+        )
 
-        # Генерируем случайный размер диапазона
-        range_size = random.randint(min_range_size, max_range_size)
-
-        # Генерируем случайную начальную точку
-        max_start = global_end - range_size + 1
-        if max_start < global_start:
-            max_start = global_start
-
-        # Используем системный RNG для безопасности
-        if platform.system() == 'Windows':
-            start_key = random.SystemRandom().randint(global_start, max_start)
-        else:
-            # Используем /dev/urandom для лучшей энтропии на Linux
-            try:
-                with open('/dev/urandom', 'rb') as f:
-                    rand_bytes = f.read(8)
-                    rand_val = int.from_bytes(rand_bytes, 'big')
-                start_key = global_start + (rand_val % (max_start - global_start + 1))
-            except:
-                # fallback на стандартный random
-                start_key = random.randint(global_start, max_start)
-
-        end_key = start_key + range_size - 1
-
-        # Проверяем границы
-        if end_key > global_end:
-            end_key = global_end
-
-        # Проверяем уникальность диапазона
+        # Сохранение использованного диапазона
         range_hash = f"{start_key}-{end_key}"
-        if range_hash in used_ranges:
-            # Если диапазон уже использовался, генерируем новый (ограничим рекурсию)
-            # Используем итерацию вместо рекурсии, чтобы избежать RecursionError
-            max_attempts = 100  # Ограничим количество попыток
-            attempts = 0
-            while range_hash in used_ranges and attempts < max_attempts:
-                # Генерируем новый размер и стартовую точку
-                range_size = random.randint(min_range_size, max_range_size)
-                max_start = global_end - range_size + 1
-                if max_start < global_start:
-                    max_start = global_start
-                if platform.system() == 'Windows':
-                    start_key = random.SystemRandom().randint(global_start, max_start)
-                else:
-                    try:
-                        with open('/dev/urandom', 'rb') as f:
-                            rand_bytes = f.read(8)
-                            rand_val = int.from_bytes(rand_bytes, 'big')
-                        start_key = global_start + (rand_val % (max_start - global_start + 1))
-                    except:
-                        start_key = random.randint(global_start, max_start)
-                end_key = start_key + range_size - 1
-                if end_key > global_end:
-                    end_key = global_end
-                range_hash = f"{start_key}-{end_key}"
-                attempts += 1
-
-            if attempts >= max_attempts:
-                # Если все диапазоны использованы или не удалось сгенерировать уникальный, очищаем историю
-                if len(used_ranges) >= max_saved_random:
-                    used_ranges.clear()
-                # Или возвращаем ошибку
-                # error_msg = "Не удалось сгенерировать уникальный диапазон после нескольких попыток"
-                # logger.warning(error_msg)
-                # return None, None, error_msg
-                # Или продолжаем с текущим (неуникальным) диапазоном, если критично важно продолжить
-                # pass # Просто используем последний сгенерированный диапазон
-
-        # Сохраняем использованный диапазон
         used_ranges.add(range_hash)
-        # if len(used_ranges) > max_saved_random: # Убираем это, так как set сам себя не ограничивает по размеру
-        #     # Ограничиваем количество сохраненных диапазонов
-        #     used_ranges.pop()  # set не поддерживает pop по индексу, удалим случайный
-        #     # Лучше: использовать collections.deque(maxlen=max_saved_random) вместо set, если нужно ограничение
 
         return start_key, end_key, None
 
     except Exception as e:
         error_msg = f"Ошибка генерации диапазона GPU: {str(e)}"
         logger.exception(error_msg)
-        return None, None, error_msg  # Возвращаем ошибку для отображения в UI
+        return None, None, error_msg
 
 
-# В конце файла добавьте вспомогательную функцию (или лучше перенесите её в utils/helpers.py)
-def get_gpu_status(device_id=0):
+def _validate_range_sizes(
+        min_range_size_str: str,
+        max_range_size_str: str,
+        total_keys: int
+) -> Tuple[int, int, Optional[str]]:
+    """Валидация размеров диапазона"""
+    try:
+        min_range_size = int(min_range_size_str)
+        max_range_size = int(max_range_size_str)
+    except ValueError:
+        return 0, 0, "Минимальный и максимальный диапазон должны быть числами"
+
+    if min_range_size <= 0 or max_range_size <= 0:
+        return 0, 0, "Размеры диапазона должны быть положительными числами"
+
+    if min_range_size > total_keys:
+        min_range_size = total_keys
+    if max_range_size > total_keys:
+        max_range_size = total_keys
+    if min_range_size > max_range_size:
+        min_range_size, max_range_size = max_range_size, min_range_size
+
+    return min_range_size, max_range_size, None
+
+
+def _generate_unique_range(
+        global_start: int,
+        global_end: int,
+        min_range_size: int,
+        max_range_size: int,
+        used_ranges: Set[str],
+        max_saved_random: int
+) -> Tuple[int, int]:
+    """Генерация уникального диапазона"""
+    range_size = random.randint(min_range_size, max_range_size)
+    max_start = global_end - range_size + 1
+
+    if max_start < global_start:
+        max_start = global_start
+
+    # Генерация уникального диапазона
+    start_key, end_key = _generate_range_with_retry(
+        global_start, max_start, range_size, global_end,
+        used_ranges, MAX_RETRY_ATTEMPTS
+    )
+
+    return start_key, end_key
+
+
+def _generate_range_with_retry(
+        global_start: int,
+        max_start: int,
+        range_size: int,
+        global_end: int,
+        used_ranges: Set[str],
+        max_attempts: int
+) -> Tuple[int, int]:
+    """Генерация диапазона с повторными попытками"""
+    for _ in range(max_attempts):
+        start_key = _generate_random_start_key(global_start, max_start)
+        end_key = start_key + range_size - 1
+
+        if end_key > global_end:
+            end_key = global_end
+
+        range_hash = f"{start_key}-{end_key}"
+        if range_hash not in used_ranges:
+            return start_key, end_key
+
+    # Если не удалось сгенерировать уникальный диапазон, очищаем историю
+    if len(used_ranges) >= max_saved_random:
+        used_ranges.clear()
+
+    # Генерируем последний диапазон
+    start_key = _generate_random_start_key(global_start, max_start)
+    end_key = min(start_key + range_size - 1, global_end)
+
+    return start_key, end_key
+
+
+def _generate_random_start_key(global_start: int, max_start: int) -> int:
+    """Генерация случайной начальной точки"""
+    if platform.system() == 'Windows':
+        return random.SystemRandom().randint(global_start, max_start)
+    else:
+        return _generate_secure_random_int(global_start, max_start)
+
+
+def _generate_secure_random_int(min_val: int, max_val: int) -> int:
+    """Генерация безопасного случайного числа"""
+    try:
+        with open('/dev/urandom', 'rb') as f:
+            rand_bytes = f.read(8)
+            rand_val = int.from_bytes(rand_bytes, 'big')
+        return min_val + (rand_val % (max_val - min_val + 1))
+    except Exception:
+        return random.randint(min_val, max_val)
+
+
+def get_gpu_status(device_id: int = 0) -> Optional[Dict[str, Any]]:
     """
     Получает статус GPU (загрузка, память и т.д.) через pynvml.
     :param device_id: ID устройства GPU (по умолчанию 0)
     :return: dict с информацией о GPU или None при ошибке
     """
+    global GPU_STATUS_INITIALIZED
+
     if not PYNVML_AVAILABLE:
         return None
 
     try:
-        # Инициализация, если ещё не была выполнена
-        # Лучше сделать это один раз при запуске приложения, например в __init__ главного окна
-        # if not hasattr(get_gpu_status, '_initialized'):
-        #     pynvml.nvmlInit()
-        #     get_gpu_status._initialized = True
+        # Инициализация NVML
+        if not GPU_STATUS_INITIALIZED:
+            pynvml.nvmlInit()
+            GPU_STATUS_INITIALIZED = True
 
-        # Получаем handle устройства
-        handle = pynvml.nvmlDeviceGetHandleByIndex(device_id)
+        return _get_gpu_info(device_id)
 
-        # Получаем утилизацию (загрузку)
-        util_info = pynvml.nvmlDeviceGetUtilizationRates(handle)
-        gpu_util = util_info.gpu  # Загрузка в %
-
-        # Получаем информацию о памяти
-        mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
-        mem_used_mb = mem_info.used / (1024 * 1024)
-        mem_total_mb = mem_info.total / (1024 * 1024)
-        mem_util = (mem_info.used / mem_info.total) * 100 if mem_info.total > 0 else 0
-
-        # Получаем температуру (опционально)
-        try:
-            temp_info = pynvml.nvmlDeviceGetTemperature(handle, pynvml.NVML_TEMPERATURE_GPU)
-            temperature = temp_info
-        except pynvml.NVMLError:
-            temperature = None # Температура может быть недоступна
-
-        return {
-            'device_id': device_id,
-            'gpu_utilization': gpu_util,
-            'memory_used_mb': mem_used_mb,
-            'memory_total_mb': mem_total_mb,
-            'memory_utilization': mem_util,
-            'temperature': temperature
-        }
     except Exception as e:
         logger.debug(f"Не удалось получить статус GPU {device_id}: {e}")
+        return None
+
+
+def _get_gpu_info(device_id: int) -> Dict[str, Any]:
+    """Получение информации о GPU"""
+    handle = pynvml.nvmlDeviceGetHandleByIndex(device_id)
+
+    # Получаем утилизацию
+    util_info = pynvml.nvmlDeviceGetUtilizationRates(handle)
+    gpu_util = util_info.gpu
+
+    # Получаем информацию о памяти
+    mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
+    mem_used_mb = mem_info.used / (1024 * 1024)
+    mem_total_mb = mem_info.total / (1024 * 1024)
+    mem_util = (mem_info.used / mem_info.total) * 100 if mem_info.total > 0 else 0
+
+    # Получаем температуру
+    temperature = _get_gpu_temperature(handle)
+
+    return {
+        'device_id': device_id,
+        'gpu_utilization': gpu_util,
+        'memory_used_mb': mem_used_mb,
+        'memory_total_mb': mem_total_mb,
+        'memory_utilization': mem_util,
+        'temperature': temperature
+    }
+
+
+def _get_gpu_temperature(handle) -> Optional[int]:
+    """Получение температуры GPU"""
+    try:
+        return pynvml.nvmlDeviceGetTemperature(handle, pynvml.NVML_TEMPERATURE_GPU)
+    except (pynvml.NVMLError, Exception):
         return None

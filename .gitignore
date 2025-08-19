@@ -5,3 +5,5 @@
 /build
 /build/bild2
 /dist
+*.pyc
+*.pyc
