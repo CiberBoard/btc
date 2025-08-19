@@ -1,10 +1,10 @@
+import sys
+import multiprocessing
 import random
 import time
 import logging
 from PyQt5.QtCore import QObject, pyqtSignal
-from multiprocessing import Process, Queue
 import hashlib
-import struct
 
 try:
     from coincurve import PrivateKey
@@ -13,7 +13,7 @@ try:
 except ImportError:
     COINCURVE_AVAILABLE = False
 
-from logger import config
+import config
 from utils.helpers import private_key_to_wif, _generate_p2pkh, _generate_p2sh, safe_queue_put
 import utils.helpers as helpers
 

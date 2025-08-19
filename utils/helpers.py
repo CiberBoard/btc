@@ -5,7 +5,7 @@ import base58
 import logging
 from logging.handlers import RotatingFileHandler
 from PyQt5.QtWidgets import QComboBox
-from logger import config
+import config
 
 # Кеш для хеш-функций
 sha256 = hashlib.sha256
