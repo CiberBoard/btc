@@ -2,6 +2,9 @@
 import multiprocessing
 import time
 import platform
+
+from PyQt5.QtWidgets import QMessageBox
+
 import config
 from utils.helpers import is_coincurve_available, validate_key_range
 import core.cpu_scanner as cpu_core
@@ -242,4 +245,4 @@ class CPULogic(QObject):
             self.process_queue.close()
             self.process_queue.join_thread()
         except Exception as e:
-            logger.error(f"Ошибка закрытия очереди: {str(e)}")
+            cpu_core.logger.error(f"Ошибка закрытия очереди: {str(e)}")

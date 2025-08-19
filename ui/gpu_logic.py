@@ -2,15 +2,12 @@
 import os
 import subprocess
 import time
-
-from PyQt5.QtWidgets import QMessageBox
-
 import config
 from PyQt5.QtCore import QTimer
-
-from core.gpu_scanner import logger
+from PyQt5.QtWidgets import QMessageBox
 from utils.helpers import validate_key_range
 import core.gpu_scanner as gpu_core
+from core.gpu_scanner import logger # Импортируем логгер напрямую
 
 class GPULogic:
     def __init__(self, main_window):
@@ -27,7 +24,13 @@ class GPULogic:
         self.gpu_end_range_key = 0
         self.gpu_total_keys_in_range = 0
         # Для таймера перезапуска случайного режима
-        self.main_window.gpu_restart_timer.timeout.connect(self.start_gpu_random_search)
+        # Подключение сигнала будет в setup_gpu_connections
+        # self.main_window.gpu_restart_timer.timeout.connect(self.start_gpu_random_search)
+
+    def setup_gpu_connections(self):
+        """Настройка соединений, специфичных для GPU логики."""
+        # Подключаем сигнал таймера перезапуска к правильному методу
+        self.main_window.gpu_restart_timer.timeout.connect(self.restart_gpu_random_search)
 
     # ============ GPU METHODS ============
     def auto_optimize_gpu_parameters(self):
@@ -151,12 +154,16 @@ class GPULogic:
         if self.gpu_is_running:
             self.stop_gpu_search_internal()
         self.main_window.append_log("Перезапуск GPU поиска с новым случайным диапазоном...", "normal")
+        # Используем QTimer.singleShot для безопасного перезапуска
         QTimer.singleShot(1000, self.start_gpu_random_search)
 
     def start_gpu_random_search(self):
         """Запускает GPU поиск со случайным диапазоном"""
+        # Проверка, не запущен ли уже поиск (на всякий случай)
         if self.gpu_is_running:
+            self.main_window.append_log("GPU поиск уже запущен. Перезапуск отменен.", "warning")
             return
+
         # Вызов функции из модуля core для генерации случайного диапазона
         start_key, end_key, error = gpu_core.generate_gpu_random_range(
             self.main_window.gpu_start_key_edit.text().strip(),  # global_start_hex
@@ -270,17 +277,16 @@ class GPULogic:
                     # Передаем УНИКАЛЬНЫЙ поддиапазон каждому воркеру
                     cuda_process, output_reader = gpu_core.start_gpu_search_with_range(
                         target_address, worker_start_key, worker_end_key, device, blocks, threads, points,
-                        priority_index, self.main_window
+                        priority_index, self.main_window # Передаем main_window для сигналов
                     )
                     # Подключаем сигналы
                     output_reader.log_message.connect(self.main_window.append_log)
-                    output_reader.stats_update.connect(self.update_gpu_stats_display)  # Требует модификации (см. ниже)
+                    output_reader.stats_update.connect(self.update_gpu_stats_display)
                     output_reader.found_key.connect(self.main_window.handle_found_key)
                     output_reader.process_finished.connect(self.handle_gpu_search_finished)
                     output_reader.start()
                     self.gpu_processes.append((cuda_process, output_reader))
                     success_count += 1
-                    from core.cpu_scanner import logger
                     logger.info(
                         f"Запущен GPU воркер {worker_local_index + 1}/{workers_per_device} (глобальный {worker_index_global + 1}/{total_requested_workers}) на устройстве {device}. Диапазон: {hex(worker_start_key)} - {hex(worker_end_key)}")
                     self.main_window.append_log(
@@ -376,19 +382,9 @@ class GPULogic:
                 if reader in self.gpu_worker_stats:
                     worker_stats = self.gpu_worker_stats[reader]
                     total_speed += worker_stats.get('speed', 0)
-                    total_checked = max(total_checked, worker_stats.get('checked',
-                                                                        0))  # Используем max, если ключи не пересекаются. Но т.к. диапазоны уникальны, скорее всего нужно суммировать.
-                    # ИЛИ, если диапазоны уникальны и каждый воркер отслеживает свой счетчик в пределах своего диапазона:
-                    # total_checked += worker_stats.get('checked', 0)
-                    # Но cuBitcrack, вероятно, показывает абсолютное количество проверенных в диапазоне.
-                    # Поэтому max может быть не совсем корректным.
-                    # Лучше: сохранять оригинальный стартовый ключ для каждого воркера и добавлять к нему checked.
-                    # Или, проще, суммировать checked, предполагая, что каждый воркер сообщает о количестве проверенных *в своём диапазоне*.
-                    # Это кажется наиболее правдоподобным.
+                    # Используем суммирование, так как диапазоны уникальны
                     total_checked += worker_stats.get('checked', 0)
             # Обновляем общее количество проверенных ключей и скорость
-            # self.gpu_keys_checked = total_checked # Уже обновлено выше
-            # self.gpu_keys_per_second = total_speed * 1000000 # Это было для одного воркера. Теперь total_speed уже в MKey/s
             self.gpu_keys_per_second = total_speed  # total_speed уже сумма MKey/s от всех воркеров
             self.gpu_keys_checked = total_checked
             self.gpu_last_update_time = time.time()  # Запоминаем время последнего обновления

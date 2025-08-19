@@ -26,12 +26,11 @@ try:
 except ImportError:
     PYNVML_AVAILABLE = False
     pynvml = None
+logger = setup_logger()
 
 # Импорт логики
 from ui.gpu_logic import GPULogic
 from ui.cpu_logic import CPULogic
-
-logger = setup_logger()
 
 
 class BitcoinGPUCPUScanner(QMainWindow):
@@ -100,13 +99,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # self.shutdown_event = multiprocessing.Event() # Перенесено в CPULogic
 
         # --- Инициализация логики ---
-        self.gpu_logic = GPULogic(self)
+        self.gpu_logic = GPULogic(self)  # Инициализируем ДО setup_ui и setup_connections
         self.cpu_logic = CPULogic(self)
 
         # --- Основная инициализация UI и подключений ---
         self.set_dark_theme()
         self.setup_ui()  # <-- Теперь setup_ui может безопасно использовать все инициализированные атрибуты
-        self.setup_connections()
+        self.setup_connections()  # <-- setup_connections вызывается ПОСЛЕ инициализации логики
         self.load_settings()
         # Создаем файл для найденных ключей, если его нет
         if not os.path.exists(config.FOUND_KEYS_FILE):
@@ -629,23 +628,23 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.main_tabs.addTab(about_tab, "О программе")
 
     def setup_connections(self):
-        # GPU connections
+        # GPU connections - подключаем к методам GPULogic
         self.gpu_start_stop_btn.clicked.connect(self.gpu_logic.toggle_gpu_search)
         self.gpu_optimize_btn.clicked.connect(self.gpu_logic.auto_optimize_gpu_parameters)
-        # CPU connections
+        # CPU connections - подключаем к методам CPULogic
         self.cpu_start_stop_btn.clicked.connect(self.cpu_logic.toggle_cpu_start_stop)
         self.cpu_pause_resume_btn.clicked.connect(self.cpu_logic.toggle_cpu_pause_resume)
         self.cpu_start_stop_btn.setShortcut(QKeySequence("Ctrl+S"))
         self.cpu_pause_resume_btn.setShortcut(QKeySequence("Ctrl+P"))
         # Common connections
         self.clear_log_btn.clicked.connect(lambda: self.log_output.clear())
-        # GPU timers
+        # GPU timers - подключаем к методам GPULogic
         self.gpu_stats_timer = QTimer()
         self.gpu_stats_timer.timeout.connect(self.gpu_logic.update_gpu_time_display)
         self.gpu_stats_timer.start(500)  # Увеличили частоту обновления в 2 раза
-        # self.gpu_restart_timer = QTimer() # Перенесено в GPULogic
-        # self.gpu_restart_timer.timeout.connect(self.gpu_logic.restart_gpu_random_search) # Перенесено в GPULogic
-        # CPU signals
+        # self.gpu_restart_timer = QTimer() # Уже создан в __init__
+        # self.gpu_restart_timer.timeout.connect(self.gpu_logic.restart_gpu_random_search) # Переносим в GPULogic.setup_gpu_connections
+        # CPU signals - подключаем к методам CPULogic
         # self.cpu_signals.update_stats.connect(self.handle_cpu_update_stats) # Перенесено в CPULogic
         # self.cpu_signals.log_message.connect(self.append_log) # Перенесено в CPULogic
         # self.cpu_signals.found_key.connect(self.handle_found_key) # Перенесено в CPULogic
@@ -663,6 +662,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             self.gpu_status_timer = None
         # =============== КОНЕЦ GPU Status Timer ===============
+        # Вызываем метод настройки специфичных для GPU соединений
+        self.gpu_logic.setup_gpu_connections()  # <-- ВАЖНО: вызываем ПОСЛЕ создания gpu_restart_timer
 
     def on_cpu_mode_changed(self, index):
         is_random = (index == 1)
