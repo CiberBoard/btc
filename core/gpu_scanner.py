@@ -14,7 +14,7 @@ try:
 except ImportError:
     PYNVML_AVAILABLE = False
     pynvml = None
-    logger.warning("pynvml не найден. Мониторинг GPU будет недоступен.")
+    btc.warning("pynvml не найден. Мониторинг GPU будет недоступен.")
 
 
 try:
@@ -25,7 +25,7 @@ try:
 except ImportError:
     WIN32_AVAILABLE = False
 
-from logger import config
+import config
 from utils.helpers import validate_key_range, private_key_to_wif
 
 logger = logging.getLogger('bitcoin_scanner')

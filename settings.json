@@ -8,15 +8,15 @@
     "points": "512",
     "gpu_random_mode": true,
     "gpu_restart_interval": "300",
-    "gpu_min_range_size": "734217728",
-    "gpu_max_range_size": "53687091277782738",
-    "gpu_priority": 0,
+    "gpu_min_range_size": "734217720",
+    "gpu_max_range_size": "53687091264634643643124",
+    "gpu_priority": 2,
     "cpu_target": "1PWo3JovpY4UQxd81623K1ZAx1VLGL6cWg",
     "cpu_start_key": "000000000000000000000000000000000000000000000070e4b9b060231c0cc5",
     "cpu_end_key": "000000000000000000000000000000000000000000000070e4b9b060235c0cc5",
-    "cpu_prefix": 6,
-    "cpu_workers": 24,
+    "cpu_prefix": 8,
+    "cpu_workers": 8,
     "cpu_attempts": 10000000,
     "cpu_mode": "random",
-    "cpu_priority": 5
+    "cpu_priority": 3
 }

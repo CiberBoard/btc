@@ -1,15 +1,15 @@
 # main.py
 import sys
-import multiprocessing
+import os
+# Добавляем корневую директорию проекта в sys.path, если нужно
+# Это позволяет импортировать модули из корня, если main.py находится там же или глубже
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from PyQt5.QtWidgets import QApplication
 from ui.main_window import BitcoinGPUCPUScanner
 
-# Убедимся, что freeze_support вызывается до создания QApplication
-# и до импорта других модулей, которые могут использовать multiprocessing
 if __name__ == '__main__':
-    multiprocessing.freeze_support()
     app = QApplication(sys.argv)
-    app.setStyle("Fusion")
     window = BitcoinGPUCPUScanner()
     window.show()
     sys.exit(app.exec_())
