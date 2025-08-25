@@ -5,6 +5,7 @@ import base58
 import logging
 from logging.handlers import RotatingFileHandler
 from PyQt5.QtWidgets import QComboBox
+from PyQt5.QtCore import QRegExp
 import config
 
 # Кеш для хеш-функций
@@ -71,7 +72,6 @@ def private_key_to_wif(private_key_hex):
         checksum = sha256(first_sha).digest()[:4]
         return base58.b58encode(extended_key + checksum).decode()
     except Exception as e:
-        # Вместо логгера используем print или передаем логгер как аргумент
         print(f"Ошибка конвертации в WIF: {str(e)}")
         return "Ошибка конвертации"
 
@@ -142,10 +142,20 @@ def format_time(seconds):
         return f"{days} дн {hours} час"
 
 
-# Добавим вспомогательную функцию для проверки наличия coincurve
 def is_coincurve_available():
     try:
         from coincurve import PrivateKey
         return True
     except ImportError:
         return False
+
+
+# ============== НОВЫЕ ФУНКЦИИ ДЛЯ РАБОТЫ С HEX ==============
+def hex_to_int(h):
+    """Преобразует hex-строку в целое число"""
+    return int(h.strip(), 16)
+
+
+def int_to_hex(x):
+    """Преобразует целое число в hex-строку (64 символа, с ведущими нулями)"""
+    return f"{x:064x}"
