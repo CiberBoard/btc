@@ -120,19 +120,38 @@ def get_grid_for_gpu(gpu_name):
     else: return GRID_PARAMS
 
 
-# ================== ВСПОМОГАТЕЛЬНЫЕ ==================
 def hex_to_int(h):
-    return int(h.strip(), 16)
+    return int(h.strip().strip('0x').lower(), 16)
 
 def int_to_hex(x):
     return f"{x:064x}"
 
 def random_subrange(full_start, full_end, bits=32):
-    width = 1 << bits
+    width = 1 << bits  # 2^32
+    if full_end - full_start <= width:
+        return full_start, full_end
+
     max_start = full_end - width
     if max_start <= full_start:
         return full_start, full_end
-    return random.randint(full_start, max_start), full_start + width
+
+    # Попробуем через random.randint
+    try:
+        offset = random.randint(0, max_start - full_start)
+        rand_start = full_start + offset
+        return rand_start, rand_start + width
+    except (ValueError, OverflowError):
+        # Если диапазон слишком большой
+        diff = max_start - full_start
+        if diff <= 0:
+            return full_start, full_end
+        num_bytes = (diff.bit_length() + 7) // 8
+        while True:
+            rand_bytes = os.urandom(num_bytes)
+            rand_offset = int.from_bytes(rand_bytes, 'big')
+            if rand_offset <= diff:
+                rand_start = full_start + rand_offset
+                return rand_start, rand_start + width
 
 
 # ================== ДИАЛОГ ВЫБОРА GPU (ПОЛНОСТЬЮ ТЁМНЫЙ) ==================
@@ -383,6 +402,7 @@ class KangarooGUI:
         self.log_text.insert(tk.END, f"{msg}\n")
         self.log_text.see(tk.END)
         self.log_text.config(state='disabled')
+
 
     def clear_log(self):
         self.log_text.config(state='normal')
