@@ -10763,3 +10763,803 @@ TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
 [2025-08-25 22:14:31] INFO [main_window:1031]: Настройки загружены
 [2025-08-25 22:14:36] INFO [main_window:1031]: Настройки сохранены
 [2025-08-25 22:14:36] INFO [main_window:1230]: pynvml выключен.
+[2025-08-27 22:55:40] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-08-27 22:55:40] INFO [main_window:1147]: Настройки загружены
+[2025-08-27 22:56:05] DEBUG [main_window:1152]: Сгенерировано: 15w3hBBhZGQJjsBJY7a5fP3DExpuQJTSQg
+[2025-08-27 22:56:16] DEBUG [main_window:1152]: Сгенерировано: 18sNQtuqoDQnKYzHp4mGVbkQs73jTtzBcd
+[2025-08-27 22:56:37] DEBUG [main_window:1152]: Сгенерировано: 15w3hBBhZGQJjsBJY7a5fP3DExpuQJTSQg
+[2025-08-27 22:56:57] DEBUG [main_window:1152]: Сгенерировано: mkSzzEGgNHqZWyevFgYTVJFY6xRcQjiz4p
+[2025-08-27 22:57:00] DEBUG [main_window:1152]: Сгенерировано: mkSzzEGgNHqZWyevFgYTVJFY6xRcQjiz4p
+[2025-08-27 22:57:03] DEBUG [main_window:1152]: Сгенерировано: 15w3hBBhZGQJjsBJY7a5fP3DExpuQJTSQg
+[2025-08-27 22:57:41] INFO [main_window:1147]: Настройки сохранены
+[2025-08-27 22:57:41] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-08-27 22:57:41] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-08-27 22:57:41] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0c96677ed76 - 0x70e4b9b0e998c03a9c на устройстве 1
+[2025-08-27 22:57:41] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B0C96677ED76:70E4B9B0E998C03A9C 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:57:41] INFO [gpu_logic:290]: Запущен GPU воркер 1/4 (глобальный 1/4) на устройстве 1. Диапазон: 0x70e4b9b0c96677ed76 - 0x70e4b9b0e998c03a9c
+[2025-08-27 22:57:41] DEBUG [main_window:1152]: Запущен воркер 1 на GPU 1. Диапазон: 0x70e4b9b0c96677ed76 - 0x70e4b9b0e998c03a9c
+[2025-08-27 22:57:41] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0e998c03a9d - 0x70e4b9b109cb0887c3 на устройстве 1
+[2025-08-27 22:57:41] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B0E998C03A9D:70E4B9B109CB0887C3 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:57:41] INFO [gpu_logic:290]: Запущен GPU воркер 2/4 (глобальный 2/4) на устройстве 1. Диапазон: 0x70e4b9b0e998c03a9d - 0x70e4b9b109cb0887c3
+[2025-08-27 22:57:41] DEBUG [main_window:1152]: Запущен воркер 2 на GPU 1. Диапазон: 0x70e4b9b0e998c03a9d - 0x70e4b9b109cb0887c3
+[2025-08-27 22:57:41] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b109cb0887c4 - 0x70e4b9b129fd50d4ea на устройстве 1
+[2025-08-27 22:57:41] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B109CB0887C4:70E4B9B129FD50D4EA 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:57:41] INFO [gpu_logic:290]: Запущен GPU воркер 3/4 (глобальный 3/4) на устройстве 1. Диапазон: 0x70e4b9b109cb0887c4 - 0x70e4b9b129fd50d4ea
+[2025-08-27 22:57:41] DEBUG [main_window:1152]: Запущен воркер 3 на GPU 1. Диапазон: 0x70e4b9b109cb0887c4 - 0x70e4b9b129fd50d4ea
+[2025-08-27 22:57:41] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b129fd50d4eb - 0x70e4b9b14a2f992212 на устройстве 1
+[2025-08-27 22:57:41] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B129FD50D4EB:70E4B9B14A2F992212 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:57:41] INFO [gpu_logic:290]: Запущен GPU воркер 4/4 (глобальный 4/4) на устройстве 1. Диапазон: 0x70e4b9b129fd50d4eb - 0x70e4b9b14a2f992212
+[2025-08-27 22:57:41] DEBUG [main_window:1152]: Запущен воркер 4 на GPU 1. Диапазон: 0x70e4b9b129fd50d4eb - 0x70e4b9b14a2f992212
+[2025-08-27 22:57:41] INFO [main_window:1147]: Успешно запущено 4 GPU воркеров
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C96677ED76
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C96677ED76
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E998C03A9C
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E998C03A9C
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:42] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:42] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 121.52 MKey/s (220,200,960 total) [00:00:00]
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 121.52 MKey/s (220,200,960 total) [00:00:00]
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E998C03A9D
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E998C03A9D
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B109CB0887C3
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B109CB0887C3
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.11 MKey/s (201,326,592 total) [00:00:00]
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.11 MKey/s (201,326,592 total) [00:00:00]
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B129FD50D4EB
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B129FD50D4EB
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B14A2F992212
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B14A2F992212
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (192,937,984 total) [00:00:00]
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (192,937,984 total) [00:00:00]
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B109CB0887C4
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B129FD50D4EA
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.69 MKey/s (195,035,136 total) [00:00:00]
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Compression: compressed
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B109CB0887C4
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B129FD50D4EA
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:41] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:42] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 10.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 20.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 30.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 40.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:43] [Info] 50.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 60.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 70.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 80.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 90.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] 100.0%
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: [2025-08-27.22:57:44] [Info] Done
+[2025-08-27 22:57:48] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.69 MKey/s (195,035,136 total) [00:00:00]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (413,138,944 total) [00:00:01]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (413,138,944 total) [00:00:01]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (608,174,080 total) [00:00:03]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (803,209,216 total) [00:00:05]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (608,174,080 total) [00:00:03]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (998,244,352 total) [00:00:07]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (803,209,216 total) [00:00:05]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (1,195,376,640 total) [00:00:09]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.11 MKey/s (1,396,703,232 total) [00:00:10]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (998,244,352 total) [00:00:07]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (1,591,738,368 total) [00:00:12]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (1,790,967,808 total) [00:00:14]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (1,195,376,640 total) [00:00:09]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (1,988,100,096 total) [00:00:16]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (2,185,232,384 total) [00:00:18]
+[2025-08-27 22:58:07] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (2,382,364,672 total) [00:00:19]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.11 MKey/s (1,396,703,232 total) [00:00:10]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (1,591,738,368 total) [00:00:12]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (1,790,967,808 total) [00:00:14]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (1,988,100,096 total) [00:00:16]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (2,185,232,384 total) [00:00:18]
+[2025-08-27 22:58:07] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (2,382,364,672 total) [00:00:19]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (394,264,576 total) [00:00:01]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (394,264,576 total) [00:00:01]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (591,396,864 total) [00:00:03]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (591,396,864 total) [00:00:03]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (784,334,848 total) [00:00:05]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (973,078,528 total) [00:00:07]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (1,168,113,664 total) [00:00:09]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (1,356,857,344 total) [00:00:10]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (1,556,086,784 total) [00:00:12]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (1,749,024,768 total) [00:00:14]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,937,768,448 total) [00:00:16]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (784,334,848 total) [00:00:05]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,130,706,432 total) [00:00:18]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,321,547,264 total) [00:00:19]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (973,078,528 total) [00:00:07]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (1,168,113,664 total) [00:00:09]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (1,356,857,344 total) [00:00:10]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (1,556,086,784 total) [00:00:12]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (1,749,024,768 total) [00:00:14]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,937,768,448 total) [00:00:16]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,130,706,432 total) [00:00:18]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,321,547,264 total) [00:00:19]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (385,875,968 total) [00:00:01]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (385,875,968 total) [00:00:01]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (576,716,800 total) [00:00:03]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (765,460,480 total) [00:00:05]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (576,716,800 total) [00:00:03]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (956,301,312 total) [00:00:07]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.05 MKey/s (1,142,947,840 total) [00:00:09]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,331,691,520 total) [00:00:10]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.96 MKey/s (1,516,240,896 total) [00:00:12]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (765,460,480 total) [00:00:05]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (1,702,887,424 total) [00:00:14]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,891,631,104 total) [00:00:16]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.64 MKey/s (2,074,083,328 total) [00:00:18]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,264,924,160 total) [00:00:19]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (956,301,312 total) [00:00:07]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.05 MKey/s (1,142,947,840 total) [00:00:09]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,331,691,520 total) [00:00:10]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.96 MKey/s (1,516,240,896 total) [00:00:12]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (1,702,887,424 total) [00:00:14]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,891,631,104 total) [00:00:16]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.64 MKey/s (2,074,083,328 total) [00:00:18]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,264,924,160 total) [00:00:19]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (381,681,664 total) [00:00:01]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (381,681,664 total) [00:00:01]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (570,425,344 total) [00:00:03]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (570,425,344 total) [00:00:03]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (761,266,176 total) [00:00:05]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.69 MKey/s (956,301,312 total) [00:00:07]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (761,266,176 total) [00:00:05]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,145,044,992 total) [00:00:09]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.69 MKey/s (956,301,312 total) [00:00:07]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.90 MKey/s (1,342,177,280 total) [00:00:10]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (1,528,823,808 total) [00:00:12]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (1,145,044,992 total) [00:00:09]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (1,721,761,792 total) [00:00:14]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.90 MKey/s (1,342,177,280 total) [00:00:10]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (1,912,602,624 total) [00:00:16]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (2,107,637,760 total) [00:00:18]
+[2025-08-27 22:58:08] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,300,575,744 total) [00:00:20]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (1,528,823,808 total) [00:00:12]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (1,721,761,792 total) [00:00:14]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (1,912,602,624 total) [00:00:16]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (2,107,637,760 total) [00:00:18]
+[2025-08-27 22:58:08] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,300,575,744 total) [00:00:20]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (2,577,399,808 total) [00:00:21]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (2,577,399,808 total) [00:00:21]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.99 MKey/s (2,776,629,248 total) [00:00:23]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.99 MKey/s (2,776,629,248 total) [00:00:23]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.84 MKey/s (2,973,761,536 total) [00:00:25]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (3,172,990,976 total) [00:00:27]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.84 MKey/s (2,973,761,536 total) [00:00:25]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.84 MKey/s (3,370,123,264 total) [00:00:29]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (3,172,990,976 total) [00:00:27]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (3,565,158,400 total) [00:00:30]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (3,762,290,688 total) [00:00:32]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.84 MKey/s (3,370,123,264 total) [00:00:29]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (3,961,520,128 total) [00:00:34]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,158,652,416 total) [00:00:36]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (3,565,158,400 total) [00:00:30]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,351,590,400 total) [00:00:38]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,548,722,688 total) [00:00:39]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,741,660,672 total) [00:00:41]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (3,762,290,688 total) [00:00:32]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (3,961,520,128 total) [00:00:34]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,158,652,416 total) [00:00:36]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,351,590,400 total) [00:00:38]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,548,722,688 total) [00:00:39]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,741,660,672 total) [00:00:41]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,514,485,248 total) [00:00:21]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,514,485,248 total) [00:00:21]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,705,326,080 total) [00:00:23]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (2,900,361,216 total) [00:00:25]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.55 MKey/s (3,093,299,200 total) [00:00:27]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,705,326,080 total) [00:00:23]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.10 MKey/s (3,279,945,728 total) [00:00:29]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (3,474,980,864 total) [00:00:30]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (3,672,113,152 total) [00:00:32]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (2,900,361,216 total) [00:00:25]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.11 MKey/s (3,873,439,744 total) [00:00:34]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (4,066,377,728 total) [00:00:36]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.55 MKey/s (3,093,299,200 total) [00:00:27]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (4,257,218,560 total) [00:00:38]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,454,350,848 total) [00:00:39]
+[2025-08-27 22:58:29] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (4,649,385,984 total) [00:00:41]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.10 MKey/s (3,279,945,728 total) [00:00:29]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (3,474,980,864 total) [00:00:30]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (3,672,113,152 total) [00:00:32]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.11 MKey/s (3,873,439,744 total) [00:00:34]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (4,066,377,728 total) [00:00:36]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (4,257,218,560 total) [00:00:38]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,454,350,848 total) [00:00:39]
+[2025-08-27 22:58:29] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (4,649,385,984 total) [00:00:41]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (2,453,667,840 total) [00:00:21]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (2,453,667,840 total) [00:00:21]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 101.79 MKey/s (2,638,217,216 total) [00:00:23]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 101.79 MKey/s (2,638,217,216 total) [00:00:23]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.01 MKey/s (2,824,863,744 total) [00:00:25]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 98.32 MKey/s (3,003,121,664 total) [00:00:27]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (3,196,059,648 total) [00:00:29]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (3,384,803,328 total) [00:00:30]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 99.53 MKey/s (3,565,158,400 total) [00:00:32]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 99.48 MKey/s (3,745,513,472 total) [00:00:34]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.01 MKey/s (2,824,863,744 total) [00:00:25]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (3,934,257,152 total) [00:00:36]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,127,195,136 total) [00:00:38]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.64 MKey/s (4,309,647,360 total) [00:00:39]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (4,498,391,040 total) [00:00:41]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 98.32 MKey/s (3,003,121,664 total) [00:00:27]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (3,196,059,648 total) [00:00:29]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (3,384,803,328 total) [00:00:30]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 99.53 MKey/s (3,565,158,400 total) [00:00:32]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 99.48 MKey/s (3,745,513,472 total) [00:00:34]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (3,934,257,152 total) [00:00:36]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,127,195,136 total) [00:00:38]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.64 MKey/s (4,309,647,360 total) [00:00:39]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (4,498,391,040 total) [00:00:41]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (2,493,513,728 total) [00:00:21]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (2,493,513,728 total) [00:00:21]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,686,451,712 total) [00:00:23]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,877,292,544 total) [00:00:25]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (2,686,451,712 total) [00:00:23]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (3,076,521,984 total) [00:00:27]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (3,271,557,120 total) [00:00:29]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (2,877,292,544 total) [00:00:25]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (3,462,397,952 total) [00:00:30]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (3,655,335,936 total) [00:00:32]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (3,076,521,984 total) [00:00:27]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (3,841,982,464 total) [00:00:34]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (3,271,557,120 total) [00:00:29]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (4,032,823,296 total) [00:00:36]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (3,462,397,952 total) [00:00:30]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.40 MKey/s (4,223,664,128 total) [00:00:38]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (4,418,699,264 total) [00:00:39]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (3,655,335,936 total) [00:00:32]
+[2025-08-27 22:58:30] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (4,607,442,944 total) [00:00:41]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (3,841,982,464 total) [00:00:34]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (4,032,823,296 total) [00:00:36]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.40 MKey/s (4,223,664,128 total) [00:00:38]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (4,418,699,264 total) [00:00:39]
+[2025-08-27 22:58:30] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (4,607,442,944 total) [00:00:41]
+[2025-08-27 22:58:41] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-08-27 22:58:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (4,934,598,656 total) [00:00:43]
+[2025-08-27 22:58:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (5,131,730,944 total) [00:00:45]
+[2025-08-27 22:58:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (5,330,960,384 total) [00:00:47]
+[2025-08-27 22:58:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.84 MKey/s (5,528,092,672 total) [00:00:48]
+[2025-08-27 22:58:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (5,723,127,808 total) [00:00:50]
+[2025-08-27 22:58:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (5,916,065,792 total) [00:00:52]
+[2025-08-27 22:58:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.05 MKey/s (6,117,392,384 total) [00:00:54]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,846,518,272 total) [00:00:43]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (5,037,359,104 total) [00:00:45]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (5,236,588,544 total) [00:00:47]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (5,427,429,376 total) [00:00:48]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (5,620,367,360 total) [00:00:50]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (5,815,402,496 total) [00:00:52]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (6,004,146,176 total) [00:00:54]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,800,380,928 total) [00:00:43]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (4,995,416,064 total) [00:00:45]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (5,184,159,744 total) [00:00:47]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.49 MKey/s (5,377,097,728 total) [00:00:49]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (5,576,327,168 total) [00:00:50]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (5,767,168,000 total) [00:00:52]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (5,955,911,680 total) [00:00:54]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (4,689,231,872 total) [00:00:43]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.69 MKey/s (4,871,684,096 total) [00:00:45]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 99.48 MKey/s (5,052,039,168 total) [00:00:47]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.40 MKey/s (5,242,880,000 total) [00:00:49]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (5,429,526,528 total) [00:00:50]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.01 MKey/s (5,616,173,056 total) [00:00:52]
+[2025-08-27 22:58:42] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (5,809,111,040 total) [00:00:54]
+[2025-08-27 22:58:42] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: Перезапуск GPU поиска с новым случайным диапазоном...
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (4,934,598,656 total) [00:00:43]
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (5,131,730,944 total) [00:00:45]
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (5,330,960,384 total) [00:00:47]
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.84 MKey/s (5,528,092,672 total) [00:00:48]
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (5,723,127,808 total) [00:00:50]
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (5,916,065,792 total) [00:00:52]
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.05 MKey/s (6,117,392,384 total) [00:00:54]
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: GPU поиск завершен
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.73 MKey/s (4,846,518,272 total) [00:00:43]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (5,037,359,104 total) [00:00:45]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.89 MKey/s (5,236,588,544 total) [00:00:47]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.32 MKey/s (5,427,429,376 total) [00:00:48]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (5,620,367,360 total) [00:00:50]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.64 MKey/s (5,815,402,496 total) [00:00:52]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.11 MKey/s (6,004,146,176 total) [00:00:54]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: GPU поиск завершен
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.48 MKey/s (4,800,380,928 total) [00:00:43]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 107.58 MKey/s (4,995,416,064 total) [00:00:45]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.16 MKey/s (5,184,159,744 total) [00:00:47]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.49 MKey/s (5,377,097,728 total) [00:00:49]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 109.95 MKey/s (5,576,327,168 total) [00:00:50]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (5,767,168,000 total) [00:00:52]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.25 MKey/s (5,955,911,680 total) [00:00:54]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: GPU поиск завершен
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 105.26 MKey/s (4,689,231,872 total) [00:00:43]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 100.69 MKey/s (4,871,684,096 total) [00:00:45]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 99.48 MKey/s (5,052,039,168 total) [00:00:47]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 104.40 MKey/s (5,242,880,000 total) [00:00:49]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 102.95 MKey/s (5,429,526,528 total) [00:00:50]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 103.01 MKey/s (5,616,173,056 total) [00:00:52]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (5,809,111,040 total) [00:00:54]
+[2025-08-27 22:58:42] ERROR [gpu_logic:416]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 398, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-08-27 22:58:42] DEBUG [main_window:1152]: GPU поиск завершен
+[2025-08-27 22:58:43] DEBUG [main_window:1152]: Новый случайный диапазон GPU: 0x70e4b9b06aca74766a - 0x70e4b9b164b9449669
+[2025-08-27 22:58:43] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b06aca74766a - 0x70e4b9b0a946287e69 на устройстве 1
+[2025-08-27 22:58:43] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B06ACA74766A:70E4B9B0A946287E69 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:58:43] INFO [gpu_logic:290]: Запущен GPU воркер 1/4 (глобальный 1/4) на устройстве 1. Диапазон: 0x70e4b9b06aca74766a - 0x70e4b9b0a946287e69
+[2025-08-27 22:58:43] DEBUG [main_window:1152]: Запущен воркер 1 на GPU 1. Диапазон: 0x70e4b9b06aca74766a - 0x70e4b9b0a946287e69
+[2025-08-27 22:58:43] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0a946287e6a - 0x70e4b9b0e7c1dc8669 на устройстве 1
+[2025-08-27 22:58:43] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B0A946287E6A:70E4B9B0E7C1DC8669 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:58:43] INFO [gpu_logic:290]: Запущен GPU воркер 2/4 (глобальный 2/4) на устройстве 1. Диапазон: 0x70e4b9b0a946287e6a - 0x70e4b9b0e7c1dc8669
+[2025-08-27 22:58:43] DEBUG [main_window:1152]: Запущен воркер 2 на GPU 1. Диапазон: 0x70e4b9b0a946287e6a - 0x70e4b9b0e7c1dc8669
+[2025-08-27 22:58:43] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0e7c1dc866a - 0x70e4b9b1263d908e69 на устройстве 1
+[2025-08-27 22:58:43] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B0E7C1DC866A:70E4B9B1263D908E69 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:58:43] INFO [gpu_logic:290]: Запущен GPU воркер 3/4 (глобальный 3/4) на устройстве 1. Диапазон: 0x70e4b9b0e7c1dc866a - 0x70e4b9b1263d908e69
+[2025-08-27 22:58:43] DEBUG [main_window:1152]: Запущен воркер 3 на GPU 1. Диапазон: 0x70e4b9b0e7c1dc866a - 0x70e4b9b1263d908e69
+[2025-08-27 22:58:43] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b1263d908e6a - 0x70e4b9b164b9449669 на устройстве 1
+[2025-08-27 22:58:43] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 128 --keyspace 70E4B9B1263D908E6A:70E4B9B164B9449669 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-27 22:58:43] INFO [gpu_logic:290]: Запущен GPU воркер 4/4 (глобальный 4/4) на устройстве 1. Диапазон: 0x70e4b9b1263d908e6a - 0x70e4b9b164b9449669
+[2025-08-27 22:58:43] DEBUG [main_window:1152]: Запущен воркер 4 на GPU 1. Диапазон: 0x70e4b9b1263d908e6a - 0x70e4b9b164b9449669
+[2025-08-27 22:58:43] INFO [main_window:1147]: Успешно запущено 4 GPU воркеров
+[2025-08-27 22:58:44] INFO [main_window:1147]: Настройки сохранены
+[2025-08-27 22:58:44] DEBUG [main_window:1152]: Запущено 20 CPU воркеров в режиме случайного поиска
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 2 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 1 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 3 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 4 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 5 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 7 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 0 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 6 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 10 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 8 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 9 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 11 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 12 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 13 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 15 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 16 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 14 started in random mode
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 17 started in random mode
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 2 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 1 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 3 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 4 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 5 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 7 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 0 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 6 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 10 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 8 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 9 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 11 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 12 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 13 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 15 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 16 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 19 started in random mode
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 14 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 17 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 19 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:45] INFO [cpu_scanner:201]: Worker 18 started in random mode
+[2025-08-27 22:58:45] DEBUG [main_window:1152]: Воркер 18 начал случайный поиск: 500000 попыток
+[2025-08-27 22:58:48] INFO [cpu_scanner:436]: Остановка CPU процессов...
+[2025-08-27 22:58:48] INFO [cpu_scanner:472]: CPU процессы остановлены.
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: CPU поиск остановлен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 5 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 11 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 17 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 8 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 0 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 6 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 7 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 14 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 18 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 3 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 19 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 10 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 4 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 9 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 16 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Воркер 15 успешно завершен
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:48] DEBUG [main_window:1152]: Все CPU воркеры завершили работу
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B06ACA74766A
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B06ACA74766A
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0A946287E69
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0A946287E69
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 122.75 MKey/s (224,395,264 total) [00:00:00]
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 122.75 MKey/s (224,395,264 total) [00:00:00]
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0A946287E6A
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0A946287E6A
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E7C1DC8669
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E7C1DC8669
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B1263D908E6A
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B164B9449669
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B1263D908E6A
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B164B9449669
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.28 MKey/s (203,423,744 total) [00:00:00]
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (197,132,288 total) [00:00:00]
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 111.28 MKey/s (203,423,744 total) [00:00:00]
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 108.79 MKey/s (197,132,288 total) [00:00:00]
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Compression: compressed
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E7C1DC866A
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E7C1DC866A
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B1263D908E69
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B1263D908E69
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:43] [Info] Generating 2,097,152 starting points (80.0MB)
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 10.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 20.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:44] [Info] 30.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 40.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 50.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 60.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 70.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 80.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 90.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] 100.0%
+[2025-08-27 22:58:49] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (192,937,984 total) [00:00:00]
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: [2025-08-27.22:58:45] [Info] Done
+[2025-08-27 22:58:49] DEBUG [main_window:1152]: NVIDIA GeForce G 1203 / 6143MB | 1 target 106.42 MKey/s (192,937,984 total) [00:00:00]

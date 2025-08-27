@@ -2,7 +2,7 @@
     "gpu_target": "1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU",
     "gpu_start_key": "000000000000000000000000000000000000000000000070E4B9B06430023105",
     "gpu_end_key": "000000000000000000000000000000000000000000000070E4B9B16720023105",
-    "gpu_device": "0",
+    "gpu_device": "1",
     "blocks": "128",
     "threads": "128",
     "points": "128",

@@ -17,7 +17,8 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QFileDialog, QSpinBox)
 import config
 from utils.helpers import setup_logger, validate_key_range, format_time, is_coincurve_available, make_combo32
-
+# Добавьте после других импортов
+from core.hextowif import generate_all_from_hex
 # Импорт pynvml (предполагается, что он установлен)
 try:
     import pynvml
@@ -581,6 +582,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         export_layout.addStretch()
         keys_layout.addLayout(export_layout)
         self.main_tabs.addTab(keys_tab, "Найденные ключи")
+        # Добавляем вкладку конвертера
+        self.setup_converter_tab()
         # =============== LOG TAB ===============
         log_tab = QWidget()
         log_layout = QVBoxLayout(log_tab)
@@ -664,6 +667,119 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # =============== КОНЕЦ GPU Status Timer ===============
         # Вызываем метод настройки специфичных для GPU соединений
         self.gpu_logic.setup_gpu_connections()  # <-- ВАЖНО: вызываем ПОСЛЕ создания gpu_restart_timer
+
+    def setup_converter_tab(self):
+        """Создаёт вкладку конвертера HEX → WIF и адреса"""
+        converter_tab = QWidget()
+        layout = QVBoxLayout(converter_tab)
+        layout.setSpacing(15)
+        layout.setContentsMargins(15, 15, 15, 15)
+
+        # Инструкция
+        info_label = QLabel(
+            "Введите приватный ключ в формате HEX (64 символа), выберите опции и нажмите 'Сгенерировать'."
+        )
+        info_label.setWordWrap(True)
+        info_label.setStyleSheet("color: #CCCCCC; font-size: 10pt;")
+        layout.addWidget(info_label)
+
+        # HEX input
+        hex_layout = QHBoxLayout()
+        hex_layout.addWidget(QLabel("Приватный ключ (HEX):"))
+        self.hex_input = QLineEdit()
+        self.hex_input.setPlaceholderText("Например: 1a2b3c4d...")
+        self.hex_input.setMaxLength(64)
+        hex_layout.addWidget(self.hex_input, 1)
+        layout.addLayout(hex_layout)
+
+        # Опции
+        options_layout = QHBoxLayout()
+        self.compressed_checkbox = QCheckBox("Сжатый публичный ключ")
+        self.compressed_checkbox.setChecked(True)
+        self.testnet_checkbox = QCheckBox("Testnet")
+        self.testnet_checkbox.setChecked(False)
+        options_layout.addWidget(self.compressed_checkbox)
+        options_layout.addWidget(self.testnet_checkbox)
+        options_layout.addStretch()
+        layout.addLayout(options_layout)
+
+        # Генерировать кнопка
+        self.generate_btn = QPushButton("Сгенерировать")
+        self.generate_btn.setStyleSheet("""
+            QPushButton {
+                background: #3498db;
+                color: white;
+                font-weight: bold;
+                padding: 10px;
+                border-radius: 6px;
+            }
+            QPushButton:hover {
+                background: #2980b9;
+            }
+        """)
+        self.generate_btn.clicked.connect(self.on_generate_clicked)
+        layout.addWidget(self.generate_btn)
+
+        # Результаты
+        result_group = QGroupBox("Результаты")
+        result_layout = QGridLayout(result_group)
+        result_layout.setSpacing(8)
+
+        self.result_fields = {}
+        row = 0
+        for label_text in ["HEX", "WIF", "P2PKH", "P2SH-P2WPKH", "Bech32 (P2WPKH)"]:
+            result_layout.addWidget(QLabel(f"{label_text}:"), row, 0)
+            value_edit = QLineEdit()
+            value_edit.setReadOnly(True)
+            value_edit.setStyleSheet("background: #202030; color: #F0F0F0;")
+            result_layout.addWidget(value_edit, row, 1)
+            copy_btn = QPushButton("Копировать")
+            copy_btn.setFixedWidth(100)
+            copy_btn.setProperty("target", label_text.lower())
+            copy_btn.clicked.connect(self.copy_to_clipboard)
+            result_layout.addWidget(copy_btn, row, 2)
+            self.result_fields[label_text] = value_edit
+            row += 1
+
+        layout.addWidget(result_group)
+
+        # Добавляем вкладку
+        self.main_tabs.addTab(converter_tab, "Конвертер HEX → WIF")
+
+    def on_generate_clicked(self):
+        hex_key = self.hex_input.text().strip()
+        if not hex_key or len(hex_key) > 64 or not all(c in '0123456789abcdefABCDEF' for c in hex_key):
+            QMessageBox.warning(self, "Ошибка", "Введите корректный HEX-ключ (до 64 символов).")
+            return
+
+        compressed = self.compressed_checkbox.isChecked()
+        testnet = self.testnet_checkbox.isChecked()
+
+        try:
+            result = generate_all_from_hex(hex_key, compressed=compressed, testnet=testnet)
+            for key, value in result.items():
+                if key in self.result_fields:
+                    self.result_fields[key].setText(value)
+            self.append_log(f"Сгенерировано: {result['P2PKH']}")
+        except Exception as e:
+            QMessageBox.critical(self, "Ошибка", str(e))
+
+    def copy_to_clipboard(self):
+        btn = self.sender()
+        field_name = btn.property("target")
+        field_map = {
+            "hex": "HEX",
+            "wif": "WIF",
+            "p2pkh": "P2PKH",
+            "p2sh-p2wpkh": "P2SH-P2WPKH",
+            "bech32 (p2wpkh)": "Bech32 (P2WPKH)"
+        }
+        display_name = field_map.get(field_name.lower())
+        if display_name and display_name in self.result_fields:
+            text = self.result_fields[display_name].text()
+            if text:
+                QApplication.clipboard().setText(text)
+                self.append_log(f"Скопировано: {display_name}", "success")
 
     def on_cpu_mode_changed(self, index):
         is_random = (index == 1)
