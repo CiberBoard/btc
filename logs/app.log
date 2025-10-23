@@ -12650,3 +12650,383 @@ TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
 [2025-08-28 02:23:24] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 512 --keyspace 70E4B9B13007B47C68:70E4B9B133890060F5 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
 [2025-08-28 02:23:24] DEBUG [main_window:1159]: Запущен воркер 8/8 на GPU 1. Диапазон: 0x70e4b9b13007b47c68 - 0x70e4b9b133890060f5
 [2025-08-28 02:23:24] INFO [main_window:1154]: Запущено 8 GPU воркеров
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B1177EA13CA2
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B1177EA13CA2
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B11AFFED212B
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B11AFFED212B
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:28] [Info] 20.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 30.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:28] [Info] 20.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 40.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 30.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 40.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 70.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 80.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 70.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 80.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 100.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] Done
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 100.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 1810 / 12287MB | 1 target 189.81 MKey/s (343,932,928 total) [00:00:00]
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] Done
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: NVIDIA GeForce R 1810 / 12287MB | 1 target 189.81 MKey/s (343,932,928 total) [00:00:00]
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B11AFFED212C
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B11AFFED212C
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B11E813905B5
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B11E813905B5
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 30.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 30.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 70.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 70.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 100.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] Done
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 100.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 1810 / 12287MB | 1 target 174.38 MKey/s (318,767,104 total) [00:00:00]
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] Done
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: NVIDIA GeForce R 1810 / 12287MB | 1 target 174.38 MKey/s (318,767,104 total) [00:00:00]
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B1220284EA40
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B1220284EA40
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B12583D0CEC9
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B12583D0CEC9
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 1810 / 12287MB | 1 target 162.03 MKey/s (293,601,280 total) [00:00:00]
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: NVIDIA GeForce R 1810 / 12287MB | 1 target 162.03 MKey/s (293,601,280 total) [00:00:00]
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B11E813905B6
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B1220284EA3F
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 100.0%
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] Done
+[2025-08-28 02:23:35] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 1810 / 12287MB | 1 target 143.17 MKey/s (268,435,456 total) [00:00:00]
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B11E813905B6
+[2025-08-28 02:23:35] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B1220284EA3F
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B129051CB354
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B12583D0CECA
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B12C866897DE
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B13007B47C68
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B12C866897DD
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B129051CB353
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B13007B47C67
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B133890060F5
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:28] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] Done
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: NVIDIA GeForce R 1810 / 12287MB | 1 target 143.17 MKey/s (268,435,456 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1779 / 6143MB | 1 target 127.44 MKey/s (234,881,024 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1779 / 6143MB | 1 target 118.34 MKey/s (218,103,808 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1779 / 6143MB | 1 target 125.00 MKey/s (226,492,416 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 1779 / 6143MB | 1 target 111.85 MKey/s (209,715,200 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Compression: compressed
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B129051CB354
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B12583D0CECA
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B12C866897DE
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B13007B47C68
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B12C866897DD
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B129051CB353
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B13007B47C67
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B133890060F5
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:24] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:25] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 10.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:29] [Info] 20.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 30.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:30] [Info] 40.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 50.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 60.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 70.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:31] [Info] 80.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 90.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] 100.0%
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: [2025-08-28.02:23:32] [Info] Done
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: NVIDIA GeForce G 1779 / 6143MB | 1 target 125.00 MKey/s (226,492,416 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: NVIDIA GeForce G 1779 / 6143MB | 1 target 127.44 MKey/s (234,881,024 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: NVIDIA GeForce G 1779 / 6143MB | 1 target 118.34 MKey/s (218,103,808 total) [00:00:00]
+[2025-08-28 02:23:36] DEBUG [main_window:1159]: NVIDIA GeForce G 1779 / 6143MB | 1 target 111.85 MKey/s (209,715,200 total) [00:00:00]
+[2025-08-28 02:25:02] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-08-28 02:25:03] INFO [main_window:1154]: Настройки загружены
+[2025-08-28 02:25:12] INFO [main_window:1154]: Настройки сохранены
+[2025-08-28 02:25:12] INFO [main_window:1353]: pynvml выключен.
+[2025-08-28 02:25:16] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-08-28 02:25:17] INFO [main_window:1154]: Настройки загружены
+[2025-08-28 02:25:18] INFO [main_window:1154]: Настройки сохранены
+[2025-08-28 02:25:18] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-08-28 02:25:18] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-08-28 02:25:18] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0c14a297f88 - 0x70e4b9b0edbdace874 на устройстве 0
+[2025-08-28 02:25:18] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 128 -t 128 -p 512 --keyspace 70E4B9B0C14A297F88:70E4B9B0EDBDACE874 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-28 02:25:18] DEBUG [main_window:1159]: Запущен воркер 1/2 на GPU 0. Диапазон: 0x70e4b9b0c14a297f88 - 0x70e4b9b0edbdace874
+[2025-08-28 02:25:18] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0edbdace875 - 0x70e4b9b11a31305161 на устройстве 1
+[2025-08-28 02:25:18] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 512 --keyspace 70E4B9B0EDBDACE875:70E4B9B11A31305161 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-28 02:25:18] DEBUG [main_window:1159]: Запущен воркер 2/2 на GPU 1. Диапазон: 0x70e4b9b0edbdace875 - 0x70e4b9b11a31305161
+[2025-08-28 02:25:18] INFO [main_window:1154]: Запущено 2 GPU воркеров
+[2025-08-28 02:25:19] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-08-28 02:25:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Compression: compressed
+[2025-08-28 02:25:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C14A297F88
+[2025-08-28 02:25:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0EDBDACE874
+[2025-08-28 02:25:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:25:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:20] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Compression: compressed
+[2025-08-28 02:25:20] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0EDBDACE875
+[2025-08-28 02:25:20] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B11A31305161
+[2025-08-28 02:25:20] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:20] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:25:20] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:18] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:20] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Compression: compressed
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C14A297F88
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0EDBDACE874
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Compression: compressed
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0EDBDACE875
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B11A31305161
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: [2025-08-28.02:25:18] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:20] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-08-28 02:25:22] INFO [main_window:1154]: Настройки сохранены
+[2025-08-28 02:25:22] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-08-28 02:25:22] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-08-28 02:25:22] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b069d1cfb223 - 0x70e4b9b0e758b22152 на устройстве 0
+[2025-08-28 02:25:22] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 128 -t 128 -p 512 --keyspace 70E4B9B069D1CFB223:70E4B9B0E758B22152 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-28 02:25:22] DEBUG [main_window:1159]: Запущен воркер 1/2 на GPU 0. Диапазон: 0x70e4b9b069d1cfb223 - 0x70e4b9b0e758b22152
+[2025-08-28 02:25:22] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0e758b22153 - 0x70e4b9b164df949082 на устройстве 1
+[2025-08-28 02:25:22] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 128 -t 128 -p 512 --keyspace 70E4B9B0E758B22153:70E4B9B164DF949082 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-08-28 02:25:22] DEBUG [main_window:1159]: Запущен воркер 2/2 на GPU 1. Диапазон: 0x70e4b9b0e758b22153 - 0x70e4b9b164df949082
+[2025-08-28 02:25:22] INFO [main_window:1154]: Запущено 2 GPU воркеров
+[2025-08-28 02:25:24] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Compression: compressed
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B069D1CFB223
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E758B22152
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Compression: compressed
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E758B22153
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B164DF949082
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:25:24] DEBUG [gpu_scanner:140]: GPU Output: [2025-08-28.02:25:22] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:24] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Compression: compressed
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B069D1CFB223
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E758B22152
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Compression: compressed
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E758B22153
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B164DF949082
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: [2025-08-28.02:25:22] [Info] Generating 8,388,608 starting points (320.0MB)
+[2025-08-28 02:25:24] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-08-28 02:25:27] INFO [main_window:1154]: Настройки сохранены
+[2025-08-28 02:25:27] INFO [main_window:1353]: pynvml выключен.
+[2025-09-17 00:20:42] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-09-17 00:20:43] INFO [main_window:1154]: Настройки загружены
+[2025-09-17 00:20:48] INFO [main_window:1154]: Параметры GPU оптимизированы для RTX 30/40 серии
+[2025-09-17 00:20:49] INFO [main_window:1154]: Параметры GPU оптимизированы для RTX 30/40 серии
+[2025-09-17 00:20:54] INFO [main_window:1154]: Настройки сохранены
+[2025-09-17 00:20:54] INFO [main_window:1353]: pynvml выключен.

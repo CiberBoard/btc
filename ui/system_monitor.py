@@ -31,6 +31,74 @@ except ImportError:
 
 logger = setup_logger()
 
+
+import requests
+# config.py
+TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"  # Получить у @BotFather
+TELEGRAM_CHAT_ID = "YOUR_CHAT_ID_HERE"      # Ваш личный ID или ID группы
+
+def send_telegram_message(message: str) -> bool:
+    """Отправляет сообщение в Telegram"""
+    url = f"https://api.telegram.org/bot{config.TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {
+        'chat_id': config.TELEGRAM_CHAT_ID,
+        'text': message,
+        'parse_mode': 'Markdown'  # Опционально, для форматирования
+    }
+    try:
+        response = requests.post(url, data=payload, timeout=10)
+        if response.status_code == 200:
+            logger.info("✅ Сообщение отправлено в Telegram")
+            return True
+        else:
+            logger.error(f"❌ Ошибка отправки в Telegram: {response.text}")
+            return False
+    except Exception as e:
+        logger.error(f"❌ Исключение при отправке в Telegram: {str(e)}")
+        return False
+    from threading import Thread
+    def send_telegram_async(message: str):
+        Thread(target=send_telegram_message, args=(message,), daemon=True).start()
+        send_telegram_async(telegram_message)
+
+def process_found_key(self) -> None:
+    """Обработка найденного ключа"""
+    try:
+        if not self.current_private_key:
+            return
+
+        wif_key = private_key_to_wif(self.current_private_key)
+        found_data = {
+            'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
+            'address': self.current_address,
+            'hex_key': self.current_private_key,
+            'wif_key': wif_key,
+            'source': 'GPU'
+        }
+        self.found_key.emit(found_data)
+        self.log_message.emit(f"🔑 НАЙДЕН КЛЮЧ! Адрес: {self.current_address}", "success")
+
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        # Отправка в Telegram
+        telegram_message = (
+            f"🔑 *Найден приватный ключ!* \n"
+            f"📅 Время: {found_data['timestamp']}\n"
+            f"📍 Адрес: `{found_data['address']}`\n"
+            f"🔑 HEX: `{found_data['hex_key']}`\n"
+            f"🔐 WIF: `{found_data['wif_key']}`\n"
+            f"🖥 Источник: {found_data['source']}"
+        )
+        send_telegram_message(telegram_message)
+        # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+        # Сброс текущих значений
+        self.current_address = None
+        self.current_private_key = None
+
+    except Exception as e:
+        logger.exception("Ошибка обработки найденного ключа")
+        self.log_message.emit(f"Ошибка обработки найденного ключа: {str(e)}", "error")
+
 class BitcoinGPUCPUScanner(QMainWindow):
     def __init__(self):
         super().__init__()
