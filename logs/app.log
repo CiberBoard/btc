@@ -13030,3 +13030,11 @@ TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
 [2025-09-17 00:20:49] INFO [main_window:1154]: Параметры GPU оптимизированы для RTX 30/40 серии
 [2025-09-17 00:20:54] INFO [main_window:1154]: Настройки сохранены
 [2025-09-17 00:20:54] INFO [main_window:1353]: pynvml выключен.
+[2025-10-24 00:23:21] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-10-24 00:23:22] INFO [main_window:1154]: Настройки загружены
+[2025-10-24 00:23:28] INFO [main_window:1154]: Настройки сохранены
+[2025-10-24 00:23:28] INFO [main_window:1353]: pynvml выключен.
+[2025-10-24 00:45:19] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-10-24 00:45:20] INFO [main_window:1154]: Настройки загружены
+[2025-10-24 00:45:28] INFO [main_window:1154]: Настройки сохранены
+[2025-10-24 00:45:28] INFO [main_window:1353]: pynvml выключен.

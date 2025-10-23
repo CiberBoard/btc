@@ -7,6 +7,8 @@ import platform
 import psutil
 import multiprocessing
 import queue
+
+import telegram_message
 from PyQt5.QtCore import Qt, QTimer, QRegExp
 from PyQt5.QtGui import QFont, QColor, QPalette, QKeySequence, QRegExpValidator
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
@@ -17,13 +19,15 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QFileDialog, QSpinBox)
 
 import config
-from utils.helpers import setup_logger, validate_key_range, format_time, is_coincurve_available, make_combo32
+from utils.helpers import setup_logger, validate_key_range, format_time, is_coincurve_available, make_combo32, \
+    private_key_to_wif
 import core.gpu_scanner as gpu_core
 import core.cpu_scanner as cpu_core
 
 # Импорт pynvml (предполагается, что он установлен)
 try:
     import pynvml
+
     PYNVML_AVAILABLE = True
 except ImportError:
     PYNVML_AVAILABLE = False
@@ -31,11 +35,8 @@ except ImportError:
 
 logger = setup_logger()
 
-
 import requests
-# config.py
-TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"  # Получить у @BotFather
-TELEGRAM_CHAT_ID = "YOUR_CHAT_ID_HERE"      # Ваш личный ID или ID группы
+
 
 def send_telegram_message(message: str) -> bool:
     """Отправляет сообщение в Telegram"""
@@ -60,6 +61,7 @@ def send_telegram_message(message: str) -> bool:
     def send_telegram_async(message: str):
         Thread(target=send_telegram_message, args=(message,), daemon=True).start()
         send_telegram_async(telegram_message)
+
 
 def process_found_key(self) -> None:
     """Обработка найденного ключа"""
@@ -99,6 +101,7 @@ def process_found_key(self) -> None:
         logger.exception("Ошибка обработки найденного ключа")
         self.log_message.emit(f"Ошибка обработки найденного ключа: {str(e)}", "error")
 
+
 class BitcoinGPUCPUScanner(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -124,7 +127,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # --- Инициализация ВСЕХ переменных, используемых в setup_ui и далее ---
         # GPU variables
         self.gpu_range_label = None
-        self.gpu_processes = [] # Список кортежей (process, reader)
+        self.gpu_processes = []  # Список кортежей (process, reader)
         self.gpu_is_running = False
         self.gpu_start_time = None
         self.gpu_keys_checked = 0
@@ -142,12 +145,12 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # Для таймера перезапуска случайного режима
         self.gpu_restart_timer = QTimer()
         self.gpu_restart_timer.timeout.connect(self.start_gpu_random_search)
-        self.gpu_restart_delay = 1000 # 1 секунда по умолчанию
+        self.gpu_restart_delay = 1000  # 1 секунда по умолчанию
 
         # CPU variables - ИНИЦИАЛИЗИРУЕМ РАНЬШЕ setup_ui
         self.optimal_workers = max(1, multiprocessing.cpu_count() - 1)
         self.cpu_signals = cpu_core.WorkerSignals()
-        self.processes = {} # {worker_id: process}
+        self.processes = {}  # {worker_id: process}
         self.cpu_stop_requested = False
         self.cpu_pause_requested = False
         self.cpu_start_time = 0
@@ -167,7 +170,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         # --- Основная инициализация UI и подключений ---
         self.set_dark_theme()
-        self.setup_ui() # <-- Теперь setup_ui может безопасно использовать все инициализированные атрибуты
+        self.setup_ui()  # <-- Теперь setup_ui может безопасно использовать все инициализированные атрибуты
         self.setup_connections()
         self.load_settings()
 
@@ -179,7 +182,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # CPU queue timer
         self.queue_timer = QTimer()
         self.queue_timer.timeout.connect(self.process_queue_messages)
-        self.queue_timer.start(100) # Увеличили частоту обработки до 10 раз в секунду
+        self.queue_timer.start(100)  # Увеличили частоту обработки до 10 раз в секунду
 
         # Инициализация системной информации
         self.sysinfo_timer = QTimer()
@@ -190,7 +193,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if self.gpu_monitor_available:
             self.gpu_status_timer = QTimer()
             self.gpu_status_timer.timeout.connect(self.update_gpu_status)
-            self.gpu_status_timer.start(1500) # 1.5 секунды
+            self.gpu_status_timer.start(1500)  # 1.5 секунды
         else:
             self.gpu_status_timer = None
         # =============== КОНЕЦ GPU Status Timer ===============
@@ -198,7 +201,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # --- Дополнительная инициализация ---
         # Заголовок окна
         self.setWindowTitle("Bitcoin GPU/CPU Scanner")
-        self.resize(1200, 900) # Размер окна, если не задан в setup_ui
+        self.resize(1200, 900)  # Размер окна, если не задан в setup_ui
 
     def set_dark_theme(self):
         palette = QPalette()
@@ -384,11 +387,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         gpu_param_layout.addWidget(self.gpu_priority_combo, 4, 1)
         # --- НОВОЕ: Воркеры на устройство ---
         # Добавляйте это ПОСЛЕ создания gpu_param_layout и ДО добавления gpu_param_group в gpu_layout
-        gpu_param_layout.addWidget(QLabel("Воркеры/устройство:"), 5, 0) # Новый ряд (индекс 5)
+        gpu_param_layout.addWidget(QLabel("Воркеры/устройство:"), 5, 0)  # Новый ряд (индекс 5)
         self.gpu_workers_per_device_spin = QSpinBox()
-        self.gpu_workers_per_device_spin.setRange(1, 16) # Или другой разумный максимум
-        self.gpu_workers_per_device_spin.setValue(1) # По умолчанию 1 воркер
-        gpu_param_layout.addWidget(self.gpu_workers_per_device_spin, 5, 1) # Новый ряд (индекс 5)
+        self.gpu_workers_per_device_spin.setRange(1, 16)  # Или другой разумный максимум
+        self.gpu_workers_per_device_spin.setValue(1)  # По умолчанию 1 воркер
+        gpu_param_layout.addWidget(self.gpu_workers_per_device_spin, 5, 1)  # Новый ряд (индекс 5)
         # --- КОНЕЦ НОВОГО ---
         gpu_layout.addWidget(gpu_param_group)
         # GPU кнопки
@@ -723,14 +726,14 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.sysinfo_timer = QTimer()
         self.sysinfo_timer.timeout.connect(self.update_system_info)
         self.sysinfo_timer.start(2000)
-    # =============== GPU Status Timer ===============
+        # =============== GPU Status Timer ===============
         if self.gpu_monitor_available:
-         self.gpu_status_timer = QTimer()
-         self.gpu_status_timer.timeout.connect(self.update_gpu_status)
-         self.gpu_status_timer.start(1500)  # 1.5 секунды
-         self.selected_gpu_device_id = 0
+            self.gpu_status_timer = QTimer()
+            self.gpu_status_timer.timeout.connect(self.update_gpu_status)
+            self.gpu_status_timer.start(1500)  # 1.5 секунды
+            self.selected_gpu_device_id = 0
         else:
-         self.gpu_status_timer = None
+            self.gpu_status_timer = None
 
     # =============== КОНЕЦ GPU Status Timer ===============
 
@@ -798,26 +801,26 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
                 # Цветовая индикация температуры
                 if cpu_temp > 80:
-                    self.cpu_temp_label.setStyleSheet("color: #e74c3c; font-weight: bold;") # Красный
+                    self.cpu_temp_label.setStyleSheet("color: #e74c3c; font-weight: bold;")  # Красный
                     self.cpu_temp_bar.setStyleSheet("""
                         QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
                         QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e74c3c, stop:1 #c0392b);} /* Красный градиент */
                     """)
                 elif cpu_temp > 65:
-                    self.cpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;") # Оранжевый
+                    self.cpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;")  # Оранжевый
                     self.cpu_temp_bar.setStyleSheet("""
                         QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
                         QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f39c12, stop:1 #d35400);} /* Оранжевый градиент */
                     """)
                 else:
-                    self.cpu_temp_label.setStyleSheet("color: #27ae60;") # Зеленый
+                    self.cpu_temp_label.setStyleSheet("color: #27ae60;")  # Зеленый
                     self.cpu_temp_bar.setStyleSheet("""
                         QProgressBar {height: 15px; text-align: center; font-size: 8pt; border: 1px solid #444; border-radius: 3px; background: #1a1a20;}
                         QProgressBar::chunk {background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #27ae60, stop:1 #219653);} /* Зеленый градиент */
                     """)
             else:
                 self.cpu_temp_label.setText("Температура: N/A")
-                self.cpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+                self.cpu_temp_label.setStyleSheet("color: #7f8c8d;")  # Серый
                 self.cpu_temp_bar.setValue(0)
                 self.cpu_temp_bar.setFormat("Темп: N/A")
             # =============== КОНЕЦ НОВОГО ===============
@@ -832,7 +835,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
             # =============== НОВОЕ: Обработка ошибок для температуры ===============
             self.cpu_temp_label.setText("Температура: Ошибка")
-            self.cpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+            self.cpu_temp_label.setStyleSheet("color: #7f8c8d;")  # Серый
             self.cpu_temp_bar.setValue(0)
             self.cpu_temp_bar.setFormat("Темп: Ошибка")
             # =============== КОНЕЦ НОВОГО ===============
@@ -1175,8 +1178,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # if self.gpu_random_checkbox.isChecked() and self.gpu_restart_timer.isActive():
         #     self.stop_gpu_search_internal()
         #     QTimer.singleShot(1000, self.start_gpu_random_search)
-
-
 
     def update_gpu_stats_display(self, stats):
         """Обновляет отображение статистики GPU. Агрегирует данные от всех воркеров."""
@@ -1858,7 +1859,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             if device_str.isdigit():
                 device_id = int(device_str)
             else:
-                device_id = 0 # По умолчанию
+                device_id = 0  # По умолчанию
         except:
             device_id = 0
 
@@ -1891,25 +1892,26 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 self.gpu_temp_label.setText(f"Температура: {temperature} °C")
                 # Можно добавить цветовую индикацию температуры
                 if temperature > 80:
-                    self.gpu_temp_label.setStyleSheet("color: #e74c3c; font-weight: bold;") # Красный при высокой температуре
+                    self.gpu_temp_label.setStyleSheet(
+                        "color: #e74c3c; font-weight: bold;")  # Красный при высокой температуре
                 elif temperature > 65:
-                    self.gpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;") # Оранжевый
+                    self.gpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;")  # Оранжевый
                 else:
-                    self.gpu_temp_label.setStyleSheet("color: #27ae60;") # Зеленый
+                    self.gpu_temp_label.setStyleSheet("color: #27ae60;")  # Зеленый
             else:
                 self.gpu_temp_label.setText("Температура: - °C")
-                self.gpu_temp_label.setStyleSheet("color: #7f8c8d;") # Серый
+                self.gpu_temp_label.setStyleSheet("color: #7f8c8d;")  # Серый
 
         except Exception as e:
             # logger.debug(f"Не удалось обновить статус GPU {device_id}: {e}") # Часто логгировать не нужно
             # Можно сбросить значения на "N/A" или скрыть виджеты
-             self.gpu_util_label.setText("Загрузка GPU: N/A")
-             self.gpu_util_bar.setValue(0)
-             self.gpu_mem_label.setText("Память GPU: N/A")
-             self.gpu_mem_bar.setValue(0)
-             self.gpu_temp_label.setText("Температура: N/A")
-             # Остановить таймер, если GPU больше не доступен? Не обязательно.
-             # self.gpu_status_timer.stop() # Лучше оставить, вдруг появится снова
+            self.gpu_util_label.setText("Загрузка GPU: N/A")
+            self.gpu_util_bar.setValue(0)
+            self.gpu_mem_label.setText("Память GPU: N/A")
+            self.gpu_mem_bar.setValue(0)
+            self.gpu_temp_label.setText("Температура: N/A")
+            # Остановить таймер, если GPU больше не доступен? Не обязательно.
+            # self.gpu_status_timer.stop() # Лучше оставить, вдруг появится снова
 
     # =============== КОНЕЦ НОВОГО ===============
 
@@ -1952,4 +1954,3 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 logger.error(f"Ошибка выключения pynvml: {e}")
         # =============== КОНЕЦ НОВОГО ===============
         event.accept()
-

@@ -12,7 +12,8 @@ if getattr(sys, 'frozen', False):
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
+TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"  # Получить у @BotFather
+TELEGRAM_CHAT_ID = "YOUR_CHAT_ID_HERE"      # Ваш личный ID или ID группы
 
 # Создаем необходимые папки при старте
 os.makedirs(BASE_DIR, exist_ok=True)
