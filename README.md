@@ -1,323 +1,246 @@
-# Bitcoin GPU/CPU Scanner
+
+
+# 🦘 Bitcoin GPU/CPU/Kangaroo Scanner  
+**v5.1 — The Ultimate Private Key Search Suite**
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-5.0-blue.svg)
-![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
-![Python](https://img.shields.io/badge/python-3.7--3.11-green.svg)
-![License](https://img.shields.io/badge/license-As--Is-red.svg)
+[![Version](https://img.shields.io/badge/version-5.0-blue.svg)](https://github.com/Jasst/BTCScanner)
+[![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://github.com/Jasst/BTCScanner)
+[![Python](https://img.shields.io/badge/python-3.7--3.11-green.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-As--Is-red.svg)](LICENSE)
+[![Kangaroo](https://img.shields.io/badge/algorithm-Pollard's_Kangaroo-orange.svg)](https://en.wikipedia.org/wiki/Pollard%27s_kangaroo_algorithm)
 
-*Advanced Bitcoin private key scanner with GPU and CPU support*
+> **💡 Now with Kangaroo (Pollard’s Kangaroo Algorithm)** — *the most efficient method for narrow-range key discovery*.
 
 </div>
 
 ## 📋 Overview
 
-Bitcoin GPU/CPU Scanner is a professional-grade application designed to search for Bitcoin private keys that correspond to specified addresses. The application features dual-mode operation with comprehensive configuration options and real-time monitoring capabilities.
+**BSG 5.1** is a professional-grade, all-in-one Bitcoin private key scanner supporting **three complementary search strategies**:
 
-## ✨ Key Features
+| 🔍 Method | Best For | Speed (RTX 3060) | Efficiency |
+|----------|----------|------------------|------------|
+| **🚀 GPU** (`cuBitcrack.exe`) | Wide ranges (> 2⁴⁸ keys) | ~1–2 GKeys/s | Linear brute-force |
+| **🧠 CPU** (`coincurve`) | Targeted, small ranges | ~50–200 KKeys/s | Flexible & precise |
+| **🦘 Kangaroo** (`Etarkangaroo.exe`) | **Narrow suspicious ranges (2³²–2⁴⁸)** | ~1–1.5 GKeys/s **+ near-100% find probability** | **✅ Best for puzzle/recovery scenarios** |
 
-### 🚀 **Dual-Mode Operation**
+> ✅ **Perfect for Bitcoin puzzle transactions** (e.g., #66, #120), wallet recovery, and research.
 
-- **GPU Mode**: High-performance scanning using NVIDIA CUDA via `cuBitcrack.exe`
-- **CPU Mode**: Multi-threaded scanning using `coincurve` library with multiprocessing
 
-### ⚡ **Advanced GPU Support**
 
-- Multi-GPU support with device selection
-- Multiple **workers (instances) per GPU device** for increased throughput
-- Automatic parameter optimization (blocks, threads, points)
-- Custom configuration for experienced users
-- NVIDIA CUDA acceleration
+## ✨ Key Features (v5.1)
 
-### 🎯 **Flexible Search Strategies**
+### 🦘 **Kangaroo Integration — NEW!**
+- Fully integrated **Pollard’s Kangaroo** algorithm via `Etarkangaroo.exe`
+- **Automatic random sub-range generation** inside your global range
+- Real-time monitoring: session #, speed, *exact* current range
+- Smart parsing of results (hex/decimal → 64-char hex)
+- Full parameter control: `DP`, `Grid`, duration, subrange bits
 
-- **Sequential Mode**: Systematic key space exploration with **automatic range splitting** for multiple workers
-- **Random Mode**: Probabilistic search with unique range generation and optional auto-restart
-- Configurable search ranges and intervals
+### 💾 **Smart Settings Management**
+All Kangaroo/GPU/CPU settings are auto-saved & restored in `settings.json`:
+```json
+{
+  "kang_pubkey": "02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16",
+  "kang_start_key": "1",
+  "kang_end_key": "FFFFFFFFFFFFFFFF",
+  "kang_dp": 20,
+  "kang_grid": "256x256",
+  "kang_duration": 300,
+  "kang_subrange_bits": 32,
+  "kang_exe_path": "C:/.../Etarkangaroo.exe",
+  "kang_temp_dir": "C:/.../kangaroo_temp"
+}
+```
 
-### 🛠️ **System Optimization**
+### 📊 **Enhanced UI & Diagnostics**
+- **✅ Fixed "Current Range" display** — now shows **beginning + end** of hex keys:
+  ```
+  rb = 0x489b17c1…e7822c9f
+  re = 0x489b17c1…e7822c9f
+  ```
+- Tooltip with full range & width: `Δ = 0x1000000000000 = 281,474,976,710,656 keys`
+- Monospace font (`Courier New`) for precise hex alignment
+- GPU hardware monitoring (utilization, memory, temperature)
+- CPU temperature & load tracking
 
-- Process priority management (Windows)
-- Real-time GPU hardware monitoring (utilization, memory, temperature)
-- Resource usage monitoring
-- Automatic performance tuning
+### 🧰 **Robust Build & Deployment**
+- **PyInstaller-ready** — `main.spec` includes `cuBitcrack.exe` & `Etarkangaroo.exe`
+- UPX-disabled (prevents CUDA compatibility issues)
+- Icon, logging, temp cleanup — all work in single `.exe`
 
-### 📊 **Real-Time Analytics**
+### 🛡️ **Reliability & Safety**
+- Graceful stop/restart (no orphaned processes)
+- Input validation & error recovery
+- Traceback logging for critical failures
+- File existence checks before launch
 
-- Aggregated speed monitoring (keys/sec) from all workers
-- Progress tracking with ETA (for sequential mode)
-- Comprehensive statistics dashboard
-- Live logging with file output
-
-### 💾 **Data Management**
-
-- Automatic key discovery logging
-- CSV export functionality
-- Settings persistence
-- Search history tracking
-
-### 🎨 **Modern Interface**
-
-- Dark-themed PyQt5 interface
-- Tabbed navigation
-- Real-time status updates
-- Keyboard shortcuts
+---
 
 ## 📋 System Requirements
 
-### **Operating System**
+| Component | Requirement |
+|----------|-------------|
+| **OS** | Windows 10/11 (primary), Linux/macOS (experimental) |
+| **GPU** | NVIDIA with CUDA support (for GPU & Kangaroo modes) |
+| **RAM** | ≥ 4 GB |
+| **Storage** | ≥ 1 GB free (includes temp files for Kangaroo) |
+| **Python** | 3.7 – 3.11 (recommended: 3.9–3.11) |
 
-- Windows 10/11 (Primary support)
-- Linux/macOS (Limited compatibility)
+> ⚠️ **Etarkangaroo.exe is a third-party binary**. Verify its integrity before use.
 
-### **Hardware**
+---
 
-- **GPU Mode**: NVIDIA GPU with CUDA support
-- **CPU Mode**: Multi-core processor recommended
-- Minimum 4GB RAM
-- 1GB free disk space
+## 🚀 Quick Start
 
-### **Software Dependencies**
-
-- Python 3.7 - 3.11 (Recommended: 3.9-3.11)
-- NVIDIA CUDA Toolkit (for GPU mode)
-- `cuBitcrack.exe` (included separately or downloaded)
-
-## 🚀 Installation
-
-### **Step 1: Download Project**
-
+### 1. Clone & Setup
 ```bash
 git clone https://github.com/Jasst/BTCScanner.git
 cd BTCScanner
-```
-
-### **Step 2: Python Environment Setup**
-
-```bash
-# Create virtual environment
 python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/activate
+venv\Scripts\activate  # Windows
+# venv/bin/activate   # Linux/macOS
 ```
 
-### **Step 3: Install Dependencies**
-
+### 2. Install Dependencies
 ```bash
-# Upgrade pip
 pip install --upgrade pip
-
-# Core dependencies
-pip install PyQt5 psutil
-
-# CPU scanning support
-pip install coincurve
-
-# Windows process management (optional but recommended for priority control)
-pip install pywin32
-
-# GPU Monitoring (optional, for hardware stats)
-pip install pynvml
+pip install PyQt5 psutil coincurve pywin32 pynvml
 ```
 
-### **Step 4: cuBitcrack Setup**
+### 3. Get Binaries
+| Tool | Source | Place in |
+|------|--------|----------|
+| `cuBitcrack.exe` | [brichard19/BitCrack](https://github.com/brichard19/BitCrack/releases) | Project root |
+| `Etarkangaroo.exe` | *(Community build required)* | Project root |
 
-1. Download `cuBitcrack.exe` (e.g., from [https://github.com/brichard19/BitCrack](https://github.com/brichard19/BitCrack) or a similar source).
-2. Place the executable in the project root directory (next to `main.py`).
-3. Ensure NVIDIA CUDA drivers are installed and up to date.
+> 🔧 Ensure NVIDIA drivers & CUDA are up to date.
 
-## 🎮 Usage Guide
-
-### **Application Launch**
-
+### 4. Run
 ```bash
-# Ensure virtual environment is active
-python main.py
+  python main.py
 ```
 
-### **GPU Search Configuration**
+---
 
-1.  **Basic Setup**
-    -   Enter target Bitcoin address (1xxx or 3xxx format).
-    -   Specify the overall search range in hexadecimal format.
-    -   Select GPU device(s) from the dropdown (e.g., `0`, `0,1`).
-2.  **Worker Configuration**
-    -   Use the **"Воркеры/устройство"** spin box to specify how many `cuBitcrack.exe` instances to run on *each* selected GPU.
-    -   The application will **automatically split the total range** among all launched workers for efficient, non-overlapping search in sequential mode.
-3.  **Performance Optimization**
-    -   Enable “Авто-оптимизация” for automatic tuning of blocks, threads, and points.
-    -   Manual configuration: adjust blocks, threads, points.
-    -   Set process priority for resource management.
-4.  **Advanced Options**
-    -   **Random search mode**: Generates a unique random sub-range for each run. The generated range is then split among workers.
-    -   Configure restart intervals for continuous random scanning.
-    -   Set minimum and maximum size for random sub-ranges.
+## 🧪 Kangaroo Usage Guide
 
-### **CPU Search Configuration**
+1. **Identify a narrow suspicious range**  
+   Example: `start = 0x70E4B9B06430023105`, `end = 0x70E4B9B16720023105` (width = 2⁴⁸)
 
-1.  **Search Parameters**
-    -   Target Bitcoin address input.
-    -   Hexadecimal range specification.
-    -   Mode selection (Sequential/Random).
-2.  **Performance Tuning**
-    -   Worker count (recommended: CPU cores - 1).
-    -   Attempt count for random mode.
-    -   Process priority adjustment.
-3.  **Execution Control**
-    -   Start: `Ctrl+S`
-    -   Stop: `Ctrl+Q`
+2. **Configure parameters**
+   - `subrange_bits = 32` → 4.3B keys/session (~3–5 min/GPU)
+   - `DP = 20`, `grid = 256x256`, `duration = 300`
 
-### **Monitoring & Results**
+3. **Launch**  
+   → Kangaroo will auto-generate non-overlapping random sub-ranges  
+   → Stops when key is found or manually stopped
 
--   **Statistics Tab**: Real-time performance metrics (aggregated for GPU).
--   **Logs Tab**: Detailed operation logging.
--   **Found Keys Tab**: Discovery results with export options (CSV).
--   **Progress Tracking**: ETA calculations and completion status (for sequential GPU/CPU).
+> 💡 **Pro Tip**: Smaller `subrange_bits` = faster sessions, more coverage over time.
+
+---
 
 ## 📁 Project Structure
 
 ```
 BTCScanner/
+├── 📄 main.py                    # Entry point
+├── ⚙️ config.py                 # Global constants
+├── 🔧 cuBitcrack.exe            # GPU scanner
+├── 🔧 Etarkangaroo.exe          # Kangaroo solver ← NEW
+├── 📁 kangaroo_temp/            # Kangaroo temporary files
+├── 💾 Found_key_CUDA.txt        # Key discoveries
+├── ⚙️ settings.json             # Auto-saved preferences
 │
-├── 📄 main.py                    # Application entry point
-├── ⚙️ config.py                 # Global configuration
-├── 🔧 cuBitcrack.exe            # GPU scanning executable (place here)
-├── 💾 Found_key_CUDA.txt        # Key discovery log
-├── 🔧 settings.json             # User preferences
+├── 📁 core/
+│   ├── 📄 gpu_scanner.py
+│   ├── 📄 cpu_scanner.py
+│   └── 📄 kangaroo_worker.py   ← NEW
 │
-├── 📁 logs/                     # Application logs
-│   └── 📄 app.log
+├── 📁 ui/
+│   ├── 📄 gpu_logic.py
+│   ├── 📄 cpu_logic.py
+│   └── 📄 kangaroo_logic.py    ← NEW
 │
-├── 📁 ui/                       # User interface module
-│   ├── 📄 __init__.py
-│   └── 📄 main_window.py        # Main UI logic
-│
-├── 📁 core/                     # Core functionality
-│   ├── 📄 __init__.py
-│   ├── 📄 gpu_scanner.py        # GPU search engine & process management
-│   └── 📄 cpu_scanner.py        # CPU search engine
-│
-├── 📁 utils/                    # Utility functions
-│   ├── 📄 __init__.py
-│   └── 📄 helpers.py            # Helper functions
-│
-└── 📄 README.md                 # Documentation
+├── 📁 utils/                    # Helpers, hex→WIF, validators
+├── 📁 logger/                   # logging.conf
+└── 📄 README.md                 # 
 ```
 
-## 🔧 Configuration Options
+---
 
-### **GPU Parameters**
+## ⚙️ Configuration Reference
 
-| Parameter | Description         | Default | Range   |
-| :-------- | :------------------ | :------ | :------ |
-| Blocks    | CUDA blocks         | Auto    | 1-65535 |
-| Threads   | Threads per block   | Auto    | 1-1024  |
-| Points    | Points per thread   | Auto    | 1-2^20  |
-| Workers/Device | Instances per GPU | 1       | 1-16    |
+### Kangaroo Parameters
 
-### **CPU Parameters**
+| Parameter | Description | Recommended |
+|----------|-------------|-------------|
+| `DP` | Distinguished Points (memory vs speed) | 16–24 |
+| `Grid` | GPU occupancy (H×W) | `256x256` |
+| `Duration` | Seconds per session | 300 |
+| `Subrange Bits` | `2^N` keys/session | 30–34 |
+| `Temp Dir` | For `result_*.txt` | `kangaroo_temp/` |
 
-| Parameter | Description         | Recommended     |
-| :-------- | :------------------ | :-------------- |
-| Workers   | Process count       | CPU cores - 1   |
-| Attempts  | Random iterations   | 1000000+        |
-| Priority  | Process priority    | Normal          |
+### GPU Parameters
+
+| Parameter | Description | Default |
+|----------|-------------|---------|
+| Workers/Device | Instances per GPU | `1` |
+| Blocks | CUDA blocks | Auto / `512` |
+| Threads | Per block | Auto / `512` |
+| Points | Per thread | Auto / `512` |
+
+---
 
 ## 🐛 Troubleshooting
 
-### **Common Issues**
+| Issue | Solution                                                                            |
+|------|-------------------------------------------------------------------------------------|
+| `Etarkangaroo.exe not found` | Use **«Обзор…»** button; check antivirus quarantine                                 |
+| `Current range shows "0000…"` | ✔️ **Fixed in v5.1** — now shows meaningful prefixes/suffixes                       |
+| Kangaroo stops early | Increase `subrange_bits` or `duration`; ensure range ≥ 2³²                          |
+| CUDA errors | Update drivers; reduce workers; check VRAM usage                                    |
+| No key found (but should be) | Kangaroo only covers part of wide ranges — reduce `subrange_bits` for more sessions |
 
-**cuBitcrack.exe not found**
+> 📝 All logs go to `logs/app.log` and **Log** tab.
 
-- Ensure the executable is named `cuBitcrack.exe` and is in the project root directory.
-- Check file permissions and antivirus exclusions.
-
-**CUDA errors**
-
-- Update NVIDIA drivers.
-- Verify GPU compatibility with CUDA.
-- Check available VRAM (especially with multiple workers).
-
-**Python dependency errors**
-
-- Verify Python version (3.7-3.11).
-- Reinstall dependencies in a clean virtual environment.
-- Check for conflicting packages.
-
-**Performance issues**
-
-- Enable auto-optimization.
-- Adjust worker count per GPU.
-- Monitor system resources (GPU Utilization, Memory).
-- Ensure no other heavy GPU tasks are running.
-
-**Only one worker starts even if more are requested**
-
-- Check the application log (`logs/app.log` or the Log tab) for errors during worker startup.
-- Ensure the total key range is large enough to be split among the requested number of workers.
-
-### **Logging**
-
-All application events are logged to:
-
-- Console output (real-time)
-- `logs/app.log` (persistent)
-- Found keys: `Found_key_CUDA.txt`
+---
 
 ## ⚠️ Legal Disclaimer
 
-This software is provided “as-is” without any warranties or guarantees. Users assume all responsibility and risk associated with its use. The software is intended for educational and research purposes only.
+> This software is provided **“as-is”** without warranty.  
+> - Use **only on addresses you own or have explicit permission to test**.  
+> - Kangaroo uses third-party `Etarkangaroo.exe` — **verify hashes**.  
+> - The author **disclaims all liability** for misuse, data loss, or legal consequences.
 
-**Important Notice**:
-
-- Only scan addresses you own or have explicit permission to test.
-- Respect applicable laws and regulations in your jurisdiction.
-- The author disclaims all liability for misuse or illegal activities.
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit issues, feature requests, or pull requests.
+Contributions welcome!  
+- ✅ Bug reports & feature requests → [Issues](https://github.com/CiberBoard/btc/issues)  
+- ✅ Pull requests → fork & PR  
+- ✅ Documentation fixes → edit this `README.md`
 
-### **Development Setup**
+---
 
-```bash
-git clone https://github.com/Jasst/BTCScanner.git
-cd BTCScanner
-pip install -r requirements.txt # (Create this file based on the pip install commands above)
-```
+## 📞 Contact
 
-## 📞 Support & Contact
+- **GitHub**: [@Jasst](https://github.com/Jasst)  
+- **Issues**: [Report here](https://github.com/CiberBoard/btc/issues)
 
-- **GitHub**: [@Jasst](https://github.com/Jasst)
-- **Issues**: [Report bugs or request features](https://github.com/Jasst/BTCScanner/issues)
-
-## 📜 Version History
-
-### **v5.0 - Enhanced Edition**
-
-- Dual-mode GPU/CPU support
-- Multi-worker per GPU device capability
-- Auto-optimization features
-- Automatic range splitting for GPU workers
-- Aggregated GPU statistics
-- Modern dark UI theme
-- Comprehensive logging system
-- Multi-GPU support
-- Advanced statistics tracking
-- Real-time GPU hardware monitoring
-
------
+---
 
 <div align="center">
 
-**Bitcoin GPU/CPU Scanner** - Professional Bitcoin Key Discovery Tool
-
-Made with ❤️ by [Jasst](https://github.com/Jasst)
+**BSG 5.1 — From brute-force to targeted recovery.**  
+Made with ❤️ by [Jasst](https://github.com/Jasst) • (https://github.com/CiberBoard/btc)
 
 </div>
 ```
+
+---
+
+
+
