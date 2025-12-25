@@ -1,11 +1,11 @@
 {
   "target_address": "16RGFo6hjq9ym6Pj7N5H7L1NR1rVPJyw2v",
   "pubkey_hex": "02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16",
-  "rb_hex": "00000000000000000000000000000040067A9BF03190CC89839FBA76C6D897DF",
-  "re_hex": "00000000000000000000000000000058067A9BF03190CC89839FBA76C6D897DF",
+  "rb_hex": "0x80000000000000000000000000000000",
+  "re_hex": "0x100000000000000000000000000000000",
   "scan_duration": 300,
-  "subrange_bits": 32,
-  "dp": 16,
+  "subrange_bits": 45,
+  "dp": 22,
   "grid_params": "88,128",
   "temp_dir": "./kangaroo_work/",
   "etarkangaroo_exe": "Etarkangaroo.exe"
