@@ -1430,6 +1430,17 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 self.cpu_mode_combo.setCurrentIndex(1 if settings.get("cpu_mode", "sequential") == "random" else 0)
                 self.cpu_priority_combo.setCurrentIndex(settings.get("cpu_priority", 3))
                 self.append_log("Настройки загружены", "success")
+                # Kangaroo settings
+                self.kang_pubkey_edit.setText(settings.get("kang_pubkey", ""))
+                self.kang_start_key_edit.setText(settings.get("kang_start_key", "1"))
+                self.kang_end_key_edit.setText(settings.get("kang_end_key", "FFFFFFFFFFFFFFFF"))
+                self.kang_dp_spin.setValue(settings.get("kang_dp", 20))
+                self.kang_grid_edit.setText(settings.get("kang_grid", "256x256"))
+                self.kang_duration_spin.setValue(settings.get("kang_duration", 300))
+                self.kang_subrange_spin.setValue(settings.get("kang_subrange_bits", 32))
+                self.kang_exe_edit.setText(settings.get("kang_exe_path", os.path.join(config.BASE_DIR, "Etarkangaroo.exe")))
+                self.kang_temp_dir_edit.setText(settings.get("kang_temp_dir", os.path.join(config.BASE_DIR, "kangaroo_temp")))
+
             except Exception as e:
                 logger.error(f"Ошибка загрузки настроек: {str(e)}")
                 self.append_log("Ошибка загрузки настроек: " + str(e), "error")
@@ -1459,6 +1470,17 @@ class BitcoinGPUCPUScanner(QMainWindow):
             "cpu_attempts": int(self.cpu_attempts_edit.text()) if self.cpu_attempts_edit.isEnabled() else 10000000,
             "cpu_mode": self.cpu_logic.cpu_mode,  # Заменено
             "cpu_priority": self.cpu_priority_combo.currentIndex(),
+            # Kangaroo settings
+            "kang_pubkey": self.kang_pubkey_edit.text(),
+            "kang_start_key": self.kang_start_key_edit.text(),
+            "kang_end_key": self.kang_end_key_edit.text(),
+            "kang_dp": self.kang_dp_spin.value(),
+            "kang_grid": self.kang_grid_edit.text().strip(),
+            "kang_duration": self.kang_duration_spin.value(),
+            "kang_subrange_bits": self.kang_subrange_spin.value(),
+            "kang_exe_path": self.kang_exe_edit.text().strip(),
+            "kang_temp_dir": self.kang_temp_dir_edit.text().strip(),
+
         }
         settings_path = os.path.join(config.BASE_DIR, "settings.json")
         try:
