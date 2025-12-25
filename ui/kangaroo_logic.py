@@ -174,12 +174,19 @@ class KangarooLogic:
         self.main_window.kang_session_label.setText(f"Сессия: #{session_num}")
 
     def handle_range_update(self, rb, re):
-        """Обновление текущего диапазона"""
         self.current_range_start = rb
         self.current_range_end = re
 
+        rb_clean = rb.lstrip('0') or '0'
+        re_clean = re.lstrip('0') or '0'
+
+        # Показываем первые/последние 8 символов
+        rb_short = f"{rb_clean[:8]}…{rb_clean[-10:]}" if len(rb_clean) > 16 else rb_clean
+        re_short = f"{re_clean[:8]}…{re_clean[-10:]}" if len(re_clean) > 16 else re_clean
+
         self.main_window.kang_range_label.setText(
-            f"Текущий диапазон:\nОт: {rb[:16]}...\nДо: {re[:16]}..."
+            f"rb = 0x{rb_short}\n"
+            f"re = 0x{re_short}"
         )
 
     def handle_found_key(self, private_hex):

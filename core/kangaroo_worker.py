@@ -4,12 +4,14 @@ import time
 import random
 import subprocess
 import json
+import re
 from PyQt5.QtCore import QObject, pyqtSignal
+
 
 class KangarooWorker(QObject):
     log_message = pyqtSignal(str)
     status_update = pyqtSignal(float, int, int)  # speed_mkeys, elapsed_sec, session_num
-    range_update = pyqtSignal(str, str)  # rb, re (hex)
+    range_update = pyqtSignal(str, str)  # sub_start_hex, sub_end_hex (hex)
     found_key = pyqtSignal(str)  # hex private key
     finished = pyqtSignal(bool)  # success
 
@@ -17,6 +19,7 @@ class KangarooWorker(QObject):
         super().__init__()
         self.params = params
         self._stop_requested = False
+        self._last_logged_line = ""
 
     def stop(self):
         self._stop_requested = True
@@ -48,11 +51,12 @@ class KangarooWorker(QObject):
 
     def run(self):
         try:
-            rb = self.hex_to_int(self.params['rb_hex'])
-            re = self.hex_to_int(self.params['re_hex'])
-            if rb > re:
-                rb, re = re, rb
-            if rb == re:
+            # 🔴 ВАЖНО: не используем имена модулей (re, os, json и т.д.) как переменные!
+            start_int = self.hex_to_int(self.params['rb_hex'])
+            end_int = self.hex_to_int(self.params['re_hex'])
+            if start_int > end_int:
+                start_int, end_int = end_int, start_int
+            if start_int == end_int:
                 self.log_message.emit("[❌] rb == re")
                 self.finished.emit(False)
                 return
@@ -61,104 +65,144 @@ class KangarooWorker(QObject):
 
             session = 1
             while not self._stop_requested:
-                s, e = self.random_subrange(rb, re, self.params['subrange_bits'])
-                rs = self.int_to_hex(s)
-                re_ = self.int_to_hex(e)
+                s, e = self.random_subrange(start_int, end_int, self.params['subrange_bits'])
+                sub_start_hex = self.int_to_hex(s)
+                sub_end_hex = self.int_to_hex(e)
 
-                self.range_update.emit(rs, re_)
+                self.range_update.emit(sub_start_hex, sub_end_hex)
 
                 result_file = os.path.join(self.params['temp_dir'], f"result_{session}.txt")
                 cmd = [
                     self.params['etarkangaroo_exe'],
                     "-dp", str(self.params['dp']),
                     "-grid", self.params['grid_params'],
-                    "-rb", rs,
-                    "-re", re_,
+                    "-rb", sub_start_hex,
+                    "-re", sub_end_hex,
                     "-pub", self.params['pubkey_hex'],
                     "-o", result_file
                 ]
 
-                self.log_message.emit(f"[🚀] Сессия #{session}: {' '.join(cmd)}")
+                self.log_message.emit(f"[🚀] Сессия #{session}: Запуск Kangaroo")
+                self.log_message.emit(f"[📦] Команда: {' '.join(cmd)}")
+
+                # Проверка существования EXE
+                exe_path = os.path.abspath(self.params['etarkangaroo_exe'])
+                self.log_message.emit(f"[🔧] Проверка EXE: {exe_path}")
+                if not os.path.exists(self.params['etarkangaroo_exe']):
+                    self.log_message.emit("[❌] Файл Kangaroo не найден!")
+                    self.finished.emit(False)
+                    return
 
                 try:
-                    self.log_message.emit(f"[🔧] Проверка EXE: {os.path.abspath(self.params['etarkangaroo_exe'])}")
-                    if not os.path.exists(self.params['etarkangaroo_exe']):
-                        self.log_message.emit(f"[❌] Файл не найден!")
-                        self.finished.emit(False)
-                        return
-
-                    self.log_message.emit(f"[🛠️] Текущая раб. директория: {os.getcwd()}")
-                    self.log_message.emit(f"[📦] Команда: {' '.join(cmd)}")
                     proc = subprocess.Popen(
                         cmd,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.STDOUT,
                         text=True,
                         bufsize=1,
-                        universal_newlines=True
+                        universal_newlines=True,
+                        cwd=self.params['temp_dir']
                     )
 
                     start_time = time.time()
-                    lines_emitted = 0
                     last_speed = 0.0
+                    self._last_logged_line = ""
+
                     while proc.poll() is None and not self._stop_requested:
                         output = proc.stdout.readline()
                         if output:
+                            # Очистка ANSI escape и whitespace
                             line = output.strip()
-                            if line:
-                                self.log_message.emit(f"    {line}")
-                                # Извлекаем скорость из лога, например: "1884 MKeys/s"
-                                if "MKeys/s" in line and "[" in line:
-                                    try:
-                                        speed_part = line.split("MKeys/s")[0]
-                                        speed_val = float(speed_part.split()[-1])
-                                        last_speed = speed_val
-                                    except:
-                                        pass
-                            lines_emitted += 1
-                            if lines_emitted % 10 == 0:  # раз в 10 строк — обновляем статус
-                                elapsed = int(time.time() - start_time)
-                                self.status_update.emit(last_speed, elapsed, session)
+                            # Удаляем ANSI "erase to end of line": \x1b[K или \033[K
+                            line = re.sub(r'\x1b\[[0-9;]*[KM]', '', line).strip()
+                            if not line:
+                                continue
 
+                            # Пропускаем повторяющиеся строки
+                            if line == self._last_logged_line:
+                                continue
+                            self._last_logged_line = line
+
+                            self.log_message.emit(f"    {line}")
+
+                            # 🔍 Парсим скорость: "<число> MKeys/s"
+                            m = re.search(r'(\d+(?:\.\d+)?)\s*MKeys/s', line)
+                            if m:
+                                try:
+                                    speed_val = float(m.group(1))
+                                    last_speed = speed_val
+                                    elapsed = int(time.time() - start_time)
+                                    self.status_update.emit(last_speed, elapsed, session)
+                                except (ValueError, TypeError):
+                                    pass
+
+                        # Принудительный таймаут сессии
                         if time.time() - start_time > self.params['scan_duration']:
                             break
 
+                    # Завершаем процесс, если ещё работает
                     if proc.poll() is None:
                         proc.terminate()
                         try:
                             proc.wait(timeout=3)
-                        except:
+                        except subprocess.TimeoutExpired:
                             proc.kill()
 
-                    # Проверка результата
+                    # 🔍 Проверяем результат
                     if os.path.exists(result_file) and os.path.getsize(result_file) > 0:
-                        with open(result_file, "r", encoding="utf-8", errors="ignore") as f:
-                            content = f.read().strip()
-                        if content:
-                            # Формат: pubkey -> private_key
-                            # Пример: 02... -> ed0d5b8c...c5d5ce6123f2
-                            if "->" in content:
-                                private_hex = content.split("->")[1].strip()
-                                # Убираем возможные 0x и приводим к 64 символам
-                                private_hex = private_hex.replace("0x", "").lower()
-                                if len(private_hex) > 64:
-                                    private_hex = private_hex[-64:]
-                                elif len(private_hex) < 64:
-                                    private_hex = private_hex.zfill(64)
-                                self.found_key.emit(private_hex)
-                                self.finished.emit(True)
-                                return
+                        try:
+                            with open(result_file, "r", encoding="utf-8", errors="ignore") as f:
+                                content = f.read().strip()
+                            if content:
+                                # Формат: pubkey -> private_key
+                                if "->" in content:
+                                    parts = content.split("->", 1)
+                                    private_raw = parts[1].strip()
+                                    # Убираем 0x и приводим к нижнему регистру
+                                    private_hex = private_raw.replace("0x", "").lower()
+                                    # Оставляем только hex-цифры (на случай, если ключ в десятичной системе)
+                                    private_hex = re.sub(r'[^a-fA-F0-9]', '', private_hex)
+
+                                    # Если осталось мало символов — возможно, это десятичное число!
+                                    # Пробуем интерпретировать как decimal, если строка состоит из цифр и длина < 60
+                                    if private_hex.isdigit() and len(private_hex) < 64:
+                                        try:
+                                            dec_val = int(private_hex)
+                                            private_hex = f"{dec_val:064x}"
+                                        except (ValueError, OverflowError):
+                                            pass  # оставляем как есть
+
+                                    # Приводим к 64 hex символам
+                                    if len(private_hex) > 64:
+                                        private_hex = private_hex[-64:]
+                                    elif len(private_hex) < 64:
+                                        private_hex = private_hex.zfill(64)
+
+                                    if len(private_hex) == 64:
+                                        self.found_key.emit(private_hex)
+                                        self.log_message.emit(f"[✅] Найден ключ: {private_hex}")
+                                        self.finished.emit(True)
+                                        return
+                                    else:
+                                        self.log_message.emit(
+                                            f"[⚠️] Некорректная длина ключа: {len(private_hex)} (ожидается 64)")
+
+                        except Exception as e:
+                            self.log_message.emit(f"[⚠️] Ошибка чтения файла результата: {e}")
 
                 except Exception as e:
-                    self.log_message.emit(f"[⚠️] Ошибка: {e}")
+                    self.log_message.emit(f"[⚠️] Ошибка запуска Kangaroo: {e}")
 
                 session += 1
                 if self._stop_requested:
                     break
                 time.sleep(0.5)
 
+            self.log_message.emit("[⏹️] Работа завершена (остановлено пользователем или исчерпаны сессии)")
             self.finished.emit(False)
 
         except Exception as e:
-            self.log_message.emit(f"[🔥] Критическая ошибка: {e}")
+            self.log_message.emit(f"[🔥] Критическая ошибка в KangarooWorker: {e}")
+            import traceback
+            self.log_message.emit(f"[🪵] Traceback:\n{traceback.format_exc()}")
             self.finished.emit(False)

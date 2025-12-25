@@ -726,9 +726,9 @@ class BitcoinGPUCPUScanner(QMainWindow):
         paths_layout.setSpacing(8)
 
         # Путь к exe
-        paths_layout.addWidget(QLabel("etarkangaroo.exe:"), 0, 0)
+        paths_layout.addWidget(QLabel("Etarkangaroo.exe:"), 0, 0)
         self.kang_exe_edit = QLineEdit()
-        default_kang_path = os.path.join(config.BASE_DIR, "tools", "etarkangaroo.exe")
+        default_kang_path = os.path.join(config.BASE_DIR, "Etarkangaroo.exe")
         self.kang_exe_edit.setText(default_kang_path)
         paths_layout.addWidget(self.kang_exe_edit, 0, 1)
 
