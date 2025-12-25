@@ -4117,3 +4117,29 @@ TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
 [2025-12-25 23:54:26] DEBUG [main_window:1382]:     0[2][1103 939]2042 MKeys/s= 2^30.9961[dead:2875][HT:0.00Mb DPs 2^3.32 OPs 2^28.32] t:36s (Ave:11h 7m 23s) 0%
 [2025-12-25 23:54:29] DEBUG [main_window:1382]:     0[2][1094 939]2033 MKeys/s= 2^30.9900[dead:2875][HT:0.00Mb DPs 2^3.32 OPs 2^28.32] t:39s (Ave:11h 10m 14s) 0%
 [2025-12-25 23:54:29] DEBUG [main_window:1382]:     0[2][1094 939]2033 MKeys/s= 2^30.9900[dead:2875][HT:0.00Mb DPs 2^3.32 OPs 2^28.32] t:39s (Ave:11h 10m 14s) 0%
+[2025-12-26 00:16:07] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-26 00:16:07] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-26 00:16:08] ERROR [main_window:1445]: Ошибка загрузки настроек: Expecting ',' delimiter: line 22 column 5 (char 865)
+[2025-12-26 00:16:08] ERROR [main_window:1445]: Ошибка загрузки настроек: Expecting ',' delimiter: line 22 column 5 (char 865)
+[2025-12-26 00:16:08] ERROR [main_window:1374]: Ошибка загрузки настроек: Expecting ',' delimiter: line 22 column 5 (char 865)
+[2025-12-26 00:16:08] ERROR [main_window:1374]: Ошибка загрузки настроек: Expecting ',' delimiter: line 22 column 5 (char 865)
+[2025-12-26 00:16:14] INFO [main_window:1377]: Настройки сохранены
+[2025-12-26 00:16:14] INFO [main_window:1377]: Настройки сохранены
+[2025-12-26 00:16:14] INFO [main_window:1600]: pynvml выключен.
+[2025-12-26 00:16:14] INFO [main_window:1600]: pynvml выключен.
+[2025-12-26 00:17:41] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-26 00:17:41] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-26 00:17:41] INFO [main_window:1377]: Настройки загружены
+[2025-12-26 00:17:41] INFO [main_window:1377]: Настройки загружены
+[2025-12-26 00:17:49] INFO [main_window:1377]: Настройки сохранены
+[2025-12-26 00:17:49] INFO [main_window:1377]: Настройки сохранены
+[2025-12-26 00:17:49] INFO [main_window:1600]: pynvml выключен.
+[2025-12-26 00:17:49] INFO [main_window:1600]: pynvml выключен.
+[2025-12-26 00:18:27] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-26 00:18:27] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-26 00:18:28] INFO [main_window:1377]: Настройки загружены
+[2025-12-26 00:18:28] INFO [main_window:1377]: Настройки загружены
+[2025-12-26 00:18:40] INFO [main_window:1377]: Настройки сохранены
+[2025-12-26 00:18:40] INFO [main_window:1377]: Настройки сохранены
+[2025-12-26 00:18:40] INFO [main_window:1600]: pynvml выключен.
+[2025-12-26 00:18:40] INFO [main_window:1600]: pynvml выключен.
