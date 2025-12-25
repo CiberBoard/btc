@@ -1,0 +1,735 @@
+[2025-12-25 20:49:13] INFO [main_window:194]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 20:51:08] INFO [main_window:194]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 20:53:23] INFO [main_window:194]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 20:53:36] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 20:53:36] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 20:53:43] INFO [main_window:194]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 3 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 11 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 7 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 1 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 12 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 13 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 10 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 9 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 2 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 14 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 5 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 4 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 16 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 6 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 15 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 18 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 19 started in random mode
+[2025-12-25 20:53:54] INFO [cpu_scanner:201]: Worker 17 started in random mode
+[2025-12-25 20:53:58] INFO [cpu_scanner:436]: Остановка CPU процессов...
+[2025-12-25 20:53:58] INFO [cpu_scanner:472]: CPU процессы остановлены.
+[2025-12-25 20:54:05] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 20:54:05] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 20:54:19] INFO [main_window:194]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 20:54:56] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 20:54:56] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 20:55:13] INFO [main_window:194]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:01:17] INFO [main_window:198]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:01:27] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:01:27] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:01:33] INFO [main_window:198]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:01:47] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:01:47] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:03:26] INFO [main_window:195]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:03:37] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:03:37] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:03:47] INFO [main_window:195]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:04:03] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:04:03] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:13:13] INFO [main_window:195]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:13:15] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:13:15] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:15:53] INFO [main_window:195]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:15:55] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:15:55] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:17:59] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:17:59] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:27:02] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:27:02] INFO [main_window:1154]: Настройки загружены
+[2025-12-25 21:27:07] INFO [main_window:1154]: Настройки сохранены
+[2025-12-25 21:27:07] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:27:07] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:27:07] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b069205b0147 - 0x70e4b9b0e5e936ecc6 на устройстве 0
+[2025-12-25 21:27:07] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B069205B0147:70E4B9B0E5E936ECC6 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:27:07] DEBUG [main_window:1159]: Запущен воркер 1/2 на GPU 0. Диапазон: 0x70e4b9b069205b0147 - 0x70e4b9b0e5e936ecc6
+[2025-12-25 21:27:07] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0e5e936ecc7 - 0x70e4b9b162b212d846 на устройстве 1
+[2025-12-25 21:27:07] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 128 -p 512 --keyspace 70E4B9B0E5E936ECC7:70E4B9B162B212D846 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:27:07] DEBUG [main_window:1159]: Запущен воркер 2/2 на GPU 1. Диапазон: 0x70e4b9b0e5e936ecc7 - 0x70e4b9b162b212d846
+[2025-12-25 21:27:07] INFO [main_window:1154]: Запущено 2 GPU воркеров
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Compression: compressed
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Compression: compressed
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B069205B0147
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B069205B0147
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E5E936ECC6
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:08] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:13] [Info] 10.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 20.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 30.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 40.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 50.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 60.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 70.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 80.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 90.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 100.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] Done
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.48 MKey/s (1,245,708,288 total) [00:00:00]
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E5E936ECC6
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:08] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:13] [Info] 10.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 20.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 30.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 40.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 50.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 60.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 70.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 80.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 90.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 100.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] Done
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.48 MKey/s (1,245,708,288 total) [00:00:00]
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Compression: compressed
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Compression: compressed
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E5E936ECC7
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0E5E936ECC7
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B162B212D846
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:07] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:08] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:13] [Info] 10.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 20.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 30.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 40.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:14] [Info] 50.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B162B212D846
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 60.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 70.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:07] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 80.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:08] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 90.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:13] [Info] 10.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] 100.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 20.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:27:15] [Info] Done
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 30.0%
+[2025-12-25 21:27:19] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 499.71 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 40.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:14] [Info] 50.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 60.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 70.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 80.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 90.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] 100.0%
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: [2025-12-25.21:27:15] [Info] Done
+[2025-12-25 21:27:19] DEBUG [main_window:1159]: NVIDIA GeForce G 2739 / 6143MB | 1 target 499.71 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:27:24] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:27:24] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (2,491,416,576 total) [00:00:01]
+[2025-12-25 21:27:24] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 681.46 MKey/s (3,737,124,864 total) [00:00:03]
+[2025-12-25 21:27:24] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.48 MKey/s (4,982,833,152 total) [00:00:05]
+[2025-12-25 21:27:24] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 681.46 MKey/s (6,228,541,440 total) [00:00:07]
+[2025-12-25 21:27:25] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 499.71 MKey/s (1,811,939,328 total) [00:00:01]
+[2025-12-25 21:27:25] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (2,717,908,992 total) [00:00:03]
+[2025-12-25 21:27:25] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (3,623,878,656 total) [00:00:05]
+[2025-12-25 21:27:25] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (2,491,416,576 total) [00:00:01]
+[2025-12-25 21:27:25] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: NVIDIA GeForce R 2770 / 12287MB | 1 target 681.46 MKey/s (3,737,124,864 total) [00:00:03]
+[2025-12-25 21:27:25] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.48 MKey/s (4,982,833,152 total) [00:00:05]
+[2025-12-25 21:27:25] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: NVIDIA GeForce R 2770 / 12287MB | 1 target 681.46 MKey/s (6,228,541,440 total) [00:00:07]
+[2025-12-25 21:27:25] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: NVIDIA GeForce G 2739 / 6143MB | 1 target 499.71 MKey/s (1,811,939,328 total) [00:00:01]
+[2025-12-25 21:27:25] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (2,717,908,992 total) [00:00:03]
+[2025-12-25 21:27:25] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (3,623,878,656 total) [00:00:05]
+[2025-12-25 21:27:25] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:27:25] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-12-25 21:29:13] INFO [main_window:49]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:29:13] INFO [main_window:1154]: Настройки загружены
+[2025-12-25 21:29:15] INFO [main_window:1154]: Настройки сохранены
+[2025-12-25 21:29:15] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:29:15] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:29:15] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b06ed6113c69 - 0x70e4b9b0ddb3fd23d3 на устройстве 0
+[2025-12-25 21:29:15] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B06ED6113C69:70E4B9B0DDB3FD23D3 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:29:15] DEBUG [main_window:1159]: Запущен воркер 1/2 на GPU 0. Диапазон: 0x70e4b9b06ed6113c69 - 0x70e4b9b0ddb3fd23d3
+[2025-12-25 21:29:15] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0ddb3fd23d4 - 0x70e4b9b14c91e90b3e на устройстве 1
+[2025-12-25 21:29:15] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 128 -p 512 --keyspace 70E4B9B0DDB3FD23D4:70E4B9B14C91E90B3E 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:29:15] DEBUG [main_window:1159]: Запущен воркер 2/2 на GPU 1. Диапазон: 0x70e4b9b0ddb3fd23d4 - 0x70e4b9b14c91e90b3e
+[2025-12-25 21:29:15] INFO [main_window:1154]: Запущено 2 GPU воркеров
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Compression: compressed
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Compression: compressed
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B06ED6113C69
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B06ED6113C69
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0DDB3FD23D3
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0DDB3FD23D3
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:21] [Info] 10.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:21] [Info] 20.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:21] [Info] 10.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 30.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:21] [Info] 20.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 40.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 30.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 50.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 40.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 60.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 50.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 70.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 60.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 80.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 70.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 90.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 80.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 100.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 90.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] Done
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 100.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 697.51 MKey/s (1,264,582,656 total) [00:00:00]
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] Done
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: NVIDIA GeForce R 2770 / 12287MB | 1 target 697.51 MKey/s (1,264,582,656 total) [00:00:00]
+[2025-12-25 21:29:26] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.48 MKey/s (2,510,290,944 total) [00:00:01]
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Compression: compressed
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0DDB3FD23D4
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B14C91E90B3E
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:15] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:21] [Info] 10.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 20.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 30.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 40.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 50.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 60.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:22] [Info] 70.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:23] [Info] 80.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:23] [Info] 90.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:23] [Info] 100.0%
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:29:23] [Info] Done
+[2025-12-25 21:29:26] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:29:26] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.48 MKey/s (2,510,290,944 total) [00:00:01]
+[2025-12-25 21:29:26] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Compression: compressed
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0DDB3FD23D4
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B14C91E90B3E
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:15] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:21] [Info] 10.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 20.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 30.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 40.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 50.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 60.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:22] [Info] 70.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:23] [Info] 80.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:23] [Info] 90.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:23] [Info] 100.0%
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: [2025-12-25.21:29:23] [Info] Done
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:29:26] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:29:26] DEBUG [main_window:1159]: GPU поиск завершен
+[2025-12-25 21:29:31] INFO [main_window:1154]: Настройки сохранены
+[2025-12-25 21:29:31] INFO [main_window:1353]: pynvml выключен.
+[2025-12-25 21:40:56] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:40:56] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-25 21:40:57] INFO [main_window:1377]: Настройки загружены
+[2025-12-25 21:40:57] INFO [main_window:1377]: Настройки загружены
+[2025-12-25 21:41:29] INFO [main_window:1377]: Настройки сохранены
+[2025-12-25 21:41:29] INFO [main_window:1377]: Настройки сохранены
+[2025-12-25 21:41:29] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:41:29] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:41:29] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:41:29] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:41:29] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0c85c384b4f - 0x70e4b9b0d585c9ffa5 на устройстве 0
+[2025-12-25 21:41:29] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0c85c384b4f - 0x70e4b9b0d585c9ffa5 на устройстве 0
+[2025-12-25 21:41:29] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B0C85C384B4F:70E4B9B0D585C9FFA5 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:41:29] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 70E4B9B0C85C384B4F:70E4B9B0D585C9FFA5 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:41:29] DEBUG [main_window:1382]: Запущен воркер 1/2 на GPU 0. Диапазон: 0x70e4b9b0c85c384b4f - 0x70e4b9b0d585c9ffa5
+[2025-12-25 21:41:29] DEBUG [main_window:1382]: Запущен воркер 1/2 на GPU 0. Диапазон: 0x70e4b9b0c85c384b4f - 0x70e4b9b0d585c9ffa5
+[2025-12-25 21:41:29] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0d585c9ffa6 - 0x70e4b9b0e2af5bb3fc на устройстве 1
+[2025-12-25 21:41:29] INFO [gpu_scanner:214]: Запуск GPU поиска для диапазона 0x70e4b9b0d585c9ffa6 - 0x70e4b9b0e2af5bb3fc на устройстве 1
+[2025-12-25 21:41:29] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 128 -p 512 --keyspace 70E4B9B0D585C9FFA6:70E4B9B0E2AF5BB3FC 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:41:29] DEBUG [gpu_scanner:230]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 128 -p 512 --keyspace 70E4B9B0D585C9FFA6:70E4B9B0E2AF5BB3FC 1PWo3J8VDPrff1QaKiXwtKncpoYhfP4ULU
+[2025-12-25 21:41:29] DEBUG [main_window:1382]: Запущен воркер 2/2 на GPU 1. Диапазон: 0x70e4b9b0d585c9ffa6 - 0x70e4b9b0e2af5bb3fc
+[2025-12-25 21:41:29] DEBUG [main_window:1382]: Запущен воркер 2/2 на GPU 1. Диапазон: 0x70e4b9b0d585c9ffa6 - 0x70e4b9b0e2af5bb3fc
+[2025-12-25 21:41:29] INFO [main_window:1377]: Запущено 2 GPU воркеров
+[2025-12-25 21:41:29] INFO [main_window:1377]: Запущено 2 GPU воркеров
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C85C384B4F
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C85C384B4F
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C85C384B4F
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0C85C384B4F
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0D585C9FFA5
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0D585C9FFA5
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0D585C9FFA5
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0D585C9FFA5
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:35] [Info] 20.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:35] [Info] 20.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:35] [Info] 20.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:35] [Info] 20.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 70.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 70.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 70.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 70.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 80.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 80.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 80.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 80.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 90.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 90.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 90.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 90.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 100.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 100.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 100.0%
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 100.0%
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] Done
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] Done
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] Done
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 697.89 MKey/s (1,264,582,656 total) [00:00:00]
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] Done
+[2025-12-25 21:41:40] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 697.89 MKey/s (1,264,582,656 total) [00:00:00]
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 697.89 MKey/s (1,264,582,656 total) [00:00:00]
+[2025-12-25 21:41:40] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 697.89 MKey/s (1,264,582,656 total) [00:00:00]
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Compression: compressed
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0D585C9FFA6
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0D585C9FFA6
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0D585C9FFA6
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Starting at: 000000000000000000000000000000000000000000000070E4B9B0D585C9FFA6
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E2AF5BB3FC
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E2AF5BB3FC
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E2AF5BB3FC
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Ending at:   000000000000000000000000000000000000000000000070E4B9B0E2AF5BB3FC
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:29] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:29] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:30] [Info] Generating 18,874,368 starting points (720.0MB)
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:35] [Info] 10.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 20.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 20.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 20.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 20.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 30.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 40.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 50.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:36] [Info] 60.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 70.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 70.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 70.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 70.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 80.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 80.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 80.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 80.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 90.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 90.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 90.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 90.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 100.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 100.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] 100.0%
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] 100.0%
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] Done
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] Done
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: [2025-12-25.21:41:37] [Info] Done
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: [2025-12-25.21:41:37] [Info] Done
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:41:41] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:41:41] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (905,969,664 total) [00:00:00]
+[2025-12-25 21:41:47] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:41:47] INFO [gpu_scanner:277]: Остановка GPU процессов...
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (2,510,290,944 total) [00:00:01]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (2,510,290,944 total) [00:00:01]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (3,737,124,864 total) [00:00:03]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (3,737,124,864 total) [00:00:03]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 691.78 MKey/s (5,001,707,520 total) [00:00:05]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 691.78 MKey/s (5,001,707,520 total) [00:00:05]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (6,247,415,808 total) [00:00:07]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (6,247,415,808 total) [00:00:07]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (1,811,939,328 total) [00:00:01]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (1,811,939,328 total) [00:00:01]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (2,717,908,992 total) [00:00:03]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (2,717,908,992 total) [00:00:03]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (3,623,878,656 total) [00:00:05]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (3,623,878,656 total) [00:00:05]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (4,529,848,320 total) [00:00:07]
+[2025-12-25 21:41:47] DEBUG [gpu_scanner:140]: GPU Output: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (4,529,848,320 total) [00:00:07]
+[2025-12-25 21:41:47] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:41:47] INFO [gpu_scanner:286]: GPU процессы остановлены.
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: GPU поиск завершен
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: GPU поиск завершен
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (2,510,290,944 total) [00:00:01]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (2,510,290,944 total) [00:00:01]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (3,737,124,864 total) [00:00:03]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 677.06 MKey/s (3,737,124,864 total) [00:00:03]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 691.78 MKey/s (5,001,707,520 total) [00:00:05]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 691.78 MKey/s (5,001,707,520 total) [00:00:05]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (6,247,415,808 total) [00:00:07]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce R 2770 / 12287MB | 1 target 687.10 MKey/s (6,247,415,808 total) [00:00:07]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: GPU поиск завершен
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: GPU поиск завершен
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (1,811,939,328 total) [00:00:01]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (1,811,939,328 total) [00:00:01]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (2,717,908,992 total) [00:00:03]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (2,717,908,992 total) [00:00:03]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (3,623,878,656 total) [00:00:05]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (3,623,878,656 total) [00:00:05]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (4,529,848,320 total) [00:00:07]
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: NVIDIA GeForce G 2739 / 6143MB | 1 target 495.61 MKey/s (4,529,848,320 total) [00:00:07]
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] ERROR [gpu_logic:328]: Ошибка обновления статистики GPU
+Traceback (most recent call last):
+  File "C:\Users\PC\PycharmProjects\btc\ui\gpu_logic.py", line 312, in update_gpu_stats_display
+    elapsed = time.time() - self.gpu_start_time
+              ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'NoneType'
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: GPU поиск завершен
+[2025-12-25 21:41:47] DEBUG [main_window:1382]: GPU поиск завершен
+[2025-12-25 21:42:51] INFO [main_window:1377]: Выбран файл: C:/Users/PC/PycharmProjects/btc/Etarkangaroo.exe
+[2025-12-25 21:42:51] INFO [main_window:1377]: Выбран файл: C:/Users/PC/PycharmProjects/btc/Etarkangaroo.exe
+[2025-12-25 21:42:53] INFO [main_window:1377]: 🦘 Kangaroo поиск запущен
+[2025-12-25 21:42:53] INFO [main_window:1377]: 🦘 Kangaroo поиск запущен
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [🚀] Сессия #1: C:/Users/PC/PycharmProjects/btc/Etarkangaroo.exe -dp 20 -grid 256x256 -rb 00000000000000000000000000000000f6ad73b4d08722a26ae3158dbf1cef4a -re 00000000000000000000000000000000f6ad73b4d08722a26ae3158ebf1cef4a -pub 02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16 -o C:\Users\PC\PycharmProjects\btc\kangaroo_temp\result_1.txt
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [🚀] Сессия #1: C:/Users/PC/PycharmProjects/btc/Etarkangaroo.exe -dp 20 -grid 256x256 -rb 00000000000000000000000000000000f6ad73b4d08722a26ae3158dbf1cef4a -re 00000000000000000000000000000000f6ad73b4d08722a26ae3158ebf1cef4a -pub 02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16 -o C:\Users\PC\PycharmProjects\btc\kangaroo_temp\result_1.txt
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [🔧] Проверка EXE: C:\Users\PC\PycharmProjects\btc\Etarkangaroo.exe
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [🔧] Проверка EXE: C:\Users\PC\PycharmProjects\btc\Etarkangaroo.exe
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [🛠️] Текущая раб. директория: C:\Users\PC\PycharmProjects\btc
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [🛠️] Текущая раб. директория: C:\Users\PC\PycharmProjects\btc
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [📦] Команда: C:/Users/PC/PycharmProjects/btc/Etarkangaroo.exe -dp 20 -grid 256x256 -rb 00000000000000000000000000000000f6ad73b4d08722a26ae3158dbf1cef4a -re 00000000000000000000000000000000f6ad73b4d08722a26ae3158ebf1cef4a -pub 02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16 -o C:\Users\PC\PycharmProjects\btc\kangaroo_temp\result_1.txt
+[2025-12-25 21:42:53] DEBUG [main_window:1382]: [📦] Команда: C:/Users/PC/PycharmProjects/btc/Etarkangaroo.exe -dp 20 -grid 256x256 -rb 00000000000000000000000000000000f6ad73b4d08722a26ae3158dbf1cef4a -re 00000000000000000000000000000000f6ad73b4d08722a26ae3158ebf1cef4a -pub 02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16 -o C:\Users\PC\PycharmProjects\btc\kangaroo_temp\result_1.txt
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -dp [20]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -dp [20]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -grid [256x256]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -grid [256x256]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -rb [f6ad73b4d08722a26ae3158dbf1cef4a]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -rb [f6ad73b4d08722a26ae3158dbf1cef4a]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -re [f6ad73b4d08722a26ae3158ebf1cef4a]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -re [f6ad73b4d08722a26ae3158ebf1cef4a]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -pub [02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -pub [02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -o [C:\Users\PC\PycharmProjects\btc\kangaroo_temp\result_1.txt]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     -o [C:\Users\PC\PycharmProjects\btc\kangaroo_temp\result_1.txt]
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     APP VERSION: Etarkangaroo3_2_4TW
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     APP VERSION: Etarkangaroo3_2_4TW
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     CUDA devices found: 2
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     CUDA devices found: 2
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Driver version API: 12.1
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Driver version API: 12.1
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     GPU #0 NVIDIA GeForce RTX 3060 (ARCH86) (11247.000/12287MB) (28x128)=>(56x256)
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     GPU #0 NVIDIA GeForce RTX 3060 (ARCH86) (11247.000/12287MB) (28x128)=>(56x256)
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     GPU #1 NVIDIA GeForce GTX 1660 SUPER (ARCH75) (5134.000/6143MB) (22x64)=>(44x128)
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     GPU #1 NVIDIA GeForce GTX 1660 SUPER (ARCH75) (5134.000/6143MB) (22x64)=>(44x128)
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Total kangaroos: 2555904
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Total kangaroos: 2555904
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Hash config st:ae0f7100541ff80c17f979c08de2d04501016121
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Hash config st:ae0f7100541ff80c17f979c08de2d04501016121
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     HT_POW: 2^25 HT_mask: 1FFFFFF
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     HT_POW: 2^25 HT_mask: 1FFFFFF
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     JMPbit: 17
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     JMPbit: 17
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Min avg: f000 2^15.91
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Min avg: f000 2^15.91
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Max avg: 11000 2^16.09
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Max avg: 11000 2^16.09
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Jmp Avg: 101bb[95] 2^16.0097
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Jmp Avg: 101bb[95] 2^16.0097
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Public key    :02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Public key    :02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Range begin   :f6ad73b4d08722a26ae3158dbf1cef4a
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Range begin   :f6ad73b4d08722a26ae3158dbf1cef4a
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Range end     :f6ad73b4d08722a26ae3158ebf1cef4a
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Range end     :f6ad73b4d08722a26ae3158ebf1cef4a
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Bit Range: 2^33
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Bit Range: 2^33
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     DP:20 mask:00000000000fffff
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     DP:20 mask:00000000000fffff
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Expected: operations 2^41.29, HT size: 117.00Mb
+[2025-12-25 21:42:53] DEBUG [main_window:1382]:     Expected: operations 2^41.29, HT size: 117.00Mb
+[2025-12-25 21:42:54] DEBUG [main_window:1382]:     GPU #1 Generate kangaroos: 720896 items
+[2025-12-25 21:42:54] DEBUG [main_window:1382]:     GPU #1 Generate kangaroos: 720896 items
+[2025-12-25 21:42:54] DEBUG [main_window:1382]:     GPU #0 Generate kangaroos: 1835008 items
+[2025-12-25 21:42:54] DEBUG [main_window:1382]:     GPU #0 Generate kangaroos: 1835008 items
+[2025-12-25 21:42:56] DEBUG [main_window:1382]:     GPU #1 Done in 00:00:02s
+[2025-12-25 21:42:56] DEBUG [main_window:1382]:     GPU #1 Done in 00:00:02s
+[2025-12-25 21:43:00] DEBUG [main_window:1382]:     GPU #0 Done in 00:00:06s
+[2025-12-25 21:43:00] DEBUG [main_window:1382]:     GPU #0 Done in 00:00:06s
+[2025-12-25 21:43:01] DEBUG [main_window:1382]:     [1K
+[2025-12-25 21:43:01] DEBUG [main_window:1382]:     [1K
+[2025-12-25 21:43:04] DEBUG [main_window:1382]:     0[2][0 0]0 MKeys/s[dead:0][HT:0.00Mb] t:0s[1K
+[2025-12-25 21:43:04] DEBUG [main_window:1382]:     0[2][0 0]0 MKeys/s[dead:0][HT:0.00Mb] t:0s[1K
+[2025-12-25 21:43:07] DEBUG [main_window:1382]:     0[2][0 0]0 MKeys/s[dead:879][HT:0.01Mb DPs 2^7.79 OPs 2^27.79] t:3s[1K
+[2025-12-25 21:43:07] DEBUG [main_window:1382]:     0[2][0 0]0 MKeys/s[dead:879][HT:0.01Mb DPs 2^7.79 OPs 2^27.79] t:3s[1K
+[2025-12-25 21:43:10] DEBUG [main_window:1382]:     0[2][828]828 MKeys/s= 2^29.6950[dead:6863][HT:0.01Mb DPs 2^7.79 OPs 2^27.79] t:6s (Ave:51m 24s) 0%[1K
+[2025-12-25 21:43:10] DEBUG [main_window:1382]:     0[2][828]828 MKeys/s= 2^29.6950[dead:6863][HT:0.01Mb DPs 2^7.79 OPs 2^27.79] t:6s (Ave:51m 24s) 0%[1K
+[2025-12-25 21:43:13] DEBUG [main_window:1382]:     0[2][720 557]1278 MKeys/s= 2^30.3197[dead:12854][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:9s (Ave:33m 20s) 0%[1K
+[2025-12-25 21:43:13] DEBUG [main_window:1382]:     0[2][720 557]1278 MKeys/s= 2^30.3197[dead:12854][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:9s (Ave:33m 20s) 0%[1K
+[2025-12-25 21:43:16] DEBUG [main_window:1382]:     0[2][720 557]1278 MKeys/s= 2^30.3197[dead:20696][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:12s (Ave:33m 20s) 1%[1K
+[2025-12-25 21:43:16] DEBUG [main_window:1382]:     0[2][720 557]1278 MKeys/s= 2^30.3197[dead:20696][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:12s (Ave:33m 20s) 1%[1K
+[2025-12-25 21:43:19] DEBUG [main_window:1382]:     0[2][600 533]1134 MKeys/s= 2^30.1473[dead:29117][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:15s (Ave:37m 34s) 1%[1K
+[2025-12-25 21:43:19] DEBUG [main_window:1382]:     0[2][600 533]1134 MKeys/s= 2^30.1473[dead:29117][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:15s (Ave:37m 34s) 1%[1K
+[2025-12-25 21:43:22] DEBUG [main_window:1382]:     0[2][589 728]1318 MKeys/s= 2^30.3641[dead:35060][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:18s (Ave:32m 19s) 1%[1K
+[2025-12-25 21:43:22] DEBUG [main_window:1382]:     0[2][589 728]1318 MKeys/s= 2^30.3641[dead:35060][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:18s (Ave:32m 19s) 1%[1K
+[2025-12-25 21:43:25] DEBUG [main_window:1382]:     0[2][604 788]1392 MKeys/s= 2^30.4438[dead:40280][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:21s (Ave:30m 35s) 1%[1K
+[2025-12-25 21:43:25] DEBUG [main_window:1382]:     0[2][604 788]1392 MKeys/s= 2^30.4438[dead:40280][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:21s (Ave:30m 35s) 1%[1K
+[2025-12-25 21:43:28] DEBUG [main_window:1382]:     0[2][524 857]1381 MKeys/s= 2^30.4319[dead:46669][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:24s (Ave:30m 50s) 1%[1K
+[2025-12-25 21:43:28] DEBUG [main_window:1382]:     0[2][524 857]1381 MKeys/s= 2^30.4319[dead:46669][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:24s (Ave:30m 50s) 1%[1K
+[2025-12-25 21:43:31] DEBUG [main_window:1382]:     0[2][521 766]1287 MKeys/s= 2^30.3306[dead:52778][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:27s (Ave:33m 5s) 1%[1K
+[2025-12-25 21:43:31] DEBUG [main_window:1382]:     0[2][521 766]1287 MKeys/s= 2^30.3306[dead:52778][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:27s (Ave:33m 5s) 1%[1K
+[2025-12-25 21:43:34] DEBUG [main_window:1382]:     0[2][522 791]1313 MKeys/s= 2^30.3597[dead:59786][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:30s (Ave:32m 25s) 2%[1K
+[2025-12-25 21:43:34] DEBUG [main_window:1382]:     0[2][522 791]1313 MKeys/s= 2^30.3597[dead:59786][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:30s (Ave:32m 25s) 2%[1K
+[2025-12-25 21:43:37] DEBUG [main_window:1382]:     0[2][556 606]1163 MKeys/s= 2^30.1843[dead:67852][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:33s (Ave:36m 37s) 2%[1K
+[2025-12-25 21:43:37] DEBUG [main_window:1382]:     0[2][556 606]1163 MKeys/s= 2^30.1843[dead:67852][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:33s (Ave:36m 37s) 2%[1K
+[2025-12-25 21:43:40] DEBUG [main_window:1382]:     0[2][763 524]1287 MKeys/s= 2^30.3305[dead:73813][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:36s (Ave:33m 5s) 2%[1K
+[2025-12-25 21:43:40] DEBUG [main_window:1382]:     0[2][763 524]1287 MKeys/s= 2^30.3305[dead:73813][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:36s (Ave:33m 5s) 2%[1K
+[2025-12-25 21:43:43] DEBUG [main_window:1382]:     2[2][829]829 MKeys/s= 2^29.6957[dead:80932][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:39s (Ave:51m 22s) 1%[1K
+[2025-12-25 21:43:43] DEBUG [main_window:1382]:     2[2][829]829 MKeys/s= 2^29.6957[dead:80932][HT:0.01Mb DPs 2^7.80 OPs 2^27.80] t:39s (Ave:51m 22s) 1%[1K
+[2025-12-25 21:43:46] DEBUG [main_window:1382]:     0[2][795 414]1209 MKeys/s= 2^30.2408[dead:90760][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:42s (Ave:35m 12s) 2%[1K
+[2025-12-25 21:43:46] DEBUG [main_window:1382]:     0[2][795 414]1209 MKeys/s= 2^30.2408[dead:90760][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:42s (Ave:35m 12s) 2%[1K
+[2025-12-25 21:43:49] DEBUG [main_window:1382]:     2[2][795 414]1209 MKeys/s= 2^30.2408[dead:97469][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:45s (Ave:35m 12s) 2%[1K
+[2025-12-25 21:43:49] DEBUG [main_window:1382]:     2[2][795 414]1209 MKeys/s= 2^30.2408[dead:97469][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:45s (Ave:35m 12s) 2%[1K
+[2025-12-25 21:43:52] DEBUG [main_window:1382]:     1[2][992 481]1474 MKeys/s= 2^30.5256[dead:103721][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:48s (Ave:28m 54s) 3%[1K
+[2025-12-25 21:43:52] DEBUG [main_window:1382]:     1[2][992 481]1474 MKeys/s= 2^30.5256[dead:103721][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:48s (Ave:28m 54s) 3%[1K
+[2025-12-25 21:43:55] DEBUG [main_window:1382]:     2[2][966 481]1448 MKeys/s= 2^30.5005[dead:110732][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:51s (Ave:29m 24s) 3%[1K
+[2025-12-25 21:43:55] DEBUG [main_window:1382]:     2[2][966 481]1448 MKeys/s= 2^30.5005[dead:110732][HT:0.01Mb DPs 2^7.81 OPs 2^27.81] t:51s (Ave:29m 24s) 3%[1K
+[2025-12-25 21:43:58] DEBUG [main_window:1382]:     1[2][886 514]1401 MKeys/s= 2^30.4528[dead:117014][HT:0.01Mb DPs 2^7.82 OPs 2^27.82] t:54s (Ave:30m 24s) 3%[1K
+[2025-12-25 21:43:58] DEBUG [main_window:1382]:     1[2][886 514]1401 MKeys/s= 2^30.4528[dead:117014][HT:0.01Mb DPs 2^7.82 OPs 2^27.82] t:54s (Ave:30m 24s) 3%[1K
+[2025-12-25 21:44:01] DEBUG [main_window:1382]:     0[2][838 531]1370 MKeys/s= 2^30.4205[dead:123285][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:57s (Ave:31m 5s) 3%[1K
+[2025-12-25 21:44:01] DEBUG [main_window:1382]:     0[2][838 531]1370 MKeys/s= 2^30.4205[dead:123285][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:57s (Ave:31m 5s) 3%[1K
+[2025-12-25 21:44:04] DEBUG [main_window:1382]:     1[2][953]953 MKeys/s= 2^29.8966[dead:128364][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 0s (Ave:44m 41s) 2%[1K
+[2025-12-25 21:44:04] DEBUG [main_window:1382]:     1[2][953]953 MKeys/s= 2^29.8966[dead:128364][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 0s (Ave:44m 41s) 2%[1K
+[2025-12-25 21:44:07] DEBUG [main_window:1382]:     3[2][864 459]1324 MKeys/s= 2^30.3707[dead:136062][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 3s (Ave:32m 10s) 3%[1K
+[2025-12-25 21:44:07] DEBUG [main_window:1382]:     3[2][864 459]1324 MKeys/s= 2^30.3707[dead:136062][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 3s (Ave:32m 10s) 3%[1K
+[2025-12-25 21:44:10] DEBUG [main_window:1382]:     0[2][874 460]1334 MKeys/s= 2^30.3822[dead:142702][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 6s (Ave:31m 55s) 3%[1K
+[2025-12-25 21:44:10] DEBUG [main_window:1382]:     0[2][874 460]1334 MKeys/s= 2^30.3822[dead:142702][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 6s (Ave:31m 55s) 3%[1K
+[2025-12-25 21:44:13] DEBUG [main_window:1382]:     2[2][874 460]1334 MKeys/s= 2^30.3822[dead:151135][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 9s (Ave:31m 55s) 4%[1K
+[2025-12-25 21:44:13] DEBUG [main_window:1382]:     2[2][874 460]1334 MKeys/s= 2^30.3822[dead:151135][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 9s (Ave:31m 55s) 4%[1K
+[2025-12-25 21:44:16] DEBUG [main_window:1382]:     2[2][734 451]1185 MKeys/s= 2^30.2117[dead:160884][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 12s (Ave:35m 55s) 3%[1K
+[2025-12-25 21:44:16] DEBUG [main_window:1382]:     2[2][734 451]1185 MKeys/s= 2^30.2117[dead:160884][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 12s (Ave:35m 55s) 3%[1K
+[2025-12-25 21:44:19] DEBUG [main_window:1382]:     3[2][638]638 MKeys/s= 2^29.3194[dead:171432][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 15s (Ave:1h 6m 41s) 2%[1K
+[2025-12-25 21:44:19] DEBUG [main_window:1382]:     3[2][638]638 MKeys/s= 2^29.3194[dead:171432][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 15s (Ave:1h 6m 41s) 2%[1K
+[2025-12-25 21:44:22] DEBUG [main_window:1382]:     3[2][604 562]1167 MKeys/s= 2^30.1893[dead:178957][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 18s (Ave:36m 29s) 4%[1K
+[2025-12-25 21:44:22] DEBUG [main_window:1382]:     3[2][604 562]1167 MKeys/s= 2^30.1893[dead:178957][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 18s (Ave:36m 29s) 4%[1K
+[2025-12-25 21:44:25] WARNING [main_window:1380]: 🛑 Kangaroo поиск остановлен
+[2025-12-25 21:44:25] WARNING [main_window:1380]: 🛑 Kangaroo поиск остановлен
+[2025-12-25 21:44:25] DEBUG [main_window:1382]:     2[2][604 562]1167 MKeys/s= 2^30.1893[dead:187418][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 21s (Ave:36m 29s) 4%[1K
+[2025-12-25 21:44:25] DEBUG [main_window:1382]:     2[2][604 562]1167 MKeys/s= 2^30.1893[dead:187418][HT:0.01Mb DPs 2^7.83 OPs 2^27.83] t:1m 21s (Ave:36m 29s) 4%[1K
