@@ -600,14 +600,21 @@ class BitcoinGPUCPUScanner(QMainWindow):
         keys_tab = QWidget()
         keys_layout = QVBoxLayout(keys_tab)
         keys_layout.setSpacing(10)
-        self.found_keys_table = QTableWidget(0, 4)
-        self.found_keys_table.setHorizontalHeaderLabels(["Время", "Адрес", "HEX ключ", "WIF ключ"])
+        self.found_keys_table = QTableWidget(0, 5)
+        self.found_keys_table.setHorizontalHeaderLabels([
+            "Время",
+            "Адрес",
+            "HEX ключ",
+            "WIF ключ",
+            "Источник"  # ← Новая колонка
+        ])
         self.found_keys_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.found_keys_table.verticalHeader().setVisible(False)
         self.found_keys_table.setAlternatingRowColors(True)
         self.found_keys_table.setContextMenuPolicy(Qt.CustomContextMenu)
         self.found_keys_table.customContextMenuRequested.connect(self.show_context_menu)
         keys_layout.addWidget(self.found_keys_table)
+
         export_layout = QHBoxLayout()
         self.export_keys_btn = QPushButton("Экспорт CSV")
         self.export_keys_btn.clicked.connect(self.export_keys_csv)
@@ -1319,38 +1326,68 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.gpu_found_label.setText(f"Найдено ключей: {found_count}")
             row = self.found_keys_table.rowCount()
             self.found_keys_table.insertRow(row)
+
             # Время
             time_item = QTableWidgetItem(key_data['timestamp'])
             time_item.setTextAlignment(Qt.AlignCenter)
             time_item.setForeground(QColor(100, 255, 100))
             self.found_keys_table.setItem(row, 0, time_item)
+
             # Адрес
             addr_item = QTableWidgetItem(key_data['address'])
             addr_item.setTextAlignment(Qt.AlignCenter)
             addr_item.setForeground(QColor(255, 215, 0))
             self.found_keys_table.setItem(row, 1, addr_item)
+
             # HEX ключ
             hex_item = QTableWidgetItem(key_data['hex_key'])
             hex_item.setTextAlignment(Qt.AlignCenter)
             hex_item.setForeground(QColor(100, 200, 255))
             self.found_keys_table.setItem(row, 2, hex_item)
+
             # WIF ключ
             wif_item = QTableWidgetItem(key_data['wif_key'])
             wif_item.setTextAlignment(Qt.AlignCenter)
             wif_item.setForeground(QColor(255, 150, 150))
             self.found_keys_table.setItem(row, 3, wif_item)
+
+            # ✨ ИСТОЧНИК (новая колонка 4)
+            source = key_data.get('source', 'CPU')  # По умолчанию CPU
+
+            # Цвета для разных источников
+            source_colors = {
+                'GPU': QColor(50, 205, 50),  # Ярко-зелёный
+                'CPU': QColor(100, 149, 237),  # Голубой
+                'KANGAROO': QColor(255, 140, 0)  # Оранжевый
+            }
+
+            # Эмодзи для источников
+            source_emoji = {
+                'GPU': '🎮',
+                'CPU': '💻',
+                'KANGAROO': '🦘'
+            }
+
+            source_text = f"{source_emoji.get(source, '❓')} {source}"
+            source_item = QTableWidgetItem(source_text)
+            source_item.setTextAlignment(Qt.AlignCenter)
+            source_item.setForeground(source_colors.get(source, QColor(200, 200, 200)))
+            source_item.setFont(QFont('Arial', 10, QFont.Bold))
+            self.found_keys_table.setItem(row, 4, source_item)
+
             self.found_keys_table.scrollToBottom()
             self.save_found_key(key_data)
-            # Определяем источник
-            source = "GPU" if 'source' in key_data and key_data['source'] == 'GPU' else "CPU"
+
+            # MessageBox с правильным определением источника
             worker_info = f" (Воркер {key_data.get('worker_id', 'N/A')})" if 'worker_id' in key_data else ""
+
             QMessageBox.information(
                 self,
-                "Ключ найден!",
+                f"🎉 {source} нашел ключ!",
                 f"<b>{source}{worker_info} нашел ключ!</b><br><br>"
                 f"<b>Адрес:</b> {key_data['address']}<br>"
-                f"<b>HEX ключ:</b> {key_data['hex_key']}<br>"
-                f"<b>WIF ключ:</b> {key_data['wif_key']}"
+                f"<b>HEX ключ:</b> {key_data['hex_key'][:32]}...<br>"
+                f"<b>WIF ключ:</b> {key_data['wif_key'][:20]}..."
             )
         except Exception as e:
             logger.exception("Ошибка обработки найденного ключа")
