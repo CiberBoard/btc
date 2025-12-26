@@ -108,10 +108,15 @@ class GPULogic:
             self.stop_gpu_search()
 
     def restart_gpu_random_search(self):
-        if self.gpu_is_running:
+        try:
+            self.main_window.append_log("🔄 Перезапуск GPU поиска с новым случайным диапазоном...", "info")
             self.stop_gpu_search_internal()
-        self.main_window.append_log("Перезапуск GPU поиска с новым случайным диапазоном...", "normal")
-        QTimer.singleShot(1000, self.start_gpu_random_search)
+            self.gpu_is_running = False
+            QTimer.singleShot(1000, self.start_gpu_search)
+        except Exception as e:
+            logger.exception("❌ Ошибка в restart_gpu_random_search:")
+            self.main_window.append_log(f"Критическая ошибка перезапуска: {e}", "error")
+            self.gpu_search_finished()  # возвращаем UI в безопасное состояние
 
     def start_gpu_search(self):
         if not self.validate_gpu_inputs():

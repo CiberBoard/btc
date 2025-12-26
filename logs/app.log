@@ -11192,3 +11192,857 @@ fo] Done
 [2025-12-27 01:24:46] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (40,919,629,824 total) [00:01:20]
 [2025-12-27 01:24:46] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (41,825,599,488 total) [00:01:22]
 [2025-12-27 01:24:46] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (41,825,599,488 total) [00:01:22]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (59,190,018,048 total) [00:01:24]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (59,190,018,048 total) [00:01:24]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (59,190,018,048 total) [00:01:24]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (59,190,018,048 total) [00:01:24]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (60,435,726,336 total) [00:01:26]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (60,435,726,336 total) [00:01:26]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (60,435,726,336 total) [00:01:26]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (61,719,183,360 total) [00:01:28]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (60,435,726,336 total) [00:01:26]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (61,719,183,360 total) [00:01:28]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (62,964,891,648 total) [00:01:30]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (62,964,891,648 total) [00:01:30]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (64,172,851,200 total) [00:01:31]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (61,719,183,360 total) [00:01:28]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (64,172,851,200 total) [00:01:31]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (65,418,559,488 total) [00:01:33]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (61,719,183,360 total) [00:01:28]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (65,418,559,488 total) [00:01:33]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (66,702,016,512 total) [00:01:35]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (66,702,016,512 total) [00:01:35]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (67,947,724,800 total) [00:01:37]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (67,947,724,800 total) [00:01:37]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (69,155,684,352 total) [00:01:39]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (69,155,684,352 total) [00:01:39]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (62,964,891,648 total) [00:01:30]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (62,964,891,648 total) [00:01:30]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 634.60 MKey/s (70,325,895,168 total) [00:01:41]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 634.60 MKey/s (70,325,895,168 total) [00:01:41]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (64,172,851,200 total) [00:01:31]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 619.51 MKey/s (71,458,357,248 total) [00:01:42]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (64,172,851,200 total) [00:01:31]
+[2025-12-27 01:25:05] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 619.51 MKey/s (71,458,357,248 total) [00:01:42]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (65,418,559,488 total) [00:01:33]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (65,418,559,488 total) [00:01:33]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (66,702,016,512 total) [00:01:35]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (66,702,016,512 total) [00:01:35]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (67,947,724,800 total) [00:01:37]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (67,947,724,800 total) [00:01:37]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (69,155,684,352 total) [00:01:39]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 660.81 MKey/s (69,155,684,352 total) [00:01:39]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 634.60 MKey/s (70,325,895,168 total) [00:01:41]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 634.60 MKey/s (70,325,895,168 total) [00:01:41]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 619.51 MKey/s (71,458,357,248 total) [00:01:42]
+[2025-12-27 01:25:05] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 619.51 MKey/s (71,458,357,248 total) [00:01:42]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (42,731,569,152 total) [00:01:23]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (42,731,569,152 total) [00:01:23]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (42,731,569,152 total) [00:01:23]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (42,731,569,152 total) [00:01:23]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (43,637,538,816 total) [00:01:25]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (43,637,538,816 total) [00:01:25]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (43,637,538,816 total) [00:01:25]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (43,637,538,816 total) [00:01:25]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (44,543,508,480 total) [00:01:27]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (44,543,508,480 total) [00:01:27]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (44,543,508,480 total) [00:01:27]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (44,543,508,480 total) [00:01:27]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (45,449,478,144 total) [00:01:29]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (45,449,478,144 total) [00:01:29]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (46,355,447,808 total) [00:01:31]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (46,355,447,808 total) [00:01:31]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (47,261,417,472 total) [00:01:33]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (47,261,417,472 total) [00:01:33]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (48,167,387,136 total) [00:01:34]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (48,167,387,136 total) [00:01:34]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (49,073,356,800 total) [00:01:36]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (45,449,478,144 total) [00:01:29]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (49,073,356,800 total) [00:01:36]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (45,449,478,144 total) [00:01:29]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (49,979,326,464 total) [00:01:38]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (49,979,326,464 total) [00:01:38]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (46,355,447,808 total) [00:01:31]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (46,355,447,808 total) [00:01:31]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (50,885,296,128 total) [00:01:40]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (50,885,296,128 total) [00:01:40]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (47,261,417,472 total) [00:01:33]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (47,261,417,472 total) [00:01:33]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (48,167,387,136 total) [00:01:34]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (48,167,387,136 total) [00:01:34]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (51,791,265,792 total) [00:01:42]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (51,791,265,792 total) [00:01:42]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (52,697,235,456 total) [00:01:44]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (49,073,356,800 total) [00:01:36]
+[2025-12-27 01:25:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (52,697,235,456 total) [00:01:44]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (49,073,356,800 total) [00:01:36]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (49,979,326,464 total) [00:01:38]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (49,979,326,464 total) [00:01:38]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (50,885,296,128 total) [00:01:40]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (50,885,296,128 total) [00:01:40]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (51,791,265,792 total) [00:01:42]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (51,791,265,792 total) [00:01:42]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (52,697,235,456 total) [00:01:44]
+[2025-12-27 01:25:08] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (52,697,235,456 total) [00:01:44]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 624.98 MKey/s (72,590,819,328 total) [00:01:44]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 624.98 MKey/s (72,590,819,328 total) [00:01:44]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 624.98 MKey/s (72,590,819,328 total) [00:01:44]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 624.98 MKey/s (72,590,819,328 total) [00:01:44]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (73,836,527,616 total) [00:01:46]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (73,836,527,616 total) [00:01:46]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (73,836,527,616 total) [00:01:46]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (75,082,235,904 total) [00:01:48]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (73,836,527,616 total) [00:01:46]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (75,082,235,904 total) [00:01:48]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (76,327,944,192 total) [00:01:50]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (76,327,944,192 total) [00:01:50]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (77,573,652,480 total) [00:01:51]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (77,573,652,480 total) [00:01:51]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (75,082,235,904 total) [00:01:48]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (78,819,360,768 total) [00:01:53]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (75,082,235,904 total) [00:01:48]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (78,819,360,768 total) [00:01:53]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (80,065,069,056 total) [00:01:55]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (80,065,069,056 total) [00:01:55]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (81,310,777,344 total) [00:01:57]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (81,310,777,344 total) [00:01:57]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (82,556,485,632 total) [00:01:59]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (76,327,944,192 total) [00:01:50]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (82,556,485,632 total) [00:01:59]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (76,327,944,192 total) [00:01:50]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 666.28 MKey/s (83,764,445,184 total) [00:02:01]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 666.28 MKey/s (83,764,445,184 total) [00:02:01]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (77,573,652,480 total) [00:01:51]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (77,573,652,480 total) [00:01:51]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (85,010,153,472 total) [00:02:02]
+[2025-12-27 01:25:25] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (85,010,153,472 total) [00:02:02]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (78,819,360,768 total) [00:01:53]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (78,819,360,768 total) [00:01:53]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (80,065,069,056 total) [00:01:55]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (80,065,069,056 total) [00:01:55]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (81,310,777,344 total) [00:01:57]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (81,310,777,344 total) [00:01:57]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (82,556,485,632 total) [00:01:59]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (82,556,485,632 total) [00:01:59]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 666.28 MKey/s (83,764,445,184 total) [00:02:01]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 666.28 MKey/s (83,764,445,184 total) [00:02:01]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (85,010,153,472 total) [00:02:02]
+[2025-12-27 01:25:25] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (85,010,153,472 total) [00:02:02]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (53,603,205,120 total) [00:01:45]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (53,603,205,120 total) [00:01:45]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (53,603,205,120 total) [00:01:45]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (54,509,174,784 total) [00:01:47]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (53,603,205,120 total) [00:01:45]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (54,509,174,784 total) [00:01:47]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (55,415,144,448 total) [00:01:49]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (55,415,144,448 total) [00:01:49]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (54,509,174,784 total) [00:01:47]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (56,321,114,112 total) [00:01:51]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (54,509,174,784 total) [00:01:47]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (56,321,114,112 total) [00:01:51]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (57,227,083,776 total) [00:01:53]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (57,227,083,776 total) [00:01:53]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (55,415,144,448 total) [00:01:49]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (58,133,053,440 total) [00:01:55]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (55,415,144,448 total) [00:01:49]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (58,133,053,440 total) [00:01:55]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (59,039,023,104 total) [00:01:56]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (59,039,023,104 total) [00:01:56]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (56,321,114,112 total) [00:01:51]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (59,944,992,768 total) [00:01:58]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (56,321,114,112 total) [00:01:51]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (59,944,992,768 total) [00:01:58]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (60,850,962,432 total) [00:02:00]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (57,227,083,776 total) [00:01:53]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (60,850,962,432 total) [00:02:00]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (61,756,932,096 total) [00:02:02]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (57,227,083,776 total) [00:01:53]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (61,756,932,096 total) [00:02:02]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (62,662,901,760 total) [00:02:04]
+[2025-12-27 01:25:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (62,662,901,760 total) [00:02:04]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (58,133,053,440 total) [00:01:55]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (58,133,053,440 total) [00:01:55]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (59,039,023,104 total) [00:01:56]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (59,039,023,104 total) [00:01:56]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (59,944,992,768 total) [00:01:58]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (59,944,992,768 total) [00:01:58]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (60,850,962,432 total) [00:02:00]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (60,850,962,432 total) [00:02:00]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (61,756,932,096 total) [00:02:02]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (61,756,932,096 total) [00:02:02]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (62,662,901,760 total) [00:02:04]
+[2025-12-27 01:25:28] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (62,662,901,760 total) [00:02:04]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (86,293,610,496 total) [00:02:04]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (86,293,610,496 total) [00:02:04]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (86,293,610,496 total) [00:02:04]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (86,293,610,496 total) [00:02:04]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (87,539,318,784 total) [00:02:06]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (87,539,318,784 total) [00:02:06]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (88,785,027,072 total) [00:02:08]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (88,785,027,072 total) [00:02:08]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (87,539,318,784 total) [00:02:06]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.55 MKey/s (87,539,318,784 total) [00:02:06]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (90,068,484,096 total) [00:02:10]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (90,068,484,096 total) [00:02:10]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (91,351,941,120 total) [00:02:12]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (91,351,941,120 total) [00:02:12]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (88,785,027,072 total) [00:02:08]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (92,597,649,408 total) [00:02:13]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (88,785,027,072 total) [00:02:08]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (90,068,484,096 total) [00:02:10]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (92,597,649,408 total) [00:02:13]
+[2025-12-27 01:25:47] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (90,068,484,096 total) [00:02:10]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (93,843,357,696 total) [00:02:15]
+[2025-12-27 01:25:47] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (93,843,357,696 total) [00:02:15]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (91,351,941,120 total) [00:02:12]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (91,351,941,120 total) [00:02:12]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (95,126,814,720 total) [00:02:17]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (92,597,649,408 total) [00:02:13]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (95,126,814,720 total) [00:02:17]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (96,410,271,744 total) [00:02:19]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (92,597,649,408 total) [00:02:13]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (96,410,271,744 total) [00:02:19]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (97,693,728,768 total) [00:02:21]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (93,843,357,696 total) [00:02:15]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (97,693,728,768 total) [00:02:21]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (93,843,357,696 total) [00:02:15]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (98,977,185,792 total) [00:02:23]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (95,126,814,720 total) [00:02:17]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (98,977,185,792 total) [00:02:23]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (95,126,814,720 total) [00:02:17]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (100,222,894,080 total) [00:02:24]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (96,410,271,744 total) [00:02:19]
+[2025-12-27 01:25:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (100,222,894,080 total) [00:02:24]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (96,410,271,744 total) [00:02:19]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (97,693,728,768 total) [00:02:21]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (97,693,728,768 total) [00:02:21]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (98,977,185,792 total) [00:02:23]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (98,977,185,792 total) [00:02:23]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (100,222,894,080 total) [00:02:24]
+[2025-12-27 01:25:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (100,222,894,080 total) [00:02:24]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (63,568,871,424 total) [00:02:06]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (63,568,871,424 total) [00:02:06]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (63,568,871,424 total) [00:02:06]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (63,568,871,424 total) [00:02:06]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (64,474,841,088 total) [00:02:07]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (64,474,841,088 total) [00:02:07]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (64,474,841,088 total) [00:02:07]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (64,474,841,088 total) [00:02:07]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (65,380,810,752 total) [00:02:09]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (65,380,810,752 total) [00:02:09]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (65,380,810,752 total) [00:02:09]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (65,380,810,752 total) [00:02:09]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (66,286,780,416 total) [00:02:11]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (66,286,780,416 total) [00:02:11]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (66,286,780,416 total) [00:02:11]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (66,286,780,416 total) [00:02:11]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (67,192,750,080 total) [00:02:13]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (67,192,750,080 total) [00:02:13]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (67,192,750,080 total) [00:02:13]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (67,192,750,080 total) [00:02:13]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (68,098,719,744 total) [00:02:15]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (68,098,719,744 total) [00:02:15]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (68,098,719,744 total) [00:02:15]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (68,098,719,744 total) [00:02:15]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (69,004,689,408 total) [00:02:17]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (69,004,689,408 total) [00:02:17]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (69,004,689,408 total) [00:02:17]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (69,004,689,408 total) [00:02:17]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (69,910,659,072 total) [00:02:18]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (69,910,659,072 total) [00:02:18]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (69,910,659,072 total) [00:02:18]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (69,910,659,072 total) [00:02:18]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (70,816,628,736 total) [00:02:20]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (70,816,628,736 total) [00:02:20]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (70,816,628,736 total) [00:02:20]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (70,816,628,736 total) [00:02:20]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (71,722,598,400 total) [00:02:22]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (71,722,598,400 total) [00:02:22]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (71,722,598,400 total) [00:02:22]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (71,722,598,400 total) [00:02:22]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (72,628,568,064 total) [00:02:24]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (72,628,568,064 total) [00:02:24]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (72,628,568,064 total) [00:02:24]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (72,628,568,064 total) [00:02:24]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (73,534,537,728 total) [00:02:26]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (73,534,537,728 total) [00:02:26]
+[2025-12-27 01:25:50] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (73,534,537,728 total) [00:02:26]
+[2025-12-27 01:25:50] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (73,534,537,728 total) [00:02:26]
+[2025-12-27 01:25:53] DEBUG [main_window:1428]: Сгенерировано: 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 01:25:53] DEBUG [main_window:1428]: Сгенерировано: 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (101,506,351,104 total) [00:02:26]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (101,506,351,104 total) [00:02:26]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (101,506,351,104 total) [00:02:26]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (101,506,351,104 total) [00:02:26]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (102,752,059,392 total) [00:02:28]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (102,752,059,392 total) [00:02:28]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (102,752,059,392 total) [00:02:28]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (102,752,059,392 total) [00:02:28]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (103,997,767,680 total) [00:02:30]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (103,997,767,680 total) [00:02:30]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (103,997,767,680 total) [00:02:30]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (103,997,767,680 total) [00:02:30]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (105,243,475,968 total) [00:02:32]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (105,243,475,968 total) [00:02:32]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (105,243,475,968 total) [00:02:32]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (105,243,475,968 total) [00:02:32]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (106,526,932,992 total) [00:02:34]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (106,526,932,992 total) [00:02:34]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (106,526,932,992 total) [00:02:34]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (106,526,932,992 total) [00:02:34]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (107,810,390,016 total) [00:02:35]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (107,810,390,016 total) [00:02:35]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (107,810,390,016 total) [00:02:35]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.40 MKey/s (107,810,390,016 total) [00:02:35]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (109,093,847,040 total) [00:02:37]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (109,093,847,040 total) [00:02:37]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (109,093,847,040 total) [00:02:37]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (109,093,847,040 total) [00:02:37]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (110,377,304,064 total) [00:02:39]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (110,377,304,064 total) [00:02:39]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (110,377,304,064 total) [00:02:39]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (110,377,304,064 total) [00:02:39]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (111,623,012,352 total) [00:02:41]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (111,623,012,352 total) [00:02:41]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (111,623,012,352 total) [00:02:41]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (111,623,012,352 total) [00:02:41]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (112,906,469,376 total) [00:02:43]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (112,906,469,376 total) [00:02:43]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (112,906,469,376 total) [00:02:43]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (112,906,469,376 total) [00:02:43]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (114,189,926,400 total) [00:02:45]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (114,189,926,400 total) [00:02:45]
+[2025-12-27 01:26:08] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (114,189,926,400 total) [00:02:45]
+[2025-12-27 01:26:08] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (114,189,926,400 total) [00:02:45]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (74,440,507,392 total) [00:02:28]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (74,440,507,392 total) [00:02:28]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (74,440,507,392 total) [00:02:28]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (74,440,507,392 total) [00:02:28]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (75,346,477,056 total) [00:02:29]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (75,346,477,056 total) [00:02:29]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (76,252,446,720 total) [00:02:31]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (75,346,477,056 total) [00:02:29]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (76,252,446,720 total) [00:02:31]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (77,158,416,384 total) [00:02:33]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (75,346,477,056 total) [00:02:29]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (77,158,416,384 total) [00:02:33]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (78,064,386,048 total) [00:02:35]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (78,064,386,048 total) [00:02:35]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (76,252,446,720 total) [00:02:31]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (76,252,446,720 total) [00:02:31]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (78,970,355,712 total) [00:02:37]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (77,158,416,384 total) [00:02:33]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (78,970,355,712 total) [00:02:37]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (77,158,416,384 total) [00:02:33]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (79,876,325,376 total) [00:02:39]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (79,876,325,376 total) [00:02:39]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (80,782,295,040 total) [00:02:40]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (78,064,386,048 total) [00:02:35]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (80,782,295,040 total) [00:02:40]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (81,688,264,704 total) [00:02:42]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (78,064,386,048 total) [00:02:35]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (78,970,355,712 total) [00:02:37]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (81,688,264,704 total) [00:02:42]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (82,594,234,368 total) [00:02:44]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (78,970,355,712 total) [00:02:37]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (82,594,234,368 total) [00:02:44]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (83,500,204,032 total) [00:02:46]
+[2025-12-27 01:26:10] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (83,500,204,032 total) [00:02:46]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (79,876,325,376 total) [00:02:39]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (79,876,325,376 total) [00:02:39]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (80,782,295,040 total) [00:02:40]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (80,782,295,040 total) [00:02:40]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (81,688,264,704 total) [00:02:42]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (81,688,264,704 total) [00:02:42]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (82,594,234,368 total) [00:02:44]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (82,594,234,368 total) [00:02:44]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (83,500,204,032 total) [00:02:46]
+[2025-12-27 01:26:10] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (83,500,204,032 total) [00:02:46]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (115,473,383,424 total) [00:02:47]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (115,473,383,424 total) [00:02:47]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (115,473,383,424 total) [00:02:47]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (115,473,383,424 total) [00:02:47]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (116,719,091,712 total) [00:02:48]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (116,719,091,712 total) [00:02:48]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (116,719,091,712 total) [00:02:48]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (116,719,091,712 total) [00:02:48]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (117,964,800,000 total) [00:02:50]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (117,964,800,000 total) [00:02:50]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (117,964,800,000 total) [00:02:50]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (117,964,800,000 total) [00:02:50]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (119,248,257,024 total) [00:02:52]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (119,248,257,024 total) [00:02:52]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (119,248,257,024 total) [00:02:52]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (120,531,714,048 total) [00:02:54]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (119,248,257,024 total) [00:02:52]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (120,531,714,048 total) [00:02:54]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (121,815,171,072 total) [00:02:56]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (121,815,171,072 total) [00:02:56]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (120,531,714,048 total) [00:02:54]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (120,531,714,048 total) [00:02:54]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (123,098,628,096 total) [00:02:58]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (123,098,628,096 total) [00:02:58]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (124,344,336,384 total) [00:02:59]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (124,344,336,384 total) [00:02:59]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (125,590,044,672 total) [00:03:01]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (121,815,171,072 total) [00:02:56]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (125,590,044,672 total) [00:03:01]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (121,815,171,072 total) [00:02:56]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (126,873,501,696 total) [00:03:03]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (123,098,628,096 total) [00:02:58]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (126,873,501,696 total) [00:03:03]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (123,098,628,096 total) [00:02:58]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (128,156,958,720 total) [00:03:05]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (124,344,336,384 total) [00:02:59]
+[2025-12-27 01:26:28] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (128,156,958,720 total) [00:03:05]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (124,344,336,384 total) [00:02:59]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (125,590,044,672 total) [00:03:01]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (125,590,044,672 total) [00:03:01]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (126,873,501,696 total) [00:03:03]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (126,873,501,696 total) [00:03:03]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (128,156,958,720 total) [00:03:05]
+[2025-12-27 01:26:28] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.03 MKey/s (128,156,958,720 total) [00:03:05]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (84,406,173,696 total) [00:02:48]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (84,406,173,696 total) [00:02:48]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (84,406,173,696 total) [00:02:48]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (84,406,173,696 total) [00:02:48]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (85,312,143,360 total) [00:02:49]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (85,312,143,360 total) [00:02:49]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (86,218,113,024 total) [00:02:51]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (85,312,143,360 total) [00:02:49]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (86,218,113,024 total) [00:02:51]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (87,124,082,688 total) [00:02:53]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (85,312,143,360 total) [00:02:49]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (87,124,082,688 total) [00:02:53]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (86,218,113,024 total) [00:02:51]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (88,030,052,352 total) [00:02:55]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (86,218,113,024 total) [00:02:51]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (87,124,082,688 total) [00:02:53]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (88,030,052,352 total) [00:02:55]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (88,936,022,016 total) [00:02:57]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (87,124,082,688 total) [00:02:53]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (88,936,022,016 total) [00:02:57]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (89,841,991,680 total) [00:02:59]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (89,841,991,680 total) [00:02:59]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (88,030,052,352 total) [00:02:55]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (90,747,961,344 total) [00:03:00]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (88,030,052,352 total) [00:02:55]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (90,747,961,344 total) [00:03:00]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (91,653,931,008 total) [00:03:02]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (88,936,022,016 total) [00:02:57]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (91,653,931,008 total) [00:03:02]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (92,559,900,672 total) [00:03:04]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (88,936,022,016 total) [00:02:57]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (92,559,900,672 total) [00:03:04]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (93,465,870,336 total) [00:03:06]
+[2025-12-27 01:26:30] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (93,465,870,336 total) [00:03:06]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (89,841,991,680 total) [00:02:59]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (89,841,991,680 total) [00:02:59]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (90,747,961,344 total) [00:03:00]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (90,747,961,344 total) [00:03:00]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (91,653,931,008 total) [00:03:02]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (91,653,931,008 total) [00:03:02]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (92,559,900,672 total) [00:03:04]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (92,559,900,672 total) [00:03:04]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (93,465,870,336 total) [00:03:06]
+[2025-12-27 01:26:30] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (93,465,870,336 total) [00:03:06]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (129,440,415,744 total) [00:03:07]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (129,440,415,744 total) [00:03:07]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (129,440,415,744 total) [00:03:07]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (129,440,415,744 total) [00:03:07]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 670.10 MKey/s (130,686,124,032 total) [00:03:09]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 670.10 MKey/s (130,686,124,032 total) [00:03:09]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (131,931,832,320 total) [00:03:10]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 670.10 MKey/s (130,686,124,032 total) [00:03:09]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (131,931,832,320 total) [00:03:10]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (133,177,540,608 total) [00:03:12]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 670.10 MKey/s (130,686,124,032 total) [00:03:09]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (133,177,540,608 total) [00:03:12]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (134,423,248,896 total) [00:03:14]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (134,423,248,896 total) [00:03:14]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (131,931,832,320 total) [00:03:10]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.46 MKey/s (131,931,832,320 total) [00:03:10]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (135,668,957,184 total) [00:03:16]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (133,177,540,608 total) [00:03:12]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (135,668,957,184 total) [00:03:16]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.91 MKey/s (136,914,665,472 total) [00:03:18]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (133,177,540,608 total) [00:03:12]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.91 MKey/s (136,914,665,472 total) [00:03:18]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (134,423,248,896 total) [00:03:14]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (138,198,122,496 total) [00:03:20]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.48 MKey/s (134,423,248,896 total) [00:03:14]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (138,198,122,496 total) [00:03:20]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (139,443,830,784 total) [00:03:21]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (139,443,830,784 total) [00:03:21]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (135,668,957,184 total) [00:03:16]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (140,727,287,808 total) [00:03:23]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 681.09 MKey/s (135,668,957,184 total) [00:03:16]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (140,727,287,808 total) [00:03:23]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.91 MKey/s (136,914,665,472 total) [00:03:18]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (142,010,744,832 total) [00:03:25]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 675.91 MKey/s (136,914,665,472 total) [00:03:18]
+[2025-12-27 01:26:48] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (142,010,744,832 total) [00:03:25]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (138,198,122,496 total) [00:03:20]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 696.02 MKey/s (138,198,122,496 total) [00:03:20]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (139,443,830,784 total) [00:03:21]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 687.10 MKey/s (139,443,830,784 total) [00:03:21]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (140,727,287,808 total) [00:03:23]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (140,727,287,808 total) [00:03:23]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (142,010,744,832 total) [00:03:25]
+[2025-12-27 01:26:48] DEBUG [main_window:1428]: NVIDIA GeForce R 4498 / 12287MB | 1 target 690.40 MKey/s (142,010,744,832 total) [00:03:25]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (94,371,840,000 total) [00:03:08]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (94,371,840,000 total) [00:03:08]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (94,371,840,000 total) [00:03:08]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (94,371,840,000 total) [00:03:08]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (95,277,809,664 total) [00:03:10]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (95,277,809,664 total) [00:03:10]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (95,277,809,664 total) [00:03:10]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (96,183,779,328 total) [00:03:11]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (95,277,809,664 total) [00:03:10]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (96,183,779,328 total) [00:03:11]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (97,089,748,992 total) [00:03:13]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (96,183,779,328 total) [00:03:11]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (97,089,748,992 total) [00:03:13]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (96,183,779,328 total) [00:03:11]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (97,995,718,656 total) [00:03:15]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (97,089,748,992 total) [00:03:13]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (97,995,718,656 total) [00:03:15]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (97,089,748,992 total) [00:03:13]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (98,901,688,320 total) [00:03:17]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (97,995,718,656 total) [00:03:15]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (98,901,688,320 total) [00:03:17]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (97,995,718,656 total) [00:03:15]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (99,807,657,984 total) [00:03:19]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (99,807,657,984 total) [00:03:19]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (98,901,688,320 total) [00:03:17]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (98,901,688,320 total) [00:03:17]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (100,713,627,648 total) [00:03:21]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (100,713,627,648 total) [00:03:21]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (99,807,657,984 total) [00:03:19]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (99,807,657,984 total) [00:03:19]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (101,619,597,312 total) [00:03:22]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (100,713,627,648 total) [00:03:21]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (101,619,597,312 total) [00:03:22]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (100,713,627,648 total) [00:03:21]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (102,525,566,976 total) [00:03:24]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (101,619,597,312 total) [00:03:22]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (102,525,566,976 total) [00:03:24]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.34 MKey/s (101,619,597,312 total) [00:03:22]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (103,431,536,640 total) [00:03:26]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (102,525,566,976 total) [00:03:24]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (103,431,536,640 total) [00:03:26]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.57 MKey/s (102,525,566,976 total) [00:03:24]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (104,337,506,304 total) [00:03:28]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (103,431,536,640 total) [00:03:26]
+[2025-12-27 01:26:52] DEBUG [gpu_scanner:141]: GPU Output: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (104,337,506,304 total) [00:03:28]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 495.61 MKey/s (103,431,536,640 total) [00:03:26]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (104,337,506,304 total) [00:03:28]
+[2025-12-27 01:26:52] DEBUG [main_window:1428]: NVIDIA GeForce G 4467 / 6143MB | 1 target 491.31 MKey/s (104,337,506,304 total) [00:03:28]
+[2025-12-27 02:38:13] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-27 02:38:13] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-27 02:38:13] INFO [main_window:1423]: Настройки загружены
+[2025-12-27 02:38:13] INFO [main_window:1423]: Настройки загружены
+[2025-12-27 02:38:20] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-27 02:38:20] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-27 02:38:20] INFO [main_window:1423]: Настройки загружены
+[2025-12-27 02:38:20] INFO [main_window:1423]: Настройки загружены
+[2025-12-27 02:38:30] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:38:30] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:38:30] INFO [main_window:1646]: pynvml выключен.
+[2025-12-27 02:38:30] INFO [main_window:1646]: pynvml выключен.
+[2025-12-27 02:38:34] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-27 02:38:34] INFO [main_window:50]: Найдено 2 NVIDIA GPU устройств для мониторинга.
+[2025-12-27 02:38:34] INFO [main_window:1423]: Настройки загружены
+[2025-12-27 02:38:34] INFO [main_window:1423]: Настройки загружены
+[2025-12-27 02:38:43] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:43] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:43] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:38:43] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:38:43] DEBUG [gpu_logic:130]: 🔍 Введённые hex:
+[2025-12-27 02:38:43] DEBUG [gpu_logic:130]: 🔍 Введённые hex:
+[2025-12-27 02:38:43] DEBUG [gpu_logic:131]:    start_hex = '349b74b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:43] DEBUG [gpu_logic:131]:    start_hex = '349b74b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:43] DEBUG [gpu_logic:132]:    end_hex   = '349b94b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:43] DEBUG [gpu_logic:132]:    end_hex   = '349b94b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:43] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:38:43] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:38:43] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:38:43] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:38:43] DEBUG [gpu_logic:141]: 🔍 Передано в generate_gpu_random_range: start='349b74b6431a6c4ef1', end='349b94b6431a6c4ef1'
+[2025-12-27 02:38:43] DEBUG [gpu_logic:141]: 🔍 Передано в generate_gpu_random_range: start='349b74b6431a6c4ef1', end='349b94b6431a6c4ef1'
+[2025-12-27 02:38:43] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:43] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:352]: GPU random: parsed range [0x349b74b6431a6c4ef1 ... 0x349b94b6431a6c4ef1], total_keys=9007199254740993
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:352]: GPU random: parsed range [0x349b74b6431a6c4ef1 ... 0x349b94b6431a6c4ef1], total_keys=9007199254740993
+[2025-12-27 02:38:43] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b836ea96e43ff28 - 0x349b84840faf04b126 на устройстве 0 (compressed=True)
+[2025-12-27 02:38:43] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b836ea96e43ff28 - 0x349b84840faf04b126 на устройстве 0 (compressed=True)
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 349B836EA96E43FF28:349B84840FAF04B126 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 349B836EA96E43FF28:349B84840FAF04B126 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:43] DEBUG [main_window:1428]: ✅ Запущен воркер 1/2 на GPU 0. Диапазон: 0x349b836ea96e43ff28 — 0x349b84840faf04b126 (сжатые ключи)
+[2025-12-27 02:38:43] DEBUG [main_window:1428]: ✅ Запущен воркер 1/2 на GPU 0. Диапазон: 0x349b836ea96e43ff28 — 0x349b84840faf04b126 (сжатые ключи)
+[2025-12-27 02:38:43] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b84840faf04b127 - 0x349b859975efc56326 на устройстве 1 (compressed=True)
+[2025-12-27 02:38:43] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b84840faf04b127 - 0x349b859975efc56326 на устройстве 1 (compressed=True)
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 349B84840FAF04B127:349B859975EFC56326 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:43] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 349B84840FAF04B127:349B859975EFC56326 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:43] DEBUG [main_window:1428]: ✅ Запущен воркер 2/2 на GPU 1. Диапазон: 0x349b84840faf04b127 — 0x349b859975efc56326 (сжатые ключи)
+[2025-12-27 02:38:43] DEBUG [main_window:1428]: ✅ Запущен воркер 2/2 на GPU 1. Диапазон: 0x349b84840faf04b127 — 0x349b859975efc56326 (сжатые ключи)
+[2025-12-27 02:38:43] INFO [main_window:1423]: 🚀 Запущено 2 GPU воркеров (сжатые ключи)
+[2025-12-27 02:38:43] INFO [main_window:1423]: 🚀 Запущено 2 GPU воркеров (сжатые ключи)
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: 🔄 Перезапуск GPU поиска с новым случайным диапазоном...
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: 🔄 Перезапуск GPU поиска с новым случайным диапазоном...
+[2025-12-27 02:38:53] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:38:53] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B836EA96E43FF28
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B836EA96E43FF28
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B84840FAF04B126
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B84840FAF04B126
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B84840FAF04B127
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B84840FAF04B127
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B859975EFC56326
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B859975EFC56326
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:38:53] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B836EA96E43FF28
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B836EA96E43FF28
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B84840FAF04B126
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B84840FAF04B126
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Compression: compressed
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B84840FAF04B127
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Starting at: 0000000000000000000000000000000000000000000000349B84840FAF04B127
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B859975EFC56326
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Ending at:   0000000000000000000000000000000000000000000000349B859975EFC56326
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: [2025-12-27.02:38:43] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:38:53] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:38:54] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:54] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:54] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:38:54] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:38:54] DEBUG [gpu_logic:130]: 🔍 Введённые hex:
+[2025-12-27 02:38:54] DEBUG [gpu_logic:130]: 🔍 Введённые hex:
+[2025-12-27 02:38:54] DEBUG [gpu_logic:131]:    start_hex = '349b74b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:54] DEBUG [gpu_logic:131]:    start_hex = '349b74b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:54] DEBUG [gpu_logic:132]:    end_hex   = '349b94b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:54] DEBUG [gpu_logic:132]:    end_hex   = '349b94b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:38:54] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:38:54] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:38:54] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:38:54] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:38:54] DEBUG [gpu_logic:141]: 🔍 Передано в generate_gpu_random_range: start='349b74b6431a6c4ef1', end='349b94b6431a6c4ef1'
+[2025-12-27 02:38:54] DEBUG [gpu_logic:141]: 🔍 Передано в generate_gpu_random_range: start='349b74b6431a6c4ef1', end='349b94b6431a6c4ef1'
+[2025-12-27 02:38:54] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:54] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:352]: GPU random: parsed range [0x349b74b6431a6c4ef1 ... 0x349b94b6431a6c4ef1], total_keys=9007199254740993
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:352]: GPU random: parsed range [0x349b74b6431a6c4ef1 ... 0x349b94b6431a6c4ef1], total_keys=9007199254740993
+[2025-12-27 02:38:54] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b89ef713e027011 - 0x349b8b75bb888c7038 на устройстве 0 (compressed=True)
+[2025-12-27 02:38:54] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b89ef713e027011 - 0x349b8b75bb888c7038 на устройстве 0 (compressed=True)
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 349B89EF713E027011:349B8B75BB888C7038 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 349B89EF713E027011:349B8B75BB888C7038 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:54] DEBUG [main_window:1428]: ✅ Запущен воркер 1/2 на GPU 0. Диапазон: 0x349b89ef713e027011 — 0x349b8b75bb888c7038 (сжатые ключи)
+[2025-12-27 02:38:54] DEBUG [main_window:1428]: ✅ Запущен воркер 1/2 на GPU 0. Диапазон: 0x349b89ef713e027011 — 0x349b8b75bb888c7038 (сжатые ключи)
+[2025-12-27 02:38:54] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b8b75bb888c7039 - 0x349b8cfc05d3167061 на устройстве 1 (compressed=True)
+[2025-12-27 02:38:54] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b8b75bb888c7039 - 0x349b8cfc05d3167061 на устройстве 1 (compressed=True)
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 349B8B75BB888C7039:349B8CFC05D3167061 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:54] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 349B8B75BB888C7039:349B8CFC05D3167061 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:38:54] DEBUG [main_window:1428]: ✅ Запущен воркер 2/2 на GPU 1. Диапазон: 0x349b8b75bb888c7039 — 0x349b8cfc05d3167061 (сжатые ключи)
+[2025-12-27 02:38:54] DEBUG [main_window:1428]: ✅ Запущен воркер 2/2 на GPU 1. Диапазон: 0x349b8b75bb888c7039 — 0x349b8cfc05d3167061 (сжатые ключи)
+[2025-12-27 02:38:54] INFO [main_window:1423]: 🚀 Запущено 2 GPU воркеров (сжатые ключи)
+[2025-12-27 02:38:54] INFO [main_window:1423]: 🚀 Запущено 2 GPU воркеров (сжатые ключи)
+[2025-12-27 02:39:04] DEBUG [main_window:1428]: 🔄 Перезапуск GPU поиска с новым случайным диапазоном...
+[2025-12-27 02:39:04] DEBUG [main_window:1428]: 🔄 Перезапуск GPU поиска с новым случайным диапазоном...
+[2025-12-27 02:39:04] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:39:04] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B89EF713E027011
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B89EF713E027011
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8B75BB888C7038
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8B75BB888C7038
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:04] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B8B75BB888C7039
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B8B75BB888C7039
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8CFC05D3167061
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8CFC05D3167061
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:05] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:05] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:39:05] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B89EF713E027011
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B89EF713E027011
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8B75BB888C7038
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8B75BB888C7038
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Compression: compressed
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B8B75BB888C7039
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Starting at: 0000000000000000000000000000000000000000000000349B8B75BB888C7039
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8CFC05D3167061
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Ending at:   0000000000000000000000000000000000000000000000349B8CFC05D3167061
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:54] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: [2025-12-27.02:38:55] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:05] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:06] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:39:06] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:39:06] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:39:06] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:39:06] DEBUG [gpu_logic:130]: 🔍 Введённые hex:
+[2025-12-27 02:39:06] DEBUG [gpu_logic:130]: 🔍 Введённые hex:
+[2025-12-27 02:39:06] DEBUG [gpu_logic:131]:    start_hex = '349b74b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:39:06] DEBUG [gpu_logic:131]:    start_hex = '349b74b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:39:06] DEBUG [gpu_logic:132]:    end_hex   = '349b94b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:39:06] DEBUG [gpu_logic:132]:    end_hex   = '349b94b6431a6c4ef1' (длина: 18)
+[2025-12-27 02:39:06] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:39:06] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:39:06] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:39:06] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:39:06] DEBUG [gpu_logic:141]: 🔍 Передано в generate_gpu_random_range: start='349b74b6431a6c4ef1', end='349b94b6431a6c4ef1'
+[2025-12-27 02:39:06] DEBUG [gpu_logic:141]: 🔍 Передано в generate_gpu_random_range: start='349b74b6431a6c4ef1', end='349b94b6431a6c4ef1'
+[2025-12-27 02:39:06] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:39:06] DEBUG [helpers:136]: validate_key_range: [349b74b6431a6c4ef1 → 0x349b74b6431a6c4ef1] ... [349b94b6431a6c4ef1 → 0x349b94b6431a6c4ef1], total=9007199254740993
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:352]: GPU random: parsed range [0x349b74b6431a6c4ef1 ... 0x349b94b6431a6c4ef1], total_keys=9007199254740993
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:352]: GPU random: parsed range [0x349b74b6431a6c4ef1 ... 0x349b94b6431a6c4ef1], total_keys=9007199254740993
+[2025-12-27 02:39:06] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b7e9e35bd63c12a - 0x349b7fc6b778655dfd на устройстве 0 (compressed=True)
+[2025-12-27 02:39:06] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b7e9e35bd63c12a - 0x349b7fc6b778655dfd на устройстве 0 (compressed=True)
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 349B7E9E35BD63C12A:349B7FC6B778655DFD -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 349B7E9E35BD63C12A:349B7FC6B778655DFD -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:39:06] DEBUG [main_window:1428]: ✅ Запущен воркер 1/2 на GPU 0. Диапазон: 0x349b7e9e35bd63c12a — 0x349b7fc6b778655dfd (сжатые ключи)
+[2025-12-27 02:39:06] DEBUG [main_window:1428]: ✅ Запущен воркер 1/2 на GPU 0. Диапазон: 0x349b7e9e35bd63c12a — 0x349b7fc6b778655dfd (сжатые ключи)
+[2025-12-27 02:39:06] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b7fc6b778655dfe - 0x349b80ef393366fad1 на устройстве 1 (compressed=True)
+[2025-12-27 02:39:06] INFO [gpu_scanner:217]: Запуск GPU поиска для диапазона 0x349b7fc6b778655dfe - 0x349b80ef393366fad1 на устройстве 1 (compressed=True)
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:233]: GPU: добавлен флаг -c (сжатые ключи)
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 349B7FC6B778655DFE:349B80EF393366FAD1 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:39:06] DEBUG [gpu_scanner:243]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 349B7FC6B778655DFE:349B80EF393366FAD1 -c 19YZECXj3SxEZMoUeJ1yiPsw8xANe7M7QR
+[2025-12-27 02:39:06] DEBUG [main_window:1428]: ✅ Запущен воркер 2/2 на GPU 1. Диапазон: 0x349b7fc6b778655dfe — 0x349b80ef393366fad1 (сжатые ключи)
+[2025-12-27 02:39:06] DEBUG [main_window:1428]: ✅ Запущен воркер 2/2 на GPU 1. Диапазон: 0x349b7fc6b778655dfe — 0x349b80ef393366fad1 (сжатые ключи)
+[2025-12-27 02:39:06] INFO [main_window:1423]: 🚀 Запущено 2 GPU воркеров (сжатые ключи)
+[2025-12-27 02:39:06] INFO [main_window:1423]: 🚀 Запущено 2 GPU воркеров (сжатые ключи)
+[2025-12-27 02:39:10] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:39:10] INFO [gpu_scanner:288]: Остановка GPU процессов...
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7E9E35BD63C12A
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7E9E35BD63C12A
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B7FC6B778655DFD
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B7FC6B778655DFD
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7FC6B778655DFE
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7FC6B778655DFE
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B80EF393366FAD1
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B80EF393366FAD1
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:10] DEBUG [gpu_scanner:141]: GPU Output: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:11] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:39:11] INFO [gpu_scanner:297]: GPU процессы остановлены.
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7E9E35BD63C12A
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7E9E35BD63C12A
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B7FC6B778655DFD
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B7FC6B778655DFD
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce RTX 3060
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Compression: compressed
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7FC6B778655DFE
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Starting at: 0000000000000000000000000000000000000000000000349B7FC6B778655DFE
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B80EF393366FAD1
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Ending at:   0000000000000000000000000000000000000000000000349B80EF393366FAD1
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: [2025-12-27.02:39:06] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:11] DEBUG [main_window:1428]: GPU поиск завершен
+[2025-12-27 02:39:12] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:39:12] INFO [main_window:1423]: Настройки сохранены
+[2025-12-27 02:39:12] INFO [main_window:1646]: pynvml выключен.
+[2025-12-27 02:39:12] INFO [main_window:1646]: pynvml выключен.
