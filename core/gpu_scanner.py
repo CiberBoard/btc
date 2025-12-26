@@ -6,6 +6,7 @@ import logging
 from typing import Tuple, Optional, Dict, Any, Set, List
 from collections import deque
 from threading import Thread
+import secrets
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
@@ -199,20 +200,24 @@ class OptimizedOutputReader(QThread):
         self._running = False
 
 
+# 🔴 ИСПРАВЛЕНО: start_gpu_search_with_range — ПОРЯДОК cmd и use_compressed
 def start_gpu_search_with_range(
-        target_address: str,
-        start_key: int,
-        end_key: int,
-        device: int,
-        blocks: int,
-        threads: int,
-        points: int,
-        priority_index: int,
-        parent_window: Any
+    target_address: str,
+    start_key: int,
+    end_key: int,
+    device: int,
+    blocks: int,
+    threads: int,
+    points: int,
+    priority_index: int,
+    parent_window: Any,
+    use_compressed: bool = True
 ) -> Tuple[Optional[subprocess.Popen], Optional[OptimizedOutputReader]]:
     """Запускает GPU поиск с указанным диапазоном"""
-    logger.info(f"Запуск GPU поиска для диапазона {hex(start_key)} - {hex(end_key)} на устройстве {device}")
+    logger.info(f"Запуск GPU поиска для диапазона {hex(start_key)} - {hex(end_key)} на устройстве {device} "
+                f"(compressed={use_compressed})")
 
+    # 🔹 1. СНАЧАЛА — базовая команда
     cmd = [
         config.CUBITCRACK_EXE,
         "-d", str(device),
@@ -220,10 +225,18 @@ def start_gpu_search_with_range(
         "-t", str(threads),
         "-p", str(points),
         "--keyspace", f"{hex(start_key)[2:].upper()}:{hex(end_key)[2:].upper()}",
-        target_address
     ]
 
-    # Установка приоритета процесса
+    # 🔹 2. ЗАТЕМ — добавление -c
+    if use_compressed and target_address.startswith(('1', '3', 'bc1')):
+        cmd.append("-c")
+        logger.debug("GPU: добавлен флаг -c (сжатые ключи)")
+    elif use_compressed:
+        logger.warning(f"GPU: адрес {target_address} не поддерживает -c, флаг пропущен")
+
+    # 🔹 3. И ТОЛЬКО ПОСЛЕ — адрес
+    cmd.append(target_address)
+
     creationflags = _get_process_creation_flags(priority_index)
 
     try:
@@ -239,8 +252,6 @@ def start_gpu_search_with_range(
         )
 
         output_reader = OptimizedOutputReader(cuda_process)
-
-        # Установка приоритета для Windows
         _set_windows_process_priority(cuda_process, priority_index)
 
         return cuda_process, output_reader
@@ -312,39 +323,41 @@ def _stop_single_process(process: subprocess.Popen, reader: OptimizedOutputReade
         pass
 
 
+# 🔴 ИСПРАВЛЕНО: generate_gpu_random_range — чистка hex от ведущих нулей
 def generate_gpu_random_range(
-        global_start_hex: str,
-        global_end_hex: str,
-        min_range_size_str: str,
-        max_range_size_str: str,
-        used_ranges: Set[str],
-        max_saved_random: int
+    global_start_hex: str,
+    global_end_hex: str,
+    min_range_size_str: str,
+    max_range_size_str: str,
+    used_ranges: Set[str],
+    max_saved_random: int
 ) -> Tuple[Optional[int], Optional[int], Optional[str]]:
     """Генерирует уникальный случайный диапазон в пределах пользовательского диапазона"""
     try:
-        # Валидация глобального диапазона
+        # 🔹 Используем оригинальные hex-строки — validate_key_range сам обработает ведущие нули
         global_result, error = validate_key_range(global_start_hex, global_end_hex)
         if global_result is None:
-            logger.error(f"Ошибка глобального диапазона: {error}")
+            logger.error(f"Ошибка валидации диапазона после очистки: {error}")
             return None, None, error
 
         global_start, global_end, total_keys = global_result
 
-        # Валидация размеров диапазона
         min_range_size, max_range_size, error = _validate_range_sizes(
             min_range_size_str, max_range_size_str, total_keys
         )
         if error:
             return None, None, error
 
-        # Генерация уникального диапазона
+        # 🔹 ЛОГИРОВАНИЕ для отладки
+        logger.debug(f"GPU random: parsed range [{hex(global_start)} ... {hex(global_end)}], total_keys={total_keys}")
+
         start_key, end_key = _generate_unique_range(
             global_start, global_end, min_range_size, max_range_size,
             used_ranges, max_saved_random
         )
 
         # Сохранение использованного диапазона
-        range_hash = f"{start_key}-{end_key}"
+        range_hash = f"{start_key:x}-{end_key:x}"  # hex без 0x — короче и эффективнее
         used_ranges.add(range_hash)
 
         return start_key, end_key, None
@@ -424,9 +437,7 @@ def _generate_range_with_retry(
         if range_hash not in used_ranges:
             return start_key, end_key
 
-    # Если не удалось сгенерировать уникальный диапазон, очищаем историю
-    if len(used_ranges) >= max_saved_random:
-        used_ranges.clear()
+
 
     # Генерируем последний диапазон
     start_key = _generate_random_start_key(global_start, max_start)
@@ -443,15 +454,26 @@ def _generate_random_start_key(global_start: int, max_start: int) -> int:
         return _generate_secure_random_int(global_start, max_start)
 
 
+import secrets
+
+# 🔴 ИСПРАВЛЕНО: безопасная генерация для больших чисел
 def _generate_secure_random_int(min_val: int, max_val: int) -> int:
-    """Генерация безопасного случайного числа"""
-    try:
-        with open('/dev/urandom', 'rb') as f:
-            rand_bytes = f.read(8)
-            rand_val = int.from_bytes(rand_bytes, 'big')
-        return min_val + (rand_val % (max_val - min_val + 1))
-    except Exception:
-        return random.randint(min_val, max_val)
+    """
+    Генерирует криптографически стойкое случайное число в [min_val, max_val] (включительно)
+    Работает с произвольно большими целыми (256 бит и более).
+    """
+    if min_val > max_val:
+        raise ValueError("min_val must be <= max_val")
+    if min_val == max_val:
+        return min_val
+
+    range_size = max_val - min_val + 1
+    bits_needed = range_size.bit_length()
+
+    while True:
+        rand_int = secrets.randbits(bits_needed)
+        if rand_int < range_size:
+            return min_val + rand_int
 
 
 def get_gpu_status(device_id: int = 0) -> Optional[Dict[str, Any]]:

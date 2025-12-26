@@ -353,6 +353,15 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_priority_combo = QComboBox()
         self.gpu_priority_combo.addItems(["Нормальный", "Высокий", "Реального времени"])
         gpu_param_layout.addWidget(self.gpu_priority_combo, 4, 1)
+        # --- СЖАТЫЕ КЛЮЧИ: чекбокс ---
+        self.gpu_use_compressed_checkbox = QCheckBox("Использовать сжатые ключи (--use-compressed / -c)")
+        self.gpu_use_compressed_checkbox.setChecked(True)
+        self.gpu_use_compressed_checkbox.setToolTip(
+            "✅ Ускоряет поиск в ~1.5–2× для адресов 1..., 3..., bc1...\n"
+            "Использует 33-байтный публичный ключ вместо 65-байтного.\n"
+            "Авто-отключается для несовместимых адресов."
+        )
+        gpu_param_layout.addWidget(self.gpu_use_compressed_checkbox, 4, 2, 1, 2)  # Занимает 1 ряд, 2 колонки
         # --- НОВОЕ: Воркеры на устройство ---
         gpu_param_layout.addWidget(QLabel("Воркеры/устройство:"), 5, 0)  # Новый ряд (индекс 5)
         self.gpu_workers_per_device_spin = QSpinBox()

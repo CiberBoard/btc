@@ -2,11 +2,15 @@
 import os
 import hashlib
 import base58
-import logging
+
 from logging.handlers import RotatingFileHandler
 from PyQt5.QtWidgets import QComboBox
 from PyQt5.QtCore import QRegExp
 import config
+import logging
+logger = logging.getLogger('bitcoin_scanner')
+# 🔹 ДОБАВЛЕНО:
+from typing import Tuple, Optional
 
 # Кеш для хеш-функций
 sha256 = hashlib.sha256
@@ -107,23 +111,36 @@ def safe_queue_put(q, message, timeout=0.1):
         return False
 
 
-def validate_key_range(start_hex, end_hex):
-    """Проверяет и нормализует диапазон ключей"""
+def validate_key_range(start_hex: str, end_hex: str) -> Tuple[Optional[Tuple[int, int, int]], Optional[str]]:
+    """
+    Валидация диапазона ключей: поддерживает hex с ведущими нулями, любой длины (1–64 символа).
+    Возвращает (start_int, end_int, total_keys) или (None, error)
+    """
     try:
+        # 🔴 УБРАЛИ .lstrip('0')! Парсим напрямую — int() сам обработает ведущие нули.
         start_int = int(start_hex, 16)
         end_int = int(end_hex, 16)
+
         if start_int <= 0:
-            return None, "Начальный ключ должен быть больше 0"
+            return None, "Начальный ключ должен быть > 0"
         if end_int > config.MAX_KEY:
-            return None, f"Конечный ключ превышает максимальный ({config.MAX_KEY_HEX})"
+            return None, f"Конечный ключ > MAX_KEY ({config.MAX_KEY_HEX})"
         if start_int > end_int:
-            return None, "Начальный ключ должен быть меньше или равен конечному"
+            return None, "Начальный ключ > конечного"
+
         total_keys = end_int - start_int + 1
         if total_keys <= 0:
-            return None, "Недопустимый диапазон ключей"
+            return None, "Диапазон переполнен или пуст"
+
+        # 🔹 ОТЛАДКА: логируем hex длины и значения
+        logger.debug(f"validate_key_range: [{start_hex} → {hex(start_int)}] ... [{end_hex} → {hex(end_int)}], total={total_keys}")
+
         return (start_int, end_int, total_keys), None
-    except ValueError:
-        return None, "Неверный формат ключей (hex)"
+
+    except ValueError as e:
+        return None, f"Некорректный hex: {e}"
+    except Exception as e:
+        return None, f"Ошибка валидации: {e}"
 
 
 def format_time(seconds):
