@@ -447,6 +447,222 @@ class BitcoinGPUCPUScanner(QMainWindow):
             gpu_hw_status_layout.addWidget(self.gpu_mem_bar, 2, 1)
             gpu_layout.addWidget(self.gpu_hw_status_group)
         # =============== КОНЕЦ НОВОГО ===============
+            # =============== KANGAROO TAB ===============
+            kangaroo_tab = QWidget()
+            kang_layout = QVBoxLayout(kangaroo_tab)
+            kang_layout.setSpacing(10)
+            kang_layout.setContentsMargins(10, 10, 10, 10)
+
+            # Информация
+            info_label = QLabel(
+                "🦘 <b>Kangaroo Algorithm</b> - эффективный метод поиска приватных ключей "
+                "в заданном диапазоне с использованием алгоритма Pollard's Kangaroo."
+            )
+            info_label.setWordWrap(True)
+            info_label.setStyleSheet(
+                "color: #3498db; font-size: 10pt; padding: 8px; background: #1a2332; border-radius: 4px;")
+            kang_layout.addWidget(info_label)
+
+            # Основные параметры
+            main_params_group = QGroupBox("Основные параметры")
+            main_params_layout = QGridLayout(main_params_group)
+            main_params_layout.setSpacing(8)
+
+            # Публичный ключ
+            main_params_layout.addWidget(QLabel("Публичный ключ (Hex):"), 0, 0)
+            self.kang_pubkey_edit = QLineEdit()
+            self.kang_pubkey_edit.setPlaceholderText("02... или 03... (66 символов) или 04... (130 символов)")
+            main_params_layout.addWidget(self.kang_pubkey_edit, 0, 1, 1, 3)
+
+            # Начальный ключ
+            main_params_layout.addWidget(QLabel("Начальный ключ (Hex):"), 1, 0)
+            self.kang_start_key_edit = QLineEdit("1")
+            self.kang_start_key_edit.setPlaceholderText("Hex значение начала диапазона")
+            main_params_layout.addWidget(self.kang_start_key_edit, 1, 1)
+
+            # Конечный ключ
+            main_params_layout.addWidget(QLabel("Конечный ключ (Hex):"), 1, 2)
+            self.kang_end_key_edit = QLineEdit("FFFFFFFFFFFFFFFF")
+            self.kang_end_key_edit.setPlaceholderText("Hex значение конца диапазона")
+            main_params_layout.addWidget(self.kang_end_key_edit, 1, 3)
+
+            kang_layout.addWidget(main_params_group)
+
+            # Параметры алгоритма
+            algo_params_group = QGroupBox("Параметры алгоритма")
+            algo_params_layout = QGridLayout(algo_params_group)
+            algo_params_layout.setSpacing(8)
+
+            # DP
+            algo_params_layout.addWidget(QLabel("DP (Distinguished Point):"), 0, 0)
+            self.kang_dp_spin = QSpinBox()
+            self.kang_dp_spin.setRange(10, 40)
+            self.kang_dp_spin.setValue(20)
+            self.kang_dp_spin.setToolTip("Параметр Distinguished Point. Чем выше, тем меньше памяти, но медленнее.")
+            algo_params_layout.addWidget(self.kang_dp_spin, 0, 1)
+
+            # Grid
+            algo_params_layout.addWidget(QLabel("Grid (например, 256x256):"), 0, 2)
+            self.kang_grid_edit = QLineEdit("256x256")
+            self.kang_grid_edit.setPlaceholderText("ВысотахШирина")
+            self.kang_grid_edit.setToolTip("Размер сетки для GPU вычислений")
+            algo_params_layout.addWidget(self.kang_grid_edit, 0, 3)
+
+            # Длительность
+            algo_params_layout.addWidget(QLabel("Длительность сканирования (сек):"), 1, 0)
+            self.kang_duration_spin = QSpinBox()
+            self.kang_duration_spin.setRange(10, 3600)
+            self.kang_duration_spin.setValue(300)
+            self.kang_duration_spin.setToolTip("Время работы каждой сессии")
+            algo_params_layout.addWidget(self.kang_duration_spin, 1, 1)
+
+            # Размер поддиапазона
+            algo_params_layout.addWidget(QLabel("Размер поддиапазона (биты):"), 1, 2)
+            self.kang_subrange_spin = QSpinBox()
+            self.kang_subrange_spin.setRange(20, 64)
+            self.kang_subrange_spin.setValue(32)
+            self.kang_subrange_spin.setToolTip("Размер случайного поддиапазона в битах (2^N)")
+            algo_params_layout.addWidget(self.kang_subrange_spin, 1, 3)
+
+            kang_layout.addWidget(algo_params_group)
+
+            # Пути к файлам
+            paths_group = QGroupBox("Пути к файлам")
+            paths_layout = QGridLayout(paths_group)
+            paths_layout.setSpacing(8)
+
+            # Путь к exe
+            paths_layout.addWidget(QLabel("Etarkangaroo.exe:"), 0, 0)
+            self.kang_exe_edit = QLineEdit()
+            default_kang_path = os.path.join(config.BASE_DIR, "Etarkangaroo.exe")
+            self.kang_exe_edit.setText(default_kang_path)
+            paths_layout.addWidget(self.kang_exe_edit, 0, 1)
+
+            self.kang_browse_exe_btn = QPushButton("📁 Обзор...")
+            self.kang_browse_exe_btn.clicked.connect(self.browse_kangaroo_exe)
+            self.kang_browse_exe_btn.setFixedWidth(100)
+            paths_layout.addWidget(self.kang_browse_exe_btn, 0, 2)
+
+            # Временная директория
+            paths_layout.addWidget(QLabel("Временная директория:"), 1, 0)
+            self.kang_temp_dir_edit = QLineEdit()
+            default_temp = os.path.join(config.BASE_DIR, "kangaroo_temp")
+            self.kang_temp_dir_edit.setText(default_temp)
+            paths_layout.addWidget(self.kang_temp_dir_edit, 1, 1)
+
+            self.kang_browse_temp_btn = QPushButton("📁 Обзор...")
+            self.kang_browse_temp_btn.clicked.connect(self.browse_kangaroo_temp)
+            self.kang_browse_temp_btn.setFixedWidth(100)
+            paths_layout.addWidget(self.kang_browse_temp_btn, 1, 2)
+
+            kang_layout.addWidget(paths_group)
+
+            # ✨ НОВОЕ: Кнопка автонастройки (ВСТАВЬТЕ ЭТО СЮДА)
+            auto_config_layout = QHBoxLayout()
+            self.kang_auto_config_btn = QPushButton("🔧 Автонастройка параметров")
+            self.kang_auto_config_btn.setMinimumHeight(40)
+            self.kang_auto_config_btn.setStyleSheet("""
+                   QPushButton {
+                       background: #3498db;
+                       font-weight: bold;
+                       font-size: 11pt;
+                   }
+                   QPushButton:hover {
+                       background: #2980b9;
+                   }
+                   QPushButton:pressed {
+                       background: #21618c;
+                   }
+               """)
+            self.kang_auto_config_btn.clicked.connect(self.kangaroo_logic.auto_configure)
+            auto_config_layout.addWidget(self.kang_auto_config_btn)
+            auto_config_layout.addStretch()
+            kang_layout.addLayout(auto_config_layout)
+            # ✨ КОНЕЦ НОВОГО
+            # Кнопка запуска
+            button_layout = QHBoxLayout()
+            self.kang_start_stop_btn = QPushButton("🚀 Запустить Kangaroo")
+            self.kang_start_stop_btn.setMinimumHeight(45)
+            self.kang_start_stop_btn.setStyleSheet("""
+                   QPushButton {
+                       background: #27ae60;
+                       font-weight: bold;
+                       font-size: 12pt;
+                   }
+                   QPushButton:hover {
+                       background: #2ecc71;
+                   }
+                   QPushButton:pressed {
+                       background: #219653;
+                   }
+               """)
+            self.kang_start_stop_btn.clicked.connect(self.kangaroo_logic.toggle_kangaroo_search)
+            button_layout.addWidget(self.kang_start_stop_btn)
+            button_layout.addStretch()
+            kang_layout.addLayout(button_layout)
+
+            # Статус и прогресс
+            status_group = QGroupBox("Статус и прогресс")
+            status_layout = QVBoxLayout(status_group)
+            status_layout.setSpacing(6)
+
+            status_info_layout = QHBoxLayout()
+            self.kang_status_label = QLabel("Статус: Готов к запуску")
+            self.kang_status_label.setStyleSheet("font-weight: bold; color: #3498db; font-size: 11pt;")
+            status_info_layout.addWidget(self.kang_status_label)
+            status_info_layout.addStretch()
+            status_layout.addLayout(status_info_layout)
+
+            # Информация
+            info_grid = QGridLayout()
+            info_grid.setSpacing(10)
+
+            self.kang_speed_label = QLabel("Скорость: 0 MKeys/s")
+            self.kang_speed_label.setStyleSheet("color: #f39c12;")
+            info_grid.addWidget(self.kang_speed_label, 0, 0)
+
+            self.kang_time_label = QLabel("Время работы: 00:00:00")
+            self.kang_time_label.setStyleSheet("color: #3498db;")
+            info_grid.addWidget(self.kang_time_label, 0, 1)
+
+            self.kang_session_label = QLabel("Сессия: #0")
+            self.kang_session_label.setStyleSheet("color: #9b59b6;")
+            info_grid.addWidget(self.kang_session_label, 0, 2)
+
+            status_layout.addLayout(info_grid)
+
+            # Текущий диапазон
+            self.kang_range_label = QLabel("Текущий диапазон: -")
+            self.kang_range_label.setStyleSheet("color: #e67e22; font-family: 'Courier New'; font-size: 9pt;")
+            self.kang_range_label.setWordWrap(True)
+            status_layout.addWidget(self.kang_range_label)
+
+            kang_layout.addWidget(status_group)
+
+            # Справка
+            help_group = QGroupBox("ℹ️ Справка")
+            help_layout = QVBoxLayout(help_group)
+            help_text = QLabel(
+                "<b>Как использовать:</b><br>"
+                "1. Введите публичный ключ в формате Hex (сжатый или несжатый)<br>"
+                "2. Укажите диапазон поиска (начальный и конечный ключи)<br>"
+                "3. Настройте параметры алгоритма (DP, Grid, длительность)<br>"
+                "4. Убедитесь, что путь к etarkangaroo.exe правильный<br>"
+                "5. Нажмите 'Запустить Kangaroo'<br><br>"
+                "<b>Примечание:</b> Алгоритм будет автоматически перебирать случайные "
+                "поддиапазоны внутри указанного диапазона, что увеличивает шансы находки."
+            )
+            help_text.setWordWrap(True)
+            help_text.setStyleSheet("color: #95a5a6; font-size: 9pt;")
+            help_layout.addWidget(help_text)
+            help_group.setMaximumHeight(150)
+            kang_layout.addWidget(help_group)
+
+            kang_layout.addStretch()
+
+            self.main_tabs.addTab(kangaroo_tab, "🦘 Kangaroo")
+            # =============== END KANGAROO TAB ===============
+
         # =============== CPU TAB ===============
         cpu_tab = QWidget()
         cpu_layout = QVBoxLayout(cpu_tab)
@@ -657,199 +873,9 @@ class BitcoinGPUCPUScanner(QMainWindow):
         log_button_layout.addStretch()
         log_layout.addLayout(log_button_layout)
         self.main_tabs.addTab(log_tab, "Лог работы")
-        # =============== KANGAROO TAB ===============
-        kangaroo_tab = QWidget()
-        kang_layout = QVBoxLayout(kangaroo_tab)
-        kang_layout.setSpacing(10)
-        kang_layout.setContentsMargins(10, 10, 10, 10)
 
-        # Информация
-        info_label = QLabel(
-            "🦘 <b>Kangaroo Algorithm</b> - эффективный метод поиска приватных ключей "
-            "в заданном диапазоне с использованием алгоритма Pollard's Kangaroo."
-        )
-        info_label.setWordWrap(True)
-        info_label.setStyleSheet(
-            "color: #3498db; font-size: 10pt; padding: 8px; background: #1a2332; border-radius: 4px;")
-        kang_layout.addWidget(info_label)
 
-        # Основные параметры
-        main_params_group = QGroupBox("Основные параметры")
-        main_params_layout = QGridLayout(main_params_group)
-        main_params_layout.setSpacing(8)
 
-        # Публичный ключ
-        main_params_layout.addWidget(QLabel("Публичный ключ (Hex):"), 0, 0)
-        self.kang_pubkey_edit = QLineEdit()
-        self.kang_pubkey_edit.setPlaceholderText("02... или 03... (66 символов) или 04... (130 символов)")
-        main_params_layout.addWidget(self.kang_pubkey_edit, 0, 1, 1, 3)
-
-        # Начальный ключ
-        main_params_layout.addWidget(QLabel("Начальный ключ (Hex):"), 1, 0)
-        self.kang_start_key_edit = QLineEdit("1")
-        self.kang_start_key_edit.setPlaceholderText("Hex значение начала диапазона")
-        main_params_layout.addWidget(self.kang_start_key_edit, 1, 1)
-
-        # Конечный ключ
-        main_params_layout.addWidget(QLabel("Конечный ключ (Hex):"), 1, 2)
-        self.kang_end_key_edit = QLineEdit("FFFFFFFFFFFFFFFF")
-        self.kang_end_key_edit.setPlaceholderText("Hex значение конца диапазона")
-        main_params_layout.addWidget(self.kang_end_key_edit, 1, 3)
-
-        kang_layout.addWidget(main_params_group)
-
-        # Параметры алгоритма
-        algo_params_group = QGroupBox("Параметры алгоритма")
-        algo_params_layout = QGridLayout(algo_params_group)
-        algo_params_layout.setSpacing(8)
-
-        # DP
-        algo_params_layout.addWidget(QLabel("DP (Distinguished Point):"), 0, 0)
-        self.kang_dp_spin = QSpinBox()
-        self.kang_dp_spin.setRange(10, 40)
-        self.kang_dp_spin.setValue(20)
-        self.kang_dp_spin.setToolTip("Параметр Distinguished Point. Чем выше, тем меньше памяти, но медленнее.")
-        algo_params_layout.addWidget(self.kang_dp_spin, 0, 1)
-
-        # Grid
-        algo_params_layout.addWidget(QLabel("Grid (например, 256x256):"), 0, 2)
-        self.kang_grid_edit = QLineEdit("256x256")
-        self.kang_grid_edit.setPlaceholderText("ВысотахШирина")
-        self.kang_grid_edit.setToolTip("Размер сетки для GPU вычислений")
-        algo_params_layout.addWidget(self.kang_grid_edit, 0, 3)
-
-        # Длительность
-        algo_params_layout.addWidget(QLabel("Длительность сканирования (сек):"), 1, 0)
-        self.kang_duration_spin = QSpinBox()
-        self.kang_duration_spin.setRange(10, 3600)
-        self.kang_duration_spin.setValue(300)
-        self.kang_duration_spin.setToolTip("Время работы каждой сессии")
-        algo_params_layout.addWidget(self.kang_duration_spin, 1, 1)
-
-        # Размер поддиапазона
-        algo_params_layout.addWidget(QLabel("Размер поддиапазона (биты):"), 1, 2)
-        self.kang_subrange_spin = QSpinBox()
-        self.kang_subrange_spin.setRange(20, 64)
-        self.kang_subrange_spin.setValue(32)
-        self.kang_subrange_spin.setToolTip("Размер случайного поддиапазона в битах (2^N)")
-        algo_params_layout.addWidget(self.kang_subrange_spin, 1, 3)
-
-        kang_layout.addWidget(algo_params_group)
-
-        # Пути к файлам
-        paths_group = QGroupBox("Пути к файлам")
-        paths_layout = QGridLayout(paths_group)
-        paths_layout.setSpacing(8)
-
-        # Путь к exe
-        paths_layout.addWidget(QLabel("Etarkangaroo.exe:"), 0, 0)
-        self.kang_exe_edit = QLineEdit()
-        default_kang_path = os.path.join(config.BASE_DIR, "Etarkangaroo.exe")
-        self.kang_exe_edit.setText(default_kang_path)
-        paths_layout.addWidget(self.kang_exe_edit, 0, 1)
-
-        self.kang_browse_exe_btn = QPushButton("📁 Обзор...")
-        self.kang_browse_exe_btn.clicked.connect(self.browse_kangaroo_exe)
-        self.kang_browse_exe_btn.setFixedWidth(100)
-        paths_layout.addWidget(self.kang_browse_exe_btn, 0, 2)
-
-        # Временная директория
-        paths_layout.addWidget(QLabel("Временная директория:"), 1, 0)
-        self.kang_temp_dir_edit = QLineEdit()
-        default_temp = os.path.join(config.BASE_DIR, "kangaroo_temp")
-        self.kang_temp_dir_edit.setText(default_temp)
-        paths_layout.addWidget(self.kang_temp_dir_edit, 1, 1)
-
-        self.kang_browse_temp_btn = QPushButton("📁 Обзор...")
-        self.kang_browse_temp_btn.clicked.connect(self.browse_kangaroo_temp)
-        self.kang_browse_temp_btn.setFixedWidth(100)
-        paths_layout.addWidget(self.kang_browse_temp_btn, 1, 2)
-
-        kang_layout.addWidget(paths_group)
-
-        # Кнопка запуска
-        button_layout = QHBoxLayout()
-        self.kang_start_stop_btn = QPushButton("🚀 Запустить Kangaroo")
-        self.kang_start_stop_btn.setMinimumHeight(45)
-        self.kang_start_stop_btn.setStyleSheet("""
-            QPushButton {
-                background: #27ae60;
-                font-weight: bold;
-                font-size: 12pt;
-            }
-            QPushButton:hover {
-                background: #2ecc71;
-            }
-            QPushButton:pressed {
-                background: #219653;
-            }
-        """)
-        self.kang_start_stop_btn.clicked.connect(self.kangaroo_logic.toggle_kangaroo_search)
-        button_layout.addWidget(self.kang_start_stop_btn)
-        button_layout.addStretch()
-        kang_layout.addLayout(button_layout)
-
-        # Статус и прогресс
-        status_group = QGroupBox("Статус и прогресс")
-        status_layout = QVBoxLayout(status_group)
-        status_layout.setSpacing(6)
-
-        status_info_layout = QHBoxLayout()
-        self.kang_status_label = QLabel("Статус: Готов к запуску")
-        self.kang_status_label.setStyleSheet("font-weight: bold; color: #3498db; font-size: 11pt;")
-        status_info_layout.addWidget(self.kang_status_label)
-        status_info_layout.addStretch()
-        status_layout.addLayout(status_info_layout)
-
-        # Информация
-        info_grid = QGridLayout()
-        info_grid.setSpacing(10)
-
-        self.kang_speed_label = QLabel("Скорость: 0 MKeys/s")
-        self.kang_speed_label.setStyleSheet("color: #f39c12;")
-        info_grid.addWidget(self.kang_speed_label, 0, 0)
-
-        self.kang_time_label = QLabel("Время работы: 00:00:00")
-        self.kang_time_label.setStyleSheet("color: #3498db;")
-        info_grid.addWidget(self.kang_time_label, 0, 1)
-
-        self.kang_session_label = QLabel("Сессия: #0")
-        self.kang_session_label.setStyleSheet("color: #9b59b6;")
-        info_grid.addWidget(self.kang_session_label, 0, 2)
-
-        status_layout.addLayout(info_grid)
-
-        # Текущий диапазон
-        self.kang_range_label = QLabel("Текущий диапазон: -")
-        self.kang_range_label.setStyleSheet("color: #e67e22; font-family: 'Courier New'; font-size: 9pt;")
-        self.kang_range_label.setWordWrap(True)
-        status_layout.addWidget(self.kang_range_label)
-
-        kang_layout.addWidget(status_group)
-
-        # Справка
-        help_group = QGroupBox("ℹ️ Справка")
-        help_layout = QVBoxLayout(help_group)
-        help_text = QLabel(
-            "<b>Как использовать:</b><br>"
-            "1. Введите публичный ключ в формате Hex (сжатый или несжатый)<br>"
-            "2. Укажите диапазон поиска (начальный и конечный ключи)<br>"
-            "3. Настройте параметры алгоритма (DP, Grid, длительность)<br>"
-            "4. Убедитесь, что путь к etarkangaroo.exe правильный<br>"
-            "5. Нажмите 'Запустить Kangaroo'<br><br>"
-            "<b>Примечание:</b> Алгоритм будет автоматически перебирать случайные "
-            "поддиапазоны внутри указанного диапазона, что увеличивает шансы находки."
-        )
-        help_text.setWordWrap(True)
-        help_text.setStyleSheet("color: #95a5a6; font-size: 9pt;")
-        help_layout.addWidget(help_text)
-        help_group.setMaximumHeight(150)
-        kang_layout.addWidget(help_group)
-
-        kang_layout.addStretch()
-
-        self.main_tabs.addTab(kangaroo_tab, "🦘 Kangaroo")
-        # =============== END KANGAROO TAB ===============
 
         # =============== ABOUT TAB ===============
         about_tab = QWidget()

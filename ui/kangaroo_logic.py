@@ -262,3 +262,8 @@ class KangarooLogic:
         self.main_window.kang_temp_dir_edit.setEnabled(enabled)
         self.main_window.kang_browse_exe_btn.setEnabled(enabled)
         self.main_window.kang_browse_temp_btn.setEnabled(enabled)
+
+    def auto_configure(self):
+        """Автоматическая настройка параметров Kangaroo"""
+        from core.gpu_detection import auto_configure_kangaroo
+        auto_configure_kangaroo(self.main_window)
