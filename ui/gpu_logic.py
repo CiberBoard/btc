@@ -350,16 +350,25 @@ class GPULogic:
             self.gpu_keys_checked = total_checked
             self.gpu_last_update_time = time.time()
 
+            # 🔹 ЗАЩИТА: gpu_start_time может быть None
             progress_percent = 0.0
             if self.gpu_total_keys_in_range > 0:
                 progress_percent = min(100.0, (self.gpu_keys_checked / self.gpu_total_keys_in_range) * 100)
                 self.main_window.gpu_progress_bar.setValue(int(progress_percent))
+
+                # 🔹 Безопасный расчёт elapsed
+                elapsed = time.time() - self.gpu_start_time if self.gpu_start_time is not None else 0
+
                 if self.main_window.gpu_random_checkbox.isChecked():
-                    elapsed = time.time() - self.gpu_start_time
-                    mins, secs = divmod(elapsed, 60)
-                    self.main_window.gpu_progress_bar.setFormat(
-                        f"Оценочный прогресс: {progress_percent:.2f}% ({int(mins):02d}:{int(secs):02d})"
-                    )
+                    if elapsed > 0:
+                        mins, secs = divmod(elapsed, 60)
+                        self.main_window.gpu_progress_bar.setFormat(
+                            f"Оценочный прогресс: {progress_percent:.2f}% ({int(mins):02d}:{int(secs):02d})"
+                        )
+                    else:
+                        self.main_window.gpu_progress_bar.setFormat(
+                            f"Оценочный прогресс: {progress_percent:.2f}% (00:00)"
+                        )
                 else:
                     self.main_window.gpu_progress_bar.setFormat(
                         f"Прогресс: {progress_percent:.2f}% ({self.gpu_keys_checked:,} / {self.gpu_total_keys_in_range:,})"
@@ -374,28 +383,36 @@ class GPULogic:
             logger.exception("Ошибка обновления статистики GPU")
 
     def update_gpu_time_display(self):
-        if self.gpu_start_time:
+        """Обновление отображения времени работы GPU поиска"""
+        if self.gpu_start_time is not None:
             elapsed = time.time() - self.gpu_start_time
-            h, rem = divmod(elapsed, 3600)
-            m, s = divmod(rem, 60)
-            self.main_window.gpu_time_label.setText(f"Время работы: {int(h):02d}:{int(m):02d}:{int(s):02d}")
+            h = int(elapsed // 3600)
+            m = int((elapsed % 3600) // 60)
+            s = int(elapsed % 60)
+            self.main_window.gpu_time_label.setText(f"Время работы: {h:02d}:{m:02d}:{s:02d}")
 
-            if self.gpu_total_keys_in_range > 0 and self.gpu_keys_per_second > 0:
+            # Обновление прогресс-бара (если в последовательном режиме)
+            if (self.gpu_total_keys_in_range > 0
+                    and self.gpu_keys_per_second > 0
+                    and not self.main_window.gpu_random_checkbox.isChecked()):
                 time_since_update = time.time() - self.gpu_last_update_time
                 estimated_total = self.gpu_keys_checked + self.gpu_keys_per_second * time_since_update
-                progress = min(100, (estimated_total / self.gpu_total_keys_in_range) * 100)
-                self.main_window.gpu_progress_bar.setValue(int(progress))
-                if not self.main_window.gpu_random_checkbox.isChecked():
-                    self.main_window.gpu_progress_bar.setFormat(
-                        f"Прогресс: {progress:.1f}% ({int(estimated_total):,} / {self.gpu_total_keys_in_range:,})"
-                    )
+                progress = min(100.0, (estimated_total / self.gpu_total_keys_in_range) * 100)
 
+                self.main_window.gpu_progress_bar.setValue(int(progress))
+                self.main_window.gpu_progress_bar.setFormat(
+                    f"Прогресс: {progress:.1f}% ({int(estimated_total):,} / {self.gpu_total_keys_in_range:,})"
+                )
+
+            # Обновление статуса
             if self.main_window.gpu_random_checkbox.isChecked():
                 self.main_window.gpu_status_label.setText("Статус: Случайный поиск")
             else:
                 self.main_window.gpu_status_label.setText("Статус: Последовательный поиск")
         else:
+            # Сброс при остановке
             self.main_window.gpu_time_label.setText("Время работы: 00:00:00")
+            self.main_window.gpu_status_label.setText("Статус: Готов к работе")
 
     def gpu_search_finished(self):
         self.gpu_is_running = False

@@ -1,12 +1,14 @@
+# core/gpu_scanner.py
 import subprocess
 import time
 import random
 import platform
 import logging
+import atexit  # ← ДОБАВЛЕНО для корректного shutdown NVML
 from typing import Tuple, Optional, Dict, Any, Set, List
 from collections import deque
 from threading import Thread
-import secrets
+import secrets  # ← ОДИН раз, в начале
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
@@ -34,8 +36,23 @@ logger = logging.getLogger('bitcoin_scanner')
 
 # Константы для улучшения читаемости
 GPU_STATUS_INITIALIZED = False
-MAX_RETRY_ATTEMPTS = 100
+MAX_RETRY_ATTEMPTS = 500  # ← УВЕЛИЧЕНО с 100 до 500
 DEFAULT_PRIORITY_CLASS = 0x00000020  # NORMAL_PRIORITY_CLASS
+
+# 🔹 ДОБАВЛЕНО: корректный shutdown NVML
+if PYNVML_AVAILABLE:
+    def _shutdown_nvml():
+        global GPU_STATUS_INITIALIZED
+        if GPU_STATUS_INITIALIZED:
+            try:
+                pynvml.nvmlShutdown()
+                GPU_STATUS_INITIALIZED = False
+                logger.debug("NVML shutdown completed")
+            except Exception as e:
+                logger.warning(f"NVML shutdown error: {e}")
+
+
+    atexit.register(_shutdown_nvml)
 
 
 class OptimizedOutputReader(QThread):
@@ -200,18 +217,17 @@ class OptimizedOutputReader(QThread):
         self._running = False
 
 
-# 🔴 ИСПРАВЛЕНО: start_gpu_search_with_range — ПОРЯДОК cmd и use_compressed
 def start_gpu_search_with_range(
-    target_address: str,
-    start_key: int,
-    end_key: int,
-    device: int,
-    blocks: int,
-    threads: int,
-    points: int,
-    priority_index: int,
-    parent_window: Any,
-    use_compressed: bool = True
+        target_address: str,
+        start_key: int,
+        end_key: int,
+        device: int,
+        blocks: int,
+        threads: int,
+        points: int,
+        priority_index: int,
+        parent_window: Any,
+        use_compressed: bool = True
 ) -> Tuple[Optional[subprocess.Popen], Optional[OptimizedOutputReader]]:
     """Запускает GPU поиск с указанным диапазоном"""
     logger.info(f"Запуск GPU поиска для диапазона {hex(start_key)} - {hex(end_key)} на устройстве {device} "
@@ -298,39 +314,41 @@ def stop_gpu_search_internal(processes: List[Tuple[subprocess.Popen, OptimizedOu
 
 
 def _stop_single_process(process: subprocess.Popen, reader: OptimizedOutputReader) -> None:
-    """Остановка одного GPU процесса"""
-    # Остановка чтения вывода
+    """Остановка одного GPU процесса с ожиданием завершения потока"""
+    # 1. Запрашиваем остановку reader'а
     reader.stop()
 
-    # Попытка мягкой остановки
+    # 2. Мягкая остановка процесса
     try:
         process.terminate()
-        process.wait(timeout=5)
+        process.wait(timeout=3)
     except subprocess.TimeoutExpired:
-        # Принудительная остановка
         try:
             process.kill()
+            process.wait(timeout=3)  # ← КРИТИЧНО: дожидаемся после kill()
         except Exception:
             pass
     except Exception:
         pass
 
-    # Ожидание завершения потока чтения
+    # 3. Корректная остановка Qt-потока
     try:
-        reader.quit()
-        reader.wait(1000)
-    except Exception:
-        pass
+        if reader.isRunning():
+            reader.quit()
+            if not reader.wait(3000):  # ждём до 3 сек
+                reader.terminate()
+                reader.wait(1000)
+    except Exception as e:
+        logger.warning(f"Ошибка остановки reader'а: {e}")
 
 
-# 🔴 ИСПРАВЛЕНО: generate_gpu_random_range — чистка hex от ведущих нулей
 def generate_gpu_random_range(
-    global_start_hex: str,
-    global_end_hex: str,
-    min_range_size_str: str,
-    max_range_size_str: str,
-    used_ranges: Set[str],
-    max_saved_random: int
+        global_start_hex: str,
+        global_end_hex: str,
+        min_range_size_str: str,
+        max_range_size_str: str,
+        used_ranges: Set[str],
+        max_saved_random: int
 ) -> Tuple[Optional[int], Optional[int], Optional[str]]:
     """Генерирует уникальный случайный диапазон в пределах пользовательского диапазона"""
     try:
@@ -437,7 +455,9 @@ def _generate_range_with_retry(
         if range_hash not in used_ranges:
             return start_key, end_key
 
-
+    # Если не удалось — очищаем историю и пробуем последний раз
+    if len(used_ranges) >= max_saved_random:
+        used_ranges.clear()
 
     # Генерируем последний диапазон
     start_key = _generate_random_start_key(global_start, max_start)
@@ -454,9 +474,7 @@ def _generate_random_start_key(global_start: int, max_start: int) -> int:
         return _generate_secure_random_int(global_start, max_start)
 
 
-import secrets
-
-# 🔴 ИСПРАВЛЕНО: безопасная генерация для больших чисел
+# 🔹 БЕЗОПАСНАЯ ГЕНЕРАЦИЯ для больших чисел
 def _generate_secure_random_int(min_val: int, max_val: int) -> int:
     """
     Генерирует криптографически стойкое случайное число в [min_val, max_val] (включительно)
@@ -488,7 +506,7 @@ def get_gpu_status(device_id: int = 0) -> Optional[Dict[str, Any]]:
         return None
 
     try:
-        # Инициализация NVML
+        # Инициализация NVML (atexit позаботится о shutdown)
         if not GPU_STATUS_INITIALIZED:
             pynvml.nvmlInit()
             GPU_STATUS_INITIALIZED = True

@@ -7,7 +7,7 @@
     "threads": "256",
     "points": "512",
     "gpu_random_mode": true,
-    "gpu_restart_interval": "10",
+    "gpu_restart_interval": "30",
     "gpu_min_range_size": "6800072810",
     "gpu_max_range_size": "860000860002305",
     "gpu_priority": 2,
