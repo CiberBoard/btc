@@ -8,7 +8,8 @@ from PyQt5.QtWidgets import QMessageBox
 from utils.helpers import validate_key_range
 import core.gpu_scanner as gpu_core
 from core.gpu_scanner import logger
-
+from collections import deque
+from threading import Thread
 
 class GPULogic:
     def __init__(self, main_window):
@@ -427,3 +428,7 @@ class GPULogic:
         self.main_window.gpu_speed_label.setText("Скорость: 0 MKey/s")
         self.main_window.gpu_checked_label.setText("Проверено ключей: 0")
         self.main_window.append_log("GPU поиск завершен", "normal")
+
+    def gpu_status_label_update(self, text):
+        self.main_window.gpu_status_label.setText("Статус: " + text)
+

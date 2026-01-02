@@ -1,4 +1,3 @@
-import sys
 import multiprocessing
 import random
 import time

@@ -5,7 +5,6 @@ from PyQt5.QtCore import QThread, QTimer
 from PyQt5.QtWidgets import QMessageBox
 from core.kangaroo_worker import KangarooWorker
 from utils.helpers import setup_logger
-import config
 
 logger = setup_logger()
 
@@ -264,6 +263,7 @@ class KangarooLogic:
         self.main_window.kang_browse_temp_btn.setEnabled(enabled)
 
     def auto_configure(self):
-        """Автоматическая настройка параметров Kangaroo"""
-        from core.gpu_detection import auto_configure_kangaroo
-        auto_configure_kangaroo(self.main_window)
+        self.main_window.kang_dp_spin.setValue(22)
+        self.main_window.kang_subrange_spin.setValue(36)
+        self.main_window.kang_duration_spin.setValue(600)
+        self.main_window.append_log("Kangaroo: параметры автонастроены (DP=22, 2^36, 10min)", "success")

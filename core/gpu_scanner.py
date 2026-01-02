@@ -6,8 +6,6 @@ import platform
 import logging
 import atexit  # ← ДОБАВЛЕНО для корректного shutdown NVML
 from typing import Tuple, Optional, Dict, Any, Set, List
-from collections import deque
-from threading import Thread
 import secrets  # ← ОДИН раз, в начале
 
 from PyQt5.QtCore import QThread, pyqtSignal

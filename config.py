@@ -48,6 +48,93 @@ WINDOWS_CPU_PRIORITY_MAP = {
     4: 0x00000080,  # HIGH_PRIORITY_CLASS
     5: 0x00000100,  # REALTIME_PRIORITY_CLASS
 }
+# config/settings_schema.py
+
+# === Схемы полей: (key_in_json, widget_attr, getter/setter_type)
+GPU_FIELDS = [
+    ("gpu_target", "gpu_target_edit", "text"),
+    ("gpu_start_key", "gpu_start_key_edit", "text"),
+    ("gpu_end_key", "gpu_end_key_edit", "text"),
+    ("gpu_device", "gpu_device_combo", "currentText"),
+    ("blocks", "blocks_combo", "currentText"),
+    ("threads", "threads_combo", "currentText"),
+    ("points", "points_combo", "currentText"),
+    ("gpu_random_mode", "gpu_random_checkbox", "isChecked"),
+    ("gpu_restart_interval", "gpu_restart_interval_combo", "currentText"),
+    ("gpu_min_range_size", "gpu_min_range_edit", "text"),
+    ("gpu_max_range_size", "gpu_max_range_edit", "text"),
+    ("gpu_priority", "gpu_priority_combo", "currentIndex"),
+]
+
+CPU_FIELDS = [
+    ("cpu_target", "cpu_target_edit", "text"),
+    ("cpu_start_key", "cpu_start_key_edit", "text"),
+    ("cpu_end_key", "cpu_end_key_edit", "text"),
+    ("cpu_prefix", "cpu_prefix_spin", "value"),
+    ("cpu_workers", "cpu_workers_spin", "value"),
+    ("cpu_attempts", "cpu_attempts_edit", "text"),
+    ("cpu_mode", "cpu_mode", "runtime"),  # особый случай — из логики
+    ("cpu_priority", "cpu_priority_combo", "currentIndex"),
+]
+
+KANGAROO_FIELDS = [
+    ("kang_pubkey", "kang_pubkey_edit", "text"),
+    ("kang_start_key", "kang_start_key_edit", "text"),
+    ("kang_end_key", "kang_end_key_edit", "text"),
+    ("kang_dp", "kang_dp_spin", "value"),
+    ("kang_grid", "kang_grid_edit", "text"),
+    ("kang_duration", "kang_duration_spin", "value"),
+    ("kang_subrange_bits", "kang_subrange_spin", "value"),
+    ("kang_exe_path", "kang_exe_edit", "text"),
+    ("kang_temp_dir", "kang_temp_dir_edit", "text"),
+]
+
+ALL_FIELDS = GPU_FIELDS + CPU_FIELDS + KANGAROO_FIELDS
+
+def apply_settings_to_ui(window, settings: dict):
+    for key, attr_name, access_type in ALL_FIELDS:
+        if not hasattr(window, attr_name):
+            continue
+        widget = getattr(window, attr_name)
+        value = settings.get(key)
+
+        if value is None:
+            continue
+
+        if access_type == "text":
+            widget.setText(str(value))
+        elif access_type == "value":
+            widget.setValue(int(value))
+        elif access_type == "isChecked":
+            widget.setChecked(bool(value))
+        elif access_type == "currentText":
+            widget.setCurrentText(str(value))
+        elif access_type == "currentIndex":
+            widget.setCurrentIndex(int(value))
+        # 'runtime' — пропускаем, обрабатываем отдельно
+
+def extract_settings_from_ui(window) -> dict:
+    settings = {}
+    for key, attr_name, access_type in ALL_FIELDS:
+        if not hasattr(window, attr_name):
+            continue
+        widget = getattr(window, attr_name)
+
+        if access_type == "text":
+            settings[key] = widget.text()
+        elif access_type == "value":
+            settings[key] = widget.value()
+        elif access_type == "isChecked":
+            settings[key] = widget.isChecked()
+        elif access_type == "currentText":
+            settings[key] = widget.currentText()
+        elif access_type == "currentIndex":
+            settings[key] = widget.currentIndex()
+        elif access_type == "runtime":
+            # Особые случаи: например, cpu_mode из логики
+            if key == "cpu_mode":
+                settings[key] = window.cpu_logic.cpu_mode
+    return settings
 
 def make_combo32(start, end, default=None):
     """Создает выпадающий список с шагом 32"""

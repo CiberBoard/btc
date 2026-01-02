@@ -1,14 +1,32 @@
 # core/cpu_logic.py
-import multiprocessing
-import time
-import platform
 
-from PyQt5.QtWidgets import QMessageBox
-
-import config
-from utils.helpers import is_coincurve_available, validate_key_range
+from utils.helpers import  validate_key_range
 import core.cpu_scanner as cpu_core
 from PyQt5.QtCore import QObject, pyqtSignal
+
+
+# ui/main_window.py
+
+import time
+
+import platform
+
+import multiprocessing
+
+from PyQt5.QtWidgets import QMessageBox
+import config
+from utils.helpers import setup_logger,is_coincurve_available
+
+try:
+    import pynvml
+
+    PYNVML_AVAILABLE = True
+except ImportError:
+    PYNVML_AVAILABLE = False
+    pynvml = None
+logger = setup_logger()
+
+
 
 class CPULogic(QObject):
     # Сигналы для связи с основным окном
@@ -19,6 +37,7 @@ class CPULogic(QObject):
 
     def __init__(self, main_window):
         super().__init__()
+        self.optimal_workers = None
         self.main_window = main_window
         self.cpu_signals = cpu_core.WorkerSignals()
         self.processes = {} # {worker_id: process}

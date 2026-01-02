@@ -18,7 +18,9 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
 import config
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
 from ui.kangaroo_logic import KangarooLogic
+# Добавьте после других импортов
 from core.hextowif import generate_all_from_hex
+# Импорт pynvml (предполагается, что он установлен)
 try:
     import pynvml
 
@@ -55,17 +57,48 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             logger.warning("Библиотека pynvml не установлена. Мониторинг GPU недоступен.")
 
+        # --- Инициализация ВСЕХ переменных, используемых в setup_ui и далее ---
         # GPU variables
         self.gpu_range_label = None
+        # self.gpu_processes = [] # Перенесено в GPULogic
+        # self.gpu_is_running = False # Перенесено в GPULogic
+        # self.gpu_start_time = None # Перенесено в GPULogic
+        # self.gpu_keys_checked = 0 # Перенесено в GPULogic
+        # self.gpu_keys_per_second = 0 # Перенесено в GPULogic
         self.random_mode = False
         self.last_random_ranges = set()
         self.max_saved_random = 100
+        # self.current_random_start = None # Перенесено в GPULogic
+        # self.current_random_end = None # Перенесено в GPULogic
         self.used_ranges = set()
+        # self.gpu_last_update_time = 0 # Перенесено в GPULogic
+        # self.gpu_start_range_key = 0 # Перенесено в GPULogic
+        # self.gpu_end_range_key = 0 # Перенесено в GPULogic
+        # self.gpu_total_keys_in_range = 0 # Перенесено в GPULogic
+        # Для таймера перезапуска случайного режима
         self.gpu_restart_timer = QTimer()
+        # self.gpu_restart_timer.timeout.connect(self.start_gpu_random_search) # Перенесено в GPULogic
         self.gpu_restart_delay = 1000  # 1 секунда по умолчанию
-
         # CPU variables - ИНИЦИАЛИЗИРУЕМ РАНЬШЕ setup_ui
         self.optimal_workers = max(1, multiprocessing.cpu_count() - 1)
+        # self.cpu_signals = cpu_core.WorkerSignals() # Перенесено в CPULogic
+        # self.processes = {} # Перенесено в CPULogic
+        # self.cpu_stop_requested = False # Перенесено в CPULogic
+        # self.cpu_pause_requested = False # Перенесено в CPULogic
+        # self.cpu_start_time = 0 # Перенесено в CPULogic
+        # self.cpu_total_scanned = 0 # Перенесено в CPULogic
+        # self.cpu_total_found = 0 # Перенесено в CPULogic
+        # self.workers_stats = {} # Перенесено в CPULogic
+        # self.last_update_time = time.time() # Перенесено в CPULogic
+        # self.start_key = 0 # Перенесено в CPULogic
+        # self.end_key = 0 # Перенесено в CPULogic
+        # self.total_keys = 0 # Перенесено в CPULogic
+        # self.cpu_mode = "sequential" # Перенесено в CPULogic
+        # self.worker_chunks = {} # Перенесено в CPULogic
+        # self.queue_active = True # Перенесено в CPULogic
+        # Очередь и событие остановки для CPU
+        # self.process_queue = multiprocessing.Queue() # Перенесено в CPULogic
+        # self.shutdown_event = multiprocessing.Event() # Перенесено в CPULogic
 
         # --- Инициализация логики ---
         self.gpu_logic = GPULogic(self)  # Инициализируем ДО setup_ui и setup_connections
@@ -243,6 +276,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         """)
 
     def setup_ui(self):
+        # ... (оставляем как есть, но заменяем self на self.gpu_logic или self.cpu_logic где нужно)
         self.setWindowTitle("Bitcoin GPU/CPU Scanner - Улучшенная версия")
         self.resize(1200, 900)
         main_widget = QWidget()
@@ -412,12 +446,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
                     """)
             gpu_hw_status_layout.addWidget(self.gpu_mem_bar, 2, 1)
             gpu_layout.addWidget(self.gpu_hw_status_group)
-            # =============== КОНЕЦ НОВОГО ===============
+        # =============== КОНЕЦ НОВОГО ===============
             # =============== KANGAROO TAB ===============
             kangaroo_tab = QWidget()
             kang_layout = QVBoxLayout(kangaroo_tab)
             kang_layout.setSpacing(10)
             kang_layout.setContentsMargins(10, 10, 10, 10)
+
             # Информация
             info_label = QLabel(
                 "🦘 <b>Kangaroo Algorithm</b> - эффективный метод поиска приватных ключей "

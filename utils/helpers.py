@@ -5,7 +5,6 @@ import base58
 
 from logging.handlers import RotatingFileHandler
 from PyQt5.QtWidgets import QComboBox
-from PyQt5.QtCore import QRegExp
 import config
 import logging
 logger = logging.getLogger('bitcoin_scanner')
@@ -176,3 +175,4 @@ def hex_to_int(h):
 def int_to_hex(x):
     """Преобразует целое число в hex-строку (64 символа, с ведущими нулями)"""
     return f"{x:064x}"
+
