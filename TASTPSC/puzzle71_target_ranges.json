@@ -1,0 +1,41 @@
+{
+  "puzzle": 71,
+  "status": "predicted",
+  "addr": "1PWo3JeB9jrGwfHDNpdGK54CRas7fsVzXU",
+  "search_ranges": [
+    {
+      "start": "0000000000000000400000000000000000000000000000000000000000000000",
+      "end": "0000000000000000400000000000000000000000000000001fffffffffffffff"
+    },
+    {
+      "start": "0000000000000000400000000000000000000000000000002000000000000000",
+      "end": "0000000000000000400000000000000000000000000000003fffffffffffffff"
+    },
+    {
+      "start": "0000000000000000400000000000000000000000000000004000000000000000",
+      "end": "0000000000000000400000000000000000000000000000005fffffffffffffff"
+    },
+    {
+      "start": "0000000000000000400000000000000000000000000000006000000000000000",
+      "end": "0000000000000000400000000000000000000000000000007fffffffffffffff"
+    },
+    {
+      "start": "0000000000000000400000000000000000000000000000008000000000000000",
+      "end": "0000000000000000400000000000000000000000000000009fffffffffffffff"
+    },
+    {
+      "start": "55555555555555556aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa9aaaaaaaaaaaaaaa",
+      "end": "55555555555555556aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaa9"
+    },
+    {
+      "start": "40000000000000001fffffffffffffffffffffffffffffffefffffffffffffff",
+      "end": "4000000000000000200000000000000000000000000000000ffffffffffffffe"
+    }
+  ],
+  "metadata": {
+    "total_ranges": 7,
+    "source": "Akey.json",
+    "prediction_method": "k71 = k70^2 / k69",
+    "range_width": "2^0000000000000000 ~ 2.3e+18 keys"
+  }
+}

@@ -6,7 +6,7 @@ import json
 import sys
 
 # ================== CONFIG ==================
-CONFIG_FILE = "config.json"
+CONFIG_FILE = "../config.json"
 
 if not os.path.exists(CONFIG_FILE):
     print(f"[❌] Файл конфигурации не найден: {CONFIG_FILE}")
