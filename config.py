@@ -2,38 +2,36 @@
 import os
 import sys
 import re
-
 from PyQt5.QtWidgets import QComboBox
 
-# ============== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ и КОНСТАНТЫ ==============
-# Определяем BASE_DIR перед использованием в setup_logger
+# ============== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==============
 if getattr(sys, 'frozen', False):
     BASE_DIR = os.path.dirname(sys.executable)
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"  # Получить у @BotFather
-TELEGRAM_CHAT_ID = "YOUR_CHAT_ID_HERE"      # Ваш личный ID или ID группы
-
-# Создаем необходимые папки при старте
+# Создаём директории
 os.makedirs(BASE_DIR, exist_ok=True)
 os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
 
+# Файлы
 LOG_FILE = os.path.join(BASE_DIR, "logs", "app.log")
 FOUND_KEYS_FILE = os.path.join(BASE_DIR, "Found_key_CUDA.txt")
 CUBITCRACK_EXE = os.path.join(BASE_DIR, "cuBitcrack.exe")
+VANITYSEARCH_EXE = os.path.join(BASE_DIR, "VanitySearch.exe")  # ✅ Добавлено
 
+# Константы
 MAX_KEY = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140
-MAX_KEY_HEX = hex(MAX_KEY)[2:].upper()  # Кешированное значение
+MAX_KEY_HEX = hex(MAX_KEY)[2:].upper()
 
-BTC_ADDR_REGEX = re.compile(r'^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$')
-# Стало (более гибкие регулярки):
+# Регулярки
+BTC_ADDR_REGEX = re.compile(r'^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$|^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,59}$')
 SPEED_REGEX = re.compile(r'(\d+\.\d+|\d+)\s*MKey/s')
 TOTAL_REGEX = re.compile(r'\(([\d,]+)\s*total\)')
-ADDR_REGEX = re.compile(r'Address:\s*([13][a-km-zA-HJ-NP-Z1-9]{25,34})')
+ADDR_REGEX = re.compile(r'Address:\s*([13bc][a-km-zA-HJ-NP-Z1-9]{25,59})')
 KEY_REGEX = re.compile(r'Private key:\s*([0-9a-fA-F]{64})')
 
-# Приоритеты для Windows (для использования в core)
+# Приоритеты Windows
 WINDOWS_GPU_PRIORITY_MAP = {
     0: 0x00000020,  # NORMAL_PRIORITY_CLASS
     1: 0x00000080,  # HIGH_PRIORITY_CLASS
@@ -48,9 +46,8 @@ WINDOWS_CPU_PRIORITY_MAP = {
     4: 0x00000080,  # HIGH_PRIORITY_CLASS
     5: 0x00000100,  # REALTIME_PRIORITY_CLASS
 }
-# config/settings_schema.py
 
-# === Схемы полей: (key_in_json, widget_attr, getter/setter_type)
+# ============== СХЕМЫ НАСТРОЕК ==============
 GPU_FIELDS = [
     ("gpu_target", "gpu_target_edit", "text"),
     ("gpu_start_key", "gpu_start_key_edit", "text"),
@@ -73,7 +70,7 @@ CPU_FIELDS = [
     ("cpu_prefix", "cpu_prefix_spin", "value"),
     ("cpu_workers", "cpu_workers_spin", "value"),
     ("cpu_attempts", "cpu_attempts_edit", "text"),
-    ("cpu_mode", "cpu_mode", "runtime"),  # особый случай — из логики
+    ("cpu_mode", "cpu_mode", "runtime"),
     ("cpu_priority", "cpu_priority_combo", "currentIndex"),
 ]
 
@@ -89,7 +86,16 @@ KANGAROO_FIELDS = [
     ("kang_temp_dir", "kang_temp_dir_edit", "text"),
 ]
 
-ALL_FIELDS = GPU_FIELDS + CPU_FIELDS + KANGAROO_FIELDS
+VANITY_FIELDS = [
+    ("vanity_prefix", "vanity_prefix_edit", "text"),
+    ("vanity_type", "vanity_type_combo", "currentIndex"),
+    ("vanity_compressed", "vanity_compressed_cb", "isChecked"),
+    ("vanity_gpu", "vanity_gpu_combo", "currentText"),
+    ("vanity_cpu_threads", "vanity_cpu_spin", "value"),
+]
+
+ALL_FIELDS = GPU_FIELDS + CPU_FIELDS + KANGAROO_FIELDS + VANITY_FIELDS
+
 
 def apply_settings_to_ui(window, settings: dict):
     for key, attr_name, access_type in ALL_FIELDS:
@@ -97,21 +103,24 @@ def apply_settings_to_ui(window, settings: dict):
             continue
         widget = getattr(window, attr_name)
         value = settings.get(key)
-
         if value is None:
             continue
 
-        if access_type == "text":
-            widget.setText(str(value))
-        elif access_type == "value":
-            widget.setValue(int(value))
-        elif access_type == "isChecked":
-            widget.setChecked(bool(value))
-        elif access_type == "currentText":
-            widget.setCurrentText(str(value))
-        elif access_type == "currentIndex":
-            widget.setCurrentIndex(int(value))
-        # 'runtime' — пропускаем, обрабатываем отдельно
+        try:
+            if access_type == "text":
+                widget.setText(str(value))
+            elif access_type == "value":
+                widget.setValue(int(value))
+            elif access_type == "isChecked":
+                widget.setChecked(bool(value))
+            elif access_type == "currentText":
+                widget.setCurrentText(str(value))
+            elif access_type == "currentIndex":
+                widget.setCurrentIndex(int(value))
+            # runtime — обрабатываем отдельно
+        except Exception as e:
+            print(f"⚠️ Ошибка применения настройки {key}: {e}")
+
 
 def extract_settings_from_ui(window) -> dict:
     settings = {}
@@ -131,13 +140,14 @@ def extract_settings_from_ui(window) -> dict:
         elif access_type == "currentIndex":
             settings[key] = widget.currentIndex()
         elif access_type == "runtime":
-            # Особые случаи: например, cpu_mode из логики
             if key == "cpu_mode":
-                settings[key] = window.cpu_logic.cpu_mode
+                settings[key] = getattr(window.cpu_logic, "cpu_mode", "sequential")
+
     return settings
 
+
 def make_combo32(start, end, default=None):
-    """Создает выпадающий список с шагом 32"""
+    """Создаёт QComboBox с шагом 32"""
     items = [str(x) for x in range(start, end + 1, 32)]
     cb = QComboBox()
     cb.addItems(items)
