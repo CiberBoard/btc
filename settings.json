@@ -16,8 +16,7 @@
     "cpu_end_key": "000000000000000000000000000000033e7665705359f04f28b88cf898c603c9",
     "cpu_prefix": 8,
     "cpu_workers": 10,
-    "cpu_attempts": 10000000,
-    "cpu_mode": "random",
+    "cpu_attempts": "10000000",
     "cpu_priority": 5,
     "kang_pubkey": "03633cbe3ec02b9401c5effa144c5b4d22f87940259634858fc7e59b1c09937852",
     "kang_start_key": "000000000000000000000000000000033e7665705359f04f28b88cf807c603c9",
@@ -27,5 +26,10 @@
     "kang_duration": 90,
     "kang_subrange_bits": 41,
     "kang_exe_path": "C:\\Users\\PC\\Desktop\\BTC\\GPUCUDA\\Etarkangaroo.exe",
-    "kang_temp_dir": "C:\\Users\\PC\\Desktop\\BTC\\GPUCUDA\\kangaroo_temp"
+    "kang_temp_dir": "C:\\Users\\PC\\Desktop\\BTC\\GPUCUDA\\kangaroo_temp",
+    "vanity_prefix": "1MoneyN",
+    "vanity_type": 0,
+    "vanity_compressed": true,
+    "vanity_gpu": "0",
+    "vanity_cpu_threads": 20
 }

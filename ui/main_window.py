@@ -7,7 +7,7 @@ import platform
 import psutil
 import multiprocessing
 import queue
-from PyQt5.QtCore import Qt, QTimer, QRegExp
+from PyQt5.QtCore import Qt, QTimer, QRegExp, pyqtSignal, QMetaObject
 from PyQt5.QtGui import QFont, QColor, QPalette, QKeySequence, QRegExpValidator
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QHBoxLayout, QLabel, QLineEdit, QPushButton,
@@ -36,6 +36,9 @@ from ui.cpu_logic import CPULogic
 from ui.vanity_logic import VanityLogic
 
 class BitcoinGPUCPUScanner(QMainWindow):
+    # ✅ Объявляем сигнал на уровне КЛАССА
+    vanity_update_ui_signal = pyqtSignal(dict)
+
     def __init__(self):
         super().__init__()
 
@@ -78,8 +81,9 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_logic = GPULogic(self)  # Инициализируем ДО setup_ui и setup_connections
         self.cpu_logic = CPULogic(self)
         self.kangaroo_logic = KangarooLogic(self)
-
-        # --- Основная инициализация UI и подключений ---
+        self.vanity_logic = VanityLogic(self)
+        # ✅ Подключаем сигнал — ПОСЛЕ создания vanity_logic
+        self.vanity_update_ui_signal.connect(self.vanity_logic.handle_stats)
         apply_dark_theme(self)  # ✅ вместо self.set_dark_theme()
         self.ui = MainWindowUI(self)  # ✅ Создаём обёртку UI
         self.ui.setup_ui()
@@ -90,6 +94,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
             open(config.FOUND_KEYS_FILE, 'w').close()
         # --- Инициализация таймеров и системной информации ---
         # CPU queue timer
+
+
         self.queue_timer = QTimer()
         self.queue_timer.timeout.connect(self.process_queue_messages)
         self.queue_timer.start(100)  # Увеличили частоту обработки до 10 раз в секунду
@@ -105,10 +111,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             self.gpu_status_timer = None
         # =============== КОНЕЦ GPU Status Timer ===============
-        # --- Дополнительная инициализация ---
-        # Заголовок окна
-        self.vanity_logic = VanityLogic(self)
-        self.vanity_start_stop_btn.clicked.connect(self.vanity_logic.toggle_search)
 
         self.setWindowTitle("Bitcoin GPU/CPU Scanner")
         self.resize(1200, 900)  # Размер окна, если не задан в setup_ui
@@ -160,20 +162,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_pause_resume_btn.clicked.connect(self.cpu_logic.toggle_cpu_pause_resume)
         self.cpu_start_stop_btn.setShortcut(QKeySequence("Ctrl+S"))
         self.cpu_pause_resume_btn.setShortcut(QKeySequence("Ctrl+P"))
+        self.vanity_start_stop_btn.clicked.connect(self.vanity_logic.toggle_search)
         # Common connections
         self.clear_log_btn.clicked.connect(lambda: self.log_output.clear())
         # GPU timers - подключаем к методам GPULogic
         self.gpu_stats_timer = QTimer()
         self.gpu_stats_timer.timeout.connect(self.gpu_logic.update_gpu_time_display)
         self.gpu_stats_timer.start(500)  # Увеличили частоту обновления в 2 раза
-        # self.gpu_restart_timer = QTimer() # Уже создан в __init__
-        # self.gpu_restart_timer.timeout.connect(self.gpu_logic.restart_gpu_random_search) # Переносим в GPULogic.setup_gpu_connections
-        # CPU signals - подключаем к методам CPULogic
-        # self.cpu_signals.update_stats.connect(self.handle_cpu_update_stats) # Перенесено в CPULogic
-        # self.cpu_signals.log_message.connect(self.append_log) # Перенесено в CPULogic
-        # self.cpu_signals.found_key.connect(self.handle_found_key) # Перенесено в CPULogic
-        # self.cpu_signals.worker_finished.connect(self.cpu_worker_finished) # Перенесено в CPULogic
-        # System info timer
         self.sysinfo_timer = QTimer()
         self.sysinfo_timer.timeout.connect(self.update_system_info)
         self.sysinfo_timer.start(2000)
@@ -186,8 +181,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             self.gpu_status_timer = None
         # =============== КОНЕЦ GPU Status Timer ===============
-        # Вызываем метод настройки специфичных для GPU соединений
         self.gpu_logic.setup_gpu_connections()  # <-- ВАЖНО: вызываем ПОСЛЕ создания gpu_restart_timer
+
+    def emit_vanity_stats(self, stats: dict):
+        self.vanity_update_ui_signal.emit(stats)
 
     def setup_converter_tab(self):
         """Создаёт вкладку конвертера HEX → WIF и адреса"""
@@ -721,96 +718,43 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.append_log(f"Не удалось открыть файл лога: {str(e)}", "error")
 
     def load_settings(self):
-        # ... (оставляем как есть)
+        """Загружает настройки из settings.json"""
         settings_path = os.path.join(config.BASE_DIR, "settings.json")
         if os.path.exists(settings_path):
             try:
-                with open(settings_path, "r") as f:
+                with open(settings_path, "r", encoding="utf-8") as f:
                     settings = json.load(f)
-                # GPU settings
-                self.gpu_target_edit.setText(settings.get("gpu_target", ""))
-                self.gpu_start_key_edit.setText(settings.get("gpu_start_key", "1"))
-                self.gpu_end_key_edit.setText(
-                    settings.get("gpu_end_key", config.MAX_KEY_HEX))
-                self.gpu_device_combo.setCurrentText(str(settings.get("gpu_device", "0")))
-                self.blocks_combo.setCurrentText(str(settings.get("blocks", "512")))
-                self.threads_combo.setCurrentText(str(settings.get("threads", "512")))
-                self.points_combo.setCurrentText(str(settings.get("points", "512")))
-                self.gpu_random_checkbox.setChecked(settings.get("gpu_random_mode", False))
-                self.gpu_restart_interval_combo.setCurrentText(str(settings.get("gpu_restart_interval", "300")))
-                self.gpu_min_range_edit.setText(str(settings.get("gpu_min_range_size", "134217728")))
-                self.gpu_max_range_edit.setText(str(settings.get("gpu_max_range_size", "536870912")))
-                self.gpu_priority_combo.setCurrentIndex(settings.get("gpu_priority", 0))
-                # CPU settings
-                self.cpu_target_edit.setText(settings.get("cpu_target", ""))
-                self.cpu_start_key_edit.setText(settings.get("cpu_start_key", "1"))
-                self.cpu_end_key_edit.setText(settings.get("cpu_end_key", config.MAX_KEY_HEX))
-                self.cpu_prefix_spin.setValue(settings.get("cpu_prefix", 8))
-                self.cpu_workers_spin.setValue(settings.get("cpu_workers", self.optimal_workers))
-                self.cpu_attempts_edit.setText(str(settings.get("cpu_attempts", 10000000)))
-                self.cpu_mode_combo.setCurrentIndex(1 if settings.get("cpu_mode", "sequential") == "random" else 0)
-                self.cpu_priority_combo.setCurrentIndex(settings.get("cpu_priority", 3))
-                self.append_log("Настройки загружены", "success")
-                # Kangaroo settings
-                self.kang_pubkey_edit.setText(settings.get("kang_pubkey", ""))
-                self.kang_start_key_edit.setText(settings.get("kang_start_key", "1"))
-                self.kang_end_key_edit.setText(settings.get("kang_end_key", "FFFFFFFFFFFFFFFF"))
-                self.kang_dp_spin.setValue(settings.get("kang_dp", 20))
-                self.kang_grid_edit.setText(settings.get("kang_grid", "256x256"))
-                self.kang_duration_spin.setValue(settings.get("kang_duration", 300))
-                self.kang_subrange_spin.setValue(settings.get("kang_subrange_bits", 32))
-                self.kang_exe_edit.setText(settings.get("kang_exe_path", os.path.join(config.BASE_DIR, "Etarkangaroo.exe")))
-                self.kang_temp_dir_edit.setText(settings.get("kang_temp_dir", os.path.join(config.BASE_DIR, "kangaroo_temp")))
+
+                # ✅ ИСПОЛЬЗУЕМ СИСТЕМУ ИЗ config.py
+                config.apply_settings_to_ui(self, settings)
+
+                # ✅ Специальная обработка для runtime полей
+                if "cpu_mode" in settings:
+                    self.cpu_logic.cpu_mode = settings["cpu_mode"]
+                    idx = 1 if settings["cpu_mode"] == "random" else 0
+                    self.cpu_mode_combo.setCurrentIndex(idx)
+
+                self.append_log("✅ Настройки загружены", "success")
 
             except Exception as e:
                 logger.error(f"Ошибка загрузки настроек: {str(e)}")
-                self.append_log("Ошибка загрузки настроек: " + str(e), "error")
+                self.append_log(f"❌ Ошибка загрузки настроек: {str(e)}", "error")
 
     def save_settings(self):
-        # ... (оставляем как есть)
-        settings = {
-            # GPU settings
-            "gpu_target": self.gpu_target_edit.text(),
-            "gpu_start_key": self.gpu_start_key_edit.text(),
-            "gpu_end_key": self.gpu_end_key_edit.text(),
-            "gpu_device": self.gpu_device_combo.currentText(),
-            "blocks": self.blocks_combo.currentText(),
-            "threads": self.threads_combo.currentText(),
-            "points": self.points_combo.currentText(),
-            "gpu_random_mode": self.gpu_random_checkbox.isChecked(),
-            "gpu_restart_interval": self.gpu_restart_interval_combo.currentText(),
-            "gpu_min_range_size": self.gpu_min_range_edit.text(),
-            "gpu_max_range_size": self.gpu_max_range_edit.text(),
-            "gpu_priority": self.gpu_priority_combo.currentIndex(),
-            # CPU settings
-            "cpu_target": self.cpu_target_edit.text(),
-            "cpu_start_key": self.cpu_start_key_edit.text(),
-            "cpu_end_key": self.cpu_end_key_edit.text(),
-            "cpu_prefix": self.cpu_prefix_spin.value(),
-            "cpu_workers": self.cpu_workers_spin.value(),
-            "cpu_attempts": int(self.cpu_attempts_edit.text()) if self.cpu_attempts_edit.isEnabled() else 10000000,
-            "cpu_mode": self.cpu_logic.cpu_mode,  # Заменено
-            "cpu_priority": self.cpu_priority_combo.currentIndex(),
-            # Kangaroo settings
-            "kang_pubkey": self.kang_pubkey_edit.text(),
-            "kang_start_key": self.kang_start_key_edit.text(),
-            "kang_end_key": self.kang_end_key_edit.text(),
-            "kang_dp": self.kang_dp_spin.value(),
-            "kang_grid": self.kang_grid_edit.text().strip(),
-            "kang_duration": self.kang_duration_spin.value(),
-            "kang_subrange_bits": self.kang_subrange_spin.value(),
-            "kang_exe_path": self.kang_exe_edit.text().strip(),
-            "kang_temp_dir": self.kang_temp_dir_edit.text().strip(),
-
-        }
-        settings_path = os.path.join(config.BASE_DIR, "settings.json")
+        """Сохраняет настройки в settings.json"""
         try:
-            with open(settings_path, "w") as f:
-                json.dump(settings, f, indent=4)
-            self.append_log("Настройки сохранены", "success")
+            # ✅ ИСПОЛЬЗУЕМ СИСТЕМУ ИЗ config.py
+            settings = config.extract_settings_from_ui(self)
+
+            settings_path = os.path.join(config.BASE_DIR, "settings.json")
+            with open(settings_path, "w", encoding="utf-8") as f:
+                json.dump(settings, f, indent=4, ensure_ascii=False)
+
+            self.append_log("✅ Настройки сохранены", "success")
+
         except Exception as e:
             logger.error(f"Ошибка сохранения настроек: {str(e)}")
-            self.append_log(f"Ошибка сохранения настроек: {str(e)}", "error")
+            self.append_log(f"❌ Ошибка сохранения: {str(e)}", "error")
 
     def close_queue(self):
         # try: # Заменено
@@ -884,42 +828,61 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     # =============== КОНЕЦ НОВОГО ===============
     def closeEvent(self, event):
-        # Проверка активных процессов
-        active_processes = False
-        # if self.gpu_is_running: # Заменено
+        """Обработка закрытия программы"""
+        # ✅ Проверяем активные процессы
+        active_processes = []
+
         if self.gpu_logic.gpu_is_running:
-            active_processes = True
-        # if self.processes: # Заменено
+            active_processes.append("GPU")
+
         if self.cpu_logic.processes:
-            active_processes = True
+            active_processes.append("CPU")
+
+        if self.kangaroo_logic.is_running:
+            active_processes.append("Kangaroo")
+
+        if self.vanity_logic.is_running:
+            active_processes.append("VanitySearch")
+
+        # ✅ Если есть активные процессы - спрашиваем подтверждение
         if active_processes:
+            from PyQt5.QtWidgets import QMessageBox
             reply = QMessageBox.question(
-                self, 'Подтверждение закрытия',
-                "Активные процессы все еще выполняются. Вы уверены, что хотите закрыть приложение?",
+                self,
+                'Подтверждение закрытия',
+                f"Активные процессы: {', '.join(active_processes)}.\n"
+                f"Вы уверены, что хотите закрыть программу?",
                 QMessageBox.Yes | QMessageBox.No
             )
             if reply == QMessageBox.No:
                 event.ignore()
                 return
-        if self.kangaroo_logic.is_running:
-            self.kangaroo_logic.stop_kangaroo_search()
-        # Корректное завершение
+
+        # ✅ СОХРАНЯЕМ НАСТРОЙКИ ПЕРЕД ЗАКРЫТИЕМ
         self.save_settings()
-        # if self.gpu_is_running: # Заменено
-        #     self.stop_gpu_search() # Заменено
+
+        # ✅ Останавливаем все процессы
         if self.gpu_logic.gpu_is_running:
             self.gpu_logic.stop_gpu_search()
-        # if self.processes: # Заменено
-        #     self.stop_cpu_search() # Заменено
+
         if self.cpu_logic.processes:
             self.cpu_logic.stop_cpu_search()
+
+        if self.kangaroo_logic.is_running:
+            self.kangaroo_logic.stop_kangaroo_search()
+
+        if self.vanity_logic.is_running:
+            self.vanity_logic.stop_search()
+
+        # ✅ Закрываем очередь CPU
         self.close_queue()
-        # =============== НОВОЕ: Остановка pynvml ===============
+
+        # ✅ Останавливаем pynvml
         if PYNVML_AVAILABLE and self.gpu_monitor_available:
             try:
                 pynvml.nvmlShutdown()
-                logger.info("pynvml выключен.")
+                logger.info("pynvml выключен")
             except Exception as e:
                 logger.error(f"Ошибка выключения pynvml: {e}")
-        # =============== КОНЕЦ НОВОГО ===============
+
         event.accept()
