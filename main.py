@@ -3,8 +3,10 @@ import sys
 import os
 from PyQt5.QtWidgets import QApplication
 from ui.main_window import BitcoinGPUCPUScanner
+import multiprocessing
 
 def main():
+    multiprocessing.freeze_support()  # ← ЭТО КРИТИЧНО для Windows!
     # Убедимся, что QApplication создаётся ОДИН раз
     app = QApplication(sys.argv)
 

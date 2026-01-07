@@ -29,7 +29,7 @@
     "kang_temp_dir": "C:\\Users\\PC\\Desktop\\BTC\\GPUCUDA\\kangaroo_temp",
     "vanity_prefix": "1MoneyN",
     "vanity_type": 0,
-    "vanity_compressed": true,
+    "vanity_compressed": false,
     "vanity_gpu": "0",
-    "vanity_cpu_threads": 20
+    "vanity_cpu_threads": 16
 }
