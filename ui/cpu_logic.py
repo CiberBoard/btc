@@ -24,7 +24,9 @@ try:
 except ImportError:
     PYNVML_AVAILABLE = False
     pynvml = None
-logger = setup_logger()
+import logging  # ← ДОБАВЛЕНО
+
+logger = logging.getLogger(__name__)
 
 
 

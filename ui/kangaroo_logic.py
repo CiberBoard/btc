@@ -4,9 +4,9 @@ import time
 from PyQt5.QtCore import QThread, QTimer
 from PyQt5.QtWidgets import QMessageBox
 from core.kangaroo_worker import KangarooWorker
-from utils.helpers import setup_logger
+import logging  # ← ДОБАВЛЕНО
 
-logger = setup_logger()
+logger = logging.getLogger(__name__)
 
 
 class KangarooLogic:

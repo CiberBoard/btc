@@ -7,9 +7,10 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMessageBox
 from utils.helpers import validate_key_range
 import core.gpu_scanner as gpu_core
-from core.gpu_scanner import logger
 from collections import deque
 from threading import Thread
+import logging  # ← ДОБАВИТЬ
+logger = logging.getLogger(__name__)  # ← ИСПОЛЬЗУЕТ СУЩЕСТВУЮЩИЙ ЛОГГЕР
 
 class GPULogic:
     def __init__(self, main_window):

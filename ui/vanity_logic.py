@@ -8,7 +8,9 @@ from PyQt5.QtCore import QThread, QTimer, pyqtSignal
 from utils.helpers import setup_logger
 import config
 
-logger = setup_logger()
+import logging  # ← ДОБАВЛЕНО
+
+logger = logging.getLogger(__name__)
 
 
 class VanityOutputReader(QThread):
