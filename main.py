@@ -1,6 +1,21 @@
 # main.py
 import sys
 import os
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"  # Для Windows + Intel MKL
+import ctypes
+try:
+    ctypes.windll.kernel32.SetErrorMode(0x0002 | 0x0004)  # SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX
+except:
+    pass
+import faulthandler
+faulthandler.enable()  # Покажет реальную ошибку вместо 0xC0000409
+
+
 import logging
 
 # 🔑 КРИТИЧНО: Очищаем ВСЕ handlers ДО импорта наших модулей

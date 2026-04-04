@@ -39,6 +39,9 @@ logger = logging.getLogger(__name__)
 from ui.gpu_logic import GPULogic
 from ui.cpu_logic import CPULogic
 from ui.vanity_logic import VanityLogic
+# В начале файла, после других импортов
+# В методе run_predict_analysis (добавьте в начало метода):
+
 
 
 class BitcoinGPUCPUScanner(QMainWindow):
@@ -256,6 +259,9 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         self.gpu_logic.setup_gpu_connections()
 
+        # Predict connections
+        self.setup_predict_connections()
+
     # ==================== КОНВЕРТЕР ====================
 
     def setup_converter_tab(self) -> None:
@@ -381,6 +387,330 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_attempts_edit.setEnabled(is_random)
         self.cpu_logic.cpu_mode = "random" if is_random else "sequential"
 
+    # ==================== PREDICT TAB METHODS ====================
+
+    def setup_predict_connections(self):
+        """Подключение сигналов вкладки Predict"""
+        self.predict_browse_btn.clicked.connect(self.browse_predict_file)
+        self.preview_keys_btn.clicked.connect(self.preview_predict_keys)
+        self.predict_run_btn.clicked.connect(self.run_predict_analysis)
+
+    def browse_predict_file(self):
+        """Выбор файла с ключами"""
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, "Выберите файл с ключами", config.BASE_DIR,
+            "Text Files (*.txt);;All Files (*.*)"
+        )
+        if file_path:
+            self.predict_file_edit.setText(file_path)
+            self.load_keys_for_preview(file_path)
+
+    def load_keys_for_preview(self, file_path: str):
+        # ✅ ДОБАВИТЬ ЭТУ СТРОКУ:
+        from ui.predict_logic import parse_keys_from_file, validate_keys
+
+        """Загрузка и валидация ключей из файла ЛЮБОГО формата"""
+        try:
+            # Используем универсальный парсер из predict_logic.py
+            raw_keys = parse_keys_from_file(file_path)
+            valid_keys, error = validate_keys(raw_keys)
+
+            if error or len(valid_keys) < 1:
+                self.predict_keys_count_label.setText("0 валидных")
+                self.append_log(f"⚠️ {error}", "warning")
+                return
+
+            self.predict_keys_count_label.setText(f"{len(valid_keys)} валидных ключей")
+            self.append_log(f"✅ Загружено {len(valid_keys)} ключей из {os.path.basename(file_path)}", "success")
+
+        except Exception as e:
+            self.append_log(f"❌ Ошибка загрузки: {str(e)}", "error")
+
+    def preview_predict_keys(self):
+        # ✅ ДОБАВИТЬ ЭТУ СТРОКУ:
+        from ui.predict_logic import parse_keys_from_file, validate_keys
+
+        """Показать первые 10 ключей"""
+        file_path = self.predict_file_edit.text().strip()
+        if not file_path or not os.path.exists(file_path):
+            QMessageBox.warning(self, "Предпросмотр", "Сначала выберите файл")
+            return
+
+        keys, _ = validate_keys(parse_keys_from_file(file_path))
+        if not keys:
+            QMessageBox.information(self, "Предпросмотр", "Валидные ключи не найдены")
+            return
+
+        preview = "\n".join([f"{i + 1}. {k[:32]}...{k[-8:]}" for i, k in enumerate(keys[:10])])
+        if len(keys) > 10:
+            preview += f"\n... и ещё {len(keys) - 10} ключей"
+        QMessageBox.information(self, "Предпросмотр ключей", preview)
+
+    def run_predict_analysis(self):
+        from ui.predict_logic import PredictWorker, parse_keys_from_file, validate_keys
+
+        file_path = self.predict_file_edit.text().strip()
+        if not file_path or not os.path.exists(file_path):
+            QMessageBox.warning(self, "Ошибка", "Выберите файл с ключами")
+            return
+
+        raw_keys = parse_keys_from_file(file_path)
+        valid_keys, err = validate_keys(raw_keys)
+
+        if err or len(valid_keys) < 3:
+            QMessageBox.warning(self, "Ошибка", err or "Нужно минимум 3 ключа")
+            return
+
+        params = {
+            'q_low': self.predict_q_low_spin.value() / 100,
+            'q_high': self.predict_q_high_spin.value() / 100,
+            'use_outlier_filter': self.predict_outlier_filter_cb.isChecked(),
+            'weight_recent': self.predict_weight_recent_cb.isChecked(),
+            'use_ensemble': self.predict_ensemble_cb.isChecked(),
+            'use_gaussian_kde': self.predict_kde_cb.isChecked(),
+            'use_spline_fit': self.predict_spline_cb.isChecked(),
+            'ensemble_models': self.predict_ensemble_models_spin.value(),
+            'output_plot': os.path.join(config.BASE_DIR, 'predict_analysis.png')
+        }
+
+        self.predict_status_label.setText("⏳ Запуск анализа...")
+        self.predict_progress_bar.show()
+        self.predict_progress_bar.setValue(0)
+        self.predict_run_btn.setEnabled(False)
+        self.predict_results_table.setRowCount(0)
+
+        self.predict_worker = PredictWorker(valid_keys, params)
+        self.predict_worker.progress_update.connect(self.on_predict_progress)
+        self.predict_worker.analysis_finished.connect(self.on_predict_finished)
+        self.predict_worker.error_occurred.connect(self.on_predict_error)
+        self.predict_worker.start()
+
+    def on_predict_progress(self, percent: int, message: str):
+        """Обновление прогресс-бара"""
+        self.predict_progress_bar.setValue(percent)
+        self.predict_status_label.setText(f"⏳ {message}")
+
+    def on_predict_finished(self, result: dict):
+        """Обработка успешного завершения"""
+        self.predict_progress_bar.hide()
+        self.predict_run_btn.setEnabled(True)
+        self.predict_status_label.setText("✅ Анализ завершён")
+
+        # Заполнение таблицы
+        rows_data = [
+            ("🎯 Следующий Puzzle", f"#{result['next_puzzle']}"),
+            ("📏 Сужение диапазона", f"{result['reduction_percent']:.2f}%"),
+            ("📐 Min границы", f"0x{result['final_min_hex']}"),
+            ("📐 Max границы", f"0x{result['final_max_hex']}"),
+            ("📊 Ширина диапазона", f"{result['range_width']:.2e}"),
+            ("⏱️ Время расчёта", f"{result.get('elapsed_seconds', 0):.2f} сек"),
+            ("📈 Тренд (последние 5)", f"{result['stats']['recent_trend']:.6f}"),
+        ]
+
+        for param, value in rows_data:
+            row = self.predict_results_table.rowCount()
+            self.predict_results_table.insertRow(row)
+            self.predict_results_table.setItem(row, 0, QTableWidgetItem(param))
+            item = QTableWidgetItem(value)
+            item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            self.predict_results_table.setItem(row, 1, item)
+
+        # Отображение графика
+        self.show_predict_plot(result.get('plot_path', ''))
+        self.append_log(f"📊 Анализ завершён. Сужение: {result['reduction_percent']:.2f}%", "success")
+        # Заполнение таблицы диапазонов
+        self._fill_ranges_table(result.get('ranges', {}))
+
+    def on_predict_error(self, error_msg: str):
+        """Обработка ошибки"""
+        self.predict_progress_bar.hide()
+        self.predict_run_btn.setEnabled(True)
+        self.predict_status_label.setText("❌ Ошибка выполнения")
+        self.append_log(f"❌ {error_msg}", "error")
+        QMessageBox.critical(self, "Ошибка анализа", error_msg)
+
+    def show_predict_plot(self, plot_path: str):
+        """Отображение графика с плавной загрузкой"""
+        if not plot_path or not os.path.exists(plot_path) or os.path.getsize(plot_path) < 100:
+            self.predict_plot_label.setText("📊 График: ожидание данных...")
+            self.predict_plot_label.setStyleSheet("""
+                QLabel { color: #7f8c8d; font-size: 11pt; padding: 20px; 
+                         background: #1a2332; border: 2px dashed #34495e; border-radius: 6px; }
+            """)
+            return
+
+        from PyQt5.QtGui import QPixmap
+        pixmap = QPixmap(plot_path)
+        if pixmap.isNull():
+            self.predict_plot_label.setText("❌ Ошибка загрузки графика")
+            return
+
+        # Адаптивное масштабирование с сохранением пропорций
+        max_width = max(600, self.predict_scroll.width() - 50)
+        max_height = 500
+        if pixmap.width() > max_width or pixmap.height() > max_height:
+            pixmap = pixmap.scaled(max_width, max_height, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+
+        self.predict_plot_label.setPixmap(pixmap)
+        self.predict_plot_label.setText("")
+        self.predict_plot_label.setStyleSheet("""
+            QLabel {
+                background: #1a2332;
+                border: 1px solid #34495e;
+                border-radius: 6px;
+                padding: 10px;
+            }
+        """)
+
+        # Центрируем контент
+        if hasattr(self.predict_scroll, 'widget'):
+            container = self.predict_scroll.widget()
+            if container and container.layout():
+                container.layout().setAlignment(Qt.AlignCenter)
+
+    def export_predict_results(self):
+        """Экспорт таблицы результатов"""
+        if self.predict_results_table.rowCount() == 0:
+            QMessageBox.information(self, "Экспорт", "Нет данных для экспорта")
+            return
+
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Сохранить результаты", "predict_results.txt", "Text Files (*.txt)"
+        )
+        if not path: return
+
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write("BTC Puzzle Analyzer v2 - Результаты\n")
+            f.write("=" * 50 + "\n")
+            for row in range(self.predict_results_table.rowCount()):
+                p = self.predict_results_table.item(row, 0).text()
+                v = self.predict_results_table.item(row, 1).text()
+                f.write(f"{p}: {v}\n")
+        self.append_log(f"💾 Результаты сохранены в {path}", "success")
+
+    def _fill_ranges_table(self, ranges: dict):
+        """Заполняет таблицу диапазонов моделей с кнопками копирования"""
+        if not hasattr(self, 'predict_ranges_table') or not ranges:
+            return
+
+        table = self.predict_ranges_table
+        table.setRowCount(0)  # Очистка
+
+        # Порядок, иконки и цвета
+        order = [
+            ('Position', '🔵', '#3498db'),
+            ('LogGrowth', '🟢', '#2ecc71'),
+            ('Ensemble', '🟠', '#e67e22'),
+            ('Final', '🔴', '#e74c3c')
+        ]
+
+        for name, icon, color in order:
+            if name not in ranges:
+                continue
+            r = ranges[name]
+            row = table.rowCount()
+            table.insertRow(row)
+
+            # 1. Название модели
+            item = QTableWidgetItem(f"{icon} {name}")
+            item.setTextAlignment(Qt.AlignCenter)
+            if name == 'Final':
+                font = item.font()
+                font.setBold(True)
+                item.setFont(font)
+                item.setForeground(QColor(color))
+            table.setItem(row, 0, item)
+
+            # 2. Диапазон в hex (сокращённо)
+            min_h = r.get('min_hex', '')
+            max_h = r.get('max_hex', '')
+            range_txt = f"{min_h[:16]}...{max_h[-16:]}" if min_h and max_h else "N/A"
+            item = QTableWidgetItem(range_txt)
+            item.setToolTip(f"Min: 0x{min_h}\nMax: 0x{max_h}" if min_h and max_h else "Нет данных")
+            if name == 'Final':
+                item.setForeground(QColor(color))
+            table.setItem(row, 1, item)
+
+            # 3. Ширина диапазона
+            width = r.get('width', 0)
+            width_txt = f"{width:.2e}" if width > 0 else "N/A"
+            item = QTableWidgetItem(width_txt)
+            item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            item.setToolTip(f"Ширина: {int(width):,} ключей" if width > 0 else "Ширина неизвестна")
+            if name == 'Final':
+                item.setForeground(QColor(color))
+            table.setItem(row, 2, item)
+
+            # 🔹 4. КНОПКА КОПИРОВАНИЯ
+            copy_btn = QPushButton("📋")
+            copy_btn.setFixedWidth(36)
+            copy_btn.setFixedHeight(28)
+            copy_btn.setStyleSheet(f"""
+                QPushButton {{
+                    background: {color};
+                    border: 1px solid #34495e;
+                    border-radius: 4px;
+                    color: white;
+                    font-weight: bold;
+                    font-size: 10pt;
+                }}
+                QPushButton:hover {{
+                    background: #ecf0f1;
+                    color: #2c3e50;
+                    border: 1px solid {color};
+                }}
+                QPushButton:pressed {{
+                    background: #bdc3c7;
+                }}
+            """)
+            # Сохраняем данные диапазона в кнопке
+            copy_btn.setProperty('range_data', {
+                'model': name,
+                'min_hex': min_h,
+                'max_hex': max_h,
+                'width': width
+            })
+            # Подключаем сигнал
+            copy_btn.clicked.connect(self._on_copy_range_clicked)
+
+            # Центрируем кнопку в ячейке
+            btn_container = QWidget()
+            btn_layout = QHBoxLayout(btn_container)
+            btn_layout.setContentsMargins(0, 0, 0, 0)
+            btn_layout.addStretch()
+            btn_layout.addWidget(copy_btn)
+            btn_layout.addStretch()
+            table.setCellWidget(row, 3, btn_container)
+
+    def _on_copy_range_clicked(self):
+        """Обработчик кнопки копирования диапазона"""
+        btn = self.sender()
+        if not btn:
+            return
+
+        data = btn.property('range_data')
+        if not data:
+            return
+
+        # Формируем текст для копирования (удобный для вставки в поиск)
+        copy_text = (
+            f"# {data['model']} range — BTC Puzzle Analyzer\n"
+            f"start_key = \"{data['min_hex']}\"\n"
+            f"end_key = \"{data['max_hex']}\"\n"
+            f"# Ширина: {data['width']:.2e} ключей"
+        )
+
+        # Копируем в буфер обмена
+        QApplication.clipboard().setText(copy_text)
+
+        # Показываем уведомление
+        model_name = data.get('model', 'Range')
+        self.append_log(f"📋 Диапазон {model_name} скопирован в буфер обмена", "success")
+
+        # Визуальная обратная связь на кнопке (мигание)
+        original_style = btn.styleSheet()
+        btn.setStyleSheet(original_style + "QPushButton { background: #2ecc71; }")
+        QTimer.singleShot(200, lambda: btn.setStyleSheet(original_style))
     # ==================== МОНИТОРИНГ СИСТЕМЫ ====================
 
     def update_system_info(self) -> None:

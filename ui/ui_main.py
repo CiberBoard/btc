@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
     QPushButton, QTextEdit, QGroupBox, QGridLayout,
     QTableWidget, QTableWidgetItem, QHeaderView,
     QProgressBar, QCheckBox, QComboBox, QTabWidget,
-    QFileDialog, QSpinBox, QMenu, QApplication
+    QFileDialog, QSpinBox, QMenu, QApplication, QScrollArea
 )
 
 import config
@@ -778,6 +778,341 @@ class MainWindowUI:
 
         self.parent.main_tabs.addTab(log_tab, "Лог работы")
         # =============== END LOG TAB ===============
+
+        # =============== PREDICT TAB ===============
+        predict_tab = QWidget()
+        predict_layout = QVBoxLayout(predict_tab)
+        predict_layout.setSpacing(12)
+        predict_layout.setContentsMargins(15, 15, 15, 15)
+
+        # 🎨 Заголовок
+        header_label = QLabel("🔮 BTC Puzzle Analyzer v2")
+        header_label.setStyleSheet("""
+            QLabel { font-size: 16pt; font-weight: bold; color: #9b59b6; padding: 8px;
+                     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1a2332, stop:1 #2c3e50);
+                     border-radius: 6px; }
+        """)
+        header_label.setAlignment(Qt.AlignCenter)
+        predict_layout.addWidget(header_label)
+
+        # ℹ️ Инструкция
+        info_box = QLabel("📌 <b>Как использовать:</b> Загрузите файл → настройте параметры → «Запустить анализ» → получите прогноз.")
+        info_box.setWordWrap(True)
+        info_box.setStyleSheet("color: #bdc3c7; font-size: 9pt; padding: 10px; background: #1a2332; border-left: 4px solid #9b59b6; border-radius: 4px;")
+        predict_layout.addWidget(info_box)
+
+        # 📁 Секция 1: Файл
+        file_group = QGroupBox("📁 Данные")
+        file_group.setStyleSheet("QGroupBox { font-weight: bold; color: #ecf0f1; margin-top: 10px; border: 1px solid #34495e; border-radius: 6px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #9b59b6; }")
+        file_layout = QGridLayout(file_group)
+        file_layout.setSpacing(10)
+        file_layout.addWidget(QLabel("Файл с ключами:"), 0, 0)
+        self.parent.predict_file_edit = QLineEdit()
+        self.parent.predict_file_edit.setPlaceholderText("Например: KNOWN_KEYS_HEX.txt")
+        self.parent.predict_file_edit.setStyleSheet("QLineEdit { background: #2c3e50; border: 1px solid #34495e; border-radius: 4px; padding: 5px; color: #ecf0f1; } QLineEdit:focus { border: 1px solid #9b59b6; }")
+        file_layout.addWidget(self.parent.predict_file_edit, 0, 1)
+        self.parent.predict_browse_btn = QPushButton("📁 Обзор...")
+        self.parent.predict_browse_btn.setFixedWidth(90)
+        self.parent.predict_browse_btn.setStyleSheet("QPushButton { background: #34495e; border: 1px solid #34495e; border-radius: 4px; padding: 5px 10px; color: #ecf0f1; } QPushButton:hover { background: #3d566e; border: 1px solid #9b59b6; }")
+        file_layout.addWidget(self.parent.predict_browse_btn, 0, 2)
+        status_row = QHBoxLayout()
+        status_row.addWidget(QLabel("✅ Ключей:"))
+        self.parent.predict_keys_count_label = QLabel("0")
+        self.parent.predict_keys_count_label.setStyleSheet("color: #2ecc71; font-weight: bold;")
+        status_row.addWidget(self.parent.predict_keys_count_label)
+        status_row.addStretch()
+        self.parent.preview_keys_btn = QPushButton("👁️ Предпросмотр")
+        self.parent.preview_keys_btn.setFixedWidth(120)
+        self.parent.preview_keys_btn.setStyleSheet("QPushButton { background: #2c3e50; border: 1px solid #34495e; border-radius: 4px; color: #3498db; } QPushButton:hover { background: #34495e; }")
+        status_row.addWidget(self.parent.preview_keys_btn)
+        file_layout.addLayout(status_row, 1, 0, 1, 3)
+        predict_layout.addWidget(file_group)
+
+        # ⚙️ Секция 2: Параметры
+        params_group = QGroupBox("⚙️ Параметры анализа")
+        params_group.setStyleSheet("QGroupBox { font-weight: bold; color: #ecf0f1; margin-top: 10px; border: 1px solid #34495e; border-radius: 6px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #e67e22; }")
+        params_layout = QGridLayout(params_group)
+        params_layout.setSpacing(8)
+        params_layout.setColumnStretch(1, 1)
+        params_layout.setColumnStretch(3, 1)
+        # Левая колонка
+        params_layout.addWidget(QLabel("Q Low:"), 0, 0)
+        self.parent.predict_q_low_spin = QSpinBox()
+        self.parent.predict_q_low_spin.setRange(0, 100)
+        self.parent.predict_q_low_spin.setValue(25)
+        self.parent.predict_q_low_spin.setSuffix("%")
+        self.parent.predict_q_low_spin.setStyleSheet("QSpinBox { background: #2c3e50; border: 1px solid #34495e; border-radius: 4px; padding: 3px; color: #ecf0f1; }")
+        params_layout.addWidget(self.parent.predict_q_low_spin, 0, 1)
+        params_layout.addWidget(QLabel("Q High:"), 1, 0)
+        self.parent.predict_q_high_spin = QSpinBox()
+        self.parent.predict_q_high_spin.setRange(0, 100)
+        self.parent.predict_q_high_spin.setValue(75)
+        self.parent.predict_q_high_spin.setSuffix("%")
+        self.parent.predict_q_high_spin.setStyleSheet(self.parent.predict_q_low_spin.styleSheet())
+        params_layout.addWidget(self.parent.predict_q_high_spin, 1, 1)
+        self.parent.predict_outlier_filter_cb = QCheckBox("Фильтр выбросов")
+        self.parent.predict_outlier_filter_cb.setChecked(True)
+        self.parent.predict_outlier_filter_cb.setStyleSheet("color: #bdc3c7;")
+        params_layout.addWidget(self.parent.predict_outlier_filter_cb, 2, 0, 1, 2)
+        self.parent.predict_weight_recent_cb = QCheckBox("Вес свежих данных")
+        self.parent.predict_weight_recent_cb.setChecked(True)
+        self.parent.predict_weight_recent_cb.setStyleSheet("color: #bdc3c7;")
+        params_layout.addWidget(self.parent.predict_weight_recent_cb, 3, 0, 1, 2)
+        self.parent.predict_log_growth_cb = QCheckBox("Логарифмический рост")
+        self.parent.predict_log_growth_cb.setChecked(True)
+        self.parent.predict_log_growth_cb.setStyleSheet("color: #bdc3c7;")
+        params_layout.addWidget(self.parent.predict_log_growth_cb, 4, 0, 1, 2)
+        # Правая колонка
+        self.parent.predict_position_model_cb = QCheckBox("Модель позиций")
+        self.parent.predict_position_model_cb.setChecked(True)
+        self.parent.predict_position_model_cb.setStyleSheet("color: #bdc3c7;")
+        params_layout.addWidget(self.parent.predict_position_model_cb, 2, 2, 1, 2)
+        self.parent.predict_ensemble_cb = QCheckBox("Ансамбль моделей")
+        self.parent.predict_ensemble_cb.setChecked(True)
+        self.parent.predict_ensemble_cb.setStyleSheet("color: #bdc3c7;")
+        params_layout.addWidget(self.parent.predict_ensemble_cb, 3, 2, 1, 2)
+        self.parent.predict_kde_cb = QCheckBox("Gaussian KDE")
+        self.parent.predict_kde_cb.setChecked(True)
+        self.parent.predict_kde_cb.setStyleSheet("color: #bdc3c7;")
+        params_layout.addWidget(self.parent.predict_kde_cb, 4, 2, 1, 2)
+        self.parent.predict_spline_cb = QCheckBox("Spline-сглаживание")
+        self.parent.predict_spline_cb.setChecked(True)
+        self.parent.predict_spline_cb.setStyleSheet("color: #bdc3c7;")
+        params_layout.addWidget(self.parent.predict_spline_cb, 5, 0, 1, 2)
+        params_layout.addWidget(QLabel("Моделей:"), 6, 0)
+        self.parent.predict_ensemble_models_spin = QSpinBox()
+        self.parent.predict_ensemble_models_spin.setRange(1, 10)
+        self.parent.predict_ensemble_models_spin.setValue(3)
+        self.parent.predict_ensemble_models_spin.setStyleSheet(self.parent.predict_q_low_spin.styleSheet())
+        params_layout.addWidget(self.parent.predict_ensemble_models_spin, 6, 1)
+        params_layout.addWidget(QLabel("KDE точек:"), 6, 2)
+        self.parent.predict_kde_points_spin = QSpinBox()
+        self.parent.predict_kde_points_spin.setRange(10000, 1000000)
+        self.parent.predict_kde_points_spin.setValue(500000)
+        self.parent.predict_kde_points_spin.setSingleStep(50000)
+        self.parent.predict_kde_points_spin.setStyleSheet(self.parent.predict_q_low_spin.styleSheet())
+        params_layout.addWidget(self.parent.predict_kde_points_spin, 6, 3)
+        predict_layout.addWidget(params_group)
+
+        # 🚀 Кнопка запуска
+        btn_layout = QHBoxLayout()
+        self.parent.predict_run_btn = QPushButton("🔮 Запустить анализ")
+        self.parent.predict_run_btn.setMinimumHeight(50)
+        self.parent.predict_run_btn.setStyleSheet("""
+            QPushButton { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #9b59b6, stop:1 #8e44ad);
+                         font-weight: bold; font-size: 13pt; color: white; border: 2px solid #7d3c98; border-radius: 8px; padding: 8px; }
+            QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #8e44ad, stop:1 #7d3c98); border: 2px solid #9b59b6; }
+            QPushButton:pressed { background: #7d3c98; border: 2px solid #6c3483; }
+            QPushButton:disabled { background: #34495e; border: 2px solid #34495e; color: #7f8c8d; }
+        """)
+        btn_layout.addWidget(self.parent.predict_run_btn)
+        predict_layout.addLayout(btn_layout)
+
+        # 📊 Секция 3: Результаты
+        # 📊 Секция 3: Результаты (стабильная версия)
+        results_group = QGroupBox("📊 Результаты анализа")
+        results_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #ecf0f1;
+                margin-top: 10px;
+                border: 1px solid #34495e;
+                border-radius: 6px;
+                padding: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px;
+                color: #2ecc71;
+            }
+        """)
+        results_layout = QVBoxLayout(results_group)
+        results_layout.setSpacing(12)
+        results_layout.setContentsMargins(10, 10, 10, 10)
+
+        # 1️⃣ Статус + прогресс (фиксированная высота)
+        status_layout = QHBoxLayout()
+        status_layout.setSpacing(10)
+        self.parent.predict_status_label = QLabel("⏳ Ожидание запуска")
+        self.parent.predict_status_label.setStyleSheet("""
+            QLabel {
+                font-weight: bold;
+                color: #3498db;
+                padding: 6px 10px;
+                background: #1a2332;
+                border-radius: 4px;
+                border: 1px solid #34495e;
+            }
+        """)
+        status_layout.addWidget(self.parent.predict_status_label, 1)  # 1 = растягивается
+
+        self.parent.predict_progress_bar = QProgressBar()
+        self.parent.predict_progress_bar.setRange(0, 100)
+        self.parent.predict_progress_bar.setValue(0)
+        self.parent.predict_progress_bar.setFormat("%p%")
+        self.parent.predict_progress_bar.setFixedHeight(24)
+        self.parent.predict_progress_bar.setStyleSheet("""
+            QProgressBar {
+                text-align: center;
+                font-weight: bold;
+                border: 1px solid #34495e;
+                border-radius: 4px;
+                background: #1a2332;
+                color: #ecf0f1;
+            }
+            QProgressBar::chunk {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #3498db, stop:1 #2ecc71);
+                border-radius: 3px;
+            }
+        """)
+        self.parent.predict_progress_bar.hide()
+        status_layout.addWidget(self.parent.predict_progress_bar, 2)  # 2 = больше места
+        results_layout.addLayout(status_layout)
+
+        # 2️⃣ Таблица основных результатов (ограниченная высота)
+        self.parent.predict_results_table = QTableWidget(0, 2)
+        self.parent.predict_results_table.setHorizontalHeaderLabels(["Параметр", "Значение"])
+        self.parent.predict_results_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.parent.predict_results_table.verticalHeader().setVisible(False)
+        self.parent.predict_results_table.setAlternatingRowColors(True)
+        self.parent.predict_results_table.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.parent.predict_results_table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.parent.predict_results_table.setStyleSheet("""
+            QTableWidget {
+                background: #1a2332;
+                border: 1px solid #34495e;
+                border-radius: 4px;
+                color: #ecf0f1;
+                gridline-color: #34495e;
+            }
+            QTableWidget::item { padding: 6px 8px; border-bottom: 1px solid #2c3e50; }
+            QTableWidget::item:selected { background: #34495e; }
+            QHeaderView::section {
+                background: #2c3e50;
+                border: none;
+                padding: 6px 8px;
+                font-weight: bold;
+                color: #9b59b6;
+                border-bottom: 1px solid #34495e;
+            }
+        """)
+        self.parent.predict_results_table.setMinimumHeight(120)
+        self.parent.predict_results_table.setMaximumHeight(200)  # ← ОГРАНИЧЕНИЕ ВЫСОТЫ!
+        results_layout.addWidget(self.parent.predict_results_table)
+
+        # 3️⃣ 🔹 Таблица диапазонов моделей (отдельная группа с прокруткой)
+        ranges_group = QGroupBox("🔍 Диапазоны моделей")
+        ranges_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #ecf0f1;
+                margin-top: 5px;
+                border: 1px solid #34495e;
+                border-radius: 6px;
+                padding: 8px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px;
+                color: #f39c12;
+            }
+        """)
+        ranges_layout = QVBoxLayout(ranges_group)
+        ranges_layout.setSpacing(8)
+        ranges_layout.setContentsMargins(8, 8, 8, 8)
+
+        ranges_layout.addWidget(QLabel("Сравнение прогнозов от разных моделей:"))
+
+        # Таблица диапазонов
+        self.parent.predict_ranges_table = QTableWidget(0, 4)
+        self.parent.predict_ranges_table.setHorizontalHeaderLabels(["Модель", "Диапазон (hex)", "Ширина", "📋"])
+        self.parent.predict_ranges_table.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
+        self.parent.predict_ranges_table.setColumnWidth(0, 100)
+        self.parent.predict_ranges_table.setColumnWidth(1, 360)
+        self.parent.predict_ranges_table.setColumnWidth(2, 110)
+        self.parent.predict_ranges_table.setColumnWidth(3, 45)
+        self.parent.predict_ranges_table.verticalHeader().setVisible(False)
+        self.parent.predict_ranges_table.setAlternatingRowColors(True)
+        self.parent.predict_ranges_table.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.parent.predict_ranges_table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.parent.predict_ranges_table.setStyleSheet("""
+            QTableWidget {
+                background: #1a2332;
+                border: 1px solid #34495e;
+                border-radius: 4px;
+                color: #ecf0f1;
+            }
+            QTableWidget::item { padding: 4px 6px; border-bottom: 1px solid #2c3e50; }
+            QHeaderView::section {
+                background: #2c3e50;
+                font-weight: bold;
+                color: #f39c12;
+                padding: 4px 6px;
+                border: none;
+            }
+        """)
+        self.parent.predict_ranges_table.setMinimumHeight(180)
+        self.parent.predict_ranges_table.setMaximumHeight(220)  # ← ОГРАНИЧЕНИЕ ВЫСОТЫ!
+
+        # Прокрутка для таблицы диапазонов
+        ranges_scroll = QScrollArea()
+        ranges_scroll.setWidgetResizable(True)
+        ranges_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        ranges_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        ranges_scroll.setStyleSheet("QScrollArea { border: none; background: transparent; }")
+        ranges_scroll.setWidget(self.parent.predict_ranges_table)
+        ranges_layout.addWidget(ranges_scroll)
+
+        # Легенда цветов
+        legend = QHBoxLayout()
+        legend.setSpacing(15)
+        for txt, col in [("🔵 Position", "#3498db"), ("🟢 LogGrowth", "#2ecc71"),
+                         ("🟠 Ensemble", "#e67e22"), ("🔴 Final", "#e74c3c")]:
+            lbl = QLabel(txt)
+            lbl.setStyleSheet(f"color: {col}; font-size: 9pt; font-weight: bold;")
+            legend.addWidget(lbl)
+        legend.addStretch()
+        ranges_layout.addLayout(legend)
+
+        results_layout.addWidget(ranges_group)
+
+        # ✅ Добавляем results_group в основной layout
+        predict_layout.addWidget(results_group)
+
+        # 📈 Секция 4: График
+        graph_group = QGroupBox("📈 Визуализация")
+        graph_group.setStyleSheet("QGroupBox { font-weight: bold; color: #ecf0f1; margin-top: 10px; border: 1px solid #34495e; border-radius: 6px; padding: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #3498db; }")
+        graph_layout = QVBoxLayout(graph_group)
+        self.parent.predict_scroll = QScrollArea()
+        self.parent.predict_scroll.setWidgetResizable(True)
+        self.parent.predict_scroll.setMinimumHeight(300)
+        self.parent.predict_scroll.setStyleSheet("QScrollArea { border: 1px solid #34495e; border-radius: 4px; background: #1a2332; }")
+        self.parent.predict_plot_label = QLabel("📊 График появится после анализа")
+        self.parent.predict_plot_label.setAlignment(Qt.AlignCenter)
+        self.parent.predict_plot_label.setStyleSheet("QLabel { color: #7f8c8d; font-size: 11pt; padding: 20px; background: #1a2332; border: 2px dashed #34495e; border-radius: 6px; }")
+        graph_container = QWidget()
+        graph_container_layout = QVBoxLayout(graph_container)
+        graph_container_layout.addWidget(self.parent.predict_plot_label)
+        graph_container_layout.addStretch()
+        self.parent.predict_scroll.setWidget(graph_container)
+        graph_layout.addWidget(self.parent.predict_scroll)
+        predict_layout.addWidget(graph_group)
+
+        # 📥 Экспорт
+        export_layout = QHBoxLayout()
+        self.parent.predict_export_btn = QPushButton("📥 Экспорт результатов")
+        self.parent.predict_export_btn.setStyleSheet("QPushButton { background: #2c3e50; border: 1px solid #34495e; border-radius: 4px; padding: 6px 15px; color: #3498db; } QPushButton:hover { background: #34495e; border: 1px solid #3498db; }")
+        export_layout.addWidget(self.parent.predict_export_btn)
+        export_layout.addStretch()
+        predict_layout.addLayout(export_layout)
+
+
+        predict_layout.addStretch(1)
+        self.parent.main_tabs.addTab(predict_tab, "🔮 Predict")
+        # =============== END PREDICT TAB ===============
+
 
         # =============== ABOUT TAB ===============
         about_tab = QWidget()
