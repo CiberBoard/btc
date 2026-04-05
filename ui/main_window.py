@@ -765,25 +765,31 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         return None
 
-    def _update_cpu_temp_display(self, temp: Optional[float]) -> None:
-        """Обновление отображения температуры CPU"""
-        if temp is not None:
-            self.safe_set_text('cpu_temp_label', f"Температура: {temp:.1f} °C")
-            self.safe_set_value('cpu_temp_bar', int(temp))
+    def _update_cpu_temp_display(self, temp: Optional[float]):
+        """Безопасное обновление отображения температуры CPU"""
+        # 🔒 Защита: атрибут может ещё не существовать при раннем вызове
+        if not hasattr(self, 'cpu_temp_label'):
+            return
 
-            if temp > self.CPU_TEMP_CRITICAL:
-                self.cpu_temp_label.setStyleSheet("color: #e74c3c; font-weight: bold;")
-                self._set_temp_bar_style('cpu_temp_bar', '#e74c3c', '#c0392b')
-            elif temp > self.CPU_TEMP_WARNING:
-                self.cpu_temp_label.setStyleSheet("color: #f39c12; font-weight: bold;")
-                self._set_temp_bar_style('cpu_temp_bar', '#f39c12', '#d35400')
+        if temp is not None:
+            self.cpu_temp_label.setText(f"Температура: {temp:.1f} °C")
+            # Цветовая индикация
+            if temp < 60:
+                color = "#2ecc71"  # 🟢 зелёный
+            elif temp < 80:
+                color = "#f39c12"  # 🟡 жёлтый
             else:
-                self.cpu_temp_label.setStyleSheet("color: #27ae60;")
-                self._set_temp_bar_style('cpu_temp_bar', '#27ae60', '#219653')
+                color = "#e74c3c"  # 🔴 красный
+            self.cpu_temp_label.setStyleSheet(f"color: {color}; font-weight: 500;")
+
+            # Обновление прогресс-бара (если есть)
+            if hasattr(self, 'cpu_temp_bar'):
+                self.cpu_temp_bar.setValue(min(int(temp), 100))
         else:
-            self.safe_set_text('cpu_temp_label', "Температура: N/A")
+            self.cpu_temp_label.setText("Температура: — °C")
             self.cpu_temp_label.setStyleSheet("color: #7f8c8d;")
-            self.safe_set_value('cpu_temp_bar', 0)
+            if hasattr(self, 'cpu_temp_bar'):
+                self.cpu_temp_bar.setValue(0)
 
     def _set_temp_bar_style(self, widget_name: str, color1: str, color2: str) -> None:
         """Установка стиля прогресс-бара температуры"""

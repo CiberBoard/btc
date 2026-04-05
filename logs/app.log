@@ -129,3 +129,114 @@
 [2026-04-05 00:33:22] INFO [main:47]: ==================================================
 [2026-04-05 00:33:22] INFO [main:48]: 🚀 Запуск Bitcoin GPU/CPU Scanner
 [2026-04-05 00:33:22] INFO [main:49]: ==================================================
+[2026-04-05 01:53:10] INFO [main:46]: ==================================================
+[2026-04-05 01:53:10] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-05 01:53:10] INFO [main:48]: ==================================================
+[2026-04-05 01:53:17] INFO [main:46]: ==================================================
+[2026-04-05 01:53:17] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-05 01:53:17] INFO [main:48]: ==================================================
+[2026-04-05 01:53:22] INFO [main:46]: ==================================================
+[2026-04-05 01:53:22] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-05 01:53:22] INFO [main:48]: ==================================================
+[2026-04-05 01:54:49] INFO [main:46]: ==================================================
+[2026-04-05 01:54:49] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-05 01:54:49] INFO [main:48]: ==================================================
+[2026-04-05 01:55:12] DEBUG [helpers:163]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf897c003c9 → 0x33e7665705359f04f28b88cf897c003c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=17170433
+[2026-04-05 01:55:21] INFO [cpu_scanner:435]: Остановка CPU процессов...
+[2026-04-05 01:55:21] INFO [cpu_scanner:471]: CPU процессы остановлены.
+[2026-04-05 02:01:52] INFO [main:46]: ==================================================
+[2026-04-05 02:01:52] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-05 02:01:52] INFO [main:48]: ==================================================
+[2026-04-05 02:02:02] DEBUG [helpers:163]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf896c603c9 → 0x33e7665705359f04f28b88cf896c603c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf897c603c9 → 0x33e7665705359f04f28b88cf897c603c9], total=16777217
+[2026-04-05 02:02:02] INFO [gpu_scanner:302]: Остановка GPU процессов...
+[2026-04-05 02:02:02] INFO [gpu_scanner:311]: GPU процессы остановлены.
+[2026-04-05 02:02:02] DEBUG [helpers:163]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf896c603c9 → 0x33e7665705359f04f28b88cf896c603c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf897c603c9 → 0x33e7665705359f04f28b88cf897c603c9], total=16777217
+[2026-04-05 02:02:02] DEBUG [gpu_scanner:368]: GPU random: parsed range [0x33e7665705359f04f28b88cf896c603c9 ... 0x33e7665705359f04f28b88cf897c603c9], total_keys=16777217
+[2026-04-05 02:02:02] INFO [gpu_scanner:231]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b88cf896c603c9 - 0x33e7665705359f04f28b88cf8974603c8 на устройстве 0 (compressed=True)
+[2026-04-05 02:02:02] DEBUG [gpu_scanner:247]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-04-05 02:02:02] DEBUG [gpu_scanner:257]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 33E7665705359F04F28B88CF896C603C9:33E7665705359F04F28B88CF8974603C8 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-04-05 02:02:02] INFO [gpu_scanner:231]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b88cf8974603c9 - 0x33e7665705359f04f28b88cf897c603c9 на устройстве 1 (compressed=True)
+[2026-04-05 02:02:02] DEBUG [gpu_scanner:247]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-04-05 02:02:02] DEBUG [gpu_scanner:257]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 33E7665705359F04F28B88CF8974603C9:33E7665705359F04F28B88CF897C603C9 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Compression: compressed
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B88CF896C603C9
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B88CF8974603C8
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:13] [Info] 10.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:13] [Info] 20.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:14] [Info] 30.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:15] [Info] 40.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:16] [Info] 50.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:16] [Info] 60.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:16] [Info] 70.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:16] [Info] 80.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] 90.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] 100.0%
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] Done
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] Address:     1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: Private key: 000000000000000000000000000000033E7665705359F04F28B88CF897C603C9
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: Compressed:  yes
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: Public key:
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: 03633CBE3EC02B9401C5EFFA144C5B4D22F87940259634858FC7E59B1C09937852
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] No targets remaining
+[2026-04-05 02:02:17] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] Reached end of keyspace
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Compression: compressed
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B88CF8974603C9
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B88CF897C603C9
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:02] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:12] [Info] 10.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:13] [Info] 20.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:14] [Info] 30.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:15] [Info] 40.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:16] [Info] 50.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:16] [Info] 60.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:16] [Info] 70.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] 80.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] 90.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] 100.0%
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:17] [Info] Done
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:18] [Info] Address:     1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: Private key: 000000000000000000000000000000033E7665705359F04F28B88CF897C603C9
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: Compressed:  yes
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: Public key:
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: 03633CBE3EC02B9401C5EFFA144C5B4D22F87940259634858FC7E59B1C09937852
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:18] [Info] No targets remaining
+[2026-04-05 02:02:18] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:18] [Info] Reached end of keyspace
+[2026-04-05 02:02:22] DEBUG [helpers:163]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf896c603c9 → 0x33e7665705359f04f28b88cf896c603c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf897c603c9 → 0x33e7665705359f04f28b88cf897c603c9], total=16777217
+[2026-04-05 02:02:22] INFO [gpu_scanner:302]: Остановка GPU процессов...
+[2026-04-05 02:02:22] INFO [gpu_scanner:311]: GPU процессы остановлены.
+[2026-04-05 02:02:22] DEBUG [helpers:163]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf896c603c9 → 0x33e7665705359f04f28b88cf896c603c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf897c603c9 → 0x33e7665705359f04f28b88cf897c603c9], total=16777217
+[2026-04-05 02:02:22] DEBUG [gpu_scanner:368]: GPU random: parsed range [0x33e7665705359f04f28b88cf896c603c9 ... 0x33e7665705359f04f28b88cf897c603c9], total_keys=16777217
+[2026-04-05 02:02:22] INFO [gpu_scanner:231]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b88cf896c603c9 - 0x33e7665705359f04f28b88cf8974603c8 на устройстве 0 (compressed=True)
+[2026-04-05 02:02:22] DEBUG [gpu_scanner:247]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-04-05 02:02:22] DEBUG [gpu_scanner:257]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 256 -p 512 --keyspace 33E7665705359F04F28B88CF896C603C9:33E7665705359F04F28B88CF8974603C8 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-04-05 02:02:22] INFO [gpu_scanner:231]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b88cf8974603c9 - 0x33e7665705359f04f28b88cf897c603c9 на устройстве 1 (compressed=True)
+[2026-04-05 02:02:22] DEBUG [gpu_scanner:247]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-04-05 02:02:22] DEBUG [gpu_scanner:257]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 1 -b 288 -t 256 -p 512 --keyspace 33E7665705359F04F28B88CF8974603C9:33E7665705359F04F28B88CF897C603C9 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-04-05 02:02:23] INFO [gpu_scanner:302]: Остановка GPU процессов...
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Compression: compressed
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B88CF896C603C9
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B88CF8974603C8
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Compression: compressed
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B88CF8974603C9
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B88CF897C603C9
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Initializing NVIDIA GeForce GTX 1660 SUPER
+[2026-04-05 02:02:23] DEBUG [gpu_scanner:156]: GPU Output: [2026-04-05.02:02:22] [Info] Generating 37,748,736 starting points (1440.0MB)
+[2026-04-05 02:02:23] INFO [gpu_scanner:311]: GPU процессы остановлены.
+[2026-04-05 02:02:45] DEBUG [helpers:163]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf897c003c9 → 0x33e7665705359f04f28b88cf897c003c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=17170433
+[2026-04-05 02:04:08] INFO [cpu_scanner:435]: Остановка CPU процессов...
+[2026-04-05 02:04:08] INFO [cpu_scanner:471]: CPU процессы остановлены.
+[2026-04-05 02:08:04] INFO [main:46]: ==================================================
+[2026-04-05 02:08:04] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-05 02:08:04] INFO [main:48]: ==================================================
+[2026-04-05 02:12:03] INFO [main:46]: ==================================================
+[2026-04-05 02:12:03] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-05 02:12:03] INFO [main:48]: ==================================================

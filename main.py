@@ -12,8 +12,7 @@ try:
     ctypes.windll.kernel32.SetErrorMode(0x0002 | 0x0004)  # SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX
 except:
     pass
-import faulthandler
-faulthandler.enable()  # Покажет реальную ошибку вместо 0xC0000409
+
 
 
 import logging
