@@ -23,6 +23,10 @@ from ui.theme import apply_dark_theme
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
 from ui.kangaroo_logic import KangarooLogic
 from core.hextowif import generate_all_from_hex
+# В main_window.py добавьте импорт вверху:
+from ui.hex_calc_window import HexCalcWindow
+
+
 
 try:
     import pynvml
@@ -181,6 +185,15 @@ class BitcoinGPUCPUScanner(QMainWindow):
         """Эмитит сигнал статистики vanity"""
         self.vanity_update_ui_signal.emit(stats)
 
+    # КАЛЬКУЛЯТОР
+    def open_hex_calculator(self):
+        """Открывает окно HEX-калькулятора"""
+        if not hasattr(self, 'hex_calc_window') or not self.hex_calc_window:
+            self.hex_calc_window = HexCalcWindow(self)
+        self.hex_calc_window.show()
+        self.hex_calc_window.raise_()
+        self.hex_calc_window.activateWindow()
+
     # ==================== МЕТОДЫ НАВИГАЦИИ ====================
 
     def browse_kangaroo_exe(self) -> None:
@@ -338,6 +351,27 @@ class BitcoinGPUCPUScanner(QMainWindow):
             row += 1
 
         layout.addWidget(result_group)
+
+        # ▼▼▼ ▼▼▼ ▼▼▼ НОВАЯ КНОПКА КАЛЬКУЛЯТОРА ▼▼▼ ▼▼▼ ▼▼▼
+        # Кнопка открытия отдельного окна HEX-калькулятора
+        calc_btn = QPushButton("🔢 Открыть HEX-калькулятор")
+        calc_btn.setStyleSheet("""
+            QPushButton {
+                background: #9b59b6;
+                color: white;
+                font-weight: bold;
+                padding: 8px;
+                border-radius: 6px;
+            }
+            QPushButton:hover {
+                background: #8e44ad;
+            }
+        """)
+        calc_btn.clicked.connect(self.open_hex_calculator)
+        layout.addWidget(calc_btn)
+        # ▲▲▲ ▲▲▲ ▲▲▲ КОНЕЦ ВСТАВКИ ▲▲▲ ▲▲▲ ▲▲▲
+
+        # Добавление вкладки в main_tabs (оригинальная строка — не менять)
         self.main_tabs.addTab(converter_tab, "Конвертер HEX → WIF")
 
     def on_generate_clicked(self) -> None:
