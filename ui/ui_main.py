@@ -228,6 +228,18 @@ class MainWindowUI:
 
         btn_row.addWidget(self.parent.gpu_start_stop_btn)
         btn_row.addWidget(self.parent.gpu_optimize_btn)
+        # 🔽 Монитор GPU
+        self.parent.gpu_monitor_btn = QPushButton("📊 Монитор")
+        self.parent.gpu_monitor_btn.setFixedWidth(100)
+        self.parent.gpu_monitor_btn.setMinimumHeight(40)
+        self.parent.gpu_monitor_btn.setStyleSheet("""
+                    QPushButton { background: #9b59b6; color: white; font-weight: bold; border-radius: 6px; }
+                    QPushButton:hover { background: #8e44ad; }
+                    QPushButton:pressed { background: #7d3c98; }
+                """)
+        self.parent.gpu_monitor_btn.clicked.connect(self.parent.open_gpu_monitor)
+        btn_row.addWidget(self.parent.gpu_monitor_btn)
+
         btn_row.addStretch()
         gpu_layout.addLayout(btn_row)
 

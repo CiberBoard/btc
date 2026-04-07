@@ -1,6 +1,4 @@
 # core/cpu_logic.py
-
-from utils.helpers import  validate_key_range
 import core.cpu_scanner as cpu_core
 from PyQt5.QtCore import QObject, pyqtSignal
 
@@ -15,7 +13,7 @@ import multiprocessing
 
 from PyQt5.QtWidgets import QMessageBox
 import config
-from utils.helpers import setup_logger,is_coincurve_available
+from utils.helpers import setup_logger,is_coincurve_available,validate_key_range
 
 try:
     import pynvml

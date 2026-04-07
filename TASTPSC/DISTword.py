@@ -34,7 +34,7 @@ kQA4wg50hAJqTynOQ09ArRHEchtB/7uvWZSBGJ7+zlzRGKx99P3oDZD+Y5D8bmUs
 mzRYrGnz9eBtepkJXDRjD6yvhNfQMCSkm6l9zMWxKvFbv5g2ae2SLrEt/x3MP2/G"""
 
 # ===== ПАРОЛЬ =====
-password = b" "
+password = b"remember"
 
 # ===== Декодируем Base64 =====
 data = base64.b64decode(blob_b64)

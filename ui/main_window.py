@@ -25,6 +25,7 @@ from ui.kangaroo_logic import KangarooLogic
 from core.hextowif import generate_all_from_hex
 # В main_window.py добавьте импорт вверху:
 from ui.hex_calc_window import HexCalcWindow
+from ui.gpu_monitor_window import GPUMonitorWindow  # <-- ДОБАВИТЬ ЭТУ СТРОКУ
 
 
 
@@ -193,6 +194,44 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.hex_calc_window.show()
         self.hex_calc_window.raise_()
         self.hex_calc_window.activateWindow()
+
+    # ▼▼▼ ВСТАВИТЬ СЮДА ▼▼▼
+    def open_gpu_monitor(self):
+        """Открывает окно мониторинга GPU с защитой от удаленных объектов"""
+        try:
+            from ui.gpu_monitor_window import GPUMonitorWindow
+
+            # 1️⃣ Если ссылки нет или она "None" — создаем окно
+            if not hasattr(self, 'gpu_monitor_window') or self.gpu_monitor_window is None:
+                self.gpu_monitor_window = GPUMonitorWindow(self)
+                # ❌ УБРАНО: self.gpu_monitor_window.setAttribute(Qt.WA_DeleteOnClose)
+                # Это главная причина ошибки. Qt будет скрывать окно, а не удалять его.
+
+            try:
+                # 2️⃣ Проверяем, живо ли окно и не свернуто ли оно
+                if self.gpu_monitor_window.isVisible():
+                    self.gpu_monitor_window.raise_()
+                    self.gpu_monitor_window.activateWindow()
+                    return
+            except RuntimeError:
+                # 🛡️ Если объект уже удален Qt, сбрасываем ссылку и создаем заново
+                self.gpu_monitor_window = None
+                self.gpu_monitor_window = GPUMonitorWindow(self)
+
+            # 3️⃣ Показываем и выводим на передний план
+            self.gpu_monitor_window.show()
+            self.gpu_monitor_window.raise_()
+            self.gpu_monitor_window.activateWindow()
+
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Ошибка открытия монитора GPU: {e}")
+            QMessageBox.critical(
+                self, "Ошибка",
+                f"Не удалось открыть монитор:\n{type(e).__name__}: {e}"
+            )
+    # ▲▲▲ КОНЕЦ ВСТАВКИ ▲▲▲
 
     # ==================== МЕТОДЫ НАВИГАЦИИ ====================
 
@@ -1410,5 +1449,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 logger.info("pynvml выключен")
             except Exception as e:
                 logger.error(f"Ошибка выключения pynvml: {e}")
+
+            # ▼▼▼ ДОБАВИТЬ: закрытие окна монитора ▼▼▼
+        if hasattr(self, 'gpu_monitor_window') and self.gpu_monitor_window:
+            try:
+                self.gpu_monitor_window.close()
+            except:
+                pass
+        # ▲▲▲ КОНЕЦ ВСТАВКИ ▲▲▲
 
         event.accept()
