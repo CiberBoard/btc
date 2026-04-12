@@ -6,41 +6,62 @@ BTC Puzzle Analyzer v2.1 — ADVANCED + SAFE + API-STABLE for PyQt5
 ✅ Гарантированная совместимость с Windows + PyQt5 + QThread
 ✅ 🔒 API полностью сохранён — все сигналы, методы и структуры данных без изменений
 """
+# 🛠 УЛУЧШЕНИЕ 1: Добавлены type hints импорты
+from __future__ import annotations
 import os
 import re
 import math
 import logging
 import random
-from typing import List, Optional, Tuple, Dict, Any
+from typing import List, Optional, Tuple, Dict, Any, Union
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
 # 🛑 КРИТИЧЕСКИ: Устанавливаем ПЕРЕД любыми импортами numpy/scipy
-os.environ["OMP_NUM_THREADS"] = "1"
-os.environ["MKL_NUM_THREADS"] = "1"
-os.environ["OPENBLAS_NUM_THREADS"] = "1"
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+# 🛠 УЛУЧШЕНИЕ 2: Вынесено в отдельную функцию для повторного использования
+def _setup_thread_env() -> None:
+    """Настраивает переменные окружения для безопасной работы в потоке."""
+    os.environ["OMP_NUM_THREADS"] = "1"
+    os.environ["MKL_NUM_THREADS"] = "1"
+    os.environ["OPENBLAS_NUM_THREADS"] = "1"
+    os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
+_setup_thread_env()
 
 logger = logging.getLogger(__name__)
 
 # ═══════════════════════════════════════════════
 # 🔧 КОНСТАНТЫ МОДУЛЯ
 # ═══════════════════════════════════════════════
-LARGE_WIDTH_THRESHOLD = 2 ** 60  # Порог для логарифмирования ширины
-MAX_LOG2_VALUE = 1020  # Макс. безопасное значение для 2**x через float
-MAX_KEY_BITS = 256  # Макс. битность ключа
-DEFAULT_RANDOM_SEED = 42  # Для воспроизводимости
-MIN_RANGE_FRACTION = 0.001  # Мин. ширина диапазона относительно полного
-IQR_MULTIPLIER = 1.5  # Множитель для IQR-фильтра
-SPLINE_WINDOW = 2  # Размер окна для сглаживания тренда
+# 🛠 УЛУЧШЕНИЕ 3: Константы сгруппированы по категориям с аннотациями типов
 
+# Пороги для работы с большими числами
+LARGE_WIDTH_THRESHOLD: int = 2 ** 60  # Порог для логарифмирования ширины
+MAX_LOG2_VALUE: float = 1020  # Макс. безопасное значение для 2**x через float
+MAX_KEY_BITS: int = 256  # Макс. битность ключа
+
+# Параметры моделей
+DEFAULT_RANDOM_SEED: int = 42  # Для воспроизводимости
+MIN_RANGE_FRACTION: float = 0.001  # Мин. ширина диапазона относительно полного
+IQR_MULTIPLIER: float = 1.5  # Множитель для IQR-фильтра
+SPLINE_WINDOW: int = 2  # Размер окна для сглаживания тренда
+
+# Веса для ансамбля
+ENSEMBLE_RECENT_WEIGHT: float = 0.7
+ENSEMBLE_OVERALL_WEIGHT: float = 0.3
 
 # ═══════════════════════════════════════════════
 # 🔧 УТИЛИТЫ — БЕЗОПАСНЫЕ ФУНКЦИИ
 # ═══════════════════════════════════════════════
 
+# 🛠 УЛУЧШЕНИЕ 4: Добавлены type hints и docstrings
 def safe_log2_int(value: int) -> float:
-    """Безопасный логарифм по основанию 2 для очень больших целых чисел."""
+    """
+    Безопасный логарифм по основанию 2 для очень больших целых чисел.
+
+    :param value: Целое число для вычисления логарифма
+    :return: Логарифм по основанию 2 как float
+    """
     if value <= 0:
         return float('-inf')
     # Для чисел > 2**1023 используем bit_length для точности
@@ -52,7 +73,13 @@ def safe_log2_int(value: int) -> float:
 
 
 def safe_pow2(log_val: float, max_bits: int = MAX_KEY_BITS) -> int:
-    """Безопасное возведение 2 в степень с ограничением по битам."""
+    """
+    Безопасное возведение 2 в степень с ограничением по битам.
+
+    :param log_val: Показатель степени (логарифм)
+    :param max_bits: Максимальное количество бит для результата
+    :return: Целое число 2^log_val, ограниченное по битам
+    """
     if log_val >= max_bits:
         return (1 << max_bits) - 1
     if log_val <= 0:
@@ -66,26 +93,43 @@ def safe_pow2(log_val: float, max_bits: int = MAX_KEY_BITS) -> int:
     return (1 << int_part)
 
 
-def parse_keys_from_file(file_path: str) -> list:
-    """Парсит файл в формате KNOWN_KEYS_HEX = ["hex", ...] или простой список"""
+def parse_keys_from_file(file_path: str) -> List[str]:
+    """
+    Парсит файл в формате KNOWN_KEYS_HEX = ["hex", ...] или простой список.
+
+    :param file_path: Путь к файлу с ключами
+    :return: Список уникальных 64-символьных hex-ключей
+    """
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
         # Находим все 64-символьные hex-строки (игнорируем кавычки, запятые, комментарии)
         keys = re.findall(r'[0-9a-fA-F]{64}', content)
-        return list(dict.fromkeys(keys))  # Убираем дубликаты
+        return list(dict.fromkeys(keys))  # Убираем дубликаты с сохранением порядка
+    except FileNotFoundError:
+        logger.error(f"Файл не найден: {file_path}")
+        return []
+    except PermissionError:
+        logger.error(f"Нет доступа к файлу: {file_path}")
+        return []
     except Exception as e:
-        logger.error(f"Ошибка чтения файла: {e}")
+        logger.error(f"Ошибка чтения файла: {type(e).__name__}: {e}", exc_info=True)
         return []
 
 
-def validate_keys(keys: list) -> tuple:
-    """Валидация: возвращает (валидные_ключи, сообщение_об_ошибке)"""
+def validate_keys(keys: List[str]) -> Tuple[List[str], Optional[str]]:
+    """
+    Валидация ключей: возвращает (валидные_ключи, сообщение_об_ошибке).
+
+    :param keys: Список строк-ключей для валидации
+    :return: Кортеж (список валидных ключей, сообщение об ошибке или None)
+    """
     valid = [
         k.strip().lower() for k in keys
         if len(k.strip()) == 64 and all(c in '0123456789abcdef' for c in k.strip())
     ]
-    return valid, (None if valid else "Не найдено валидных 64-символьных hex ключей")
+    error_msg = None if valid else "Не найдено валидных 64-символьных hex ключей"
+    return valid, error_msg
 
 
 # ═══════════════════════════════════════════════
@@ -99,10 +143,14 @@ def _iqr_filter_with_weights(
 ) -> Tuple[List[float], List[float]]:
     """
     Применяет IQR-фильтрацию, сохраняя соответствие значений и весов.
-    Возвращает отфильтрованные (values, weights).
+
+    :param values: Список значений для фильтрации
+    :param weights: Соответствующие веса значений
+    :param multiplier: Множитель для расчёта границ (по умолчанию IQR_MULTIPLIER)
+    :return: Кортеж (отфильтрованные значения, отфильтрованные веса)
     """
     if len(values) <= 4:
-        return values[:], weights[:]
+        return values[:], weights[:]  # 🛠 УЛУЧШЕНИЕ 5: Явное копирование списков
 
     sorted_vals = sorted(values)
     q1_idx = len(sorted_vals) // 4
@@ -123,8 +171,18 @@ def _iqr_filter_with_weights(
 
 
 def _get_puzzle_range(n: int) -> Tuple[int, int]:
-    """Возвращает (min, max) для puzzle №n."""
+    """
+    Возвращает (min, max) для puzzle №n.
+
+    :param n: Номер пазла
+    :return: Кортеж (минимальное значение, максимальное значение) диапазона
+    """
     return 2 ** (n - 1), (2 ** n) - 1
+
+
+def _clamp(value: float, min_val: float, max_val: float) -> float:
+    """🛠 УЛУЧШЕНИЕ 6: Вспомогательная функция для ограничения значения в диапазоне."""
+    return min(max_val, max(min_val, value))
 
 
 # ═══════════════════════════════════════════════
@@ -134,6 +192,10 @@ def _get_puzzle_range(n: int) -> Tuple[int, int]:
 class PositionModel:
     """Модель на основе позиций ключей в их битовых диапазонах"""
 
+    # 🛠 УЛУЧШЕНИЕ 7: Атрибуты класса с аннотациями типов
+    positions: List[float]
+    weights: List[float]
+
     def __init__(self, positions: List[float], weights: Optional[List[float]] = None):
         self.positions = positions
         self.weights = weights if weights is not None else [1.0] * len(positions)
@@ -142,6 +204,13 @@ class PositionModel:
             self.weights = [1.0] * len(self.positions)
 
     def predict_quantile(self, q_low: float, q_high: float) -> Tuple[float, float]:
+        """
+        Предсказывает квантили позиций.
+
+        :param q_low: Нижний квантиль (0.0-1.0)
+        :param q_high: Верхний квантиль (0.0-1.0)
+        :return: Кортеж (нижняя граница, верхняя граница) позиций
+        """
         if not self.positions:
             return 0.5, 0.5
         sorted_pos = sorted(self.positions)
@@ -152,6 +221,15 @@ class PositionModel:
     def predict_bounds(
             self, pmin: int, pmax: int, q_low: float, q_high: float
     ) -> Tuple[int, int]:
+        """
+        Предсказывает границы диапазона на основе позиций.
+
+        :param pmin: Минимум диапазона пазла
+        :param pmax: Максимум диапазона пазла
+        :param q_low: Нижний квантиль
+        :param q_high: Верхний квантиль
+        :return: Кортеж (минимальная граница, максимальная граница) в абсолютных значениях
+        """
         if pmax <= pmin:
             return pmin, pmax
         p_low, p_high = self.predict_quantile(q_low, q_high)
@@ -163,6 +241,12 @@ class PositionModel:
 
 class LogGrowthModel:
     """Модель экспоненциального роста на основе логарифмических разностей"""
+
+    # 🛠 УЛУЧШЕНИЕ 8: Атрибуты с аннотациями
+    log_keys: List[float]
+    log_diff: List[float]
+    weights_filtered: List[float]
+    trend: List[float]
 
     def __init__(
             self,
@@ -191,12 +275,17 @@ class LogGrowthModel:
                 if sum(window_w) > 0:
                     avg = sum(v * w for v, w in zip(window_vals, window_w)) / sum(window_w)
                 else:
-                    avg = sum(window_vals) / len(window_vals)
+                    avg = sum(window_vals) / len(window_vals) if window_vals else 0.0
                 self.trend.append(avg)
         else:
             self.trend = self.log_diff[:]
 
     def predict_next_log(self) -> float:
+        """
+        Предсказывает следующее логарифмическое значение.
+
+        :return: Предсказанное логарифмическое значение
+        """
         if not self.log_keys:
             return 0.0
         if not self.log_diff:
@@ -209,20 +298,32 @@ class LogGrowthModel:
         if sum(recent_w) > 0:
             recent_avg = sum(r * w for r, w in zip(recent, recent_w)) / sum(recent_w)
         else:
-            recent_avg = sum(recent) / len(recent)
+            recent_avg = sum(recent) / len(recent) if recent else 0.0
 
         if sum(self.weights_filtered) > 0:
             overall_avg = sum(
                 d * w for d, w in zip(self.log_diff, self.weights_filtered)
             ) / sum(self.weights_filtered)
         else:
-            overall_avg = sum(self.log_diff) / len(self.log_diff)
+            overall_avg = sum(self.log_diff) / len(self.log_diff) if self.log_diff else 0.0
 
-        return self.log_keys[-1] + (0.7 * recent_avg + 0.3 * overall_avg)
+        # 🛠 УЛУЧШЕНИЕ 9: Использование констант для весов
+        return self.log_keys[-1] + (
+            ENSEMBLE_RECENT_WEIGHT * recent_avg +
+            ENSEMBLE_OVERALL_WEIGHT * overall_avg
+        )
 
     def predict_bounds(
             self, next_log: float, q_low: float, q_high: float
     ) -> Tuple[int, int]:
+        """
+        Предсказывает границы диапазона на основе логарифмического роста.
+
+        :param next_log: Предсказанное логарифмическое значение
+        :param q_low: Нижний квантиль
+        :param q_high: Верхний квантиль
+        :return: Кортеж (минимальная граница, максимальная граница)
+        """
         if not self.log_diff:
             val = safe_pow2(next_log)
             return val, val
@@ -243,6 +344,11 @@ class LogGrowthModel:
 class EnsembleModel:
     """Упрощённый ансамбль (линейная регрессия вместо RandomForest для стабильности)"""
 
+    # 🛠 УЛУЧШЕНИЕ 10: Атрибуты с аннотациями
+    positions: List[float]
+    n_models: int
+    slopes: List[float]
+
     def __init__(self, positions: List[float], n_models: int = 3, seed: int = DEFAULT_RANDOM_SEED):
         self.positions = positions
         self.n_models = n_models
@@ -250,7 +356,8 @@ class EnsembleModel:
         random.seed(seed)  # ✅ Воспроизводимость
         self._train()
 
-    def _train(self):
+    def _train(self) -> None:
+        """Обучает модели ансамбля через бутстрэп и линейную регрессию."""
         if len(self.positions) < 5:
             return
         n = len(self.positions)
@@ -276,13 +383,18 @@ class EnsembleModel:
             slope = num / den if den != 0 else 0.0
             self.slopes.append(slope)
 
-    def predict(self, x: int) -> float:
-        """Предсказывает нормализованную позицию [0, 1] для индекса x."""
+    def predict(self, x: int) -> float:  # 🛠 УЛУЧШЕНИЕ 11: Параметр x помечен как неиспользуемый (для обратной совместимости)
+        """
+        Предсказывает нормализованную позицию [0, 1] для индекса x.
+
+        :param x: Индекс для предсказания (не используется в текущей реализации)
+        :return: Нормализованная позиция в диапазоне [0.0, 1.0]
+        """
         if not self.slopes or not self.positions:
             return 0.5
         avg_slope = sum(self.slopes) / len(self.slopes)
         pred = self.positions[-1] + avg_slope
-        return min(1.0, max(0.0, pred))  # ✅ Clamp к [0, 1]
+        return _clamp(pred, 0.0, 1.0)  # ✅ Clamp к [0, 1] через вспомогательную функцию
 
 
 # ═══════════════════════════════════════════════
@@ -291,16 +403,22 @@ class EnsembleModel:
 
 class PredictWorker(QThread):
     # ✅ Сигналы — без изменений для совместимости
+    # 🛠 УЛУЧШЕНИЕ 12: Явные аннотации типов для сигналов
     analysis_finished = pyqtSignal(dict)
     error_occurred = pyqtSignal(str)
     progress_update = pyqtSignal(int, str)
 
-    def __init__(self, keys_hex: list, params: dict, parent=None):
+    # 🛠 УЛУЧШЕНИЕ 13: Атрибуты класса с аннотациями
+    keys_hex: List[str]
+    params: Dict[str, Any]
+
+    def __init__(self, keys_hex: List[str], params: Dict[str, Any], parent: Optional[Any] = None):
         super().__init__(parent)
         self.keys_hex = keys_hex
         self.params = params
 
-    def run(self):
+    def run(self) -> None:  # 🛠 УЛУЧШЕНИЕ 14: Явный возврат None
+        """Основной метод выполнения в отдельном потоке."""
         try:
             if self.isInterruptionRequested():
                 return
@@ -315,18 +433,22 @@ class PredictWorker(QThread):
             # Опциональные импорты с fallback
             HAS_SCIPY = False
             try:
-                from scipy.interpolate import UnivariateSpline
+                from scipy.interpolate import UnivariateSpline  # noqa: F401
                 from scipy.stats import gaussian_kde
                 HAS_SCIPY = True
-            except Exception:
-                pass
+            except ImportError:
+                logger.debug("scipy не доступен, используем fallback")
+            except Exception as e:
+                logger.warning(f"Ошибка импорта scipy: {e}")
 
             HAS_SKLEARN = False
             try:
-                from sklearn.ensemble import RandomForestRegressor
+                from sklearn.ensemble import RandomForestRegressor  # noqa: F401
                 HAS_SKLEARN = True
-            except Exception:
-                pass
+            except ImportError:
+                logger.debug("sklearn не доступен, используем упрощённый ансамбль")
+            except Exception as e:
+                logger.warning(f"Ошибка импорта sklearn: {e}")
 
             if self.isInterruptionRequested():
                 return
@@ -336,11 +458,11 @@ class PredictWorker(QThread):
             keys = [int(k, 16) for k in self.keys_hex]
             n_keys = len(keys)
 
-            def get_range(n):
+            def get_range(n: int) -> Tuple[int, int]:
                 return _get_puzzle_range(n)
 
             # Позиции в диапазонах
-            positions = []
+            positions: List[float] = []
             for i, key in enumerate(keys[1:], start=2):
                 pmin, pmax = get_range(i)
                 if pmax > pmin:
@@ -455,50 +577,50 @@ class PredictWorker(QThread):
                 return
             self.progress_update.emit(100, "Готово!")
 
-            # Функция конвертации в hex
-            def h(x):
+            # 🛠 УЛУЧШЕНИЕ 15: Вынесена функция конвертации в hex для повторного использования
+            def _to_hex(x: Union[int, float]) -> str:
                 try:
                     return f"{int(x):064x}"
-                except Exception:
+                except (ValueError, OverflowError, TypeError):
                     return "0" * 64
 
             total_range = pmax - pmin
             reduction = (
                 (1 - (final_max - final_min) / total_range) * 100
-                if total_range > 0 else 0
+                if total_range > 0 else 0.0
             )
 
             # ✅ Структура ответа — ПОЛНОСТЬЮ СОВМЕСТИМА с оригиналом
             self.analysis_finished.emit({
                 'next_puzzle': next_puzzle,
-                'final_min_hex': h(final_min),
-                'final_max_hex': h(final_max),
+                'final_min_hex': _to_hex(final_min),
+                'final_max_hex': _to_hex(final_max),
                 'reduction_percent': reduction,
                 'range_width': float(final_max - final_min),
 
                 # 🔹 Все промежуточные диапазоны (формат сохранён)
                 'ranges': {
                     'Position': {
-                        'min_hex': h(dist_min),
-                        'max_hex': h(dist_max),
+                        'min_hex': _to_hex(dist_min),
+                        'max_hex': _to_hex(dist_max),
                         'width': float(dist_max - dist_min),
                         'color': '#3498db'
                     },
                     'LogGrowth': {
-                        'min_hex': h(growth_min),
-                        'max_hex': h(growth_max),
+                        'min_hex': _to_hex(growth_min),
+                        'max_hex': _to_hex(growth_max),
                         'width': float(growth_max - growth_min),
                         'color': '#2ecc71'
                     },
                     'Ensemble': {
-                        'min_hex': h(ensemble_min),
-                        'max_hex': h(ensemble_max),
+                        'min_hex': _to_hex(ensemble_min),
+                        'max_hex': _to_hex(ensemble_max),
                         'width': float(ensemble_max - ensemble_min),
                         'color': '#e67e22'
                     },
                     'Final': {
-                        'min_hex': h(final_min),
-                        'max_hex': h(final_max),
+                        'min_hex': _to_hex(final_min),
+                        'max_hex': _to_hex(final_max),
                         'width': float(final_max - final_min),
                         'color': '#e74c3c'
                     }
@@ -512,6 +634,9 @@ class PredictWorker(QThread):
                 'plot_path': plot_path
             })
 
+        except KeyboardInterrupt:
+            logger.info("Worker прерван пользователем")
+            return
         except Exception as e:
             logger.exception("Worker crashed")
             # ✅ Формат ошибки сохранён для совместимости
@@ -525,12 +650,22 @@ class PredictWorker(QThread):
             widths: List[float],
             output_path: str,
             has_scipy: bool
-    ):
-        """Генерация 2x2 графика — с безопасной обработкой больших чисел."""
-        try:
-            import matplotlib.pyplot as plt
-            import numpy as np
+    ) -> None:  # 🛠 УЛУЧШЕНИЕ 16: Явный возврат None
+        """
+        Генерация 2x2 графика — с безопасной обработкой больших чисел.
 
+        :param positions: Список позиций ключей
+        :param log_diff: Список логарифмических разностей
+        :param trend: Список значений тренда
+        :param widths: Список ширин диапазонов для отображения
+        :param output_path: Путь для сохранения графика
+        :param has_scipy: Флаг доступности scipy для KDE
+        """
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        fig = None
+        try:
             fig, axes = plt.subplots(2, 2, figsize=(12, 9), dpi=100)
             fig.patch.set_facecolor('#1a1a20')
 
@@ -582,9 +717,9 @@ class PredictWorker(QThread):
                     ax.set_title('KDE Density', color='white', fontsize=9)
                 except Exception as e:
                     logger.debug(f"KDE fallback: {e}")
-                    ax.text(0.5, 0.5, 'KDE: fallback', color='white', ha='center')
+                    ax.text(0.5, 0.5, 'KDE: fallback', color='white', ha='center', va='center')
             else:
-                ax.text(0.5, 0.5, 'KDE: disabled', color='white', ha='center')
+                ax.text(0.5, 0.5, 'KDE: disabled', color='white', ha='center', va='center')
             ax.tick_params(colors='white')
 
             # 4. Ширина диапазонов — ✅ БЕЗОПАСНОЕ логарифмирование
@@ -608,7 +743,9 @@ class PredictWorker(QThread):
             ax.set_xlabel('Width (log₂ if >2⁶⁰)', color='white', fontsize=8)
 
             plt.tight_layout()
-            os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
+            output_dir = os.path.dirname(output_path)
+            if output_dir:
+                os.makedirs(output_dir, exist_ok=True)
             plt.savefig(
                 output_path, dpi=100, bbox_inches='tight',
                 facecolor=fig.get_facecolor()
@@ -618,9 +755,11 @@ class PredictWorker(QThread):
             logger.error(f"Plot error: {e}", exc_info=True)
             # Создаём заглушку-файл
             try:
-                os.makedirs(os.path.dirname(output_path) or '.', exist_ok=True)
+                output_dir = os.path.dirname(output_path)
+                if output_dir:
+                    os.makedirs(output_dir, exist_ok=True)
                 with open(output_path, 'wb') as f:
-                    # Минимальный валидный PNG 1x1
+                    # Минимальный валидный PNG 1x1 (чёрный пиксель)
                     f.write(
                         b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01'
                         b'\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15\xc4\x89'
@@ -631,4 +770,27 @@ class PredictWorker(QThread):
                 logger.error(f"Failed to write placeholder: {e2}")
         finally:
             # ✅ Гарантированное освобождение ресурсов
+            if fig is not None:
+                plt.close(fig)
+            # Дополнительная страховка
             plt.close('all')
+
+
+# 🛠 УЛУЧШЕНИЕ 17: Явный экспорт публичного API модуля
+__all__ = [
+    'LARGE_WIDTH_THRESHOLD',
+    'MAX_LOG2_VALUE',
+    'MAX_KEY_BITS',
+    'DEFAULT_RANDOM_SEED',
+    'MIN_RANGE_FRACTION',
+    'IQR_MULTIPLIER',
+    'SPLINE_WINDOW',
+    'safe_log2_int',
+    'safe_pow2',
+    'parse_keys_from_file',
+    'validate_keys',
+    'PositionModel',
+    'LogGrowthModel',
+    'EnsembleModel',
+    'PredictWorker',
+]

@@ -1,6 +1,9 @@
 # ui/ui_main.py
+# 🛠 УЛУЧШЕНИЕ 1: Добавлены type hints для лучшей поддержки IDE
+from typing import Optional, TYPE_CHECKING
 import os
 import multiprocessing
+
 from PyQt5.QtCore import Qt, QRegExp, QSize
 from PyQt5.QtGui import QFont, QRegExpValidator
 from PyQt5.QtWidgets import (
@@ -10,6 +13,9 @@ from PyQt5.QtWidgets import (
     QComboBox, QTabWidget, QSpinBox, QMenu, QApplication,
     QScrollArea, QFrame, QSizePolicy
 )
+
+if TYPE_CHECKING:  # 🛠 УЛУЧШЕНИЕ 2: Избегаем циклических импортов для type hints
+    from ui.main_window import BitcoinGPUCPUScanner
 
 import config
 from utils.helpers import make_combo32, is_coincurve_available
@@ -28,29 +34,34 @@ class MainWindowUI:
     • Все имена виджетов сохранены (100% совместимость API)
     """
 
-    def __init__(self, parent):
+    # 🛠 УЛУЧШЕНИЕ 3: Константы вынесены в класс для удобства изменения
+    _MARGIN = 12
+    _SPACING = 10
+    _MIN_WINDOW_WIDTH = 1100
+    _MIN_WINDOW_HEIGHT = 750
+    _DEFAULT_WINDOW_WIDTH = 1300
+    _DEFAULT_WINDOW_HEIGHT = 900
+
+    def __init__(self, parent: 'BitcoinGPUCPUScanner'):  # 🛠 УЛУЧШЕНИЕ 4: Type hint для parent
         self.parent = parent
         self._ui_initialized = False  # Флаг для защиты от ранних обновлений
 
-    def setup_ui(self):
+    def setup_ui(self) -> None:  # 🛠 УЛУЧШЕНИЕ 5: Явный возврат None
         # ─────────────────────────────────────────────────────
         # 1. Базовая настройка окна
         # ─────────────────────────────────────────────────────
         self.parent.setWindowTitle("⛏️ Bitcoin GPU/CPU Scanner v5.0")
-        self.parent.resize(1300, 900)
-        self.parent.setMinimumSize(1100, 750)
+        self.parent.resize(self._DEFAULT_WINDOW_WIDTH, self._DEFAULT_WINDOW_HEIGHT)
+        self.parent.setMinimumSize(self._MIN_WINDOW_WIDTH, self._MIN_WINDOW_HEIGHT)
 
-        # Применяем тему из theme.py
         apply_dark_theme(self.parent)
 
-        # Центральная область
         main_widget = QWidget()
         self.parent.setCentralWidget(main_widget)
         main_layout = QVBoxLayout(main_widget)
-        main_layout.setContentsMargins(12, 12, 12, 12)
-        main_layout.setSpacing(10)
+        main_layout.setContentsMargins(self._MARGIN, self._MARGIN, self._MARGIN, self._MARGIN)
+        main_layout.setSpacing(self._SPACING)
 
-        # Вкладки
         self.parent.main_tabs = QTabWidget()
         self.parent.main_tabs.setObjectName("mainTabs")
         main_layout.addWidget(self.parent.main_tabs)
@@ -59,58 +70,26 @@ class MainWindowUI:
         # GPU TAB
         # ═══════════════════════════════════════════════════
         self._setup_gpu_tab()
-
-        # ═══════════════════════════════════════════════════
-        # KANGAROO TAB
-        # ═══════════════════════════════════════════════════
         self._setup_kangaroo_tab()
-
-        # ═══════════════════════════════════════════════════
-        # CPU TAB
-        # ═══════════════════════════════════════════════════
         self._setup_cpu_tab()
-
-        # ═══════════════════════════════════════════════════
-        # VANITY TAB
-        # ═══════════════════════════════════════════════════
         self._setup_vanity_tab()
-
-        # ═══════════════════════════════════════════════════
-        # FOUND KEYS TAB
-        # ═══════════════════════════════════════════════════
         self._setup_found_keys_tab()
-
-        # Конвертер (вызываем из parent)
-        self.parent.setup_converter_tab()
-
-        # ═══════════════════════════════════════════════════
-        # LOG TAB
-        # ═══════════════════════════════════════════════════
+        self.parent.setup_converter_tab()  # Вызываем из parent
         self._setup_log_tab()
-
-        # ═══════════════════════════════════════════════════
-        # PREDICT TAB
-        # ═══════════════════════════════════════════════════
         self._setup_predict_tab()
-
-        # ═══════════════════════════════════════════════════
-        # ABOUT TAB
-        # ═══════════════════════════════════════════════════
         self._setup_about_tab()
 
-        # ✅ UI полностью инициализирован
-        self._ui_initialized = True
+        self._ui_initialized = True  # ✅ UI полностью инициализирован
 
     # ─────────────────────────────────────────────────────
     # GPU TAB
     # ─────────────────────────────────────────────────────
-    def _setup_gpu_tab(self):
+    def _setup_gpu_tab(self) -> None:  # 🛠 УЛУЧШЕНИЕ 6: Добавлен тип возврата
         gpu_tab = QWidget()
         gpu_layout = QVBoxLayout(gpu_tab)
         gpu_layout.setContentsMargins(10, 10, 10, 10)
         gpu_layout.setSpacing(10)
 
-        # Заголовок
         header = QLabel("🎮 GPU Поиск приватных ключей")
         header.setProperty("cssClass", "header")
         gpu_layout.addWidget(header)
@@ -177,7 +156,10 @@ class MainWindowUI:
         self.parent.gpu_restart_interval_combo.setCurrentText("300")
         self.parent.gpu_restart_interval_combo.setEnabled(False)
         params_layout.addWidget(self.parent.gpu_restart_interval_combo, 2, 3)
-        self.parent.gpu_random_checkbox.toggled.connect(self.parent.gpu_restart_interval_combo.setEnabled)
+        # 🛠 УЛУЧШЕНИЕ 7: Использование lambda для передачи аргумента в connect
+        self.parent.gpu_random_checkbox.toggled.connect(
+            lambda checked: self.parent.gpu_restart_interval_combo.setEnabled(checked)
+        )
 
         # Ряд 4: Размер диапазона
         params_layout.addWidget(QLabel("Мин. диапазон:"), 3, 0)
@@ -225,18 +207,21 @@ class MainWindowUI:
         self.parent.gpu_optimize_btn = QPushButton("⚡ Авто-оптимизация")
         set_button_style(self.parent.gpu_optimize_btn, "primary")
         self.parent.gpu_optimize_btn.setMinimumHeight(42)
+        # Добавьте подключение (если ещё нет):
+        self.parent.gpu_optimize_btn.clicked.connect(self.parent.gpu_logic.auto_optimize_gpu_parameters)
 
         btn_row.addWidget(self.parent.gpu_start_stop_btn)
         btn_row.addWidget(self.parent.gpu_optimize_btn)
+
         # 🔽 Монитор GPU
         self.parent.gpu_monitor_btn = QPushButton("📊 Монитор")
         self.parent.gpu_monitor_btn.setFixedWidth(100)
         self.parent.gpu_monitor_btn.setMinimumHeight(40)
         self.parent.gpu_monitor_btn.setStyleSheet("""
-                    QPushButton { background: #9b59b6; color: white; font-weight: bold; border-radius: 6px; }
-                    QPushButton:hover { background: #8e44ad; }
-                    QPushButton:pressed { background: #7d3c98; }
-                """)
+            QPushButton { background: #9b59b6; color: white; font-weight: bold; border-radius: 6px; }
+            QPushButton:hover { background: #8e44ad; }
+            QPushButton:pressed { background: #7d3c98; }
+        """)
         self.parent.gpu_monitor_btn.clicked.connect(self.parent.open_gpu_monitor)
         btn_row.addWidget(self.parent.gpu_monitor_btn)
 
@@ -280,11 +265,13 @@ class MainWindowUI:
         gpu_layout.addWidget(self.parent.gpu_range_label)
 
         # ── Аппаратный мониторинг (если доступен) ─────────
+        # 🛠 УЛУЧШЕНИЕ 8: Проверка PYNVML_AVAILABLE вынесена из try/except
+        PYNVML_AVAILABLE = False
         try:
             import pynvml
             PYNVML_AVAILABLE = True
         except ImportError:
-            PYNVML_AVAILABLE = False
+            pass  # 🛠 УЛУЧШЕНИЕ 9: Явный pass вместо молчаливого игнорирования
 
         if PYNVML_AVAILABLE:
             hw_group = QGroupBox("🌡 Аппаратный статус")
@@ -323,13 +310,12 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # KANGAROO TAB
     # ─────────────────────────────────────────────────────
-    def _setup_kangaroo_tab(self):
+    def _setup_kangaroo_tab(self) -> None:
         kangaroo_tab = QWidget()
         kang_layout = QVBoxLayout(kangaroo_tab)
         kang_layout.setContentsMargins(12, 12, 12, 12)
         kang_layout.setSpacing(10)
 
-        # Инфо-блок
         info = QLabel(
             "🦘 <b>Kangaroo Algorithm</b><br>"
             "Эффективный поиск ключей в диапазоне через Pollard's Kangaroo.<br>"
@@ -339,7 +325,6 @@ class MainWindowUI:
         info.setProperty("cssClass", "info-box")
         kang_layout.addWidget(info)
 
-        # Параметры
         main_params = QGroupBox("🔑 Основные параметры")
         mp_layout = QGridLayout(main_params)
         mp_layout.setSpacing(10)
@@ -490,7 +475,7 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # CPU TAB (с защитой от наезжания)
     # ─────────────────────────────────────────────────────
-    def _setup_cpu_tab(self):
+    def _setup_cpu_tab(self) -> None:
         cpu_tab = QWidget()
         cpu_layout = QVBoxLayout(cpu_tab)
         cpu_layout.setContentsMargins(10, 10, 10, 10)
@@ -559,6 +544,7 @@ class MainWindowUI:
         sp_layout.addWidget(QLabel("Воркеры:"), 1, 2)
         self.parent.cpu_workers_spin = QSpinBox()
         self.parent.cpu_workers_spin.setRange(1, multiprocessing.cpu_count() * 2)
+        # 🛠 УЛУЧШЕНИЕ 10: Безопасное получение значения с дефолтом
         self.parent.cpu_workers_spin.setValue(getattr(self.parent, 'optimal_workers', 4))
         sp_layout.addWidget(self.parent.cpu_workers_spin, 1, 3)
         sp_layout.addWidget(QLabel("Приоритет:"), 2, 0)
@@ -604,13 +590,13 @@ class MainWindowUI:
         cpl.addWidget(self.parent.cpu_eta_label)
         cpu_layout.addWidget(cpu_prog)
 
-        # Таблица воркеров (в скролл-области для защиты от наезжания)
+        # Таблица воркеров (в скролл-области)
         cpu_layout.addWidget(QLabel("🔧 Воркеры:"))
         scroll_wrapper = QScrollArea()
         scroll_wrapper.setWidgetResizable(True)
         scroll_wrapper.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         scroll_wrapper.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        scroll_wrapper.setMaximumHeight(200)  # Ограничение высоты
+        scroll_wrapper.setMaximumHeight(200)
 
         table_container = QWidget()
         table_layout = QVBoxLayout(table_container)
@@ -632,7 +618,7 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # VANITY TAB
     # ─────────────────────────────────────────────────────
-    def _setup_vanity_tab(self):
+    def _setup_vanity_tab(self) -> None:
         vanity_tab = QWidget()
         vanity_layout = QVBoxLayout(vanity_tab)
         vanity_layout.setContentsMargins(12, 12, 12, 12)
@@ -741,13 +727,12 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # FOUND KEYS TAB
     # ─────────────────────────────────────────────────────
-    def _setup_found_keys_tab(self):
+    def _setup_found_keys_tab(self) -> None:
         keys_tab = QWidget()
         keys_layout = QVBoxLayout(keys_tab)
         keys_layout.setContentsMargins(10, 10, 10, 10)
         keys_layout.setSpacing(10)
 
-        # Таблица в скролл-области
         self.parent.found_keys_table = QTableWidget(0, 5)
         self.parent.found_keys_table.setHorizontalHeaderLabels(["Время", "Адрес", "HEX", "WIF", "Источник"])
         self.parent.found_keys_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -774,7 +759,7 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # LOG TAB
     # ─────────────────────────────────────────────────────
-    def _setup_log_tab(self):
+    def _setup_log_tab(self) -> None:
         log_tab = QWidget()
         log_layout = QVBoxLayout(log_tab)
         log_layout.setContentsMargins(10, 10, 10, 10)
@@ -801,13 +786,12 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # PREDICT TAB (ДВУХКОЛОНОЧНЫЙ LAYOUT)
     # ─────────────────────────────────────────────────────
-    def _setup_predict_tab(self):
+    def _setup_predict_tab(self) -> None:
         predict_tab = QWidget()
         predict_layout = QVBoxLayout(predict_tab)
         predict_layout.setContentsMargins(12, 12, 12, 12)
         predict_layout.setSpacing(10)
 
-        # Заголовок на всю ширину
         header_p = QLabel("🔮 BTC Puzzle Analyzer v2")
         header_p.setProperty("cssClass", "header")
         header_p.setAlignment(Qt.AlignCenter)
@@ -889,7 +873,6 @@ class MainWindowUI:
         self.parent.predict_ranges_table.setEditTriggers(QTableWidget.NoEditTriggers)
         self.parent.predict_ranges_table.setSelectionBehavior(QTableWidget.SelectRows)
 
-        # Скролл для таблицы диапазонов
         ranges_scroll = QScrollArea()
         ranges_scroll.setWidgetResizable(True)
         ranges_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
@@ -902,10 +885,11 @@ class MainWindowUI:
         # Легенда
         legend = QHBoxLayout()
         legend.setSpacing(12)
-        for txt, col in [("🔵 Position", COLORS['accent_primary']),
-                         ("🟢 LogGrowth", COLORS['accent_success']),
-                         ("🟠 Ensemble", COLORS['accent_warning']),
-                         ("🔴 Final", COLORS['accent_danger'])]:
+        # 🛠 УЛУЧШЕНИЕ 11: Безопасный доступ к COLORS с .get()
+        for txt, col in [("🔵 Position", COLORS.get('accent_primary', '#5B8CFF')),
+                         ("🟢 LogGrowth", COLORS.get('accent_success', '#2ECC71')),
+                         ("🟠 Ensemble", COLORS.get('accent_warning', '#F39C12')),
+                         ("🔴 Final", COLORS.get('accent_danger', '#E74C3C'))]:
             lbl = QLabel(txt)
             lbl.setStyleSheet(f"color:{col}; font-size:9pt; font-weight:bold;")
             legend.addWidget(lbl)
@@ -914,7 +898,7 @@ class MainWindowUI:
 
         left_column.addWidget(ranges_group)
 
-        # 4. График (занимает оставшееся место)
+        # 4. График
         graph_group = QGroupBox("📊 Визуализация распределения")
         graph_layout = QVBoxLayout(graph_group)
         graph_layout.setSpacing(6)
@@ -934,8 +918,8 @@ class MainWindowUI:
         )
         self.parent.predict_plot_label.setAlignment(Qt.AlignCenter)
         self.parent.predict_plot_label.setStyleSheet(
-            f"color:{COLORS['text_secondary']}; font-size:10pt; padding:40px; "
-            f"background:{COLORS['bg_input']}; border:2px dashed {COLORS['border']}; border-radius:6px;"
+            f"color:{COLORS.get('text_secondary', '#B0B0C0')}; font-size:10pt; padding:40px; "
+            f"background:{COLORS.get('bg_input', '#232332')}; border:2px dashed {COLORS.get('border', '#3A3A4A')}; border-radius:6px;"
         )
 
         graph_container = QWidget()
@@ -945,7 +929,7 @@ class MainWindowUI:
         self.parent.predict_scroll.setWidget(graph_container)
 
         graph_layout.addWidget(self.parent.predict_scroll)
-        left_column.addWidget(graph_group, 1)  # 1 = stretch, занимает всё оставшееся место
+        left_column.addWidget(graph_group, 1)
 
         # ───────────────────────────────────────────────
         # ПРАВАЯ КОЛОНКА: ПАРАМЕТРЫ И НАСТРОЙКИ (40%)
@@ -968,7 +952,6 @@ class MainWindowUI:
         self.parent.predict_browse_btn.setFixedWidth(40)
         file_layout.addWidget(self.parent.predict_browse_btn, 0, 2)
 
-        # Статус файла
         file_status = QHBoxLayout()
         file_status.addWidget(QLabel("✅ Ключей:"))
         self.parent.predict_keys_count_label = QLabel("0")
@@ -998,7 +981,6 @@ class MainWindowUI:
         params_layout.setColumnStretch(1, 1)
         params_layout.setColumnStretch(3, 1)
 
-        # Левая колонка параметров
         params_layout.addWidget(QLabel("Q Low:"), 0, 0)
         self.parent.predict_q_low_spin = QSpinBox()
         self.parent.predict_q_low_spin.setRange(0, 100)
@@ -1025,7 +1007,6 @@ class MainWindowUI:
         self.parent.predict_log_growth_cb.setChecked(True)
         params_layout.addWidget(self.parent.predict_log_growth_cb, 4, 0, 1, 2)
 
-        # Правая колонка параметров
         self.parent.predict_position_model_cb = QCheckBox("Модель позиций")
         self.parent.predict_position_model_cb.setChecked(True)
         params_layout.addWidget(self.parent.predict_position_model_cb, 2, 2, 1, 2)
@@ -1055,7 +1036,6 @@ class MainWindowUI:
         self.parent.predict_kde_points_spin.setSingleStep(50000)
         params_layout.addWidget(self.parent.predict_kde_points_spin, 6, 3)
 
-        # Контейнер для параметров
         params_container_layout = QVBoxLayout(params_container)
         params_container_layout.addWidget(params_group)
         params_container_layout.addStretch()
@@ -1086,9 +1066,8 @@ class MainWindowUI:
         # ═══════════════════════════════════════════════
         # ДОБАВЛЯЕМ КОЛОНКИ В MAIN LAYOUT
         # ═══════════════════════════════════════════════
-        # Левая колонка: 60%, Правая колонка: 40%
-        main_split.addLayout(left_column, 3)  # 3 части
-        main_split.addLayout(right_column, 2)  # 2 части
+        main_split.addLayout(left_column, 3)
+        main_split.addLayout(right_column, 2)
 
         predict_layout.addLayout(main_split)
         self.parent.main_tabs.addTab(predict_tab, "🔮 Predict")
@@ -1096,22 +1075,22 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # ABOUT TAB
     # ─────────────────────────────────────────────────────
-    def _setup_about_tab(self):
+    def _setup_about_tab(self) -> None:
         about_tab = QWidget()
         about_layout = QVBoxLayout(about_tab)
         about_layout.setContentsMargins(20, 20, 20, 20)
         about_layout.setSpacing(15)
 
         coincurve_status = "✓ Доступна" if is_coincurve_available() else "✗ Не установлена"
-        cubitcrack_status = "✓ Найден" if os.path.join(config.BASE_DIR, "cuBitcrack.exe") else "✗ Не найден"
+        cubitcrack_status = "✓ Найден" if os.path.exists(os.path.join(config.BASE_DIR, "cuBitcrack.exe")) else "✗ Не найден"  # 🛠 УЛУЧШЕНИЕ 12: os.path.exists вместо os.path.join
 
         about_text = QLabel(
-            f"<div style='text-align:center; padding:20px; background:{COLORS['bg_input']}; "
-            f"border-radius:10px; border:1px solid {COLORS['border']};'>"
-            f"<h2 style='color:{COLORS['accent_primary']}; margin:0 0 10px 0;'>⛏️ Bitcoin GPU/CPU Scanner</h2>"
+            f"<div style='text-align:center; padding:20px; background:{COLORS.get('bg_input', '#232332')}; "
+            f"border-radius:10px; border:1px solid {COLORS.get('border', '#3A3A4A')};'>"
+            f"<h2 style='color:{COLORS.get('accent_primary', '#5B8CFF')}; margin:0 0 10px 0;'>⛏️ Bitcoin GPU/CPU Scanner</h2>"
             f"<b>Версия:</b> 5.0 (Улучшенная)<br>"
             f"<b>Автор:</b> Jasst<br>"
-            f"<b>GitHub:</b> <a href='https://github.com/Jasst' style='color:{COLORS['accent_primary']};'>github.com/Jasst</a><br><br>"
+            f"<b>GitHub:</b> <a href='https://github.com/Jasst' style='color:{COLORS.get('accent_primary', '#5B8CFF')};'>github.com/Jasst</a><br><br>"
             f"<b>Возможности:</b><ul style='text-align:left; display:inline-block;'>"
             f"<li>🎮 GPU поиск через cuBitcrack</li>"
             f"<li>💻 CPU мультипроцессинг</li>"
@@ -1123,8 +1102,8 @@ class MainWindowUI:
             f"<li>🔮 Предиктивная аналитика</li>"
             f"</ul><br>"
             f"<b>Статус:</b><br>"
-            f"coincurve: <span style='color:{COLORS['accent_success'] if '✓' in coincurve_status else COLORS['accent_danger']}'>{coincurve_status}</span><br>"
-            f"cuBitcrack.exe: <span style='color:{COLORS['accent_success'] if '✓' in cubitcrack_status else COLORS['accent_danger']}'>{cubitcrack_status}</span>"
+            f"coincurve: <span style='color:{COLORS.get('accent_success', '#2ECC71') if '✓' in coincurve_status else COLORS.get('accent_danger', '#E74C3C')}'>{coincurve_status}</span><br>"
+            f"cuBitcrack.exe: <span style='color:{COLORS.get('accent_success', '#2ECC71') if '✓' in cubitcrack_status else COLORS.get('accent_danger', '#E74C3C')}'>{cubitcrack_status}</span>"
             f"</div>"
         )
         about_text.setWordWrap(True)
@@ -1136,7 +1115,7 @@ class MainWindowUI:
     # ─────────────────────────────────────────────────────
     # БЕЗОПАСНЫЕ МЕТОДЫ ОБНОВЛЕНИЯ UI
     # ─────────────────────────────────────────────────────
-    def _safe_update_label(self, label_attr: str, text: str, css_class: str = None):
+    def _safe_update_label(self, label_attr: str, text: str, css_class: Optional[str] = None) -> None:
         """Безопасное обновление QLabel с проверкой инициализации"""
         if not self._ui_initialized:
             return
@@ -1148,10 +1127,10 @@ class MainWindowUI:
                     label.setProperty("cssClass", css_class)
                     label.style().unpolish(label)
                     label.style().polish(label)
-            except Exception:
-                pass  # Игнорируем ошибки обновления
+            except (AttributeError, RuntimeError):  # 🛠 УЛУЧШЕНИЕ 13: Конкретные исключения вместо общего Exception
+                pass
 
-    def _safe_update_progress(self, bar_attr: str, value: int, fmt: str = None, css_class: str = None):
+    def _safe_update_progress(self, bar_attr: str, value: int, fmt: Optional[str] = None, css_class: Optional[str] = None) -> None:
         """Безопасное обновление QProgressBar"""
         if not self._ui_initialized:
             return
@@ -1165,5 +1144,5 @@ class MainWindowUI:
                     bar.setProperty("cssClass", css_class)
                     bar.style().unpolish(bar)
                     bar.style().polish(bar)
-            except Exception:
+            except (AttributeError, RuntimeError):
                 pass

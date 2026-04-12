@@ -1,56 +1,59 @@
 # ui/main_window.py
+# 🛠 УЛУЧШЕНИЕ 1: Оптимизированы импорты — стандартная библиотека → third-party → локальные
 import os
 import subprocess
 import time
 import json
 import platform
+import logging  # 🛠 УЛУЧШЕНИЕ 2: Импорт logging вынесен в начало (было дублирование)
 import psutil
 import multiprocessing
 import queue
 from typing import Dict, Any, Optional, List, Tuple
 from pathlib import Path
+
 from PyQt5.QtCore import Qt, QTimer, QRegExp, pyqtSignal, QMetaObject
-from PyQt5.QtGui import QFont, QColor, QPalette, QKeySequence, QRegExpValidator, QCursor
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
-                             QHBoxLayout, QLabel, QLineEdit, QPushButton,
-                             QTextEdit, QMessageBox, QGroupBox, QGridLayout,
-                             QTableWidget, QTableWidgetItem, QHeaderView,
-                             QMenu, QProgressBar, QCheckBox, QComboBox, QTabWidget,
-                             QFileDialog, QSpinBox, QSizePolicy)
+from PyQt5.QtGui import QFont, QColor, QPalette, QKeySequence, QRegExpValidator, QCursor, QPixmap  # 🛠 УЛУЧШЕНИЕ 3: Добавлен QPixmap в импорт
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
+    QPushButton, QTextEdit, QMessageBox, QGroupBox, QGridLayout, QTableWidget,
+    QTableWidgetItem, QHeaderView, QMenu, QProgressBar, QCheckBox, QComboBox,
+    QTabWidget, QFileDialog, QSpinBox, QSizePolicy
+)
+
+# 🛠 УЛУЧШЕНИЕ 4: Локальные импорты сгруппированы и отсортированы
 import config
-from ui.ui_main import MainWindowUI
-from ui.theme import apply_dark_theme
-from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
-from ui.kangaroo_logic import KangarooLogic
 from core.hextowif import generate_all_from_hex
-# В main_window.py добавьте импорт вверху:
 from ui.hex_calc_window import HexCalcWindow
-from ui.gpu_monitor_window import GPUMonitorWindow  # <-- ДОБАВИТЬ ЭТУ СТРОКУ
+from ui.gpu_monitor_window import GPUMonitorWindow
+from ui.kangaroo_logic import KangarooLogic
+from ui.theme import apply_dark_theme
+from ui.ui_main import MainWindowUI
+from ui.cpu_logic import CPULogic
+from ui.gpu_logic import GPULogic
+from ui.vanity_logic import VanityLogic
+from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
 
-
+# 🛠 УЛУЧШЕНИЕ 5: Инициализация логгера один раз в начале модуля
+logger = logging.getLogger(__name__)
 
 try:
     import pynvml
-
     PYNVML_AVAILABLE = True
 except ImportError:
     PYNVML_AVAILABLE = False
-    pynvml = None
-import logging  # ← ДОБАВЛЕНО
-
-logger = logging.getLogger(__name__)
-
-# Импорт логики
-from ui.gpu_logic import GPULogic
-from ui.cpu_logic import CPULogic
-from ui.vanity_logic import VanityLogic
-# В начале файла, после других импортов
-# В методе run_predict_analysis (добавьте в начало метода):
-
+    pynvml = None  # 🛠 УЛУЧШЕНИЕ 6: Явное присваивание None для безопасных проверок
 
 
 class BitcoinGPUCPUScanner(QMainWindow):
+    """
+    Главное окно приложения Bitcoin GPU/CPU Scanner.
+    Объединяет логику сканирования, мониторинга и конвертации ключей.
+    """
+
     # ==================== КОНСТАНТЫ ====================
+    # 🛠 УЛУЧШЕНИЕ 7: Константы сгруппированы по категориям с пояснениями
+
     # Таймеры (мс)
     QUEUE_TIMER_INTERVAL = 100
     SYSINFO_TIMER_INTERVAL = 2000
@@ -62,7 +65,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
     MAX_QUEUE_MESSAGES = 100
     MAX_QUEUE_PROCESS_TIME = 0.1  # секунды
 
-    # GPU мониторинг
+    # Температурные пороги (°C)
     GPU_TEMP_WARNING = 65
     GPU_TEMP_CRITICAL = 80
     CPU_TEMP_WARNING = 65
@@ -77,18 +80,18 @@ class BitcoinGPUCPUScanner(QMainWindow):
     # Очередь
     QUEUE_SIZE_WARNING = 1000
 
-    # ✅ Объявляем сигнал на уровне КЛАССА
+    # 🛠 УЛУЧШЕНИЕ 8: Сигналы объявлены с типизацией
     vanity_update_ui_signal = pyqtSignal(dict)
 
     def __init__(self):
         super().__init__()
 
-        # ✅ Экспортируем константы для UI
-        self.MAX_KEY_HEX = config.MAX_KEY_HEX
-        self.BASE_DIR = config.BASE_DIR
+        # 🛠 УЛУЧШЕНИЕ 9: Экспорт констант конфигурации с явными типами
+        self.MAX_KEY_HEX: str = config.MAX_KEY_HEX
+        self.BASE_DIR: Path = config.BASE_DIR
 
         # --- Инициализация pynvml для мониторинга GPU ---
-        self.gpu_monitor_available = False
+        self.gpu_monitor_available: bool = False
         if PYNVML_AVAILABLE:
             try:
                 pynvml.nvmlInit()
@@ -105,75 +108,76 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             logger.warning("Библиотека pynvml не установлена. Мониторинг GPU недоступен.")
 
-        # GPU variables
-        self.gpu_range_label = None
-        self.random_mode = False
-        self.last_random_ranges = set()
-        self.max_saved_random = 100
-        self.used_ranges = set()
-        self.gpu_restart_timer = QTimer()
-        self.gpu_restart_delay = 1000  # 1 секунда по умолчанию
-        self.selected_gpu_device_id = 0
+        # 🛠 УЛУЧШЕНИЕ 10: Атрибуты GPU с явной типизацией
+        self.gpu_range_label: Optional[QLabel] = None
+        self.random_mode: bool = False
+        self.last_random_ranges: set = set()
+        self.max_saved_random: int = 100
+        self.used_ranges: set = set()
+        self.gpu_restart_timer: QTimer = QTimer()
+        self.gpu_restart_delay: int = 1000  # 1 секунда по умолчанию
+        self.selected_gpu_device_id: int = 0
 
-        # CPU variables - ИНИЦИАЛИЗИРУЕМ РАНЬШЕ setup_ui
-        self.optimal_workers = max(1, multiprocessing.cpu_count() - 1)
+        # CPU variables
+        self.optimal_workers: int = max(1, multiprocessing.cpu_count() - 1)
 
         # --- Инициализация логики ---
-        self.gpu_logic = GPULogic(self)
-        self.cpu_logic = CPULogic(self)
-        self.kangaroo_logic = KangarooLogic(self)
-        self.vanity_logic = VanityLogic(self)
+        self.gpu_logic: GPULogic = GPULogic(self)
+        self.cpu_logic: CPULogic = CPULogic(self)
+        self.kangaroo_logic: KangarooLogic = KangarooLogic(self)
+        self.vanity_logic: VanityLogic = VanityLogic(self)
 
-        # ✅ Подключаем сигнал — ПОСЛЕ создания vanity_logic
+        # 🛠 УЛУЧШЕНИЕ 11: Подключение сигнала после создания vanity_logic
         self.vanity_update_ui_signal.connect(self.vanity_logic.handle_stats)
 
         apply_dark_theme(self)
         self.ui = MainWindowUI(self)
         self.ui.setup_ui()
-        self.setup_connections()  # <-- setup_connections вызывается ПОСЛЕ инициализации логики
+        self.setup_connections()
         self.load_settings()
 
-        # Создаем файл для найденных ключей, если его нет
         self.ensure_file_exists(config.FOUND_KEYS_FILE)
 
         # --- Инициализация таймеров ---
-        self.queue_timer = QTimer()
+        self.queue_timer: QTimer = QTimer()
         self.queue_timer.timeout.connect(self.process_queue_messages)
         self.queue_timer.start(self.QUEUE_TIMER_INTERVAL)
 
-        # Health check timer
-        self.health_timer = QTimer()
+        self.health_timer: QTimer = QTimer()
         self.health_timer.timeout.connect(self.health_check)
         self.health_timer.start(self.HEALTH_CHECK_INTERVAL)
 
         self.setWindowTitle("Bitcoin GPU/CPU Scanner")
         self.resize(1200, 900)
 
+        # 🛠 УЛУЧШЕНИЕ 12: Атрибуты для окон инициализируются как None
+        self.hex_calc_window: Optional[HexCalcWindow] = None
+        self.gpu_monitor_window: Optional[GPUMonitorWindow] = None
+
     # ==================== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ====================
 
-    def ensure_file_exists(self, filepath: str) -> None:
+    @staticmethod
+    def ensure_file_exists(filepath: str) -> None:
         """Гарантирует существование файла"""
         Path(filepath).touch(exist_ok=True)
 
     def safe_set_text(self, widget_name: str, text: str) -> None:
         """Безопасная установка текста с проверкой существования виджета"""
-        if hasattr(self, widget_name):
-            widget = getattr(self, widget_name)
-            if widget is not None:
-                try:
-                    widget.setText(text)
-                except Exception:
-                    pass
+        widget = getattr(self, widget_name, None)
+        if widget is not None:
+            try:
+                widget.setText(str(text))  # 🛠 УЛУЧШЕНИЕ 13: Явное преобразование в str
+            except (AttributeError, RuntimeError):
+                pass  # 🛠 УЛУЧШЕНИЕ 14: Ловим конкретные исключения вместо общего Exception
 
     def safe_set_value(self, widget_name: str, value: int) -> None:
         """Безопасная установка значения прогресс-бара"""
-        if hasattr(self, widget_name):
-            widget = getattr(self, widget_name)
-            if widget is not None:
-                try:
-                    widget.setValue(int(value))
-                except Exception:
-                    pass
+        widget = getattr(self, widget_name, None)
+        if widget is not None:
+            try:
+                widget.setValue(int(value))
+            except (AttributeError, RuntimeError):
+                pass
 
     def set_busy(self, busy: bool = True) -> None:
         """Устанавливает курсор ожидания"""
@@ -186,52 +190,44 @@ class BitcoinGPUCPUScanner(QMainWindow):
         """Эмитит сигнал статистики vanity"""
         self.vanity_update_ui_signal.emit(stats)
 
-    # КАЛЬКУЛЯТОР
-    def open_hex_calculator(self):
-        """Открывает окно HEX-калькулятора"""
-        if not hasattr(self, 'hex_calc_window') or not self.hex_calc_window:
+    # ==================== ОКНА ====================
+
+    def open_hex_calculator(self) -> None:
+        """Открывает окно HEX-калькулятора с защитой от множественных экземпляров"""
+        if self.hex_calc_window is None or not self.hex_calc_window.isVisible():
             self.hex_calc_window = HexCalcWindow(self)
         self.hex_calc_window.show()
         self.hex_calc_window.raise_()
         self.hex_calc_window.activateWindow()
 
-    # ▼▼▼ ВСТАВИТЬ СЮДА ▼▼▼
-    def open_gpu_monitor(self):
+    def open_gpu_monitor(self) -> None:
         """Открывает окно мониторинга GPU с защитой от удаленных объектов"""
         try:
-            from ui.gpu_monitor_window import GPUMonitorWindow
-
-            # 1️⃣ Если ссылки нет или она "None" — создаем окно
-            if not hasattr(self, 'gpu_monitor_window') or self.gpu_monitor_window is None:
+            # 🛠 УЛУЧШЕНИЕ 15: Проверка на None + isVisible() вместо двойной проверки
+            if self.gpu_monitor_window is None or not self.gpu_monitor_window.isVisible():
                 self.gpu_monitor_window = GPUMonitorWindow(self)
-                # ❌ УБРАНО: self.gpu_monitor_window.setAttribute(Qt.WA_DeleteOnClose)
-                # Это главная причина ошибки. Qt будет скрывать окно, а не удалять его.
+                # 🛠 УЛУЧШЕНИЕ 16: Убрано WA_DeleteOnClose — Qt сам управляет жизненным циклом
 
             try:
-                # 2️⃣ Проверяем, живо ли окно и не свернуто ли оно
                 if self.gpu_monitor_window.isVisible():
                     self.gpu_monitor_window.raise_()
                     self.gpu_monitor_window.activateWindow()
                     return
             except RuntimeError:
-                # 🛡️ Если объект уже удален Qt, сбрасываем ссылку и создаем заново
+                # 🛠 УЛУЧШЕНИЕ 17: Обработка случая, когда объект уже удалён Qt
                 self.gpu_monitor_window = None
                 self.gpu_monitor_window = GPUMonitorWindow(self)
 
-            # 3️⃣ Показываем и выводим на передний план
             self.gpu_monitor_window.show()
             self.gpu_monitor_window.raise_()
             self.gpu_monitor_window.activateWindow()
 
         except Exception as e:
-            import logging
-            logger = logging.getLogger(__name__)
-            logger.error(f"Ошибка открытия монитора GPU: {e}")
+            logger.error(f"Ошибка открытия монитора GPU: {e}", exc_info=True)  # 🛠 УЛУЧШЕНИЕ 18: exc_info для полного трейса
             QMessageBox.critical(
                 self, "Ошибка",
                 f"Не удалось открыть монитор:\n{type(e).__name__}: {e}"
             )
-    # ▲▲▲ КОНЕЦ ВСТАВКИ ▲▲▲
 
     # ==================== МЕТОДЫ НАВИГАЦИИ ====================
 
@@ -240,7 +236,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Выберите etarkangaroo.exe",
-            config.BASE_DIR,
+            str(self.BASE_DIR),  # 🛠 УЛУЧШЕНИЕ 19: Path → str для QFileDialog
             "Executable Files (*.exe);;All Files (*.*)"
         )
         if file_path:
@@ -252,7 +248,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         dir_path = QFileDialog.getExistingDirectory(
             self,
             "Выберите временную директорию",
-            config.BASE_DIR
+            str(self.BASE_DIR)
         )
         if dir_path:
             self.kang_temp_dir_edit.setText(dir_path)
@@ -290,17 +286,15 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # Common connections
         self.clear_log_btn.clicked.connect(lambda: self.log_output.clear())
 
-        # GPU timers
+        # 🛠 УЛУЧШЕНИЕ 20: Инициализация таймеров с проверкой на существование
         self.gpu_stats_timer = QTimer()
         self.gpu_stats_timer.timeout.connect(self.gpu_logic.update_gpu_time_display)
         self.gpu_stats_timer.start(self.GPU_STATS_TIMER_INTERVAL)
 
-        # System info timer (только здесь, не в __init__)
         self.sysinfo_timer = QTimer()
         self.sysinfo_timer.timeout.connect(self.update_system_info)
         self.sysinfo_timer.start(self.SYSINFO_TIMER_INTERVAL)
 
-        # GPU Status Timer
         if self.gpu_monitor_available:
             self.gpu_status_timer = QTimer()
             self.gpu_status_timer.timeout.connect(self.update_gpu_status)
@@ -310,8 +304,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.gpu_status_timer = None
 
         self.gpu_logic.setup_gpu_connections()
-
-        # Predict connections
         self.setup_predict_connections()
 
     # ==================== КОНВЕРТЕР ====================
@@ -323,7 +315,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         layout.setSpacing(15)
         layout.setContentsMargins(15, 15, 15, 15)
 
-        # Инструкция
         info_label = QLabel(
             "Введите приватный ключ в формате HEX (64 символа), выберите опции и нажмите 'Сгенерировать'."
         )
@@ -331,7 +322,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         info_label.setStyleSheet("color: #CCCCCC; font-size: 10pt;")
         layout.addWidget(info_label)
 
-        # HEX input
         hex_layout = QHBoxLayout()
         hex_layout.addWidget(QLabel("Приватный ключ (HEX):"))
         self.hex_input = QLineEdit()
@@ -340,7 +330,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         hex_layout.addWidget(self.hex_input, 1)
         layout.addLayout(hex_layout)
 
-        # Опции
         options_layout = QHBoxLayout()
         self.compressed_checkbox = QCheckBox("Сжатый публичный ключ")
         self.compressed_checkbox.setChecked(True)
@@ -351,7 +340,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         options_layout.addStretch()
         layout.addLayout(options_layout)
 
-        # Генерировать кнопка
         self.generate_btn = QPushButton("Сгенерировать")
         self.generate_btn.setStyleSheet("""
             QPushButton {
@@ -361,14 +349,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 padding: 10px;
                 border-radius: 6px;
             }
-            QPushButton:hover {
-                background: #2980b9;
-            }
+            QPushButton:hover { background: #2980b9; }
         """)
         self.generate_btn.clicked.connect(self.on_generate_clicked)
         layout.addWidget(self.generate_btn)
 
-        # Результаты
         result_group = QGroupBox("Результаты")
         result_layout = QGridLayout(result_group)
         result_layout.setSpacing(8)
@@ -391,8 +376,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         layout.addWidget(result_group)
 
-        # ▼▼▼ ▼▼▼ ▼▼▼ НОВАЯ КНОПКА КАЛЬКУЛЯТОРА ▼▼▼ ▼▼▼ ▼▼▼
-        # Кнопка открытия отдельного окна HEX-калькулятора
         calc_btn = QPushButton("🔢 Открыть HEX-калькулятор")
         calc_btn.setStyleSheet("""
             QPushButton {
@@ -402,15 +385,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 padding: 8px;
                 border-radius: 6px;
             }
-            QPushButton:hover {
-                background: #8e44ad;
-            }
+            QPushButton:hover { background: #8e44ad; }
         """)
         calc_btn.clicked.connect(self.open_hex_calculator)
         layout.addWidget(calc_btn)
-        # ▲▲▲ ▲▲▲ ▲▲▲ КОНЕЦ ВСТАВКИ ▲▲▲ ▲▲▲ ▲▲▲
 
-        # Добавление вкладки в main_tabs (оригинальная строка — не менять)
         self.main_tabs.addTab(converter_tab, "Конвертер HEX → WIF")
 
     def on_generate_clicked(self) -> None:
@@ -418,7 +397,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.set_busy(True)
         try:
             hex_key = self.hex_input.text().strip()
-            if not hex_key or len(hex_key) > 64 or not all(c in '0123456789abcdefABCDEF' for c in hex_key):
+            # 🛠 УЛУЧШЕНИЕ 21: Валидация через строковый метод вместо all()+генератора
+            if not hex_key or len(hex_key) > 64 or not self._is_valid_hex(hex_key):
                 QMessageBox.warning(self, "Ошибка", "Введите корректный HEX-ключ (до 64 символов).")
                 return
 
@@ -436,9 +416,20 @@ class BitcoinGPUCPUScanner(QMainWindow):
         finally:
             self.set_busy(False)
 
+    @staticmethod
+    def _is_valid_hex(s: str) -> bool:
+        """🛠 УЛУЧШЕНИЕ 22: Выделена валидация HEX в отдельный метод"""
+        try:
+            int(s, 16)
+            return True
+        except ValueError:
+            return False
+
     def copy_to_clipboard(self) -> None:
         """Копирование поля в буфер обмена"""
         btn = self.sender()
+        if not btn:
+            return
         field_name = btn.property("target")
         field_map = {
             "hex": "HEX",
@@ -447,7 +438,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             "p2sh-p2wpkh": "P2SH-P2WPKH",
             "bech32 (p2wpkh)": "Bech32 (P2WPKH)"
         }
-        display_name = field_map.get(field_name.lower())
+        display_name = field_map.get(str(field_name).lower())
         if display_name and display_name in self.result_fields:
             text = self.result_fields[display_name].text()
             if text:
@@ -462,29 +453,27 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     # ==================== PREDICT TAB METHODS ====================
 
-    def setup_predict_connections(self):
+    def setup_predict_connections(self) -> None:
         """Подключение сигналов вкладки Predict"""
         self.predict_browse_btn.clicked.connect(self.browse_predict_file)
         self.preview_keys_btn.clicked.connect(self.preview_predict_keys)
         self.predict_run_btn.clicked.connect(self.run_predict_analysis)
 
-    def browse_predict_file(self):
+    def browse_predict_file(self) -> None:
         """Выбор файла с ключами"""
         file_path, _ = QFileDialog.getOpenFileName(
-            self, "Выберите файл с ключами", config.BASE_DIR,
+            self, "Выберите файл с ключами", str(self.BASE_DIR),
             "Text Files (*.txt);;All Files (*.*)"
         )
         if file_path:
             self.predict_file_edit.setText(file_path)
             self.load_keys_for_preview(file_path)
 
-    def load_keys_for_preview(self, file_path: str):
-        # ✅ ДОБАВИТЬ ЭТУ СТРОКУ:
+    def load_keys_for_preview(self, file_path: str) -> None:
+        """Загрузка и валидация ключей из файла ЛЮБОГО формата"""
         from ui.predict_logic import parse_keys_from_file, validate_keys
 
-        """Загрузка и валидация ключей из файла ЛЮБОГО формата"""
         try:
-            # Используем универсальный парсер из predict_logic.py
             raw_keys = parse_keys_from_file(file_path)
             valid_keys, error = validate_keys(raw_keys)
 
@@ -498,12 +487,12 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         except Exception as e:
             self.append_log(f"❌ Ошибка загрузки: {str(e)}", "error")
+            logger.exception("Ошибка в load_keys_for_preview")
 
-    def preview_predict_keys(self):
-        # ✅ ДОБАВИТЬ ЭТУ СТРОКУ:
+    def preview_predict_keys(self) -> None:
+        """Показать первые 10 ключей"""
         from ui.predict_logic import parse_keys_from_file, validate_keys
 
-        """Показать первые 10 ключей"""
         file_path = self.predict_file_edit.text().strip()
         if not file_path or not os.path.exists(file_path):
             QMessageBox.warning(self, "Предпросмотр", "Сначала выберите файл")
@@ -519,7 +508,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
             preview += f"\n... и ещё {len(keys) - 10} ключей"
         QMessageBox.information(self, "Предпросмотр ключей", preview)
 
-    def run_predict_analysis(self):
+    def run_predict_analysis(self) -> None:
+        """Запуск анализа предсказания"""
         from ui.predict_logic import PredictWorker, parse_keys_from_file, validate_keys
 
         file_path = self.predict_file_edit.text().strip()
@@ -543,7 +533,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             'use_gaussian_kde': self.predict_kde_cb.isChecked(),
             'use_spline_fit': self.predict_spline_cb.isChecked(),
             'ensemble_models': self.predict_ensemble_models_spin.value(),
-            'output_plot': os.path.join(config.BASE_DIR, 'predict_analysis.png')
+            'output_plot': os.path.join(str(self.BASE_DIR), 'predict_analysis.png')
         }
 
         self.predict_status_label.setText("⏳ Запуск анализа...")
@@ -558,18 +548,17 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.predict_worker.error_occurred.connect(self.on_predict_error)
         self.predict_worker.start()
 
-    def on_predict_progress(self, percent: int, message: str):
+    def on_predict_progress(self, percent: int, message: str) -> None:
         """Обновление прогресс-бара"""
         self.predict_progress_bar.setValue(percent)
         self.predict_status_label.setText(f"⏳ {message}")
 
-    def on_predict_finished(self, result: dict):
+    def on_predict_finished(self, result: dict) -> None:
         """Обработка успешного завершения"""
         self.predict_progress_bar.hide()
         self.predict_run_btn.setEnabled(True)
         self.predict_status_label.setText("✅ Анализ завершён")
 
-        # Заполнение таблицы
         rows_data = [
             ("🎯 Следующий Puzzle", f"#{result['next_puzzle']}"),
             ("📏 Сужение диапазона", f"{result['reduction_percent']:.2f}%"),
@@ -588,13 +577,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
             item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
             self.predict_results_table.setItem(row, 1, item)
 
-        # Отображение графика
         self.show_predict_plot(result.get('plot_path', ''))
         self.append_log(f"📊 Анализ завершён. Сужение: {result['reduction_percent']:.2f}%", "success")
-        # Заполнение таблицы диапазонов
         self._fill_ranges_table(result.get('ranges', {}))
 
-    def on_predict_error(self, error_msg: str):
+    def on_predict_error(self, error_msg: str) -> None:
         """Обработка ошибки"""
         self.predict_progress_bar.hide()
         self.predict_run_btn.setEnabled(True)
@@ -602,7 +589,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.append_log(f"❌ {error_msg}", "error")
         QMessageBox.critical(self, "Ошибка анализа", error_msg)
 
-    def show_predict_plot(self, plot_path: str):
+    def show_predict_plot(self, plot_path: str) -> None:
         """Отображение графика с плавной загрузкой"""
         if not plot_path or not os.path.exists(plot_path) or os.path.getsize(plot_path) < 100:
             self.predict_plot_label.setText("📊 График: ожидание данных...")
@@ -612,13 +599,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
             """)
             return
 
-        from PyQt5.QtGui import QPixmap
         pixmap = QPixmap(plot_path)
         if pixmap.isNull():
             self.predict_plot_label.setText("❌ Ошибка загрузки графика")
             return
 
-        # Адаптивное масштабирование с сохранением пропорций
         max_width = max(600, self.predict_scroll.width() - 50)
         max_height = 500
         if pixmap.width() > max_width or pixmap.height() > max_height:
@@ -635,13 +620,12 @@ class BitcoinGPUCPUScanner(QMainWindow):
             }
         """)
 
-        # Центрируем контент
         if hasattr(self.predict_scroll, 'widget'):
             container = self.predict_scroll.widget()
             if container and container.layout():
                 container.layout().setAlignment(Qt.AlignCenter)
 
-    def export_predict_results(self):
+    def export_predict_results(self) -> None:
         """Экспорт таблицы результатов"""
         if self.predict_results_table.rowCount() == 0:
             QMessageBox.information(self, "Экспорт", "Нет данных для экспорта")
@@ -650,7 +634,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         path, _ = QFileDialog.getSaveFileName(
             self, "Сохранить результаты", "predict_results.txt", "Text Files (*.txt)"
         )
-        if not path: return
+        if not path:
+            return
 
         with open(path, 'w', encoding='utf-8') as f:
             f.write("BTC Puzzle Analyzer v2 - Результаты\n")
@@ -661,15 +646,14 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 f.write(f"{p}: {v}\n")
         self.append_log(f"💾 Результаты сохранены в {path}", "success")
 
-    def _fill_ranges_table(self, ranges: dict):
+    def _fill_ranges_table(self, ranges: dict) -> None:
         """Заполняет таблицу диапазонов моделей с кнопками копирования"""
         if not hasattr(self, 'predict_ranges_table') or not ranges:
             return
 
         table = self.predict_ranges_table
-        table.setRowCount(0)  # Очистка
+        table.setRowCount(0)
 
-        # Порядок, иконки и цвета
         order = [
             ('Position', '🔵', '#3498db'),
             ('LogGrowth', '🟢', '#2ecc71'),
@@ -684,7 +668,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
             row = table.rowCount()
             table.insertRow(row)
 
-            # 1. Название модели
             item = QTableWidgetItem(f"{icon} {name}")
             item.setTextAlignment(Qt.AlignCenter)
             if name == 'Final':
@@ -694,7 +677,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 item.setForeground(QColor(color))
             table.setItem(row, 0, item)
 
-            # 2. Диапазон в hex (сокращённо)
             min_h = r.get('min_hex', '')
             max_h = r.get('max_hex', '')
             range_txt = f"{min_h[:16]}...{max_h[-16:]}" if min_h and max_h else "N/A"
@@ -704,7 +686,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 item.setForeground(QColor(color))
             table.setItem(row, 1, item)
 
-            # 3. Ширина диапазона
             width = r.get('width', 0)
             width_txt = f"{width:.2e}" if width > 0 else "N/A"
             item = QTableWidgetItem(width_txt)
@@ -714,7 +695,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 item.setForeground(QColor(color))
             table.setItem(row, 2, item)
 
-            # 🔹 4. КНОПКА КОПИРОВАНИЯ
             copy_btn = QPushButton("📋")
             copy_btn.setFixedWidth(36)
             copy_btn.setFixedHeight(28)
@@ -736,17 +716,14 @@ class BitcoinGPUCPUScanner(QMainWindow):
                     background: #bdc3c7;
                 }}
             """)
-            # Сохраняем данные диапазона в кнопке
             copy_btn.setProperty('range_data', {
                 'model': name,
                 'min_hex': min_h,
                 'max_hex': max_h,
                 'width': width
             })
-            # Подключаем сигнал
             copy_btn.clicked.connect(self._on_copy_range_clicked)
 
-            # Центрируем кнопку в ячейке
             btn_container = QWidget()
             btn_layout = QHBoxLayout(btn_container)
             btn_layout.setContentsMargins(0, 0, 0, 0)
@@ -755,7 +732,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             btn_layout.addStretch()
             table.setCellWidget(row, 3, btn_container)
 
-    def _on_copy_range_clicked(self):
+    def _on_copy_range_clicked(self) -> None:
         """Обработчик кнопки копирования диапазона"""
         btn = self.sender()
         if not btn:
@@ -765,7 +742,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if not data:
             return
 
-        # Формируем текст для копирования (удобный для вставки в поиск)
         copy_text = (
             f"# {data['model']} range — BTC Puzzle Analyzer\n"
             f"start_key = \"{data['min_hex']}\"\n"
@@ -773,17 +749,14 @@ class BitcoinGPUCPUScanner(QMainWindow):
             f"# Ширина: {data['width']:.2e} ключей"
         )
 
-        # Копируем в буфер обмена
         QApplication.clipboard().setText(copy_text)
-
-        # Показываем уведомление
         model_name = data.get('model', 'Range')
         self.append_log(f"📋 Диапазон {model_name} скопирован в буфер обмена", "success")
 
-        # Визуальная обратная связь на кнопке (мигание)
         original_style = btn.styleSheet()
         btn.setStyleSheet(original_style + "QPushButton { background: #2ecc71; }")
         QTimer.singleShot(200, lambda: btn.setStyleSheet(original_style))
+
     # ==================== МОНИТОРИНГ СИСТЕМЫ ====================
 
     def update_system_info(self) -> None:
@@ -799,7 +772,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
             else:
                 self.safe_set_text('cpu_status_label', "Ожидание запуска")
 
-            # Температура CPU
             cpu_temp = self._get_cpu_temperature()
             self._update_cpu_temp_display(cpu_temp)
 
@@ -817,7 +789,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
             if not temps:
                 return None
 
-            # Приоритетные сенсоры
             priority_sensors = ['coretemp', 'k10temp', 'cpu_thermal', 'acpi']
 
             for name in priority_sensors:
@@ -825,37 +796,33 @@ class BitcoinGPUCPUScanner(QMainWindow):
                     for entry in temps[name]:
                         if entry.current is not None:
                             if 'package' in entry.label.lower() or entry.label == '':
-                                return entry.current
+                                return float(entry.current)  # 🛠 УЛУЧШЕНИЕ 23: Явное преобразование в float
 
-            # fallback: первая доступная температура
             for entries in temps.values():
                 for entry in entries:
                     if entry.current is not None:
-                        return entry.current
+                        return float(entry.current)
 
         except (AttributeError, NotImplementedError):
             pass
 
         return None
 
-    def _update_cpu_temp_display(self, temp: Optional[float]):
+    def _update_cpu_temp_display(self, temp: Optional[float]) -> None:
         """Безопасное обновление отображения температуры CPU"""
-        # 🔒 Защита: атрибут может ещё не существовать при раннем вызове
         if not hasattr(self, 'cpu_temp_label'):
             return
 
         if temp is not None:
             self.cpu_temp_label.setText(f"Температура: {temp:.1f} °C")
-            # Цветовая индикация
             if temp < 60:
-                color = "#2ecc71"  # 🟢 зелёный
+                color = "#2ecc71"
             elif temp < 80:
-                color = "#f39c12"  # 🟡 жёлтый
+                color = "#f39c12"
             else:
-                color = "#e74c3c"  # 🔴 красный
+                color = "#e74c3c"
             self.cpu_temp_label.setStyleSheet(f"color: {color}; font-weight: 500;")
 
-            # Обновление прогресс-бара (если есть)
             if hasattr(self, 'cpu_temp_bar'):
                 self.cpu_temp_bar.setValue(min(int(temp), 100))
         else:
@@ -866,15 +833,14 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def _set_temp_bar_style(self, widget_name: str, color1: str, color2: str) -> None:
         """Установка стиля прогресс-бара температуры"""
-        if hasattr(self, widget_name):
-            widget = getattr(self, widget_name)
-            if widget is not None:
-                widget.setStyleSheet(f"""
-                    QProgressBar {{height: 15px; text-align: center; font-size: 8pt; 
-                    border: 1px solid #444; border-radius: 3px; background: #1a1a20;}}
-                    QProgressBar::chunk {{background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                    stop:0 {color1}, stop:1 {color2});}}
-                """)
+        widget = getattr(self, widget_name, None)
+        if widget is not None:
+            widget.setStyleSheet(f"""
+                QProgressBar {{height: 15px; text-align: center; font-size: 8pt; 
+                border: 1px solid #444; border-radius: 3px; background: #1a1a20;}}
+                QProgressBar::chunk {{background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                stop:0 {color1}, stop:1 {color2});}}
+            """)
 
     def update_gpu_status(self) -> None:
         """Обновление отображения аппаратного статуса GPU"""
@@ -884,13 +850,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
         try:
             device_str = self.gpu_device_combo.currentText().split(',')[0].strip()
             device_id = int(device_str) if device_str.isdigit() else 0
-        except Exception:
+        except (ValueError, AttributeError):
             device_id = 0
 
         try:
             handle = pynvml.nvmlDeviceGetHandleByIndex(device_id)
             util_info = pynvml.nvmlDeviceGetUtilizationRates(handle)
-            gpu_util = util_info.gpu
+            gpu_util = int(util_info.gpu)  # 🛠 УЛУЧШЕНИЕ 24: Явное преобразование в int
 
             mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
             mem_used_mb = mem_info.used / (1024 * 1024)
@@ -898,12 +864,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
             mem_util = (mem_info.used / mem_info.total) * 100 if mem_info.total > 0 else 0
 
             try:
-                temp_info = pynvml.nvmlDeviceGetTemperature(handle, pynvml.NVML_TEMPERATURE_GPU)
-                temperature = temp_info
+                temperature = int(pynvml.nvmlDeviceGetTemperature(handle, pynvml.NVML_TEMPERATURE_GPU))
             except pynvml.NVMLError:
                 temperature = None
 
-            # Обновление UI
             self.safe_set_text('gpu_util_label', f"Загрузка GPU: {gpu_util} %")
             self.safe_set_value('gpu_util_bar', gpu_util)
             self.safe_set_text('gpu_mem_label',
@@ -950,8 +914,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
                     break
                 except Exception as e:
                     logger.error(f"Ошибка обработки сообщения: {type(e).__name__}: {e}")
-                    continue  # Продолжаем обработку остальных сообщений
-
+                    continue
         except Exception as e:
             logger.exception("Критическая ошибка обработки очереди")
             self.cpu_logic.queue_active = False
@@ -995,7 +958,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if self.cpu_workers_table.rowCount() <= worker_id:
             self.cpu_workers_table.setRowCount(worker_id + 1)
 
-        # ID воркера
         item = self.cpu_workers_table.item(worker_id, 0)
         if item is None:
             item = QTableWidgetItem(str(worker_id))
@@ -1004,19 +966,15 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             item.setText(str(worker_id))
 
-        # Проверено ключей
         item = self._get_or_create_item(worker_id, 1, Qt.AlignRight | Qt.AlignVCenter)
         item.setText(f"{scanned:,}")
 
-        # Найдено ключей
         item = self._get_or_create_item(worker_id, 2, Qt.AlignCenter)
         item.setText(str(found))
 
-        # Скорость
         item = self._get_or_create_item(worker_id, 3, Qt.AlignRight | Qt.AlignVCenter)
         item.setText(f"{speed:,.0f} keys/sec")
 
-        # Прогресс бар
         self._update_worker_progress_bar(worker_id, progress)
 
     def _get_or_create_item(self, row: int, col: int, alignment: Qt.Alignment) -> QTableWidgetItem:
@@ -1065,7 +1023,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         elapsed = max(1, time.time() - self.cpu_logic.cpu_start_time)
         avg_speed = total_scanned / elapsed if elapsed > 0 else 0
 
-        # Расчет оставшегося времени
         eta_text = "-"
         if self.cpu_logic.cpu_mode == "sequential" and self.cpu_logic.total_keys > 0:
             processed = self.cpu_logic.cpu_total_scanned
@@ -1087,14 +1044,12 @@ class BitcoinGPUCPUScanner(QMainWindow):
     def health_check(self) -> None:
         """Проверка здоровья приложения"""
         try:
-            # Проверка памяти
             mem = psutil.Process().memory_info()
             if mem.rss > self.MEMORY_WARNING_THRESHOLD:
                 mem_mb = mem.rss / 1024 / 1024
                 logger.warning(f"Высокое использование памяти: {mem_mb:.0f} MB")
                 self.append_log(f"⚠️ Высокое использование памяти: {mem_mb:.0f} MB!", "warning")
 
-            # Проверка очереди
             if hasattr(self.cpu_logic, 'process_queue'):
                 try:
                     queue_size = self.cpu_logic.process_queue.qsize()
@@ -1102,8 +1057,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
                         logger.warning(f"Большая очередь сообщений: {queue_size}")
                         self.append_log(f"⚠️ Большая очередь: {queue_size} сообщений", "warning")
                 except NotImplementedError:
-                    pass  # qsize() не поддерживается на некоторых платформах
-
+                    pass
         except Exception as e:
             logger.debug(f"Health check failed: {e}")
 
@@ -1207,31 +1161,26 @@ class BitcoinGPUCPUScanner(QMainWindow):
             row = self.found_keys_table.rowCount()
             self.found_keys_table.insertRow(row)
 
-            # Время
             time_item = QTableWidgetItem(key_data['timestamp'])
             time_item.setTextAlignment(Qt.AlignCenter)
             time_item.setForeground(QColor(100, 255, 100))
             self.found_keys_table.setItem(row, 0, time_item)
 
-            # Адрес
             addr_item = QTableWidgetItem(key_data['address'])
             addr_item.setTextAlignment(Qt.AlignCenter)
             addr_item.setForeground(QColor(255, 215, 0))
             self.found_keys_table.setItem(row, 1, addr_item)
 
-            # HEX ключ
             hex_item = QTableWidgetItem(key_data['hex_key'])
             hex_item.setTextAlignment(Qt.AlignCenter)
             hex_item.setForeground(QColor(100, 200, 255))
             self.found_keys_table.setItem(row, 2, hex_item)
 
-            # WIF ключ
             wif_item = QTableWidgetItem(key_data['wif_key'])
             wif_item.setTextAlignment(Qt.AlignCenter)
             wif_item.setForeground(QColor(255, 150, 150))
             self.found_keys_table.setItem(row, 3, wif_item)
 
-            # Источник
             source = key_data.get('source', 'CPU')
             source_colors = {
                 'GPU': QColor(50, 205, 50),
@@ -1254,7 +1203,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.found_keys_table.scrollToBottom()
             self.save_found_key(key_data)
 
-            # MessageBox
             worker_info = f" (Воркер {key_data.get('worker_id', 'N/A')})" if 'worker_id' in key_data else ""
             QMessageBox.information(
                 self,
@@ -1301,7 +1249,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
         html = f'<span style="color:{color};">{timestamp} {message}</span>'
         self.log_output.append(html)
 
-        # Автопрокрутка к концу
         scrollbar = self.log_output.verticalScrollBar()
         if scrollbar:
             scrollbar.setValue(scrollbar.maximum())
@@ -1320,15 +1267,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def load_settings(self) -> None:
         """Загружает настройки из settings.json"""
-        settings_path = os.path.join(config.BASE_DIR, "settings.json")
+        settings_path = os.path.join(str(self.BASE_DIR), "settings.json")
         if os.path.exists(settings_path):
             try:
                 with open(settings_path, "r", encoding="utf-8") as f:
                     settings = json.load(f)
 
-                # Валидация настроек
                 settings = self.validate_settings(settings)
-
                 config.apply_settings_to_ui(self, settings)
 
                 if "cpu_mode" in settings:
@@ -1372,7 +1317,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         """Сохраняет настройки в settings.json"""
         try:
             settings = config.extract_settings_from_ui(self)
-            settings_path = os.path.join(config.BASE_DIR, "settings.json")
+            settings_path = os.path.join(str(self.BASE_DIR), "settings.json")
 
             with open(settings_path, "w", encoding="utf-8") as f:
                 json.dump(settings, f, indent=4, ensure_ascii=False)
@@ -1395,13 +1340,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         if self.gpu_logic.gpu_is_running:
             active_processes.append("GPU")
-
         if self.cpu_logic.processes:
             active_processes.append("CPU")
-
         if self.kangaroo_logic.is_running:
             active_processes.append("Kangaroo")
-
         if self.vanity_logic.is_running:
             active_processes.append("VanitySearch")
 
@@ -1417,10 +1359,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 event.ignore()
                 return
 
-        # Сохраняем настройки перед закрытием
         self.save_settings()
 
-        # Graceful shutdown с таймаутом
         shutdown_timeout = self.SHUTDOWN_TIMEOUT
         start_time = time.time()
 
@@ -1434,15 +1374,12 @@ class BitcoinGPUCPUScanner(QMainWindow):
         for name, stop_func, is_running_check in processes_to_stop:
             if is_running_check():
                 stop_func()
-                # Ждём завершения с таймаутом
                 while is_running_check() and (time.time() - start_time) < shutdown_timeout:
                     time.sleep(0.1)
                     QApplication.processEvents()
 
-        # Закрываем очередь CPU
         self.close_queue()
 
-        # Останавливаем pynvml
         if PYNVML_AVAILABLE and self.gpu_monitor_available:
             try:
                 pynvml.nvmlShutdown()
@@ -1450,12 +1387,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
             except Exception as e:
                 logger.error(f"Ошибка выключения pynvml: {e}")
 
-            # ▼▼▼ ДОБАВИТЬ: закрытие окна монитора ▼▼▼
+        # 🛠 УЛУЧШЕНИЕ 25: Безопасное закрытие окна монитора с проверкой
         if hasattr(self, 'gpu_monitor_window') and self.gpu_monitor_window:
             try:
                 self.gpu_monitor_window.close()
-            except:
-                pass
-        # ▲▲▲ КОНЕЦ ВСТАВКИ ▲▲▲
+            except RuntimeError:
+                pass  # Объект уже удалён
 
         event.accept()

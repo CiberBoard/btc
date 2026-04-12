@@ -1,5 +1,5 @@
-import re
-from decimal import Decimal, getcontext, ROUND_FLOOR, InvalidOperation
+from decimal import Decimal, localcontext, ROUND_FLOOR, InvalidOperation
+from time import strftime  # 🛠 УЛУЧШЕНИЕ 1: Импорт вынесен в начало (было внутри _log)
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (
@@ -9,8 +9,8 @@ from PyQt5.QtWidgets import (
 )
 from ui.theme import apply_dark_theme, set_button_style, COLORS
 
-# Настройка точности Decimal (100 знаков покрывает 256-битные числа с запасом)
-getcontext().prec = 100
+# 🛠 УЛУЧШЕНИЕ 2: Убран глобальный getcontext().prec = 100
+# Он менял точность Decimal для всего приложения. Теперь точность задаётся локально в _calculate.
 
 # Порядок кривой secp256k1
 SECP256K1_ORDER = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
@@ -49,7 +49,7 @@ class HexCalcWindow(QDialog):
             "💡 Результат уссекается до целого (floor) и сохраняет длину первого числа"
         )
         info.setWordWrap(True)
-        info.setStyleSheet(f"color: {COLORS['text_secondary']}; font-size: 9pt;")
+        info.setStyleSheet(f"color: {COLORS.get('text_secondary', '#aaaaaa')}; font-size: 9pt;")  # 🛠 УЛУЧШЕНИЕ 3
         main_layout.addWidget(info)
 
         # Поле ввода
@@ -95,24 +95,24 @@ class HexCalcWindow(QDialog):
         quick_group = QGroupBox("⚡ Быстрые операции")
         quick_layout = QHBoxLayout(quick_group)
         for label, val in [("×1.5", "*1.5"), ("×2", "*2"), ("×2.5", "*2.5"), ("×3", "*3")]:
-            btn = QPushButton(label);
-            btn.setFixedWidth(65);
+            btn = QPushButton(label)  # 🛠 УЛУЧШЕНИЕ 4: Убраны лишние точки с запятой
+            btn.setFixedWidth(65)
             btn.setProperty("op", val)
-            btn.clicked.connect(self._insert_operator);
+            btn.clicked.connect(self._insert_operator)
             quick_layout.addWidget(btn)
         quick_layout.addStretch()
         for label, val in [("÷1.5", "/1.5"), ("÷2", "/2"), ("÷2.5", "/2.5"), ("÷3", "/3")]:
-            btn = QPushButton(label);
-            btn.setFixedWidth(65);
+            btn = QPushButton(label)
+            btn.setFixedWidth(65)
             btn.setProperty("op", val)
-            btn.clicked.connect(self._insert_operator);
+            btn.clicked.connect(self._insert_operator)
             quick_layout.addWidget(btn)
         quick_layout.addStretch()
         for label, val in [("+10%", "+10%"), ("+25%", "+25%"), ("-10%", "-10%"), ("-25%", "-25%")]:
-            btn = QPushButton(label);
-            btn.setFixedWidth(65);
+            btn = QPushButton(label)
+            btn.setFixedWidth(65)
             btn.setProperty("op", val)
-            btn.clicked.connect(self._insert_operator);
+            btn.clicked.connect(self._insert_operator)
             quick_layout.addWidget(btn)
         main_layout.addWidget(quick_group)
 
@@ -123,7 +123,7 @@ class HexCalcWindow(QDialog):
         self.result_hex = QLineEdit()
         self.result_hex.setReadOnly(True)
         self.result_hex.setFont(QFont("Consolas", 11, QFont.Bold))
-        self.result_hex.setStyleSheet(f"background: {COLORS['bg_input']}; color: {COLORS['accent_primary']};")
+        self.result_hex.setStyleSheet(f"background: {COLORS.get('bg_input', '#2b2b2b')}; color: {COLORS.get('accent_primary', '#4CAF50')};")  # 🛠 УЛУЧШЕНИЕ 3
         result_layout.addWidget(self.result_hex, 0, 1)
 
         result_layout.addWidget(QLabel("DEC:"), 1, 0)
@@ -196,115 +196,123 @@ class HexCalcWindow(QDialog):
         result_dec = 0
         parsed = False
 
-        try:
-            # 1. Проценты: +10%, -25.5%
-            if raw.endswith('%'):
-                pct_idx = -1
-                for i in range(len(raw) - 2, 0, -1):
-                    if raw[i] in '+-':
-                        pct_idx = i
-                        break
-                if pct_idx != -1:
-                    base_hex = raw[:pct_idx]
-                    sign = raw[pct_idx]
-                    pct_str = raw[pct_idx + 1:-1]
-                    if base_hex and pct_str:
+        # 🛠 УЛУЧШЕНИЕ 2 (продолжение): Локальный контекст Decimal.
+        # Не влияет на другие части приложения, точность изолирована.
+        with localcontext() as ctx:
+            ctx.prec = 100
+            ctx.rounding = ROUND_FLOOR
+
+            try:
+                # 1. Проценты: +10%, -25.5%
+                if raw.endswith('%'):
+                    pct_idx = -1
+                    for i in range(len(raw) - 2, 0, -1):
+                        if raw[i] in '+-':
+                            pct_idx = i
+                            break
+                    if pct_idx != -1:
+                        base_hex = raw[:pct_idx]
+                        sign = raw[pct_idx]
+                        pct_str = raw[pct_idx + 1:-1]
+                        if base_hex and pct_str:
+                            val = Decimal(int(base_hex, 16))
+                            pct = Decimal(pct_str)
+                            factor = Decimal('1') + (pct / Decimal('100')) if sign == '+' else Decimal('1') - (pct / Decimal('100'))
+                            result_dec = int((val * factor).to_integral_value(rounding=ROUND_FLOOR))
+                            op, operand_hex = f"{sign}{pct_str}%", pct_str
+                            parsed = True
+
+                # 2. Умножение/Деление: *1.5, /2, /2.7
+                elif '*' in raw or '/' in raw:
+                    op_idx = raw.find('/') if '/' in raw else raw.find('*')
+                    base_hex = raw[:op_idx]
+                    num_str = raw[op_idx + 1:]
+                    if base_hex and num_str:
                         val = Decimal(int(base_hex, 16))
-                        pct = Decimal(pct_str)
-                        factor = Decimal('1') + (pct / Decimal('100')) if sign == '+' else Decimal('1') - (
-                                    pct / Decimal('100'))
-                        result_dec = int((val * factor).to_integral_value(rounding=ROUND_FLOOR))
-                        op, operand_hex = f"{sign}{pct_str}%", pct_str
+                        num = Decimal(num_str)
+                        if num == 0:
+                            raise ZeroDivisionError("Деление на ноль недопустимо")
+
+                        res_dec = val / num if raw[op_idx] == '/' else val * num
+                        result_dec = int(res_dec.to_integral_value(rounding=ROUND_FLOOR))
+                        op, operand_hex = raw[op_idx], num_str
                         parsed = True
 
-            # 2. Умножение/Деление: *1.5, /2, /2.7
-            elif '*' in raw or '/' in raw:
-                op_idx = raw.find('/') if '/' in raw else raw.find('*')
-                base_hex = raw[:op_idx]
-                num_str = raw[op_idx + 1:]
-                if base_hex and num_str:
-                    val = Decimal(int(base_hex, 16))
-                    num = Decimal(num_str)
-                    if num == 0:
-                        raise ZeroDivisionError("Деление на ноль недопустимо")
+                # 3. Сложение/Вычитание HEX
+                elif '+' in raw:
+                    parts = raw.split('+', 1)
+                    if len(parts) == 2 and parts[0] and parts[1]:
+                        base_hex, operand_hex = parts
+                        op = '+'
+                        result_dec = int(base_hex, 16) + int(operand_hex, 16)
+                        parsed = True
+                elif '-' in raw and not raw.startswith('-'):
+                    parts = raw.split('-', 1)
+                    if len(parts) == 2 and parts[0] and parts[1]:
+                        base_hex, operand_hex = parts
+                        op = '-'
+                        result_dec = int(base_hex, 16) - int(operand_hex, 16)
+                        if result_dec < 0:
+                            QMessageBox.warning(self, "Отрицательный результат", f"Результат: {result_dec}")
+                            return
+                        parsed = True
 
-                    res_dec = val / num if raw[op_idx] == '/' else val * num
-                    result_dec = int(res_dec.to_integral_value(rounding=ROUND_FLOOR))
-                    op, operand_hex = raw[op_idx], num_str
-                    parsed = True
+                # 4. Чистая конвертация (если оператор не найден)
+                if not parsed:
+                    val = int(raw, 16)
+                    width = len(raw)
+                    is_valid = self._validate_secp256k1(val)
+                    self._show_result(raw, f"{val:X}".zfill(width), val, width, valid=is_valid)
+                    self._log(f"Конвертация: {raw} → {val}")
+                    return
 
-            # 3. Сложение/Вычитание HEX
-            elif '+' in raw:
-                parts = raw.split('+', 1)
-                if len(parts) == 2 and parts[0] and parts[1]:
-                    base_hex, operand_hex = parts
-                    op = '+'
-                    result_dec = int(base_hex, 16) + int(operand_hex, 16)
-                    parsed = True
-            elif '-' in raw and not raw.startswith('-'):
-                parts = raw.split('-', 1)
-                if len(parts) == 2 and parts[0] and parts[1]:
-                    base_hex, operand_hex = parts
-                    op = '-'
-                    result_dec = int(base_hex, 16) - int(operand_hex, 16)
-                    if result_dec < 0:
-                        QMessageBox.warning(self, "Отрицательный результат", f"Результат: {result_dec}")
-                        return
-                    parsed = True
+                # Валидация и вывод результата
+                is_valid_key = self._validate_secp256k1(result_dec)
+                width = len(base_hex)
+                res_hex = f"{result_dec:X}"
 
-            # 4. Чистая конвертация (если оператор не найден)
-            if not parsed:
-                val = int(raw, 16)
-                width = len(raw)
-                is_valid = self._validate_secp256k1(val)
-                self._show_result(raw, f"{val:X}".zfill(width), val, width, valid=is_valid)
-                self._log(f"Конвертация: {raw} → {val}")
-                return
+                if len(res_hex) > width:
+                    self._show_result(base_hex, res_hex, result_dec, width, overflow=True, valid=is_valid_key)
+                    self._log(f"⚠️ {base_hex} {op}{operand_hex} = {res_hex} (переполнение)")
+                else:
+                    self._show_result(base_hex, res_hex.zfill(width), result_dec, width, valid=is_valid_key)
+                    self._log(f"✅ {base_hex} {op}{operand_hex} = {res_hex.zfill(width)}")
 
-            # Валидация и вывод результата
-            is_valid_key = self._validate_secp256k1(result_dec)
-            width = len(base_hex)
-            res_hex = f"{result_dec:X}"
-
-            if len(res_hex) > width:
-                self._show_result(base_hex, res_hex, result_dec, width, overflow=True, valid=is_valid_key)
-                self._log(f"⚠️ {base_hex} {op}{operand_hex} = {res_hex} (переполнение)")
-            else:
-                self._show_result(base_hex, res_hex.zfill(width), result_dec, width, valid=is_valid_key)
-                self._log(f"✅ {base_hex} {op}{operand_hex} = {res_hex.zfill(width)}")
-
-        except ZeroDivisionError as e:
-            QMessageBox.warning(self, "Ошибка деления", str(e))
-        except (ValueError, InvalidOperation):
-            QMessageBox.warning(self, "Ошибка формата",
-                                "Введите корректное выражение.\nПримеры:\n"
-                                "• 00FF*1.5  |  • 0100+10%  |  • 00FF/2")
-        except Exception as e:
-            QMessageBox.critical(self, "Ошибка", f"{type(e).__name__}: {str(e)}")
+            except ZeroDivisionError as e:
+                QMessageBox.warning(self, "Ошибка деления", str(e))
+            except (ValueError, InvalidOperation):
+                QMessageBox.warning(self, "Ошибка формата",
+                                    "Введите корректное выражение.\nПримеры:\n"
+                                    "• 00FF*1.5  |  • 0100+10%  |  • 00FF/2")
+            except Exception as e:
+                QMessageBox.critical(self, "Ошибка", f"{type(e).__name__}: {str(e)}")
 
     def _validate_secp256k1(self, value: int) -> bool:
         return 1 <= value < SECP256K1_ORDER
 
     def _show_result(self, original, result_hex, result_dec, width, overflow=False, valid=True):
+        # 🛠 УЛУЧШЕНИЕ 3: Безопасный доступ к COLORS.get() с fallback-цветами
         if not valid:
             self.result_hex.setStyleSheet(
-                f"background: #4a1a1a; color: {COLORS['accent_danger']}; font-weight: bold; border: 2px solid #e74c3c;")
+                f"background: #4a1a1a; color: {COLORS.get('accent_danger', '#e74c3c')}; font-weight: bold; border: 2px solid #e74c3c;")
             tooltip = "⚠️ Ключ вне диапазона secp256k1 — невалидный приватный ключ!"
         elif overflow:
-            self.result_hex.setStyleSheet(f"background: #3d2a1a; color: {COLORS['accent_warning']}; font-weight: bold;")
+            self.result_hex.setStyleSheet(f"background: #3d2a1a; color: {COLORS.get('accent_warning', '#f39c12')}; font-weight: bold;")
             tooltip = "⚠️ Результат не помещается в исходную разрядную сетку"
         else:
             self.result_hex.setStyleSheet(
-                f"background: {COLORS['bg_input']}; color: {COLORS['accent_primary']}; font-weight: bold;")
+                f"background: {COLORS.get('bg_input', '#2b2b2b')}; color: {COLORS.get('accent_primary', '#4CAF50')}; font-weight: bold;")
             tooltip = "✅ Валидный приватный ключ secp256k1"
 
         self.result_hex.setText(result_hex)
         self.result_hex.setToolTip(tooltip)
         self.result_dec.setText(f"{result_dec:,}")
 
-        bin_str = bin(result_dec)[2:].zfill(width * 4)
-        if len(bin_str) > 128:
-            bin_str = bin_str[:64] + "..." + bin_str[-64:]
+        # 🛠 УЛУЧШЕНИЕ 5: Более корректная генерация BIN с учётом ширины
+        total_bits = width * 4
+        bin_str = bin(result_dec)[2:].zfill(total_bits)
+        if len(bin_str) > 256:  # Показываем только начало и конец для очень длинных строк
+            bin_str = f"{bin_str[:64]}...{bin_str[-64:]}"
         self.result_bin.setText(bin_str)
 
         if not valid:
@@ -321,8 +329,9 @@ class HexCalcWindow(QDialog):
             self._log(f"📋 Скопировано: {text[:32]}{'...' if len(text) > 32 else ''}")
 
     def _log(self, message: str):
-        from time import strftime
-        timestamp = strftime("[%H:%M:%S]")
-        self.log_output.append(f'<span style="color:{COLORS["text_secondary"]};">{timestamp} {message}</span>')
+        timestamp = strftime("[%H:%M:%S]")  # 🛠 УЛУЧШЕНИЕ 1: Теперь импорт в начале файла
+        # 🛠 УЛУЧШЕНИЕ 3: Безопасный доступ к словарю цветов
+        color = COLORS.get('text_secondary', '#888888')
+        self.log_output.append(f'<span style="color:{color};">{timestamp} {message}</span>')
         scrollbar = self.log_output.verticalScrollBar()
         if scrollbar: scrollbar.setValue(scrollbar.maximum())
