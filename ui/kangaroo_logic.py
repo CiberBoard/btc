@@ -8,8 +8,8 @@ import logging
 from typing import Dict, Any, Optional, TYPE_CHECKING
 from dataclasses import dataclass, field  # 🛠 УЛУЧШЕНИЕ 2: dataclass для конфигурации
 
-from PyQt5.QtCore import QThread, QTimer
-from PyQt5.QtWidgets import QMessageBox
+from PyQt6.QtCore import QThread, QTimer
+from PyQt6.QtWidgets import QMessageBox
 
 if TYPE_CHECKING:  # 🛠 УЛУЧШЕНИЕ 3: Избегаем циклических импортов для type hints
     from ui.main_window import BitcoinGPUCPUScanner

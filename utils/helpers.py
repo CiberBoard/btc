@@ -4,7 +4,7 @@ import hashlib
 import base58
 import logging
 from logging.handlers import RotatingFileHandler
-from PyQt5.QtWidgets import QComboBox
+
 from typing import Tuple, Optional
 import config
 
@@ -87,8 +87,15 @@ def reset_logger() -> None:
 
 
 # ============== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==============
-def make_combo32(start: int, end: int, default: int = None) -> QComboBox:
-    """Создает выпадающий список с шагом 32"""
+def make_combo32(start: int, end: int, default: int = None) -> 'QComboBox':
+    from PyQt6.QtWidgets import QComboBox
+    from PyQt6.QtCore import QCoreApplication
+
+    # ✅ Проверка: есть ли активное QApplication
+    if not QCoreApplication.instance():
+        # Возвращаем заглушку или выбрасываем понятную ошибку
+        raise RuntimeError("make_combo32() вызван до создания QApplication")
+
     items = [str(x) for x in range(start, end + 1, 32)]
     cb = QComboBox()
     cb.addItems(items)

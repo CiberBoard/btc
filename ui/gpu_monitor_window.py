@@ -8,9 +8,9 @@ import logging
 from typing import Dict, List, Optional, Any, TYPE_CHECKING
 from dataclasses import dataclass, field
 
-from PyQt5.QtCore import Qt, QTimer, pyqtSignal
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel,
     QPushButton, QGroupBox, QGridLayout,
     QApplication, QScrollArea, QWidget, QSpinBox, QSizePolicy
@@ -192,7 +192,7 @@ class GPUMonitorWindow(QDialog):
         # Заголовок
         header = QLabel("🖥️ Мониторинг видеокарт (температура + энергопотребление)")
         header.setProperty("cssClass", "header")
-        header.setAlignment(Qt.AlignCenter)
+        header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(header)
 
         info = QLabel(
@@ -207,9 +207,9 @@ class GPUMonitorWindow(QDialog):
         # Область карточек GPU (растягивается на всё доступное место)
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
-        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        scroll.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        scroll.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
         self.gpu_container = QWidget()
         self.gpu_layout = QVBoxLayout(self.gpu_container)
@@ -227,7 +227,7 @@ class GPUMonitorWindow(QDialog):
 
         summary_layout.addWidget(QLabel("⚡ Общее потребление:"), 0, 0)
         self.total_power_label = QLabel("0.0 W")
-        self.total_power_label.setFont(QFont("Consolas", MONITOR_CONFIG.FONT_SIZE_VALUE, QFont.Bold))
+        self.total_power_label.setFont(QFont("Consolas", MONITOR_CONFIG.FONT_SIZE_VALUE, QFont.Weight.Bold))
         # 🛠 УЛУЧШЕНИЕ 12: Безопасный доступ к цветам
         self.total_power_label.setStyleSheet(f"color: {COLORS.get('accent_primary', '#5B8CFF')};")
         summary_layout.addWidget(self.total_power_label, 0, 1)
@@ -244,7 +244,7 @@ class GPUMonitorWindow(QDialog):
         self.toggle_btn = QPushButton("⏸ Остановить")
         self.toggle_btn.setFixedWidth(130)
         self.toggle_btn.clicked.connect(self._toggle_monitoring)
-        summary_layout.addWidget(self.toggle_btn, 2, 0, 1, 2, Qt.AlignCenter)
+        summary_layout.addWidget(self.toggle_btn, 2, 0, 1, 2, Qt.AlignmentFlag.AlignCenter)
 
         main_layout.addWidget(summary_group)
 
@@ -253,7 +253,7 @@ class GPUMonitorWindow(QDialog):
         set_button_style(close_btn, "danger")
         close_btn.setFixedWidth(100)
         close_btn.clicked.connect(self.close)
-        main_layout.addWidget(close_btn, alignment=Qt.AlignCenter)
+        main_layout.addWidget(close_btn, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # Оптимальные размеры окна
         self.resize(MONITOR_CONFIG.OPTIMAL_WIDTH, MONITOR_CONFIG.OPTIMAL_HEIGHT)
@@ -301,7 +301,7 @@ class GPUMonitorWindow(QDialog):
             font_size = MONITOR_CONFIG.FONT_SIZE_VALUE if "Temp" in txt or "Status" in txt else MONITOR_CONFIG.FONT_SIZE_LABEL
             font_bold = MONITOR_CONFIG.FONT_BOLD_TEMP if "Temp" in txt else False
             val = QLabel("--")
-            val.setFont(QFont("Consolas", font_size, QFont.Bold if font_bold else QFont.Normal))
+            val.setFont(QFont("Consolas", font_size, QFont.Weight.Bold if font_bold else QFont.Weight.Normal))
             grid.addWidget(lb, row, 0)
             grid.addWidget(val, row, 1)
             labels[txt] = val

@@ -14,7 +14,7 @@ import logging
 from typing import Dict, Any, Optional, Tuple, List, TYPE_CHECKING
 from dataclasses import dataclass, field
 
-from PyQt5.QtCore import QObject, pyqtSignal
+from PyQt6.QtCore import QObject, pyqtSignal
 
 if TYPE_CHECKING:
     pass

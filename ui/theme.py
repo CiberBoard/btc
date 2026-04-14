@@ -1,9 +1,9 @@
 # ui/theme.py
 # 🛠 УЛУЧШЕНИЕ 1: Добавлены type hints и документация
 from typing import Dict, Optional
-from PyQt5.QtGui import QPalette, QColor
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QPushButton
+from PyQt6.QtGui import QPalette, QColor
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QPushButton
 
 # 🛠 УЛУЧШЕНИЕ 2: Типизация словаря цветов через Dict[str, str]
 COLORS: Dict[str, str] = {
@@ -48,22 +48,22 @@ def apply_dark_theme(window: QWidget) -> None:
     try:
         # 1️⃣ Палитра для нативных виджетов
         palette = QPalette()
-        palette.setColor(QPalette.Window, QColor(_get_color('bg_main')))
-        palette.setColor(QPalette.WindowText, QColor(_get_color('text_primary')))
-        palette.setColor(QPalette.Base, QColor(_get_color('bg_input')))
-        palette.setColor(QPalette.AlternateBase, QColor('#252535'))
-        palette.setColor(QPalette.ToolTipBase, QColor(_get_color('bg_card')))
-        palette.setColor(QPalette.ToolTipText, QColor(_get_color('text_primary')))
-        palette.setColor(QPalette.Text, QColor(_get_color('text_primary')))
-        palette.setColor(QPalette.Button, QColor(_get_color('bg_card')))
-        palette.setColor(QPalette.ButtonText, QColor(_get_color('text_primary')))
-        palette.setColor(QPalette.BrightText, QColor(_get_color('accent_danger')))
-        palette.setColor(QPalette.Link, QColor(_get_color('accent_primary')))
-        palette.setColor(QPalette.Highlight, QColor(_get_color('accent_primary')))
-        palette.setColor(QPalette.HighlightedText, QColor(_get_color('text_primary')))
-        palette.setColor(QPalette.PlaceholderText, QColor(_get_color('text_secondary')))
-        palette.setColor(QPalette.Disabled, QPalette.Text, QColor(_get_color('text_disabled')))
-        palette.setColor(QPalette.Disabled, QPalette.ButtonText, QColor(_get_color('text_disabled')))
+        palette.setColor(QPalette.ColorRole.Window, QColor(_get_color('bg_main')))
+        palette.setColor(QPalette.ColorRole.WindowText, QColor(_get_color('text_primary')))
+        palette.setColor(QPalette.ColorRole.Base, QColor(_get_color('bg_input')))
+        palette.setColor(QPalette.ColorRole.AlternateBase, QColor('#252535'))
+        palette.setColor(QPalette.ColorRole.ToolTipBase, QColor(_get_color('bg_card')))
+        palette.setColor(QPalette.ColorRole.ToolTipText, QColor(_get_color('text_primary')))
+        palette.setColor(QPalette.ColorRole.Text, QColor(_get_color('text_primary')))
+        palette.setColor(QPalette.ColorRole.Button, QColor(_get_color('bg_card')))
+        palette.setColor(QPalette.ColorRole.ButtonText, QColor(_get_color('text_primary')))
+        palette.setColor(QPalette.ColorRole.BrightText, QColor(_get_color('accent_danger')))
+        palette.setColor(QPalette.ColorRole.Link, QColor(_get_color('accent_primary')))
+        palette.setColor(QPalette.ColorRole.Highlight, QColor(_get_color('accent_primary')))
+        palette.setColor(QPalette.ColorRole.HighlightedText, QColor(_get_color('text_primary')))
+        palette.setColor(QPalette.ColorRole.PlaceholderText, QColor(_get_color('text_secondary')))
+        palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Text, QColor(_get_color('text_disabled')))
+        palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.ButtonText, QColor(_get_color('text_disabled')))
 
         window.setPalette(palette)
         window.setAutoFillBackground(True)

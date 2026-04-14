@@ -4,9 +4,9 @@ from typing import Optional, TYPE_CHECKING
 import os
 import multiprocessing
 
-from PyQt5.QtCore import Qt, QRegExp, QSize
-from PyQt5.QtGui import QFont, QRegExpValidator
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, QRegularExpression, QSize
+from PyQt6.QtGui import QFont, QRegularExpressionValidator
+from PyQt6.QtWidgets import (QAbstractItemView ,
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
     QPushButton, QTextEdit, QGroupBox, QGridLayout,
     QTableWidget, QHeaderView, QProgressBar, QCheckBox,
@@ -108,12 +108,12 @@ class MainWindowUI:
 
         addr_layout.addWidget(QLabel("Начало (hex):"), 1, 0)
         self.parent.gpu_start_key_edit = QLineEdit("1")
-        self.parent.gpu_start_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self.parent))
+        self.parent.gpu_start_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
         addr_layout.addWidget(self.parent.gpu_start_key_edit, 1, 1)
 
         addr_layout.addWidget(QLabel("Конец (hex):"), 1, 2)
         self.parent.gpu_end_key_edit = QLineEdit(config.MAX_KEY_HEX)
-        self.parent.gpu_end_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self.parent))
+        self.parent.gpu_end_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
         addr_layout.addWidget(self.parent.gpu_end_key_edit, 1, 3)
 
         gpu_layout.addWidget(addr_group)
@@ -164,12 +164,12 @@ class MainWindowUI:
         # Ряд 4: Размер диапазона
         params_layout.addWidget(QLabel("Мин. диапазон:"), 3, 0)
         self.parent.gpu_min_range_edit = QLineEdit("134217728")
-        self.parent.gpu_min_range_edit.setValidator(QRegExpValidator(QRegExp("\\d+"), self.parent))
+        self.parent.gpu_min_range_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self.parent))
         params_layout.addWidget(self.parent.gpu_min_range_edit, 3, 1)
 
         params_layout.addWidget(QLabel("Макс. диапазон:"), 3, 2)
         self.parent.gpu_max_range_edit = QLineEdit("536870912")
-        self.parent.gpu_max_range_edit.setValidator(QRegExpValidator(QRegExp("\\d+"), self.parent))
+        self.parent.gpu_max_range_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self.parent))
         params_layout.addWidget(self.parent.gpu_max_range_edit, 3, 3)
 
         # Ряд 5
@@ -202,7 +202,11 @@ class MainWindowUI:
         self.parent.gpu_start_stop_btn = QPushButton("▶ Запустить GPU")
         set_button_style(self.parent.gpu_start_stop_btn, "success")
         self.parent.gpu_start_stop_btn.setMinimumHeight(42)
-        self.parent.gpu_start_stop_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        # ✅ Стало (PyQt6)
+        self.parent.gpu_start_stop_btn.setSizePolicy(
+            QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Fixed
+        )
 
         self.parent.gpu_optimize_btn = QPushButton("⚡ Авто-оптимизация")
         set_button_style(self.parent.gpu_optimize_btn, "primary")
@@ -528,11 +532,11 @@ class MainWindowUI:
         kg_layout = QGridLayout(keys_group)
         kg_layout.addWidget(QLabel("Начало:"), 0, 0)
         self.parent.cpu_start_key_edit = QLineEdit("1")
-        self.parent.cpu_start_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self.parent))
+        self.parent.cpu_start_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
         kg_layout.addWidget(self.parent.cpu_start_key_edit, 0, 1)
         kg_layout.addWidget(QLabel("Конец:"), 0, 2)
         self.parent.cpu_end_key_edit = QLineEdit(config.MAX_KEY_HEX)
-        self.parent.cpu_end_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self.parent))
+        self.parent.cpu_end_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
         kg_layout.addWidget(self.parent.cpu_end_key_edit, 0, 3)
         pc_layout.addWidget(keys_group, 1, 0, 1, 4)
 
@@ -547,7 +551,7 @@ class MainWindowUI:
         sp_layout.addWidget(QLabel("Попыток:"), 0, 2)
         self.parent.cpu_attempts_edit = QLineEdit("10000000")
         self.parent.cpu_attempts_edit.setEnabled(False)
-        self.parent.cpu_attempts_edit.setValidator(QRegExpValidator(QRegExp("\\d+"), self.parent))
+        self.parent.cpu_attempts_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self.parent))
         sp_layout.addWidget(self.parent.cpu_attempts_edit, 0, 3)
         sp_layout.addWidget(QLabel("Режим:"), 1, 0)
         self.parent.cpu_mode_combo = QComboBox()
@@ -607,8 +611,8 @@ class MainWindowUI:
         cpu_layout.addWidget(QLabel("🔧 Воркеры:"))
         scroll_wrapper = QScrollArea()
         scroll_wrapper.setWidgetResizable(True)
-        scroll_wrapper.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        scroll_wrapper.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        scroll_wrapper.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        scroll_wrapper.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         scroll_wrapper.setMaximumHeight(200)
 
         table_container = QWidget()
@@ -617,7 +621,10 @@ class MainWindowUI:
 
         self.parent.cpu_workers_table = QTableWidget(0, 5)
         self.parent.cpu_workers_table.setHorizontalHeaderLabels(["ID", "Проверено", "Найдено", "Скорость", "Прогресс"])
-        self.parent.cpu_workers_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # ✅ Стало (PyQt6)
+        self.parent.cpu_workers_table.horizontalHeader().setSectionResizeMode(
+            QHeaderView.ResizeMode.Stretch
+        )
         self.parent.cpu_workers_table.verticalHeader().setVisible(False)
         self.parent.cpu_workers_table.setAlternatingRowColors(True)
         table_layout.addWidget(self.parent.cpu_workers_table)
@@ -748,10 +755,13 @@ class MainWindowUI:
 
         self.parent.found_keys_table = QTableWidget(0, 5)
         self.parent.found_keys_table.setHorizontalHeaderLabels(["Время", "Адрес", "HEX", "WIF", "Источник"])
-        self.parent.found_keys_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # ✅ Стало (PyQt6)
+        self.parent.found_keys_table.horizontalHeader().setSectionResizeMode(
+            QHeaderView.ResizeMode.Stretch
+        )
         self.parent.found_keys_table.verticalHeader().setVisible(False)
         self.parent.found_keys_table.setAlternatingRowColors(True)
-        self.parent.found_keys_table.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.parent.found_keys_table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.parent.found_keys_table.customContextMenuRequested.connect(self.parent.show_context_menu)
         keys_layout.addWidget(self.parent.found_keys_table)
 
@@ -807,7 +817,7 @@ class MainWindowUI:
 
         header_p = QLabel("🔮 BTC Puzzle Analyzer v2")
         header_p.setProperty("cssClass", "header")
-        header_p.setAlignment(Qt.AlignCenter)
+        header_p.setAlignment(Qt.AlignmentFlag.AlignCenter)
         predict_layout.addWidget(header_p)
 
         info_p = QLabel(
@@ -836,7 +846,7 @@ class MainWindowUI:
 
         self.parent.predict_status_label = QLabel("⏳ Ожидание запуска")
         self.parent.predict_status_label.setProperty("cssClass", "status")
-        self.parent.predict_status_label.setAlignment(Qt.AlignCenter)
+        self.parent.predict_status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         status_layout.addWidget(self.parent.predict_status_label)
 
         self.parent.predict_progress_bar = QProgressBar()
@@ -856,11 +866,11 @@ class MainWindowUI:
 
         self.parent.predict_results_table = QTableWidget(0, 2)
         self.parent.predict_results_table.setHorizontalHeaderLabels(["Параметр", "Значение"])
-        self.parent.predict_results_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.parent.predict_results_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.parent.predict_results_table.verticalHeader().setVisible(False)
         self.parent.predict_results_table.setAlternatingRowColors(True)
-        self.parent.predict_results_table.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.parent.predict_results_table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.parent.predict_results_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.parent.predict_results_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.parent.predict_results_table.setMinimumHeight(150)
         self.parent.predict_results_table.setMaximumHeight(220)
         results_layout.addWidget(self.parent.predict_results_table)
@@ -880,16 +890,16 @@ class MainWindowUI:
         self.parent.predict_ranges_table.setColumnWidth(1, 280)
         self.parent.predict_ranges_table.setColumnWidth(2, 90)
         self.parent.predict_ranges_table.setColumnWidth(3, 40)
-        self.parent.predict_ranges_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
+        self.parent.predict_ranges_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         self.parent.predict_ranges_table.verticalHeader().setVisible(False)
         self.parent.predict_ranges_table.setAlternatingRowColors(True)
-        self.parent.predict_ranges_table.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.parent.predict_ranges_table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.parent.predict_ranges_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.parent.predict_ranges_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
         ranges_scroll = QScrollArea()
         ranges_scroll.setWidgetResizable(True)
-        ranges_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        ranges_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        ranges_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        ranges_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         ranges_scroll.setMinimumHeight(180)
         ranges_scroll.setMaximumHeight(250)
         ranges_scroll.setWidget(self.parent.predict_ranges_table)
@@ -929,7 +939,7 @@ class MainWindowUI:
             "• Предсказанные диапазоны\n"
             "• Плотность вероятности"
         )
-        self.parent.predict_plot_label.setAlignment(Qt.AlignCenter)
+        self.parent.predict_plot_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.parent.predict_plot_label.setStyleSheet(
             f"color:{COLORS.get('text_secondary', '#B0B0C0')}; font-size:10pt; padding:40px; "
             f"background:{COLORS.get('bg_input', '#232332')}; border:2px dashed {COLORS.get('border', '#3A3A4A')}; border-radius:6px;"
@@ -982,8 +992,8 @@ class MainWindowUI:
         # 2. Параметры анализа (в скролле)
         params_scroll = QScrollArea()
         params_scroll.setWidgetResizable(True)
-        params_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        params_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        params_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        params_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         params_scroll.setMaximumHeight(400)
         params_scroll.setMinimumHeight(300)
 
@@ -1060,7 +1070,7 @@ class MainWindowUI:
         self.parent.predict_run_btn = QPushButton("🔮 Запустить анализ")
         set_button_style(self.parent.predict_run_btn, "predict")
         self.parent.predict_run_btn.setMinimumHeight(50)
-        self.parent.predict_run_btn.setFont(QFont("", 11, QFont.Bold))
+        self.parent.predict_run_btn.setFont(QFont("", 11, QFont.Weight.Bold))
         right_column.addWidget(self.parent.predict_run_btn)
 
         # 4. Экспорт результатов

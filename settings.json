@@ -6,7 +6,7 @@
     "blocks": "288",
     "threads": "128",
     "points": "512",
-    "gpu_random_mode": true,
+    "gpu_random_mode": false,
     "gpu_restart_interval": "80",
     "gpu_min_range_size": "134217728",
     "gpu_max_range_size": "536870912887373737437437437",

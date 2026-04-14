@@ -12,9 +12,9 @@ import queue
 from typing import Dict, Any, Optional, List, Tuple
 from pathlib import Path
 
-from PyQt5.QtCore import Qt, QTimer, QRegExp, pyqtSignal, QMetaObject
-from PyQt5.QtGui import QFont, QColor, QPalette, QKeySequence, QRegExpValidator, QCursor, QPixmap  # 🛠 УЛУЧШЕНИЕ 3: Добавлен QPixmap в импорт
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QMetaObject, QPoint
+from PyQt6.QtGui import QFont, QColor, QPalette, QKeySequence, QRegularExpressionValidator, QCursor, QPixmap
+from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
     QPushButton, QTextEdit, QMessageBox, QGroupBox, QGridLayout, QTableWidget,
     QTableWidgetItem, QHeaderView, QMenu, QProgressBar, QCheckBox, QComboBox,
@@ -81,7 +81,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
     QUEUE_SIZE_WARNING = 1000
 
     # 🛠 УЛУЧШЕНИЕ 8: Сигналы объявлены с типизацией
-    vanity_update_ui_signal = pyqtSignal(dict)
+    vanity_update_ui_signal = pyqtSignal(object)
     log_gpu_progress_signal = pyqtSignal(str, str, float, int)
 
     def __init__(self):
@@ -185,7 +185,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
     def set_busy(self, busy: bool = True) -> None:
         """Устанавливает курсор ожидания"""
         if busy:
-            QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
+            QApplication.setOverrideCursor(QCursor(Qt.CursorShape.WaitCursor))
         else:
             QApplication.restoreOverrideCursor()
 
@@ -235,17 +235,28 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def open_gpu_progress_tracker(self) -> None:
         """Открывает окно сохраненного прогресса GPU"""
-        if self.progress_tracker_window is None or not self.progress_tracker_window.isVisible():
-            from pathlib import Path
-            from ui.gpu_progress_tracker import GpuProgressTrackerWindow
+        logger.debug("🔍 [1/4] Вход в open_gpu_progress_tracker")  # 👈 ДОБАВИТЬ
+        try:
+            if self.progress_tracker_window is None or not self.progress_tracker_window.isVisible():
+                logger.debug("🔍 [2/4] Создание экземпляра...")  # 👈 ДОБАВИТЬ
+                from pathlib import Path
+                from ui.gpu_progress_tracker import GpuProgressTrackerWindow
 
-            log_path = Path(config.BASE_DIR) / "gpu_progress.txt"
-            self.progress_tracker_window = GpuProgressTrackerWindow(self, log_path)
-            self.progress_tracker_window.range_selected.connect(self.apply_gpu_progress_range)
-            self.progress_tracker_window.show()
-        else:
-            self.progress_tracker_window.raise_()
-            self.progress_tracker_window.activateWindow()
+                log_path = Path(config.BASE_DIR) / "gpu_progress.txt"
+                self.progress_tracker_window = GpuProgressTrackerWindow(self, log_path)
+
+                logger.debug("🔍 [3/4] Подключение сигнала...")  # 👈 ДОБАВИТЬ
+                self.progress_tracker_window.range_selected.connect(self.apply_gpu_progress_range)
+
+                logger.debug("🔍 [4/4] Показ окна...")  # 👈 ДОБАВИТЬ
+                self.progress_tracker_window.show()
+            else:
+                self.progress_tracker_window.raise_()
+                self.progress_tracker_window.activateWindow()
+        except Exception as e:
+            logger.exception(f"❌ КРАШ в open_gpu_progress_tracker: {e}")  # 👈 ДОБАВИТЬ
+            QMessageBox.critical(self, "Ошибка", f"Не удалось открыть окно:\n{e}")
+
 
     def apply_gpu_progress_range(self, start_hex: str, end_hex: str) -> None:
         """Загружает выбранный диапазон в поля GPU поиска"""
@@ -533,6 +544,36 @@ class BitcoinGPUCPUScanner(QMainWindow):
             preview += f"\n... и ещё {len(keys) - 10} ключей"
         QMessageBox.information(self, "Предпросмотр ключей", preview)
 
+    def on_predict_plot_data_ready(self, plot_data: dict) -> None:
+        """Генерация графика в главном потоке (безопасно для matplotlib)"""
+        try:
+            from ui.predict_logic import PredictWorker  # для доступа к _generate_plot
+            # Создаём временный экземпляр только для вызова статического метода
+            worker = PredictWorker([], {})
+            worker._generate_plot(
+                plot_data['positions'],
+                plot_data['log_diff'],
+                plot_data['trend'],
+                plot_data['widths'],
+                plot_data['plot_path'],
+                plot_data['has_scipy']
+            )
+            # Обновляем отображение графика
+            self.show_predict_plot(plot_data['plot_path'])
+        except Exception as e:
+            logger.error(f"Ошибка генерации графика: {e}", exc_info=True)
+            # Создаём заглушку
+            try:
+                with open(plot_data['plot_path'], 'wb') as f:
+                    f.write(
+                        b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01'
+                        b'\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15\xc4\x89'
+                        b'\x00\x00\x00\nIDATx\x9cc\x00\x01\x00\x00\x05\x00\x01'
+                        b'\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82'
+                    )
+            except:
+                pass
+
     def run_predict_analysis(self) -> None:
         """Запуск анализа предсказания"""
         from ui.predict_logic import PredictWorker, parse_keys_from_file, validate_keys
@@ -567,9 +608,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.predict_run_btn.setEnabled(False)
         self.predict_results_table.setRowCount(0)
 
-        self.predict_worker = PredictWorker(valid_keys, params)
+        self.predict_worker = PredictWorker(valid_keys, params, parent=self)  # 👈 parent=self!
         self.predict_worker.progress_update.connect(self.on_predict_progress)
         self.predict_worker.analysis_finished.connect(self.on_predict_finished)
+        self.predict_worker.plot_data_ready.connect(self.on_predict_plot_data_ready)  # <- НОВОЕ
         self.predict_worker.error_occurred.connect(self.on_predict_error)
         self.predict_worker.start()
 
@@ -578,8 +620,19 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.predict_progress_bar.setValue(percent)
         self.predict_status_label.setText(f"⏳ {message}")
 
-    def on_predict_finished(self, result: dict) -> None:
-        """Обработка успешного завершения"""
+    def on_predict_finished(self, result_json: str) -> None:  # <- принимаем строку!
+        """Обработка успешного завершения (принимает JSON-строку)"""
+        import json
+
+        # ✅ Парсим JSON обратно в dict
+        try:
+            result = json.loads(result_json)
+        except json.JSONDecodeError as e:
+            logger.error(f"Ошибка парсинга JSON от PredictWorker: {e}")
+            self.on_predict_error("Некорректные данные от PredictWorker")
+            return
+
+        # ✅ Дальше ваш существующий код (result теперь — dict)
         self.predict_progress_bar.hide()
         self.predict_run_btn.setEnabled(True)
         self.predict_status_label.setText("✅ Анализ завершён")
@@ -599,7 +652,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.predict_results_table.insertRow(row)
             self.predict_results_table.setItem(row, 0, QTableWidgetItem(param))
             item = QTableWidgetItem(value)
-            item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
             self.predict_results_table.setItem(row, 1, item)
 
         self.show_predict_plot(result.get('plot_path', ''))
@@ -632,7 +685,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
         max_width = max(600, self.predict_scroll.width() - 50)
         max_height = 500
         if pixmap.width() > max_width or pixmap.height() > max_height:
-            pixmap = pixmap.scaled(max_width, max_height, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            # ✅ ИСПРАВЛЕНО: PyQt6 Enum'ы для масштабирования
+            pixmap = pixmap.scaled(
+                max_width,
+                max_height,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            )
 
         self.predict_plot_label.setPixmap(pixmap)
         self.predict_plot_label.setText("")
@@ -648,7 +707,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if hasattr(self.predict_scroll, 'widget'):
             container = self.predict_scroll.widget()
             if container and container.layout():
-                container.layout().setAlignment(Qt.AlignCenter)
+                container.layout().setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def export_predict_results(self) -> None:
         """Экспорт таблицы результатов"""
@@ -694,7 +753,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             table.insertRow(row)
 
             item = QTableWidgetItem(f"{icon} {name}")
-            item.setTextAlignment(Qt.AlignCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             if name == 'Final':
                 font = item.font()
                 font.setBold(True)
@@ -714,7 +773,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             width = r.get('width', 0)
             width_txt = f"{width:.2e}" if width > 0 else "N/A"
             item = QTableWidgetItem(width_txt)
-            item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
             item.setToolTip(f"Ширина: {int(width):,} ключей" if width > 0 else "Ширина неизвестна")
             if name == 'Final':
                 item.setForeground(QColor(color))
@@ -986,23 +1045,23 @@ class BitcoinGPUCPUScanner(QMainWindow):
         item = self.cpu_workers_table.item(worker_id, 0)
         if item is None:
             item = QTableWidgetItem(str(worker_id))
-            item.setTextAlignment(Qt.AlignCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.cpu_workers_table.setItem(worker_id, 0, item)
         else:
             item.setText(str(worker_id))
 
-        item = self._get_or_create_item(worker_id, 1, Qt.AlignRight | Qt.AlignVCenter)
+        item = self._get_or_create_item(worker_id, 1, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
         item.setText(f"{scanned:,}")
 
-        item = self._get_or_create_item(worker_id, 2, Qt.AlignCenter)
+        item = self._get_or_create_item(worker_id, 2, Qt.AlignmentFlag.AlignCenter)
         item.setText(str(found))
 
-        item = self._get_or_create_item(worker_id, 3, Qt.AlignRight | Qt.AlignVCenter)
+        item = self._get_or_create_item(worker_id, 3, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
         item.setText(f"{speed:,.0f} keys/sec")
 
         self._update_worker_progress_bar(worker_id, progress)
 
-    def _get_or_create_item(self, row: int, col: int, alignment: Qt.Alignment) -> QTableWidgetItem:
+    def _get_or_create_item(self, row: int, col: int, alignment: Qt.AlignmentFlag) -> QTableWidgetItem:
         """Получить или создать элемент таблицы"""
         item = self.cpu_workers_table.item(row, col)
         if item is None:
@@ -1017,7 +1076,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if progress_bar is None:
             progress_bar = QProgressBar()
             progress_bar.setRange(0, 100)
-            progress_bar.setAlignment(Qt.AlignCenter)
+            progress_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
             progress_bar.setFormat("%p%")
             self.cpu_workers_table.setCellWidget(worker_id, 4, progress_bar)
         progress_bar.setValue(progress)
@@ -1111,7 +1170,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         finally:
             self.set_busy(False)
 
-    def show_context_menu(self, position) -> None:
+    def show_context_menu(self, position: QPoint) -> None:  # <- явный тип
         """Показ контекстного меню таблицы найденных ключей"""
         menu = QMenu()
         copy_wif_action = menu.addAction("Копировать WIF ключ")
@@ -1121,7 +1180,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         save_all_action = menu.addAction("Сохранить все ключи в файл")
         clear_action = menu.addAction("Очистить таблицу")
 
-        action = menu.exec_(self.found_keys_table.viewport().mapToGlobal(position))
+        action = menu.exec(self.found_keys_table.viewport().mapToGlobal(position))
         selected = self.found_keys_table.selectedItems()
 
         if action == clear_action:
@@ -1187,22 +1246,22 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.found_keys_table.insertRow(row)
 
             time_item = QTableWidgetItem(key_data['timestamp'])
-            time_item.setTextAlignment(Qt.AlignCenter)
+            time_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             time_item.setForeground(QColor(100, 255, 100))
             self.found_keys_table.setItem(row, 0, time_item)
 
             addr_item = QTableWidgetItem(key_data['address'])
-            addr_item.setTextAlignment(Qt.AlignCenter)
+            addr_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             addr_item.setForeground(QColor(255, 215, 0))
             self.found_keys_table.setItem(row, 1, addr_item)
 
             hex_item = QTableWidgetItem(key_data['hex_key'])
-            hex_item.setTextAlignment(Qt.AlignCenter)
+            hex_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             hex_item.setForeground(QColor(100, 200, 255))
             self.found_keys_table.setItem(row, 2, hex_item)
 
             wif_item = QTableWidgetItem(key_data['wif_key'])
-            wif_item.setTextAlignment(Qt.AlignCenter)
+            wif_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             wif_item.setForeground(QColor(255, 150, 150))
             self.found_keys_table.setItem(row, 3, wif_item)
 
@@ -1220,9 +1279,9 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
             source_text = f"{source_emoji.get(source, '❓')} {source}"
             source_item = QTableWidgetItem(source_text)
-            source_item.setTextAlignment(Qt.AlignCenter)
+            source_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             source_item.setForeground(source_colors.get(source, QColor(200, 200, 200)))
-            source_item.setFont(QFont('Arial', 10, QFont.Bold))
+            source_item.setFont(QFont('Arial', 10, QFont.Weight.Bold))
             self.found_keys_table.setItem(row, 4, source_item)
 
             self.found_keys_table.scrollToBottom()
@@ -1390,9 +1449,9 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 'Подтверждение закрытия',
                 f"Активные процессы: {', '.join(active_processes)}.\n"
                 f"Вы уверены, что хотите закрыть программу?",
-                QMessageBox.Yes | QMessageBox.No
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
             )
-            if reply == QMessageBox.No:
+            if reply == QMessageBox.StandardButton.No:
                 event.ignore()
                 return
 

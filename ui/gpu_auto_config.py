@@ -237,7 +237,7 @@ def auto_configure_kangaroo(main_window) -> Optional[Dict[str, Any]]:
     :return: конфигурация или None при ошибке
     """
     try:
-        from PyQt5.QtWidgets import QMessageBox, QInputDialog
+        from PyQt6.QtWidgets import QMessageBox, QInputDialog
     except ImportError:
         logger.error("PyQt5 не установлен")
         return None
@@ -270,9 +270,9 @@ def auto_configure_kangaroo(main_window) -> Optional[Dict[str, Any]]:
                 f"Автоматически обнаружено: <b>{config['gpu_count']} GPU</b><br><br>"
                 f"Если у вас на самом деле больше GPU,<br>"
                 f"хотите указать количество вручную?",
-                QMessageBox.Yes | QMessageBox.No
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
             )
-            if reply == QMessageBox.Yes:
+            if reply == QMessageBox.StandardButton.Yes:
                 manual_count, ok = QInputDialog.getInt(
                     main_window, "Количество GPU", "Укажите реальное количество GPU:",
                     value=2, min=1, max=8
@@ -398,7 +398,7 @@ def auto_configure_gpu(main_window) -> Optional[Dict[str, Any]]:
     :return: конфигурация или None при ошибке
     """
     try:
-        from PyQt5.QtWidgets import QMessageBox, QInputDialog
+        from PyQt6.QtWidgets import QMessageBox, QInputDialog
     except ImportError:
         logger.error("PyQt5 не установлен")
         return None
@@ -425,9 +425,9 @@ def auto_configure_gpu(main_window) -> Optional[Dict[str, Any]]:
                 f"Автоматически обнаружено: <b>{gpu_count} GPU</b><br><br>"
                 f"Если у вас на самом деле больше GPU,<br>"
                 f"хотите указать количество вручную?",
-                QMessageBox.Yes | QMessageBox.No
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
             )
-            if reply == QMessageBox.Yes:
+            if reply == QMessageBox.StandardButton.Yes:
                 manual_count, ok = QInputDialog.getInt(
                     main_window, "Количество GPU", "Укажите реальное количество GPU:",
                     value=2, min=1, max=8

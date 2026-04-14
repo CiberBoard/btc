@@ -2,11 +2,13 @@
 import re
 import logging
 from pathlib import Path
-from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTableWidget,
+# В начало файла добавьте:
+from functools import partial  # 👈 ДОБАВИТЬ
+from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTableWidget, QAbstractItemView ,
                              QTableWidgetItem, QPushButton, QLabel, QMessageBox,
                              QHeaderView, QApplication, QWidget, QFrame)
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtGui import QFont
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QFont
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +35,7 @@ class GpuProgressTrackerWindow(QDialog):
         # ── Заголовок ──
         header_layout = QHBoxLayout()
         title_label = QLabel("📋 Сохраненные диапазоны поиска")
-        title_label.setFont(QFont("Segoe UI", 15, QFont.Bold))
+        title_label.setFont(QFont("Segoe UI", 15, QFont.Weight.Bold))
         title_label.setStyleSheet("color: #E0E0E0;")
 
         self.stats_label = QLabel("Записей: 0")
@@ -46,8 +48,9 @@ class GpuProgressTrackerWindow(QDialog):
 
         # Разделитель
         sep = QFrame()
-        sep.setFrameShape(QFrame.HLine)
-        sep.setFrameShadow(QFrame.Sunken)
+        # ✅ Стало (PyQt6)
+        sep.setFrameShape(QFrame.Shape.HLine)
+        sep.setFrameShadow(QFrame.Shadow.Sunken)
         sep.setStyleSheet("background: #3A3A4A; margin: 4px 0;")
         main_layout.addWidget(sep)
 
@@ -55,18 +58,18 @@ class GpuProgressTrackerWindow(QDialog):
         self.table = QTableWidget()
         self.table.setColumnCount(5)
         self.table.setHorizontalHeaderLabels(["GPU", "Начало (HEX)", "Конец (HEX)", "Прогресс", "Действия"])
-        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Fixed)
-        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
-        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.Stretch)
-        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.Fixed)
-        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.Fixed)
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Fixed)
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Fixed)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.Fixed)
         self.table.setColumnWidth(0, 70)
         self.table.setColumnWidth(3, 90)
         self.table.setColumnWidth(4, 210)
         self.table.verticalHeader().setVisible(False)
         self.table.setAlternatingRowColors(True)
-        self.table.setSelectionBehavior(QTableWidget.SelectRows)
-        self.table.setSelectionMode(QTableWidget.SingleSelection)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.table.setStyleSheet(self._table_style())
         main_layout.addWidget(self.table)
 
@@ -95,7 +98,7 @@ class GpuProgressTrackerWindow(QDialog):
     def _create_tool_button(self, text: str, base_color: str) -> QPushButton:
         btn = QPushButton(text)
         btn.setFixedHeight(38)
-        btn.setCursor(Qt.PointingHandCursor)
+        btn.setCursor(Qt.CursorShape.PointingHandCursor)
         btn.setStyleSheet(f"""
             QPushButton {{
                 background: {base_color};
@@ -230,20 +233,23 @@ class GpuProgressTrackerWindow(QDialog):
 
     def _set_item(self, row: int, col: int, text: str):
         item = QTableWidgetItem(str(text))
-        item.setTextAlignment(Qt.AlignCenter | Qt.AlignVCenter)
+        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter)
         if col in (1, 2):
             item.setToolTip(text)  # Подсказка с полным HEX при наведении
         self.table.setItem(row, col, item)
 
     def _create_action_row(self, start: str, end: str) -> QWidget:
         container = QWidget()
+        # 👇 Важно для PyQt6: устанавливаем атрибут для безопасного удаления
+        container.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
+
         layout = QHBoxLayout(container)
         layout.setContentsMargins(6, 4, 6, 4)
         layout.setSpacing(8)
 
         copy_btn = QPushButton("📋 Копировать")
         copy_btn.setFixedHeight(28)
-        copy_btn.setCursor(Qt.PointingHandCursor)
+        copy_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         copy_btn.setStyleSheet("""
             QPushButton {
                 background: #3498db; color: white; border: none;
@@ -252,11 +258,12 @@ class GpuProgressTrackerWindow(QDialog):
             QPushButton:hover { background: #2980b9; }
             QPushButton:pressed { background: #1a5276; }
         """)
-        copy_btn.clicked.connect(lambda: self._copy_to_clipboard(start, end))
+        # ✅ ИСПРАВЛЕНО: partial вместо lambda — безопасный захват аргументов
+        copy_btn.clicked.connect(partial(self._copy_to_clipboard, start, end))
 
         load_btn = QPushButton("📥 В поиск")
         load_btn.setFixedHeight(28)
-        load_btn.setCursor(Qt.PointingHandCursor)
+        load_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         load_btn.setStyleSheet("""
             QPushButton {
                 background: #27ae60; color: white; border: none;
@@ -265,7 +272,8 @@ class GpuProgressTrackerWindow(QDialog):
             QPushButton:hover { background: #219a52; }
             QPushButton:pressed { background: #1e8449; }
         """)
-        load_btn.clicked.connect(lambda: self.range_selected.emit(start, end))
+        # ✅ ИСПРАВЛЕНО: partial для сигнала с аргументами
+        load_btn.clicked.connect(partial(lambda s, e: self.range_selected.emit(s, e), start, end))
 
         layout.addWidget(copy_btn)
         layout.addWidget(load_btn)
@@ -293,8 +301,8 @@ class GpuProgressTrackerWindow(QDialog):
     def _clear_log(self):
         reply = QMessageBox.question(self, "🗑 Очистка",
                                      "Удалить все записи прогресса?\nЭто действие нельзя отменить.",
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        if reply == QMessageBox.Yes:
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No, QMessageBox.StandardButton.No)
+        if reply == QMessageBox.StandardButton.Yes:
             if self.log_file_path.exists():
                 self.log_file_path.unlink()
             self._load_data()

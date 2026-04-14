@@ -12,7 +12,7 @@ import secrets
 from typing import Tuple, Optional, Dict, Any, Set, List, TYPE_CHECKING
 from dataclasses import dataclass, field
 
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread, pyqtSignal
 
 if TYPE_CHECKING:  # 🛠 УЛУЧШЕНИЕ 2: Избегаем циклических импортов для type hints
     import pynvml  # type: ignore

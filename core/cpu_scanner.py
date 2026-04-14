@@ -9,7 +9,7 @@ import logging
 import hashlib
 from typing import Dict, List, Tuple, Optional, Any, Callable
 from dataclasses import dataclass, field  # 🛠 УЛУЧШЕНИЕ 2: dataclass для конфигурации
-from PyQt5.QtCore import QObject, pyqtSignal
+from PyQt6.QtCore import QObject, pyqtSignal
 
 try:
     from coincurve import PrivateKey

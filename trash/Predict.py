@@ -4,7 +4,7 @@ os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
 
 import numpy as np
-from PyQt5.QtCore import QThread, pyqtSignal, QCoreApplication
+from PyQt6.QtCore import QThread, pyqtSignal, QCoreApplication
 import sys
 
 print(f"NumPy version: {np.__version__}")
@@ -23,4 +23,4 @@ app = QCoreApplication(sys.argv)
 worker = TestWorker()
 worker.result.connect(lambda r: print(r) or app.quit())
 worker.start()
-sys.exit(app.exec_())
+sys.exit(app.exec())

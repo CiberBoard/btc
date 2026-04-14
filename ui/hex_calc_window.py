@@ -1,8 +1,8 @@
 from decimal import Decimal, localcontext, ROUND_FLOOR, InvalidOperation
 from time import strftime  # 🛠 УЛУЧШЕНИЕ 1: Импорт вынесен в начало (было внутри _log)
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import (
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
     QPushButton, QTextEdit, QGroupBox, QGridLayout,
     QMessageBox, QApplication, QComboBox, QDoubleSpinBox
@@ -39,7 +39,7 @@ class HexCalcWindow(QDialog):
 
         header = QLabel("🔢 16-ричный калькулятор (проценты + дробные множители)")
         header.setProperty("cssClass", "header")
-        header.setAlignment(Qt.AlignCenter)
+        header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(header)
 
         info = QLabel(
@@ -81,7 +81,7 @@ class HexCalcWindow(QDialog):
         self.custom_value_spin.setDecimals(4)
         self.custom_value_spin.setValue(1.5)
         self.custom_value_spin.setFixedWidth(130)
-        self.custom_value_spin.setButtonSymbols(QDoubleSpinBox.PlusMinus)
+        self.custom_value_spin.setButtonSymbols(QDoubleSpinBox.ButtonSymbols.PlusMinus)
         custom_layout.addWidget(self.custom_value_spin)
 
         self.apply_custom_btn = QPushButton("➕ Вставить в формулу")
@@ -122,7 +122,7 @@ class HexCalcWindow(QDialog):
         result_layout.addWidget(QLabel("HEX:"), 0, 0)
         self.result_hex = QLineEdit()
         self.result_hex.setReadOnly(True)
-        self.result_hex.setFont(QFont("Consolas", 11, QFont.Bold))
+        self.result_hex.setFont(QFont("Consolas", 11, QFont.Weight.Bold))
         self.result_hex.setStyleSheet(f"background: {COLORS.get('bg_input', '#2b2b2b')}; color: {COLORS.get('accent_primary', '#4CAF50')};")  # 🛠 УЛУЧШЕНИЕ 3
         result_layout.addWidget(self.result_hex, 0, 1)
 

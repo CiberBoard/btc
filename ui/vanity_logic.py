@@ -10,7 +10,7 @@ import logging
 from typing import Dict, Any, Optional, List, Pattern, TYPE_CHECKING
 from dataclasses import dataclass, field
 
-from PyQt5.QtCore import QThread, QTimer, pyqtSignal
+from PyQt6.QtCore import QThread, QTimer, pyqtSignal
 
 if TYPE_CHECKING:
     from ui.main_window import BitcoinGPUCPUScanner
