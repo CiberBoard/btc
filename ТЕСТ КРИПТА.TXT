@@ -3927,4 +3927,4 @@ class MainWindowUI:
                     bar.style().unpolish(bar)
                     bar.style().polish(bar)
             except (AttributeError, RuntimeError):
-                pass  ХОЧУ ПОСТРОИТЬ МОДУЛЬ ДОБЫЧИ КРИПТО ВАЛЮТЫ КАК ЭТО РЕАЛИЗОВАТЬ ? 
+                pass  ХОЧУ ПОСТРОИТЬ МОДУЛЬ ДОБЫЧИ КРИПТО ВАЛЮТЫ КАК ЭТО РЕАЛИЗОВАТЬ ?

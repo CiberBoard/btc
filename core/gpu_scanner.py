@@ -96,7 +96,7 @@ if PYNVML_AVAILABLE:
                 logger.warning(f"NVML shutdown error: {e}")
 
 
-    atexit.register(_shutdown_nvml)
+    # atexit.register(_shutdown_nvml)  # 👈 ЗАКОММЕНТИРОВАТЬ
 
 
 # ═══════════════════════════════════════════════
@@ -443,23 +443,31 @@ def _get_process_creation_flags(priority_index: int) -> int:
 def _set_windows_process_priority(process: subprocess.Popen, priority_index: int) -> None:
     """
     Установка приоритета процесса для Windows.
-
     :param process: Экземпляр subprocess.Popen
     :param priority_index: Индекс приоритета
     """
     if platform.system() != 'Windows' or not WIN32_AVAILABLE or priority_index <= 0:
         return
 
+    handle = None  # 👈 Инициализируем для безопасного закрытия
     try:
         priority_value = config.WINDOWS_GPU_PRIORITY_MAP.get(
             priority_index, SCANNER_CONFIG.DEFAULT_PRIORITY_CLASS
         )
         handle = win32api.OpenProcess(win32process.PROCESS_ALL_ACCESS, True, process.pid)
-        win32process.SetPriorityClass(handle, priority_value)
+        if handle:  # 👈 Проверяем, что хендл получен
+            win32process.SetPriorityClass(handle, priority_value)
     except (OSError, AttributeError) as e:
         logger.debug(f"Не удалось установить приоритет процесса: {e}")
     except Exception as e:
         logger.error(f"Неожиданная ошибка установки приоритета: {e}")
+    finally:
+        # 👈 КРИТИЧНО: закрываем хендл в любом случае
+        if handle is not None:
+            try:
+                win32api.CloseHandle(handle)
+            except Exception as e:
+                logger.debug(f"Не удалось закрыть хендл процесса: {e}")
 
 
 # ═══════════════════════════════════════════════

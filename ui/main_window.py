@@ -82,6 +82,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     # 🛠 УЛУЧШЕНИЕ 8: Сигналы объявлены с типизацией
     vanity_update_ui_signal = pyqtSignal(dict)
+    log_gpu_progress_signal = pyqtSignal(str, str, float, int)
 
     def __init__(self):
         super().__init__()
@@ -131,6 +132,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.vanity_update_ui_signal.connect(self.vanity_logic.handle_stats)
 
         apply_dark_theme(self)
+        self.log_gpu_progress_signal.connect(self._save_gpu_progress)
         self.ui = MainWindowUI(self)
         self.ui.setup_ui()
         self.setup_connections()
@@ -153,6 +155,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # 🛠 УЛУЧШЕНИЕ 12: Атрибуты для окон инициализируются как None
         self.hex_calc_window: Optional[HexCalcWindow] = None
         self.gpu_monitor_window: Optional[GPUMonitorWindow] = None
+        self.progress_tracker_window: Optional[Any] = None  # 👈 ДОБАВИТЬ!
 
     # ==================== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ====================
 
@@ -216,6 +219,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             except RuntimeError:
                 # 🛠 УЛУЧШЕНИЕ 17: Обработка случая, когда объект уже удалён Qt
                 self.gpu_monitor_window = None
+
                 self.gpu_monitor_window = GPUMonitorWindow(self)
 
             self.gpu_monitor_window.show()
@@ -229,6 +233,27 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 f"Не удалось открыть монитор:\n{type(e).__name__}: {e}"
             )
 
+    def open_gpu_progress_tracker(self) -> None:
+        """Открывает окно сохраненного прогресса GPU"""
+        if self.progress_tracker_window is None or not self.progress_tracker_window.isVisible():
+            from pathlib import Path
+            from ui.gpu_progress_tracker import GpuProgressTrackerWindow
+
+            log_path = Path(config.BASE_DIR) / "gpu_progress.txt"
+            self.progress_tracker_window = GpuProgressTrackerWindow(self, log_path)
+            self.progress_tracker_window.range_selected.connect(self.apply_gpu_progress_range)
+            self.progress_tracker_window.show()
+        else:
+            self.progress_tracker_window.raise_()
+            self.progress_tracker_window.activateWindow()
+
+    def apply_gpu_progress_range(self, start_hex: str, end_hex: str) -> None:
+        """Загружает выбранный диапазон в поля GPU поиска"""
+        self.gpu_start_key_edit.setText(start_hex)
+        self.gpu_end_key_edit.setText(end_hex)
+        self.append_log(f"📥 Загружен сохраненный диапазон: {start_hex[:16]}... -> {end_hex[:16]}...", "success")
+        QMessageBox.information(self, "✅ Загружено",
+                                "Диапазон применен к полям поиска. Нажмите 'Запустить GPU' для продолжения.")
     # ==================== МЕТОДЫ НАВИГАЦИИ ====================
 
     def browse_kangaroo_exe(self) -> None:
@@ -1328,6 +1353,18 @@ class BitcoinGPUCPUScanner(QMainWindow):
             logger.error(f"Ошибка сохранения настроек: {str(e)}")
             self.append_log(f"❌ Ошибка сохранения: {str(e)}", "error")
 
+    def _save_gpu_progress(self, start_hex: str, end_hex: str, percent: float, gpu_id: int) -> None:
+        """Безопасное сохранение прогресса (вызывается только в главном потоке)"""
+        try:
+            from pathlib import Path
+            log_path = Path(config.BASE_DIR) / "gpu_progress.txt"
+            log_path.parent.mkdir(parents=True, exist_ok=True)
+            line = f"{start_hex.zfill(64)}-{end_hex.zfill(64)} {int(percent)}% пройдено GPU{gpu_id}\n"
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(line)
+        except Exception as e:
+            logging.getLogger(__name__).error(f"Ошибка сохранения прогресса: {e}")
+
     def close_queue(self) -> None:
         """Закрытие очереди CPU"""
         self.cpu_logic.close_queue()
@@ -1380,12 +1417,21 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         self.close_queue()
 
+        # ── NVML Shutdown с защитой от двойного выключения ──
         if PYNVML_AVAILABLE and self.gpu_monitor_available:
             try:
-                pynvml.nvmlShutdown()
-                logger.info("pynvml выключен")
+                # Проверяем флаг инициализации перед shutdown
+                if getattr(pynvml, '_nvml_initialized', True):  # Если атрибута нет — считаем инициализированным
+                    pynvml.nvmlShutdown()
+                    pynvml._nvml_initialized = False  # 👈 Помечаем как выключенный
+                    logger.info("pynvml выключен")
+            except pynvml.NVMLError_LibraryNotFound:  # type: ignore
+                logger.debug("NVML библиотека уже выгружена")
+            except pynvml.NVMLError_DriverNotLoaded:  # type: ignore
+                logger.debug("NVML драйвер не загружен")
             except Exception as e:
-                logger.error(f"Ошибка выключения pynvml: {e}")
+                # Игнорируем ошибки повторного shutdown — это нормально
+                logger.debug(f"NVML shutdown (ожидаемо): {type(e).__name__}: {e}")
 
         # 🛠 УЛУЧШЕНИЕ 25: Безопасное закрытие окна монитора с проверкой
         if hasattr(self, 'gpu_monitor_window') and self.gpu_monitor_window:

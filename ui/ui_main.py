@@ -224,9 +224,22 @@ class MainWindowUI:
         """)
         self.parent.gpu_monitor_btn.clicked.connect(self.parent.open_gpu_monitor)
         btn_row.addWidget(self.parent.gpu_monitor_btn)
-
+        # 👇 ВСТАВЬТЕ СЮДА:
+        self.parent.gpu_progress_btn = QPushButton("💾 Прогресс")
+        self.parent.gpu_progress_btn.setFixedWidth(100)
+        self.parent.gpu_progress_btn.setMinimumHeight(40)
+        self.parent.gpu_progress_btn.setStyleSheet("""
+            QPushButton { background: #2c3e50; color: white; font-weight: bold; border-radius: 6px; }
+            QPushButton:hover { background: #34495e; }
+            QPushButton:pressed { background: #1a252f; }
+        """)
+        self.parent.gpu_progress_btn.clicked.connect(self.parent.open_gpu_progress_tracker)
+        btn_row.addWidget(self.parent.gpu_progress_btn)
+        # 👆 КОНЕЦ ВСТАВКИ
         btn_row.addStretch()
         gpu_layout.addLayout(btn_row)
+
+
 
         # ── Прогресс и статистика ─────────────────────────
         progress_group = QGroupBox("📊 Статистика")

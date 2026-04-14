@@ -552,6 +552,15 @@ class GPULogic:
             return
 
         progress_percent = min(100.0, (self.gpu_keys_checked / self.gpu_total_keys_in_range) * 100)
+        # 👇 ВСТАВИТЬ ВМЕСТО ПРЯМОГО ВЫЗОВА
+        if int(progress_percent) % 5 == 0:
+            # Эмитим сигнал в главный поток — HEX с нулями до 64 символов
+            self.main_window.log_gpu_progress_signal.emit(
+                hex(self.gpu_start_range_key)[2:].zfill(64),  # 👈 .zfill(64)
+                hex(self.gpu_end_range_key)[2:].zfill(64),  # 👈 .zfill(64)
+                progress_percent,
+                int(self._parse_gpu_devices()[0]) if self._parse_gpu_devices() else 0  # 👈 int()
+            )
         self.main_window.gpu_progress_bar.setValue(int(progress_percent))
 
         elapsed = time.time() - self.gpu_start_time if self.gpu_start_time is not None else 0.0
