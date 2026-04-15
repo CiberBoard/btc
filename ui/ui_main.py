@@ -1,40 +1,30 @@
 # ui/ui_main.py
-# 🛠 УЛУЧШЕНИЕ 1: Добавлены type hints для лучшей поддержки IDE
 from typing import Optional, TYPE_CHECKING
 import os
 import multiprocessing
+import logging
 
 from PyQt6.QtCore import Qt, QRegularExpression, QSize
 from PyQt6.QtGui import QFont, QRegularExpressionValidator
-from PyQt6.QtWidgets import (QAbstractItemView ,
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QTextEdit, QGroupBox, QGridLayout,
-    QTableWidget, QHeaderView, QProgressBar, QCheckBox,
-    QComboBox, QTabWidget, QSpinBox, QMenu, QApplication,
-    QScrollArea, QFrame, QSizePolicy
-)
+from PyQt6.QtWidgets import (QAbstractItemView,
+                             QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
+                             QPushButton, QTextEdit, QGroupBox, QGridLayout,
+                             QTableWidget, QHeaderView, QProgressBar, QCheckBox,
+                             QComboBox, QTabWidget, QSpinBox, QMenu, QApplication,
+                             QScrollArea, QFrame, QSizePolicy
+                             )
 
-if TYPE_CHECKING:  # 🛠 УЛУЧШЕНИЕ 2: Избегаем циклических импортов для type hints
+if TYPE_CHECKING:
     from ui.main_window import BitcoinGPUCPUScanner
 
 import config
 from utils.helpers import make_combo32, is_coincurve_available
 from ui.theme import apply_dark_theme, set_button_style, COLORS
 
+logger = logging.getLogger(__name__)
+
 
 class MainWindowUI:
-    """
-    Улучшенный UI с интеграцией темы и защитой от наезжания элементов.
-
-    Ключевые улучшения:
-    • Все виджеты имеют правильные sizePolicy для адаптивности
-    • Используется theme.py для консистентного стиля
-    • Критические области в QScrollArea для прокрутки при малом экране
-    • Единая система отступов и интервалов
-    • Все имена виджетов сохранены (100% совместимость API)
-    """
-
-    # 🛠 УЛУЧШЕНИЕ 3: Константы вынесены в класс для удобства изменения
     _MARGIN = 12
     _SPACING = 10
     _MIN_WINDOW_WIDTH = 1100
@@ -42,14 +32,11 @@ class MainWindowUI:
     _DEFAULT_WINDOW_WIDTH = 1300
     _DEFAULT_WINDOW_HEIGHT = 900
 
-    def __init__(self, parent: 'BitcoinGPUCPUScanner'):  # 🛠 УЛУЧШЕНИЕ 4: Type hint для parent
+    def __init__(self, parent: 'BitcoinGPUCPUScanner'):
         self.parent = parent
-        self._ui_initialized = False  # Флаг для защиты от ранних обновлений
+        self._ui_initialized = False
 
-    def setup_ui(self) -> None:  # 🛠 УЛУЧШЕНИЕ 5: Явный возврат None
-        # ─────────────────────────────────────────────────────
-        # 1. Базовая настройка окна
-        # ─────────────────────────────────────────────────────
+    def setup_ui(self) -> None:
         self.parent.setWindowTitle("⛏️ Bitcoin GPU/CPU Scanner v5.0")
         self.parent.resize(self._DEFAULT_WINDOW_WIDTH, self._DEFAULT_WINDOW_HEIGHT)
         self.parent.setMinimumSize(self._MIN_WINDOW_WIDTH, self._MIN_WINDOW_HEIGHT)
@@ -66,20 +53,52 @@ class MainWindowUI:
         self.parent.main_tabs.setObjectName("mainTabs")
         main_layout.addWidget(self.parent.main_tabs)
 
-        # ═══════════════════════════════════════════════════
-        # GPU TAB
-        # ═══════════════════════════════════════════════════
+        # ✅ Все вкладки должны быть определены в этом классе
         self._setup_gpu_tab()
-        self._setup_kangaroo_tab()
-        self._setup_cpu_tab()
-        self._setup_vanity_tab()
-        self._setup_found_keys_tab()
-        self.parent.setup_converter_tab()  # Вызываем из parent
-        self._setup_log_tab()
-        self._setup_predict_tab()
-        self._setup_about_tab()
+        self._setup_kangaroo_tab()      # ✅ ДОБАВЛЕНО
+        self._setup_cpu_tab()           # ✅ ДОБАВЛЕНО
+        self._setup_vanity_tab()        # ✅ ДОБАВЛЕНО
+        self._setup_found_keys_tab()    # ✅ ДОБАВЛЕНО
+        self.parent.setup_converter_tab()
+        self._setup_log_tab()           # ✅ ДОБАВЛЕНО
+        self._setup_predict_tab()       # ✅ ДОБАВЛЕНО
+        self._setup_about_tab()         # ✅ ДОБАВЛЕНО
 
-        self._ui_initialized = True  # ✅ UI полностью инициализирован
+        self._ui_initialized = True
+
+
+    # ─────────────────────────────────────────────────────
+    # ВСПОМОГАТЕЛЬНЫЙ МЕТОД: Заполнение списка GPU
+    # ─────────────────────────────────────────────────────
+    def _populate_gpu_combo(self) -> None:
+        if not hasattr(self.parent, 'gpu_device_combo'):
+            logger.warning("gpu_device_combo ещё не создан, пропускаем заполнение")
+            return
+
+        self.parent.gpu_device_combo.clear()
+
+        if not getattr(self.parent, 'gpu_monitor_available', False):
+            self.parent.gpu_device_combo.addItems(["0", "1", "2"])
+            return
+
+        try:
+            import pynvml
+            device_count = pynvml.nvmlDeviceGetCount()
+            for idx in range(device_count):
+                handle = pynvml.nvmlDeviceGetHandleByIndex(idx)
+                raw_name = pynvml.nvmlDeviceGetName(handle)
+                gpu_name = raw_name.decode('utf-8') if isinstance(raw_name, bytes) else raw_name
+                self.parent.gpu_device_combo.addItem(f"{idx} - {gpu_name}", userData=idx)
+
+            if device_count >= 2:
+                self.parent.gpu_device_combo.addItem("0,1 (Multi-GPU)", userData=0)
+            if device_count >= 3:
+                self.parent.gpu_device_combo.addItem("0,1,2 (Multi-GPU)", userData=0)
+
+        except Exception as e:
+            logger.error(f"Не удалось получить список GPU: {e}")
+            self.parent.gpu_device_combo.addItems(["0", "1", "2"])
+
 
     # ─────────────────────────────────────────────────────
     # GPU TAB
@@ -129,7 +148,28 @@ class MainWindowUI:
         params_layout.addWidget(QLabel("GPU:"), 0, 0)
         self.parent.gpu_device_combo = QComboBox()
         self.parent.gpu_device_combo.setEditable(True)
-        self.parent.gpu_device_combo.addItems(["0", "1", "2", "0,1", "0,1,2", "0,1,2,3"])
+        # ✅ Стало (динамическое заполнение с userData):
+        self.parent.gpu_device_combo.clear()
+        try:
+            import pynvml
+            device_count = pynvml.nvmlDeviceGetCount()
+            for idx in range(device_count):
+                handle = pynvml.nvmlDeviceGetHandleByIndex(idx)
+                raw_name = pynvml.nvmlDeviceGetName(handle)
+                gpu_name = raw_name.decode('utf-8') if isinstance(raw_name, bytes) else raw_name
+                # 🔧 Ключевое: сохраняем реальный NVML-индекс в userData
+                self.parent.gpu_device_combo.addItem(f"{idx} - {gpu_name}", userData=idx)
+
+            # Опции для мульти-GPU (используют первый индекс для мониторинга)
+            if device_count >= 2:
+                self.parent.gpu_device_combo.addItem("0,1 (Multi-GPU)", userData=0)
+            if device_count >= 3:
+                self.parent.gpu_device_combo.addItem("0,1,2 (Multi-GPU)", userData=0)
+
+            self.parent.gpu_device_combo.setCurrentIndex(0)
+        except Exception as e:
+            logger.error(f"Не удалось получить список GPU: {e}")
+            self.parent.gpu_device_combo.addItems(["0", "1", "2"])
         self.parent.gpu_device_combo.setCurrentText("0")
         params_layout.addWidget(self.parent.gpu_device_combo, 0, 1)
 

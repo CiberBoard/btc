@@ -138,7 +138,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.ui.setup_ui()
         self.setup_connections()
         self.load_settings()
-
+        # ✅ Теперь безопасно заполняем GPU combo
+        if self.gpu_monitor_available:
+            self.ui._populate_gpu_combo()
+            if self.gpu_device_combo.count() > 0:
+                self.gpu_device_combo.setCurrentIndex(0)
         self.ensure_file_exists(config.FOUND_KEYS_FILE)
 
         # --- Инициализация таймеров ---
@@ -935,15 +939,20 @@ class BitcoinGPUCPUScanner(QMainWindow):
             return
 
         try:
-            device_str = self.gpu_device_combo.currentText().split(',')[0].strip()
-            device_id = int(device_str) if device_str.isdigit() else 0
+            # 🔧 БЕЗОПАСНОЕ ПОЛУЧЕНИЕ NVML-ИНДЕКСА через userData
+            device_id = self.gpu_device_combo.currentData()
+
+            # Фоллбэк для старых версий или ошибок
+            if device_id is None or device_id == -1:
+                device_str = self.gpu_device_combo.currentText().split(',')[0].strip()
+                device_id = int(device_str) if device_str.isdigit() else 0
         except (ValueError, AttributeError):
             device_id = 0
 
         try:
             handle = pynvml.nvmlDeviceGetHandleByIndex(device_id)
             util_info = pynvml.nvmlDeviceGetUtilizationRates(handle)
-            gpu_util = int(util_info.gpu)  # 🛠 УЛУЧШЕНИЕ 24: Явное преобразование в int
+            gpu_util = int(util_info.gpu)
 
             mem_info = pynvml.nvmlDeviceGetMemoryInfo(handle)
             mem_used_mb = mem_info.used / (1024 * 1024)

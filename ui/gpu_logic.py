@@ -444,7 +444,13 @@ class GPULogic:
     def _parse_gpu_devices(self) -> List[str]:
         """Парсит строку ввода устройств GPU в список ID."""
         devices_input = self.main_window.gpu_device_combo.currentText()
-        return [d.strip() for d in devices_input.split(',') if d.strip().isdigit()]
+        devices = []
+        for part in devices_input.split(','):
+            # Извлекаем только цифры из начала строки: "1 (Multi-GPU)" → "1"
+            cleaned = ''.join(c for c in part.strip() if c.isdigit())
+            if cleaned:
+                devices.append(cleaned)
+        return devices
 
     def _connect_worker_signals(self, output_reader: Any) -> None:
         """Подключает сигналы воркера к слотам главного окна."""
@@ -571,31 +577,36 @@ class GPULogic:
 
         if should_log:
             devices = self._parse_gpu_devices()
-            gpu_id = int(devices[0]) if devices else 0
 
-            # 🔧 ВЫЧИСЛЯЕМ НОВУЮ ТОЧКУ СТАРТА (с учётом параллельных воркеров)
-            if self.gpu_worker_stats and len(self.gpu_worker_stats) > 1:
-                # Режим параллельных воркеров: берём минимальную позицию среди всех
-                # Это гарантирует, что мы не пропустим непроверенные ключи
-                min_position = min(
-                    self.gpu_start_range_key + stats.get('checked', 0)
-                    for stats in self.gpu_worker_stats.values()
-                )
-                new_start = min(min_position, self.gpu_end_range_key)
+            # 🔧 Если воркеров несколько (мульти-GPU), эмитим для каждого
+            if len(devices) > 1 and len(self.gpu_worker_stats) > 1:
+                # Сопоставляем воркеров с GPU по порядку запуска
+                for i, (reader, stats) in enumerate(self.gpu_worker_stats.items()):
+                    if i < len(devices):
+                        gpu_id = int(devices[i])
+                        position = self.gpu_start_range_key + stats.get('checked', 0)
+                        new_start = min(position, self.gpu_end_range_key)
+
+                        self.main_window.log_gpu_progress_signal.emit(
+                            hex(new_start)[2:].zfill(64),
+                            hex(self.gpu_end_range_key)[2:].zfill(64),
+                            progress_percent,
+                            gpu_id
+                        )
             else:
-                # Последовательный режим или один воркер: простая формула
+                # Одиночный GPU или фоллбэк
+                gpu_id = int(devices[0]) if devices else 0
                 range_size = self.gpu_end_range_key - self.gpu_start_range_key + 1
                 completed_keys = int(range_size * (progress_percent / 100.0))
                 new_start = self.gpu_start_range_key + completed_keys
                 new_start = min(new_start, self.gpu_end_range_key)
 
-            # ✅ Эмитим сигнал: [новая_точка_старта ... оригинальный_конец]
-            self.main_window.log_gpu_progress_signal.emit(
-                hex(new_start)[2:].zfill(64),
-                hex(self.gpu_end_range_key)[2:].zfill(64),
-                progress_percent,
-                gpu_id
-            )
+                self.main_window.log_gpu_progress_signal.emit(
+                    hex(new_start)[2:].zfill(64),
+                    hex(self.gpu_end_range_key)[2:].zfill(64),
+                    progress_percent,
+                    gpu_id
+                )
 
             self._last_progress_log_time = current_time
             self._last_logged_percent = current_percent_int
