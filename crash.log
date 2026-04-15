@@ -1,0 +1,12 @@
+Timeout (0:00:10)!
+Thread 0x0000380c (most recent call first):
+  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 171 in _read_process_output
+  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 147 in run
+
+Thread 0x00003ff4 (most recent call first):
+  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 171 in _read_process_output
+  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 147 in run
+
+Thread 0x00003c80 (most recent call first):
+  File "C:\Users\PC\PycharmProjects\btc\main.py", line 65 in main
+  File "C:\Users\PC\PycharmProjects\btc\main.py", line 69 in <module>

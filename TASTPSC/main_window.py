@@ -7,9 +7,9 @@ import platform
 import psutil
 import multiprocessing
 import queue
-from PyQt5.QtCore import Qt, QTimer, QRegExp
-from PyQt5.QtGui import QFont, QColor, QPalette, QKeySequence, QRegExpValidator
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
+from PyQt6.QtCore import Qt, QTimer, QRegularExpression, QRegularExpressionValidator
+from PyQt6.QtGui import QFont, QColor, QPalette, QKeySequence, QRegularExpressionValidator
+from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QHBoxLayout, QLabel, QLineEdit, QPushButton,
                              QTextEdit, QMessageBox, QGroupBox, QGridLayout,
                              QTableWidget, QTableWidgetItem, QHeaderView,
@@ -139,7 +139,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def browse_kangaroo_exe(self):
         """Выбор файла etarkangaroo.exe"""
-        from PyQt5.QtWidgets import QFileDialog
+        from PyQt6.QtWidgets import QFileDialog
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Выберите etarkangaroo.exe",
@@ -152,7 +152,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def browse_kangaroo_temp(self):
         """Выбор временной директории"""
-        from PyQt5.QtWidgets import QFileDialog
+        from PyQt6.QtWidgets import QFileDialog
         dir_path = QFileDialog.getExistingDirectory(
             self,
             "Выберите временную директорию",
@@ -165,20 +165,20 @@ class BitcoinGPUCPUScanner(QMainWindow):
     def set_dark_theme(self):
         # ... (оставляем как есть)
         palette = QPalette()
-        palette.setColor(QPalette.Window, QColor(20, 20, 30))
-        palette.setColor(QPalette.WindowText, QColor(240, 240, 240))
-        palette.setColor(QPalette.Base, QColor(28, 28, 38))
-        palette.setColor(QPalette.AlternateBase, QColor(38, 38, 48))
-        palette.setColor(QPalette.ToolTipBase, QColor(40, 40, 45))
-        palette.setColor(QPalette.ToolTipText, QColor(230, 230, 230))
-        palette.setColor(QPalette.Text, QColor(220, 220, 220))
-        palette.setColor(QPalette.Button, QColor(38, 38, 48))
-        palette.setColor(QPalette.ButtonText, QColor(240, 240, 240))
-        palette.setColor(QPalette.BrightText, QColor(255, 0, 0))
-        palette.setColor(QPalette.Link, QColor(42, 130, 218))
-        palette.setColor(QPalette.Highlight, QColor(80, 130, 180))
-        palette.setColor(QPalette.HighlightedText, QColor(255, 255, 255))
-        palette.setColor(QPalette.PlaceholderText, QColor(120, 120, 120))
+        palette.setColor(QPalette.ColorRole.Window, QColor(20, 20, 30))
+        palette.setColor(QPalette.ColorRole.WindowText, QColor(240, 240, 240))
+        palette.setColor(QPalette.ColorRole.Base, QColor(28, 28, 38))
+        palette.setColor(QPalette.ColorRole.AlternateBase, QColor(38, 38, 48))
+        palette.setColor(QPalette.ColorRole.ToolTipBase, QColor(40, 40, 45))
+        palette.setColor(QPalette.ColorRole.ToolTipText, QColor(230, 230, 230))
+        palette.setColor(QPalette.ColorRole.Text, QColor(220, 220, 220))
+        palette.setColor(QPalette.ColorRole.Button, QColor(38, 38, 48))
+        palette.setColor(QPalette.ColorRole.ButtonText, QColor(240, 240, 240))
+        palette.setColor(QPalette.ColorRole.BrightText, QColor(255, 0, 0))
+        palette.setColor(QPalette.ColorRole.Link, QColor(42, 130, 218))
+        palette.setColor(QPalette.ColorRole.Highlight, QColor(80, 130, 180))
+        palette.setColor(QPalette.ColorRole.HighlightedText, QColor(255, 255, 255))
+        palette.setColor(QPalette.ColorRole.PlaceholderText, QColor(120, 120, 120))
         self.setPalette(palette)
         self.setStyleSheet("""
             QWidget, QTabWidget, QTabBar, QGroupBox, QComboBox, QLineEdit, QTextEdit, QSpinBox {
@@ -300,11 +300,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         gpu_addr_layout.addWidget(self.gpu_target_edit, 0, 1, 1, 3)
         gpu_addr_layout.addWidget(QLabel("Начальный ключ (hex):"), 1, 0)
         self.gpu_start_key_edit = QLineEdit("1")
-        self.gpu_start_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self))
+        self.gpu_start_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self))
         gpu_addr_layout.addWidget(self.gpu_start_key_edit, 1, 1)
         gpu_addr_layout.addWidget(QLabel("Конечный ключ (hex):"), 1, 2)
         self.gpu_end_key_edit = QLineEdit(config.MAX_KEY_HEX)
-        self.gpu_end_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self))
+        self.gpu_end_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self))
         gpu_addr_layout.addWidget(self.gpu_end_key_edit, 1, 3)
         gpu_layout.addWidget(gpu_addr_group)
         # GPU параметры
@@ -342,11 +342,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_random_checkbox.toggled.connect(self.gpu_restart_interval_combo.setEnabled)
         gpu_param_layout.addWidget(QLabel("Мин. размер диапазона:"), 3, 0)
         self.gpu_min_range_edit = QLineEdit("134217728")
-        self.gpu_min_range_edit.setValidator(QRegExpValidator(QRegExp("\\d+"), self))
+        self.gpu_min_range_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self))
         gpu_param_layout.addWidget(self.gpu_min_range_edit, 3, 1)
         gpu_param_layout.addWidget(QLabel("Макс. размер диапазона:"), 3, 2)
         self.gpu_max_range_edit = QLineEdit("536870912")
-        self.gpu_max_range_edit.setValidator(QRegExpValidator(QRegExp("\\d+"), self))
+        self.gpu_max_range_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self))
         gpu_param_layout.addWidget(self.gpu_max_range_edit, 3, 3)
         # Приоритет GPU
         gpu_param_layout.addWidget(QLabel("Приоритет GPU:"), 4, 0)
@@ -717,11 +717,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         cpu_keys_layout = QGridLayout(cpu_keys_group)
         cpu_keys_layout.addWidget(QLabel("Начальный ключ:"), 0, 0)
         self.cpu_start_key_edit = QLineEdit("1")
-        self.cpu_start_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self))
+        self.cpu_start_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self))
         cpu_keys_layout.addWidget(self.cpu_start_key_edit, 0, 1)
         cpu_keys_layout.addWidget(QLabel("Конечный ключ:"), 0, 2)
         self.cpu_end_key_edit = QLineEdit(config.MAX_KEY_HEX)
-        self.cpu_end_key_edit.setValidator(QRegExpValidator(QRegExp("[0-9a-fA-F]+"), self))
+        self.cpu_end_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self))
         cpu_keys_layout.addWidget(self.cpu_end_key_edit, 0, 3)
         cpu_params_layout.addWidget(cpu_keys_group, 1, 0, 1, 4)
         # Параметры сканирования для CPU
@@ -737,7 +737,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         cpu_scan_params_layout.addWidget(QLabel("Попыток:"), 0, 2)
         self.cpu_attempts_edit = QLineEdit("10000000")
         self.cpu_attempts_edit.setEnabled(False)
-        self.cpu_attempts_edit.setValidator(QRegExpValidator(QRegExp("\\d+"), self))
+        self.cpu_attempts_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self))
         self.cpu_attempts_edit.setFixedWidth(param_input_width)
         cpu_scan_params_layout.addWidget(self.cpu_attempts_edit, 0, 3)
         cpu_scan_params_layout.addWidget(QLabel("Режим:"), 1, 0)
@@ -816,7 +816,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         cpu_layout.addWidget(QLabel("Статистика воркеров:"))
         self.cpu_workers_table = QTableWidget(0, 5)
         self.cpu_workers_table.setHorizontalHeaderLabels(["ID", "Проверено", "Найдено", "Скорость", "Прогресс"])
-        self.cpu_workers_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.cpu_workers_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.cpu_workers_table.verticalHeader().setVisible(False)
         self.cpu_workers_table.setAlternatingRowColors(True)
         cpu_layout.addWidget(self.cpu_workers_table, 1)
@@ -833,10 +833,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
             "WIF ключ",
             "Источник"  # ← Новая колонка
         ])
-        self.found_keys_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.found_keys_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.found_keys_table.verticalHeader().setVisible(False)
         self.found_keys_table.setAlternatingRowColors(True)
-        self.found_keys_table.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.found_keys_table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.found_keys_table.customContextMenuRequested.connect(self.show_context_menu)
         keys_layout.addWidget(self.found_keys_table)
 
@@ -1211,33 +1211,33 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # ID воркера
         if self.cpu_workers_table.item(worker_id, 0) is None:
             item = QTableWidgetItem(str(worker_id))
-            item.setTextAlignment(Qt.AlignCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.cpu_workers_table.setItem(worker_id, 0, item)
         else:
             self.cpu_workers_table.item(worker_id, 0).setText(str(worker_id))
         # Проверено ключей
         if self.cpu_workers_table.item(worker_id, 1) is None:
             item = QTableWidgetItem()
-            item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
             self.cpu_workers_table.setItem(worker_id, 1, item)
         self.cpu_workers_table.item(worker_id, 1).setText(f"{scanned:,}")
         # Найдено ключей
         if self.cpu_workers_table.item(worker_id, 2) is None:
             item = QTableWidgetItem()
-            item.setTextAlignment(Qt.AlignCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.cpu_workers_table.setItem(worker_id, 2, item)
         self.cpu_workers_table.item(worker_id, 2).setText(str(found))
         # Скорость
         if self.cpu_workers_table.item(worker_id, 3) is None:
             item = QTableWidgetItem()
-            item.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
             self.cpu_workers_table.setItem(worker_id, 3, item)
         self.cpu_workers_table.item(worker_id, 3).setText(f"{speed:,.0f} keys/sec")
         # Прогресс бар
         if self.cpu_workers_table.cellWidget(worker_id, 4) is None:
             progress_bar = QProgressBar()
             progress_bar.setRange(0, 100)
-            progress_bar.setAlignment(Qt.AlignCenter)
+            progress_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
             progress_bar.setFormat("%p%")
             self.cpu_workers_table.setCellWidget(worker_id, 4, progress_bar)
         else:
@@ -1316,7 +1316,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         menu.addSeparator()
         save_all_action = menu.addAction("Сохранить все ключи в файл")
         clear_action = menu.addAction("Очистить таблицу")
-        action = menu.exec_(self.found_keys_table.viewport().mapToGlobal(position))
+        action = menu.exec(self.found_keys_table.viewport().mapToGlobal(position))
         selected = self.found_keys_table.selectedItems()
         if action == clear_action:
             self.found_keys_table.setRowCount(0)
@@ -1364,25 +1364,25 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
             # Время
             time_item = QTableWidgetItem(key_data['timestamp'])
-            time_item.setTextAlignment(Qt.AlignCenter)
+            time_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             time_item.setForeground(QColor(100, 255, 100))
             self.found_keys_table.setItem(row, 0, time_item)
 
             # Адрес
             addr_item = QTableWidgetItem(key_data['address'])
-            addr_item.setTextAlignment(Qt.AlignCenter)
+            addr_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             addr_item.setForeground(QColor(255, 215, 0))
             self.found_keys_table.setItem(row, 1, addr_item)
 
             # HEX ключ
             hex_item = QTableWidgetItem(key_data['hex_key'])
-            hex_item.setTextAlignment(Qt.AlignCenter)
+            hex_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             hex_item.setForeground(QColor(100, 200, 255))
             self.found_keys_table.setItem(row, 2, hex_item)
 
             # WIF ключ
             wif_item = QTableWidgetItem(key_data['wif_key'])
-            wif_item.setTextAlignment(Qt.AlignCenter)
+            wif_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             wif_item.setForeground(QColor(255, 150, 150))
             self.found_keys_table.setItem(row, 3, wif_item)
 
@@ -1405,7 +1405,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
             source_text = f"{source_emoji.get(source, '❓')} {source}"
             source_item = QTableWidgetItem(source_text)
-            source_item.setTextAlignment(Qt.AlignCenter)
+            source_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             source_item.setForeground(source_colors.get(source, QColor(200, 200, 200)))
             source_item.setFont(QFont('Arial', 10, QFont.Bold))
             self.found_keys_table.setItem(row, 4, source_item)
@@ -1647,9 +1647,9 @@ class BitcoinGPUCPUScanner(QMainWindow):
             reply = QMessageBox.question(
                 self, 'Подтверждение закрытия',
                 "Активные процессы все еще выполняются. Вы уверены, что хотите закрыть приложение?",
-                QMessageBox.Yes | QMessageBox.No
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
             )
-            if reply == QMessageBox.No:
+            if reply == QMessageBox.StandardButton.No:
                 event.ignore()
                 return
         if self.kangaroo_logic.is_running:

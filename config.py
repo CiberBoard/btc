@@ -2,7 +2,7 @@
 import os
 import sys
 import re
-from PyQt5.QtWidgets import QComboBox
+from PyQt6.QtWidgets import QComboBox
 
 # ============== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==============
 if getattr(sys, 'frozen', False):

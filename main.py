@@ -1,25 +1,69 @@
-# ✅ main.py — ЕДИНСТВЕННЫЙ корректный вариант
+# main.py
+import faulthandler
+faulthandler.enable()
+faulthandler.dump_traceback_later(
+    timeout=10,
+    repeat=False,
+    file=open('crash.log', 'w', encoding='utf-8')
+)
 import sys
 import os
-from PyQt5.QtWidgets import QApplication
-from ui.main_window import BitcoinGPUCPUScanner
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"  # Для Windows + Intel MKL
+import ctypes
+try:
+    ctypes.windll.kernel32.SetErrorMode(0x0002 | 0x0004)  # SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX
+except:
+    pass
+
+
+
+import logging
+
+# 🔑 КРИТИЧНО: Очищаем ВСЕ handlers ДО импорта наших модулей
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+
+
+from PyQt6.QtWidgets import QApplication
+
+
 import multiprocessing
 
+
 def main():
-    multiprocessing.freeze_support()  # ← ЭТО КРИТИЧНО для Windows!
-    # Убедимся, что QApplication создаётся ОДИН раз
+    # 🔑 КРИТИЧНО для Windows с multiprocessing!
+    multiprocessing.freeze_support()
+
+    # ✅ Создаём QApplication ОДИН раз
     app = QApplication(sys.argv)
 
-    # Установим application name (важно для Windows)
+    # Сбрасываем флаг инициализации логгера (на случай повторного запуска)
+    import utils.helpers
+
+    utils.helpers._logger_initialized = False
+    from ui.main_window import BitcoinGPUCPUScanner
     app.setApplicationName("BitcoinGPUCPUScanner")
     app.setOrganizationName("Jasst")
 
-    # Создаём ОДНО окно
+    # ✅ Инициализируем логгер ТОЛЬКО ЗДЕСЬ (перед созданием окна)
+    from utils.helpers import setup_logger
+    logger = setup_logger()
+    logger.info("=" * 50)
+    logger.info("🚀 Запуск Bitcoin GPU/CPU Scanner")
+    logger.info("=" * 50)
+
+    # ✅ Создаём ОДНО окно
     window = BitcoinGPUCPUScanner()
     window.show()
 
-    # Запускаем ЦИКЛ ОДИН РАЗ
-    sys.exit(app.exec_())
+    # ✅ Запускаем цикл ОДИН раз
+    sys.exit(app.exec())
+
 
 if __name__ == "__main__":
     main()
