@@ -1,100 +1,137 @@
-
-
 # 🦘 Bitcoin GPU/CPU/Kangaroo Scanner  
-**v5.1 — The Ultimate Private Key Search Suite**
+**v5.2 — Enhanced Stability & Predictive Analytics**
 
 <div align="center">
 
-[![Version](https://img.shields.io/badge/version-5.0-blue.svg)](https://github.com/Jasst/BTCScanner)
+[![Version](https://img.shields.io/badge/version-5.2-blue.svg)](https://github.com/Jasst/BTCScanner)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://github.com/Jasst/BTCScanner)
 [![Python](https://img.shields.io/badge/python-3.7--3.11-green.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-As--Is-red.svg)](LICENSE)
 [![Kangaroo](https://img.shields.io/badge/algorithm-Pollard's_Kangaroo-orange.svg)](https://en.wikipedia.org/wiki/Pollard%27s_kangaroo_algorithm)
+[![PyQt6](https://img.shields.io/badge/ui-PyQt6-purple.svg)](https://www.riverbankcomputing.com/software/pyqt/)
 
-> **💡 Now with Kangaroo (Pollard’s Kangaroo Algorithm)** — *the most efficient method for narrow-range key discovery*.
+> **💡 v5.2**: Улучшенная стабильность • Прогнозная аналитика • Мониторинг прогресса • PyQt6 совместимость
 
 </div>
 
-## 📋 Overview
+## 📋 Обзор
 
-**BSG 5.1** is a professional-grade, all-in-one Bitcoin private key scanner supporting **three complementary search strategies**:
+**BSG 5.2** — профессиональный сканер приватных ключей Bitcoin с **тремя стратегиями поиска** и новыми инструментами аналитики:
 
-| 🔍 Method | Best For | Speed (RTX 3060) | Efficiency |
-|----------|----------|------------------|------------|
-| **🚀 GPU** (`cuBitcrack.exe`) | Wide ranges (> 2⁴⁸ keys) | ~1–2 GKeys/s | Linear brute-force |
-| **🧠 CPU** (`coincurve`) | Targeted, small ranges | ~50–200 KKeys/s | Flexible & precise |
-| **🦘 Kangaroo** (`Etarkangaroo.exe`) | **Narrow suspicious ranges (2³²–2⁴⁸)** | ~1–1.5 GKeys/s **+ near-100% find probability** | **✅ Best for puzzle/recovery scenarios** |
+| 🔍 Метод | Лучше всего для | Скорость (RTX 3060) | Эффективность |
+|----------|----------------|---------------------|---------------|
+| **🚀 GPU** (`cuBitcrack.exe`) | Широкие диапазоны (> 2⁴⁸ ключей) | ~1–2 GKeys/s | Линейный перебор |
+| **🧠 CPU** (`coincurve`) | Точечный поиск, малые диапазоны | ~50–200 KKeys/s | Гибкость и точность |
+| **🦘 Kangaroo** (`Etarkangaroo.exe`) | **Узкие «подозрительные» диапазоны (2³²–2⁴⁸)** | ~1–1.5 GKeys/s **+ ~100% вероятность нахождения** | **✅ Идеально для головоломок/восстановления** |
 
-> ✅ **Perfect for Bitcoin puzzle transactions** (e.g., #66, #120), wallet recovery, and research.
+> ✅ **Поддержка Bitcoin Puzzle** (#66, #120 и др.), восстановление кошельков, исследовательские задачи.
 
+---
 
+## ✨ Новые возможности (v5.2)
 
-## ✨ Key Features (v5.1)
+### 🔮 **BTC Puzzle Analyzer v2 — Predictive Analytics**
+- **Двухколоночный интерфейс**: результаты/графики слева, параметры справа
+- **4 модели прогнозирования**: Position • LogGrowth • Ensemble • Final
+- **Визуализация распределения**: плотность вероятности, тренды, выбросы
+- **Фильтры и веса**: outlier filter, weighted recent data, Gaussian KDE, spline-сглаживание
+- **Экспорт диапазонов**: копирование прогнозов в буфер с форматированием под код
+- **Безопасная генерация графиков**: matplotlib в отдельном потоке с передачей через сигнал
 
-### 🦘 **Kangaroo Integration — NEW!**
-- Fully integrated **Pollard’s Kangaroo** algorithm via `Etarkangaroo.exe`
-- **Automatic random sub-range generation** inside your global range
-- Real-time monitoring: session #, speed, *exact* current range
-- Smart parsing of results (hex/decimal → 64-char hex)
-- Full parameter control: `DP`, `Grid`, duration, subrange bits
+### 💾 **Сохранение прогресса GPU**
+- **Автосохранение**: прогресс сканирования в `gpu_progress.txt` (start-end, %, GPU ID)
+- **Окно «Прогресс»**: просмотр истории, выбор диапазона для продолжения
+- **Сигнал `log_gpu_progress_signal`**: безопасная запись из любого потока
+- **Кнопка «💾 Прогресс»**: быстрый доступ к сохранённым точкам
 
-### 💾 **Smart Settings Management**
-All Kangaroo/GPU/CPU settings are auto-saved & restored in `settings.json`:
-```json
-{
-  "kang_pubkey": "02145d2611c823a396ef6712ce0f712f09b9b4f3135e3e0aa3230fb9b6d08d1e16",
-  "kang_start_key": "1",
-  "kang_end_key": "FFFFFFFFFFFFFFFF",
-  "kang_dp": 20,
-  "kang_grid": "256x256",
-  "kang_duration": 300,
-  "kang_subrange_bits": 32,
-  "kang_exe_path": "C:/.../Etarkangaroo.exe",
-  "kang_temp_dir": "C:/.../kangaroo_temp"
-}
+### 🛡️ **Улучшенная стабильность и безопасность**
+| Улучшение | Описание |
+|-----------|----------|
+| **Типизация атрибутов** | Явные типы (`Optional[...]`, `Dict[str, Any]`) для всех полей класса |
+| **Безопасные обновления UI** | Методы `_safe_update_label()`, `_safe_update_progress()` с проверкой инициализации |
+| **Конкретные исключения** | Замена общего `except Exception` на `(AttributeError, RuntimeError)` где возможно |
+| **NVML shutdown protection** | Защита от двойного выключения библиотеки мониторинга GPU |
+| **Проверка `isVisible()`** | Корректная работа с окнами, которые могут быть удалены Qt |
+| **Логирование с `exc_info`** | Полные трейсы ошибок в критических местах |
+
+### 🎨 **Улучшения интерфейса (PyQt6)**
+- **Совместимость с PyQt6**: `Qt.AlignmentFlag`, `Qt.AspectRatioMode`, `QSizePolicy.Policy`
+- **Цветовое кодирование**: температура (🟢<60° • 🟡<80° • 🔴≥80°), статусы, источники ключей
+- **Контекстное меню таблицы**: копирование WIF/HEX/адреса, сохранение всех ключей
+- **Адаптивные прогресс-бары**: в таблице воркеров с `%` и цветовой индикацией
+- **Тёмная тема**: единая система стилей через `ui/theme.py`
+
+### ⚙️ **Оптимизация кода**
+```python
+# 📦 Импорты: стандартная библиотека → third-party → локальные
+import os, subprocess, time, json, logging  # stdlib
+import psutil, PyQt6, pynvml               # third-party  
+from core.gpu_scanner import GPULogic      # local
+
+# 🔧 Константы сгруппированы по категориям
+class BitcoinGPUCPUScanner(QMainWindow):
+    # Таймеры (мс)
+    QUEUE_TIMER_INTERVAL = 100
+    HEALTH_CHECK_INTERVAL = 60000
+    # Температурные пороги (°C)
+    GPU_TEMP_WARNING = 65
+    GPU_TEMP_CRITICAL = 80
 ```
 
-### 📊 **Enhanced UI & Diagnostics**
-- **✅ Fixed "Current Range" display** — now shows **beginning + end** of hex keys:
-  ```
-  rb = 0x489b17c1…e7822c9f
-  re = 0x489b17c1…e7822c9f
-  ```
-- Tooltip with full range & width: `Δ = 0x1000000000000 = 281,474,976,710,656 keys`
-- Monospace font (`Courier New`) for precise hex alignment
-- GPU hardware monitoring (utilization, memory, temperature)
-- CPU temperature & load tracking
-
-### 🧰 **Robust Build & Deployment**
-- **PyInstaller-ready** — `main.spec` includes `cuBitcrack.exe` & `Etarkangaroo.exe`
-- UPX-disabled (prevents CUDA compatibility issues)
-- Icon, logging, temp cleanup — all work in single `.exe`
-
-### 🛡️ **Reliability & Safety**
-- Graceful stop/restart (no orphaned processes)
-- Input validation & error recovery
-- Traceback logging for critical failures
-- File existence checks before launch
+### 🧰 **Новые вспомогательные методы**
+| Метод | Назначение |
+|-------|-----------|
+| `_is_valid_hex(s)` | Валидация HEX-строки через `int(s, 16)` |
+| `_populate_gpu_combo()` | Динамическое заполнение GPU с `userData=NVML_index` |
+| `_fill_ranges_table()` | Заполнение таблицы прогнозов с кнопками копирования |
+| `health_check()` | Мониторинг памяти и очереди сообщений |
+| `_save_gpu_progress()` | Потокобезопасная запись прогресса |
 
 ---
 
-## 📋 System Requirements
+## 📊 Вкладка Predict: Как использовать
 
-| Component | Requirement |
-|----------|-------------|
-| **OS** | Windows 10/11 (primary), Linux/macOS (experimental) |
-| **GPU** | NVIDIA with CUDA support (for GPU & Kangaroo modes) |
-| **RAM** | ≥ 4 GB |
-| **Storage** | ≥ 1 GB free (includes temp files for Kangaroo) |
-| **Python** | 3.7 – 3.11 (recommended: 3.9–3.11) |
+1. **Загрузите файл с известными ключами**  
+   Поддерживаются форматы: чистый HEX, WIF, адреса (автовалидация)
 
-> ⚠️ **Etarkangaroo.exe is a third-party binary**. Verify its integrity before use.
+2. **Настройте параметры анализа**
+   ```
+   • Q Low / Q High: квантили для отсечения выбросов (25% / 75%)
+   • Фильтр выбросов: удаление аномальных интервалов
+   • Вес свежих данных: больший вес последним ключам
+   • Ансамбль моделей: усреднение прогнозов 3-10 моделей
+   • Gaussian KDE: оценка плотности вероятности
+   ```
+
+3. **Запустите анализ** → получите:
+   - 🎯 Прогноз следующего номера головоломки
+   - 📏 Сужение диапазона поиска (в % и ключах)
+   - 📐 Мин/макс границы для каждой модели
+   - 📊 График распределения с наложенными прогнозами
+
+4. **Скопируйте лучший диапазон**  
+   Кнопка 📋 в таблице → форматированный код для вставки в настройки поиска
 
 ---
 
-## 🚀 Quick Start
+## 📋 Системные требования
 
-### 1. Clone & Setup
+| Компонент | Требование |
+|-----------|------------|
+| **ОС** | Windows 10/11 (основная), Linux/macOS (экспериментально) |
+| **GPU** | NVIDIA с поддержкой CUDA (для GPU и Kangaroo) |
+| **RAM** | ≥ 4 ГБ (≥ 8 ГБ рекомендовано для Predict) |
+| **Storage** | ≥ 1 ГБ (включая временные файлы Kangaroo и кэш графиков) |
+| **Python** | 3.7 – 3.11 (рекомендуется 3.9–3.11) |
+| **Доп. библиотеки** | `matplotlib`, `scipy` (опционально для KDE в Predict) |
+
+> ⚠️ **Etarkangaroo.exe** — сторонний бинарный файл. Проверяйте хэш перед запуском.
+
+---
+
+## 🚀 Быстрый старт
+
+### 1. Клонирование и настройка
 ```bash
 git clone https://github.com/Jasst/BTCScanner.git
 cd BTCScanner
@@ -103,144 +140,164 @@ venv\Scripts\activate  # Windows
 # venv/bin/activate   # Linux/macOS
 ```
 
-### 2. Install Dependencies
+### 2. Установка зависимостей
 ```bash
 pip install --upgrade pip
-pip install PyQt5 psutil coincurve pywin32 pynvml
+pip install PyQt6 psutil coincurve pywin32 pynvml matplotlib scipy
 ```
 
-### 3. Get Binaries
-| Tool | Source | Place in |
-|------|--------|----------|
-| `cuBitcrack.exe` | [brichard19/BitCrack](https://github.com/brichard19/BitCrack/releases) | Project root |
-| `Etarkangaroo.exe` | *(Community build required)* | Project root |
+### 3. Получение бинарных файлов
+| Инструмент | Источник | Куда поместить |
+|------------|----------|----------------|
+| `cuBitcrack.exe` | [brichard19/BitCrack](https://github.com/brichard19/BitCrack/releases) | Корень проекта |
+| `Etarkangaroo.exe` | *(Сборка сообщества)* | Корень проекта |
 
-> 🔧 Ensure NVIDIA drivers & CUDA are up to date.
+> 🔧 Обновите драйверы NVIDIA и CUDA Toolkit до актуальных версий.
 
-### 4. Run
+### 4. Запуск
 ```bash
-  python main.py
+python main.py
 ```
 
 ---
 
-## 🧪 Kangaroo Usage Guide
+## 🧪 Руководство по Kangaroo
 
-1. **Identify a narrow suspicious range**  
-   Example: `start = 0x70E4B9B06430023105`, `end = 0x70E4B9B16720023105` (width = 2⁴⁸)
+1. **Определите узкий «подозрительный» диапазон**  
+   Пример: `start = 0x70E4B9B06430023105`, `end = 0x70E4B9B16720023105` (ширина = 2⁴⁸)
 
-2. **Configure parameters**
-   - `subrange_bits = 32` → 4.3B keys/session (~3–5 min/GPU)
+2. **Настройте параметры**
+   - `subrange_bits = 32` → 4.3 млрд ключей/сессия (~3–5 мин на GPU)
    - `DP = 20`, `grid = 256x256`, `duration = 300`
 
-3. **Launch**  
-   → Kangaroo will auto-generate non-overlapping random sub-ranges  
-   → Stops when key is found or manually stopped
+3. **Запустите**  
+   → Kangaroo автоматически генерирует непересекающиеся случайные поддиапазоны  
+   → Останавливается при нахождении ключа или вручную
 
-> 💡 **Pro Tip**: Smaller `subrange_bits` = faster sessions, more coverage over time.
+> 💡 **Совет**: Меньший `subrange_bits` = более быстрые сессии, больше покрытия со временем.
 
 ---
 
-## 📁 Project Structure
+## 📁 Структура проекта
 
 ```
 BTCScanner/
-├── 📄 main.py                    # Entry point
-├── ⚙️ config.py                 # Global constants
-├── 🔧 cuBitcrack.exe            # GPU scanner
-├── 🔧 Etarkangaroo.exe          # Kangaroo solver ← NEW
-├── 📁 kangaroo_temp/            # Kangaroo temporary files
-├── 💾 Found_key_CUDA.txt        # Key discoveries
-├── ⚙️ settings.json             # Auto-saved preferences
+├── 📄 main.py                    # Точка входа
+├── ⚙️ config.py                 # Глобальные константы
+├── 🔧 cuBitcrack.exe            # GPU-сканер
+├── 🔧 Etarkangaroo.exe          # Kangaroo-солвер
+├── 📁 kangaroo_temp/            # Временные файлы Kangaroo
+├── 💾 Found_key_CUDA.txt        # Найденные ключи
+├── 💾 gpu_progress.txt          # Сохранённый прогресс GPU ← NEW
+├── ⚙️ settings.json             # Автосохраняемые настройки
 │
 ├── 📁 core/
 │   ├── 📄 gpu_scanner.py
 │   ├── 📄 cpu_scanner.py
-│   └── 📄 kangaroo_worker.py   ← NEW
+│   └── 📄 kangaroo_worker.py
 │
 ├── 📁 ui/
+│   ├── 📄 main_window.py        # Основная логика окна (с улучшениями v5.2)
+│   ├── 📄 ui_main.py            # Построение интерфейса
 │   ├── 📄 gpu_logic.py
 │   ├── 📄 cpu_logic.py
-│   └── 📄 kangaroo_logic.py    ← NEW
+│   ├── 📄 kangaroo_logic.py
+│   ├── 📄 vanity_logic.py
+│   ├── 📄 predict_logic.py      # Логика Predict-анализа ← NEW
+│   ├── 📄 gpu_progress_tracker.py # Окно прогресса GPU ← NEW
+│   ├── 📄 hex_calc_window.py
+│   ├── 📄 gpu_monitor_window.py
+│   └── 📄 theme.py              # Единая система стилей
 │
-├── 📁 utils/                    # Helpers, hex→WIF, validators
+├── 📁 utils/                    # Хелперы: hex→WIF, валидаторы
 ├── 📁 logger/                   # logging.conf
-└── 📄 README.md                 # 
+└── 📄 README.md                 # Этот файл
 ```
 
 ---
 
-## ⚙️ Configuration Reference
+## ⚙️ Справочник конфигурации
 
-### Kangaroo Parameters
+### Параметры Kangaroo
+| Параметр | Описание | Рекомендуется |
+|----------|----------|---------------|
+| `DP` | Distinguished Points (память/скорость) | 16–24 |
+| `Grid` | Загрузка GPU (Высота×Ширина) | `256x256` |
+| `Duration` | Длительность сессии (сек) | 300 |
+| `Subrange Bits` | `2^N` ключей/сессия | 30–34 |
+| `Temp Dir` | Для `result_*.txt` | `kangaroo_temp/` |
 
-| Parameter | Description | Recommended |
-|----------|-------------|-------------|
-| `DP` | Distinguished Points (memory vs speed) | 16–24 |
-| `Grid` | GPU occupancy (H×W) | `256x256` |
-| `Duration` | Seconds per session | 300 |
-| `Subrange Bits` | `2^N` keys/session | 30–34 |
-| `Temp Dir` | For `result_*.txt` | `kangaroo_temp/` |
+### Параметры Predict-анализа
+| Параметр | Описание | Значение по умолчанию |
+|----------|----------|----------------------|
+| `Q Low / High` | Квантили для фильтрации | 25% / 75% |
+| `Outlier Filter` | Удалять аномальные интервалы | ✅ Включено |
+| `Weight Recent` | Больший вес свежим данным | ✅ Включено |
+| `Ensemble Models` | Количество моделей в ансамбле | 3 |
+| `KDE Points` | Точек для оценки плотности | 500 000 |
+| `Use Spline` | Сглаживание сплайном | ✅ Включено |
 
-### GPU Parameters
-
-| Parameter | Description | Default |
-|----------|-------------|---------|
-| Workers/Device | Instances per GPU | `1` |
-| Blocks | CUDA blocks | Auto / `512` |
-| Threads | Per block | Auto / `512` |
-| Points | Per thread | Auto / `512` |
-
----
-
-## 🐛 Troubleshooting
-
-| Issue | Solution                                                                            |
-|------|-------------------------------------------------------------------------------------|
-| `Etarkangaroo.exe not found` | Use **«Обзор…»** button; check antivirus quarantine                                 |
-| `Current range shows "0000…"` | ✔️ **Fixed in v5.1** — now shows meaningful prefixes/suffixes                       |
-| Kangaroo stops early | Increase `subrange_bits` or `duration`; ensure range ≥ 2³²                          |
-| CUDA errors | Update drivers; reduce workers; check VRAM usage                                    |
-| No key found (but should be) | Kangaroo only covers part of wide ranges — reduce `subrange_bits` for more sessions |
-
-> 📝 All logs go to `logs/app.log` and **Log** tab.
+### Параметры GPU
+| Параметр | Описание | По умолчанию |
+|----------|----------|--------------|
+| `Workers/Device` | Экземпляры на GPU | `1` |
+| `Blocks` | CUDA-блоки | Авто / `512` |
+| `Threads` | Потоков на блок | Авто / `512` |
+| `Points` | Точек на поток | Авто / `512` |
 
 ---
 
-## ⚠️ Legal Disclaimer
+## 🐛 Устранение неполадок
 
-> This software is provided **“as-is”** without warranty.  
-> - Use **only on addresses you own or have explicit permission to test**.  
-> - Kangaroo uses third-party `Etarkangaroo.exe` — **verify hashes**.  
-> - The author **disclaims all liability** for misuse, data loss, or legal consequences.
+| Проблема | Решение |
+|----------|---------|
+| `Etarkangaroo.exe not found` | Используйте кнопку **«Обзор…»**; проверьте карантин антивируса |
+| `Current range shows "0000…"` | ✅ **Исправлено в v5.1+** — теперь показывает значимые префиксы/суффиксы |
+| `Kangaroo stops early` | Увеличьте `subrange_bits` или `duration`; убедитесь, что диапазон ≥ 2³² |
+| `CUDA errors` | Обновите драйверы; уменьшите число воркеров; проверьте использование VRAM |
+| `No key found (but should be)` | Kangaroo покрывает только часть широких диапазонов — уменьшите `subrange_bits` для большего числа сессий |
+| `Predict: график не отображается` | Установите `matplotlib` и `scipy`; проверьте права на запись в `BASE_DIR` |
+| `GPU monitor shows N/A` | Убедитесь, что `pynvml` установлен и драйверы NVIDIA загружены |
 
----
-
-## 🤝 Contributing
-
-Contributions welcome!  
-- ✅ Bug reports & feature requests → [Issues](https://github.com/CiberBoard/btc/issues)  
-- ✅ Pull requests → fork & PR  
-- ✅ Documentation fixes → edit this `README.md`
+> 📝 Все логи сохраняются в `logs/app.log` и вкладке **Лог**.
 
 ---
 
-## 📞 Contact
+## ⚠️ Юридическое предупреждение
+
+> Программное обеспечение предоставляется **«как есть»** без каких-либо гарантий.  
+> - Используйте **только для адресов, которыми вы владеете, или с явного разрешения владельца**.  
+> - Kangaroo использует сторонний `Etarkangaroo.exe` — **проверяйте контрольные суммы**.  
+> - Автор **не несёт ответственности** за неправомерное использование, потерю данных или юридические последствия.
+
+---
+
+## 🤝 Вклад в проект
+
+Приветствуются любые улучшения!  
+- ✅ Отчёты об ошибках и запросы функций → [Issues](https://github.com/CiberBoard/btc/issues)  
+- ✅ Pull Request'ы → форкните репозиторий и создайте PR  
+- ✅ Исправления документации → редактируйте этот `README.md`
+
+**Рекомендации для контрибьюторов**:
+- Следуйте стилю импортов: stdlib → third-party → local
+- Добавляйте типизацию для новых методов (`-> None`, `Dict[str, Any]`)
+- Используйте `_safe_*` методы для обновления UI из фоновых потоков
+- Логируйте ошибки с `exc_info=True` в критических секциях
+
+---
+
+## 📞 Контакты
 
 - **GitHub**: [@Jasst](https://github.com/Jasst)  
-- **Issues**: [Report here](https://github.com/CiberBoard/btc/issues)
+- **Репозиторий**: [CiberBoard/btc](https://github.com/CiberBoard/btc)  
+- **Issues**: [Сообщить о проблеме](https://github.com/CiberBoard/btc/issues)
 
 ---
 
 <div align="center">
 
-**BSG 5.1 — From brute-force to targeted recovery.**  
-Made with ❤️ by [Jasst](https://github.com/Jasst) • (https://github.com/CiberBoard/btc)
+**BSG 5.2 — От перебора к интеллектуальному поиску.**  
+Сделано с ❤️ [Jasst](https://github.com/Jasst) • [github.com/CiberBoard/btc](https://github.com/CiberBoard/btc)
 
 </div>
-```
-
----
-
-
-
