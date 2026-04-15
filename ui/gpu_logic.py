@@ -445,12 +445,35 @@ class GPULogic:
         """Парсит строку ввода устройств GPU в список ID."""
         devices_input = self.main_window.gpu_device_combo.currentText()
         devices = []
+
         for part in devices_input.split(','):
-            # Извлекаем только цифры из начала строки: "1 (Multi-GPU)" → "1"
-            cleaned = ''.join(c for c in part.strip() if c.isdigit())
-            if cleaned:
-                devices.append(cleaned)
-        return devices
+            part = part.strip()
+            if not part:
+                continue
+
+            # 🛠 ВАРИАНТ 1 (Рекомендуемый): Использовать currentData() если доступно
+            # Это работает если в combo элементы добавлены с данными: addItem(text, userData=id)
+            if hasattr(self.main_window.gpu_device_combo, 'currentData'):
+                device_id = self.main_window.gpu_device_combo.currentData()
+                if device_id is not None and device_id != -1:
+                    devices.append(str(device_id))
+                    continue
+
+            # 🛠 ВАРИАНТ 2 (Fallback): Извлекать только ВЕДУЩИЕ цифры до первого не-цифрового символа
+            # "0 (GTX 1660)" → "0", "1 (RTX 3060)" → "1"
+            import re
+            match = re.match(r'^(\d+)', part)
+            if match:
+                devices.append(match.group(1))
+            else:
+                logger.warning(f"Не удалось извлечь GPU ID из: '{part}'")
+
+        # 🛠 Валидация: фильтруем заведомо некорректные ID (>100 обычно ошибка)
+        valid_devices = [d for d in devices if d.isdigit() and 0 <= int(d) <= 16]
+        if len(valid_devices) != len(devices):
+            logger.warning(f"Отфильтрованы некорректные GPU ID: {set(devices) - set(valid_devices)}")
+
+        return valid_devices if valid_devices else devices
 
     def _connect_worker_signals(self, output_reader: Any) -> None:
         """Подключает сигналы воркера к слотам главного окна."""
