@@ -358,6 +358,7 @@ class QtGraphPlotter:
         """Генерирует 2x2 аналитический график через PyQtGraph."""
         import numpy as np
 
+
         try:
             # 🛡 Создаём QApplication если не существует
             app = None
@@ -387,10 +388,15 @@ class QtGraphPlotter:
                 p1.addItem(bar)
                 if len(positions) > 0:
                     mean_pos = sum(positions) / len(positions)
-                    line = pg.InfiniteLine(
-                        angle=90, movable=False,
-                        pen=QPen(cls._make_color('#e74c3c'), 2, Qt.PenStyle.DashLine)
-                    )
+
+                    # ✅ ИСПРАВЛЕНО: обходим строгую типизацию QPen и UnboundLocalError
+                    from PyQt6.QtCore import Qt as _Qt  # Локальный алиас, изолирует от конфликтов
+
+                    line_pen = QPen(cls._make_color('#e74c3c'))
+                    line_pen.setWidth(2)
+                    line_pen.setStyle(_Qt.PenStyle.DashLine)
+
+                    line = pg.InfiniteLine(angle=90, movable=False, pen=line_pen)
                     p1.addItem(line)
                     line.setPos(mean_pos)
 
@@ -425,7 +431,7 @@ class QtGraphPlotter:
                         legend.brush = QBrush(bg)
                         legend.pen = QPen(QColor('#444444'), 1)
 
-            # ═════ 3. KDE плотность ═════
+            # ═════ 3. KDE плотность (если scipy) ═════
             p3 = plot_widget.addPlot(row=1, col=0, title="KDE Density")
             p3.setTitle('KDE Density', color='#ffffff', size='11pt')
             p3.showGrid(x=True, y=True, alpha=0.3)
@@ -444,9 +450,25 @@ class QtGraphPlotter:
                             fillLevel=0, brush=cls._make_color('#3498db', 50))
                 except Exception as e:
                     logger.debug(f"KDE fallback: {e}")
-                    p3.addText(0.5, 0.5, 'KDE: fallback', color='#888888')
+                    # ✅ ИСПРАВЛЕНО: правильное добавление текста в PyQtGraph
+                    from PyQt6.QtCore import Qt
+                    text = pg.TextItem(
+                        text='KDE: fallback',
+                        color='#888888',
+                        anchor=(0.5, 0.5)  # Центрирование текста
+                    )
+                    text.setPos(0.5, 0.5)  # Позиция в координатах графика
+                    p3.addItem(text)
             else:
-                p3.addText(0.5, 0.5, 'KDE: disabled', color='#888888')
+                # ✅ То же исправление для случая "KDE: disabled"
+                from PyQt6.QtCore import Qt
+                text = pg.TextItem(
+                    text='KDE: disabled',
+                    color='#888888',
+                    anchor=(0.5, 0.5)
+                )
+                text.setPos(0.5, 0.5)
+                p3.addItem(text)
 
             # ═════ 4. Ширина диапазонов (бар-чарт) ═════
             p4 = plot_widget.addPlot(row=1, col=1, title="Range Widths")
