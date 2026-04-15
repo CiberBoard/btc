@@ -1,4 +1,6 @@
 # main.py
+
+import multiprocessing
 import faulthandler
 faulthandler.enable()
 faulthandler.dump_traceback_later(
@@ -19,7 +21,9 @@ try:
     ctypes.windll.kernel32.SetErrorMode(0x0002 | 0x0004)  # SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX
 except:
     pass
-
+# 🔥 КРИТИЧНО: Должно быть ПЕРЕД любым импортом coincurve!
+if sys.platform == 'win32':
+    multiprocessing.set_start_method('spawn', force=True)
 
 
 import logging
@@ -32,12 +36,22 @@ for handler in logging.root.handlers[:]:
 from PyQt6.QtWidgets import QApplication
 
 
-import multiprocessing
 
 
 def main():
+    if sys.platform == 'win32':
+        multiprocessing.set_start_method('spawn', force=True)
     # 🔑 КРИТИЧНО для Windows с multiprocessing!
+
+    # 🛡 Увеличьте лимит дескрипторов для множества процессов
+    if sys.platform == 'win32':
+        try:
+            import ctypes
+            ctypes.windll.kernel32.SetErrorMode(0x0002 | 0x0004)
+        except:
+            pass
     multiprocessing.freeze_support()
+
 
     # ✅ Создаём QApplication ОДИН раз
     app = QApplication(sys.argv)

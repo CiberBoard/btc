@@ -1,12 +1,21 @@
 Timeout (0:00:10)!
-Thread 0x0000380c (most recent call first):
-  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 171 in _read_process_output
-  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 147 in run
+Thread 0x00005428 (most recent call first):
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 359 in wait
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\queues.py", line 249 in _feed
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 994 in run
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 1014 in _bootstrap
 
-Thread 0x00003ff4 (most recent call first):
-  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 171 in _read_process_output
-  File "C:\Users\PC\PycharmProjects\btc\core\gpu_scanner.py", line 147 in run
-
-Thread 0x00003c80 (most recent call first):
-  File "C:\Users\PC\PycharmProjects\btc\main.py", line 65 in main
-  File "C:\Users\PC\PycharmProjects\btc\main.py", line 69 in <module>
+Thread 0x00003744 (most recent call first):
+  File "C:\Users\PC\PycharmProjects\btc\.venv\Lib\site-packages\base58\__init__.py", line 48 in b58encode_int
+  File "C:\Users\PC\PycharmProjects\btc\.venv\Lib\site-packages\base58\__init__.py", line 66 in b58encode
+  File "C:\Users\PC\PycharmProjects\btc\utils\helpers.py", line 124 in _generate_p2pkh
+  File ast
+  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 209 in process_key_batch
+  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 310 in _process_sequential_mode
+  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 440 in worker_main
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\process.py", line 108 in run
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\process.py", line 313 in _bootstrap
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 135 in _main
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python313\Lib\multiprocessing\spawn.py", line 122 in spawn_main
+  File "<string>", line 1 in <module>
