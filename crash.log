@@ -1,22 +1,19 @@
 Timeout (0:00:10)!
-Thread 0x00004b34 (most recent call first):
+Thread 0x0000317c (most recent call first):
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 355 in wait
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\queues.py", line 251 in _feed
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012 in run
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075 in _bootstrap_inner
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1032 in _bootstrap
 
-Thread 0x00002fcc (most recent call first):
-  File "C:\Users\PC\PycharmProjects\btc\.venv1\Lib\site-packages\coincurve\keys.py", line 124 in format
-  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 144 in generate_address_fast
-  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 185 in process_key_batch
-  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 315 in _process_sequential_mode
-  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 440 in worker_main
+Thread 0x00004354 (most recent call first):
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\synchronize.py", line 95 in __enter__
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\synchronize.py", line 237 in __enter__
+  File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\synchronize.py", line 335 in is_set
+  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 338 in _process_sequential_mode
+  File "C:\Users\PC\PycharmProjects\btc\core\cpu_scanner.py", line 475 in worker_main
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\process.py", line 108 in run
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\process.py", line 314 in _bootstrap
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\spawn.py", line 135 in _main
   File "C:\Users\PC\AppData\Local\Programs\Python\Python312\Lib\multiprocessing\spawn.py", line 122 in spawn_main
   File "<string>", line 1 in <module>
-ograms\Python\Python312\Lib\multiprocessing\spawn.py", line 122 in spawn_main
-  File "<string>", line 1 in <module>
-

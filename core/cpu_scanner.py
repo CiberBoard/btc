@@ -127,28 +127,42 @@ class AddressGenerator:
         logger.warning("coincurve не доступен, генерация адреса невозможна")
         return None, None
 
+    # 🔐 Глобальная константа порядка кривой (вынести в начало файла, после импортов)
+    SECP256K1_ORDER: int = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
+
     def generate_address_fast(self, priv_int: int) -> Tuple[Optional[str], Optional[str]]:
-        if not (WORKER_CONFIG.MIN_PRIVATE_KEY <= priv_int <= WORKER_CONFIG.MAX_PRIVATE_KEY):
+        """
+        Генерация адреса с КРИТИЧЕСКОЙ валидацией ключа перед вызовом coincurve.
+        🛡 Предотвращает access violation в libsecp256k1
+        """
+        # 🔥 КРИТИЧНО 1: Проверка диапазона ДО любых операций
+        if priv_int <= 0 or priv_int >= SECP256K1_ORDER:
+            return None, None
+
+        # 🔥 КРИТИЧНО 2: Конвертация в 32 байта BIG-ENDIAN (требование coincurve)
+        try:
+            priv_bytes = priv_int.to_bytes(WORKER_CONFIG.KEY_BYTES, byteorder='big')
+        except (OverflowError, ValueError) as e:
+            logger.debug(f"Не удалось конвертировать ключ {priv_int} в байты: {e}")
             return None, None
 
         try:
-            priv_bytes = priv_int.to_bytes(WORKER_CONFIG.KEY_BYTES, 'big')
-            SECP256K1_N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
-            if priv_int <= 0 or priv_int >= SECP256K1_N:
-                return None, None
-
             if COINCURVE_AVAILABLE:
                 try:
-                    # 🛡 КРИТИЧНО: Импорт ТОЛЬКО внутри функции + внутри процесса
+                    # 🛡 Импорт ТОЛЬКО внутри функции + внутри процесса
                     from coincurve import PrivateKey
+
+                    # 🔥 КРИТИЧНО 3: Обёртка coincurve в try/except
                     priv = PrivateKey(priv_bytes)
                     pub = priv.public_key.format(compressed=WORKER_CONFIG.COMPRESSED_PUBKEY)
                 except Exception as e:
-                    logger.debug(f"coincurve error for key {priv_int}: {e}")
+                    # 🛡 Любая ошибка coincurve — возврат, а не краш процесса
+                    logger.debug(f"coincurve error for key {hex(priv_int)}: {type(e).__name__}: {e}")
                     return self._generate_address_fallback(priv_bytes)
             else:
                 return self._generate_address_fallback(priv_bytes)
 
+            # Дальнейшая генерация адреса (без изменений)
             pub_sha = self._fast_sha256(pub).digest()
             pub_ripemd = self._fast_ripemd160()
             pub_ripemd.update(pub_sha)
@@ -161,11 +175,12 @@ class AddressGenerator:
             else:
                 return _generate_p2pkh(pub_ripemd_digest), _generate_p2sh(pub_ripemd_digest)
 
-        except (ValueError, OverflowError, TypeError) as e:
-            logger.debug(f"Ошибка генерации адреса для ключа {priv_int}: {e}")
+        except (ValueError, OverflowError, TypeError, MemoryError) as e:
+            logger.debug(f"Ошибка генерации адреса для ключа {hex(priv_int)}: {e}")
             return None, None
         except Exception as e:
-            logger.warning(f"Непредвиденная ошибка при генерации адреса: {e}", exc_info=True)
+            # 🛡 Catch-all для непредвиденных ошибок
+            logger.warning(f"Непредвиденная ошибка при генерации адреса: {type(e).__name__}: {e}", exc_info=True)
             return None, None
 
 
@@ -177,34 +192,46 @@ def process_key_batch(
         keys_batch: List[int], target_prefix: str, addr_type: Optional[str],
         worker_id: int, queue: multiprocessing.Queue, generator: AddressGenerator
 ) -> int:
+    """
+    Обработка пакета ключей с безопасной обработкой ошибок.
+    🛡 Один сбойный ключ не роняет весь воркер.
+    """
     found_count = 0
     messages_to_send: List[Dict[str, Any]] = []
 
     for key_int in keys_batch:
-        hex_key = f"{key_int:064x}"
-        addr_p2pkh, addr_p2sh = generator.generate_address_fast(key_int)
-        found_address: Optional[str] = None
+        try:
+            hex_key = f"{key_int:064x}"
+            addr_p2pkh, addr_p2sh = generator.generate_address_fast(key_int)
+            found_address: Optional[str] = None
 
-        if addr_type == ADDR_TYPE_P2PKH and addr_p2pkh and addr_p2pkh.startswith(target_prefix):
-            found_address = addr_p2pkh
-        elif addr_type == ADDR_TYPE_P2SH and addr_p2sh and addr_p2sh.startswith(target_prefix):
-            found_address = addr_p2sh
-        elif not addr_type:
-            if addr_p2pkh and addr_p2pkh.startswith(target_prefix):
+            if addr_type == ADDR_TYPE_P2PKH and addr_p2pkh and addr_p2pkh.startswith(target_prefix):
                 found_address = addr_p2pkh
-            elif addr_p2sh and addr_p2sh.startswith(target_prefix):
+            elif addr_type == ADDR_TYPE_P2SH and addr_p2sh and addr_p2sh.startswith(target_prefix):
                 found_address = addr_p2sh
+            elif not addr_type:
+                if addr_p2pkh and addr_p2pkh.startswith(target_prefix):
+                    found_address = addr_p2pkh
+                elif addr_p2sh and addr_p2sh.startswith(target_prefix):
+                    found_address = addr_p2sh
 
-        if found_address:
-            wif_key = private_key_to_wif(hex_key)
-            messages_to_send.append(create_found_message(found_address, hex_key, wif_key, worker_id))
-            found_count += 1
+            if found_address:
+                wif_key = private_key_to_wif(hex_key)
+                messages_to_send.append(create_found_message(found_address, hex_key, wif_key, worker_id))
+                found_count += 1
 
+        except Exception as e:
+            # 🛡 Логгируем ошибку, но продолжаем обработку остальных ключей в пакете
+            logger.debug(f"[Worker {worker_id}] Ошибка при обработке ключа {hex(key_int)}: {type(e).__name__}: {e}")
+            continue
+
+    # Отправка сообщений в очередь с обработкой ошибок
     for message in messages_to_send:
         try:
             safe_queue_put(queue, message, timeout=WORKER_CONFIG.QUEUE_TIMEOUT)
         except Exception as e:
-            logger.error(f"Ошибка отправки сообщения в очередь: {e}")
+            logger.error(f"[Worker {worker_id}] Ошибка отправки сообщения в очередь: {e}")
+            # 🛡 Не прерываем цикл, пробуем отправить остальные
 
     return found_count
 
@@ -412,6 +439,14 @@ def worker_main(
     """
     logger.info(f"Worker {worker_id} started in {mode} mode (PID: {multiprocessing.current_process().pid})")
 
+    # 🔥 КРИТИЧНО: Установка обработчика исключений для каждого воркера
+    # Предотвращает "тихое" падение процесса без лога
+    def _worker_excepthook(args):
+        logger.error(f"[Worker {worker_id}] Uncaught exception: {args.exc_type.__name__}: {args.exc_value}",
+                     exc_info=args.exc_traceback)
+
+    if hasattr(sys, 'excepthook'):
+        sys.excepthook = _worker_excepthook
     # 🛡 КРИТИЧНО: Поэтапная задержка для "разрежения" запуска воркеров
     if sys.platform == 'win32' and total_workers > 1:
         stagger_delay = WORKER_CONFIG.WORKER_INIT_STAGGER * worker_id
@@ -469,6 +504,7 @@ def worker_main(
                        timeout=WORKER_CONFIG.QUEUE_TIMEOUT)
     finally:
         _cleanup_worker(worker_id, queue)
+
 
 
 # ═══════════════════════════════════════════════
