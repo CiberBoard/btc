@@ -97,6 +97,12 @@ class GPULogic:
         self.gpu_end_range_key = 0
         self.gpu_total_keys_in_range = 0
         self.gpu_worker_stats = {}
+        # В __init__ добавьте:
+        self._last_progress_log_time: float = 0.0
+        self._last_logged_percent: int = -1
+        self._PROGRESS_LOG_INTERVAL_SEC: float = 5.0  # Мин. интервал между записями
+        self._PROGRESS_LOG_DELTA: int = 5  # Мин. изменение % для записи
+
 
     def setup_gpu_connections(self) -> None:
         """Настройка подключений сигналов для GPU."""
@@ -546,21 +552,55 @@ class GPULogic:
         return active
 
     def _update_progress_display(self, total_checked: int, total_speed: float) -> None:
-        """Обновление отображения прогресса."""
+        """Обновление отображения прогресса с троттлингом записи в лог."""
         if self.gpu_total_keys_in_range <= 0:
             self.main_window.gpu_progress_bar.setFormat(f"Проверено: {self.gpu_keys_checked:,} ключей")
             return
 
         progress_percent = min(100.0, (self.gpu_keys_checked / self.gpu_total_keys_in_range) * 100)
-        # 👇 ВСТАВИТЬ ВМЕСТО ПРЯМОГО ВЫЗОВА
-        if int(progress_percent) % 5 == 0:
-            # Эмитим сигнал в главный поток — HEX с нулями до 64 символов
+        current_time = time.time()
+        current_percent_int = int(progress_percent)
+
+        should_log = (
+                (current_time - self._last_progress_log_time >= self._PROGRESS_LOG_INTERVAL_SEC) and
+                (abs(current_percent_int - self._last_logged_percent) >= self._PROGRESS_LOG_DELTA) and
+                (current_percent_int % 5 == 0)  # Сохраняем кратность 5% для совместимости
+        )
+
+        # ✅ ИСПРАВЛЕНИЕ в методе _update_progress_display:
+
+        if should_log:
+            devices = self._parse_gpu_devices()
+            gpu_id = int(devices[0]) if devices else 0
+
+            # 🔧 ВЫЧИСЛЯЕМ НОВУЮ ТОЧКУ СТАРТА (с учётом параллельных воркеров)
+            if self.gpu_worker_stats and len(self.gpu_worker_stats) > 1:
+                # Режим параллельных воркеров: берём минимальную позицию среди всех
+                # Это гарантирует, что мы не пропустим непроверенные ключи
+                min_position = min(
+                    self.gpu_start_range_key + stats.get('checked', 0)
+                    for stats in self.gpu_worker_stats.values()
+                )
+                new_start = min(min_position, self.gpu_end_range_key)
+            else:
+                # Последовательный режим или один воркер: простая формула
+                range_size = self.gpu_end_range_key - self.gpu_start_range_key + 1
+                completed_keys = int(range_size * (progress_percent / 100.0))
+                new_start = self.gpu_start_range_key + completed_keys
+                new_start = min(new_start, self.gpu_end_range_key)
+
+            # ✅ Эмитим сигнал: [новая_точка_старта ... оригинальный_конец]
             self.main_window.log_gpu_progress_signal.emit(
-                hex(self.gpu_start_range_key)[2:].zfill(64),  # 👈 .zfill(64)
-                hex(self.gpu_end_range_key)[2:].zfill(64),  # 👈 .zfill(64)
+                hex(new_start)[2:].zfill(64),
+                hex(self.gpu_end_range_key)[2:].zfill(64),
                 progress_percent,
-                int(self._parse_gpu_devices()[0]) if self._parse_gpu_devices() else 0  # 👈 int()
+                gpu_id
             )
+
+            self._last_progress_log_time = current_time
+            self._last_logged_percent = current_percent_int
+
+        # Обновляем визуальный прогресс-бар (без ограничений)
         self.main_window.gpu_progress_bar.setValue(int(progress_percent))
 
         elapsed = time.time() - self.gpu_start_time if self.gpu_start_time is not None else 0.0

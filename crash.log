@@ -1,0 +1,4 @@
+Timeout (0:00:10)!
+Thread 0x0000055c (most recent call first):
+  File "C:\Users\PC\PycharmProjects\btc\main.py", line 65 in main
+  File "C:\Users\PC\PycharmProjects\btc\main.py", line 69 in <module>

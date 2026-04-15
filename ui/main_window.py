@@ -82,7 +82,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     # 🛠 УЛУЧШЕНИЕ 8: Сигналы объявлены с типизацией
     vanity_update_ui_signal = pyqtSignal(object)
-    log_gpu_progress_signal = pyqtSignal(str, str, float, int)
+    log_gpu_progress_signal = pyqtSignal(str, str, float, int)  # 👈 ДОБАВЛЕНО
 
     def __init__(self):
         super().__init__()
@@ -132,6 +132,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.vanity_update_ui_signal.connect(self.vanity_logic.handle_stats)
 
         apply_dark_theme(self)
+        # 🔧 После apply_dark_theme(self) добавьте:
         self.log_gpu_progress_signal.connect(self._save_gpu_progress)
         self.ui = MainWindowUI(self)
         self.ui.setup_ui()
@@ -156,6 +157,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.hex_calc_window: Optional[HexCalcWindow] = None
         self.gpu_monitor_window: Optional[GPUMonitorWindow] = None
         self.progress_tracker_window: Optional[Any] = None  # 👈 ДОБАВИТЬ!
+
+
 
     # ==================== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ====================
 

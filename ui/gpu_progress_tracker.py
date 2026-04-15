@@ -4,9 +4,9 @@ import logging
 from pathlib import Path
 # В начало файла добавьте:
 from functools import partial  # 👈 ДОБАВИТЬ
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTableWidget, QAbstractItemView ,
+from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTableWidget, QAbstractItemView,
                              QTableWidgetItem, QPushButton, QLabel, QMessageBox,
-                             QHeaderView, QApplication, QWidget, QFrame)
+                             QHeaderView, QApplication, QWidget, QFrame, QLineEdit, QComboBox, QSpinBox, QMenu)
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QFont
 
@@ -71,7 +71,16 @@ class GpuProgressTrackerWindow(QDialog):
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.table.setStyleSheet(self._table_style())
+        # Контекстное меню для таблицы
+        self.table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.table.customContextMenuRequested.connect(self._show_context_menu)
+
+        # Double-click для быстрой загрузки
+        self.table.doubleClicked.connect(self._apply_selected)
         main_layout.addWidget(self.table)
+
+        # ── Панель фильтров ──
+        main_layout.addLayout(self._setup_filters())
 
         # ── Панель инструментов ──
         toolbar = QHBoxLayout()
@@ -173,6 +182,78 @@ class GpuProgressTrackerWindow(QDialog):
             }
         """
 
+    def _setup_filters(self):
+        """Панель фильтров для таблицы"""
+        filter_layout = QHBoxLayout()
+        filter_layout.setSpacing(8)
+
+        # 🔍 Поиск по HEX
+        self.search_edit = QLineEdit()
+        self.search_edit.setPlaceholderText("🔍 Поиск по HEX...")
+        self.search_edit.textChanged.connect(self._filter_table)
+        self.search_edit.setFixedWidth(220)
+        self.search_edit.setStyleSheet("""
+            QLineEdit {
+                background: #2A2A3A; border: 1px solid #3A3A4A;
+                border-radius: 4px; color: #E0E0E0; padding: 4px 8px;
+            }
+            QLineEdit:focus { border-color: #5B8CFF; }
+        """)
+
+        # 🎛 Фильтр по GPU
+        self.gpu_filter = QComboBox()
+        self.gpu_filter.addItem("Все GPU")
+        self.gpu_filter.addItems([f"GPU {i}" for i in range(8)])
+        self.gpu_filter.currentTextChanged.connect(self._filter_table)
+        self.gpu_filter.setFixedWidth(100)
+        self.gpu_filter.setStyleSheet("""
+            QComboBox {
+                background: #2A2A3A; border: 1px solid #3A3A4A;
+                border-radius: 4px; color: #E0E0E0; padding: 4px 8px;
+            }
+            QComboBox::drop-down { border: none; }
+            QComboBox QAbstractItemView { background: #1E1E2E; color: #E0E0E0; }
+        """)
+
+        # 📊 Минимальный прогресс
+        self.min_progress = QSpinBox()
+        self.min_progress.setRange(0, 100)
+        self.min_progress.setSuffix("%")
+        self.min_progress.setValue(0)
+        self.min_progress.valueChanged.connect(self._filter_table)
+        self.min_progress.setFixedWidth(70)
+
+        filter_layout.addWidget(QLabel("Фильтры:"))
+        filter_layout.addWidget(self.search_edit)
+        filter_layout.addWidget(self.gpu_filter)
+        filter_layout.addWidget(QLabel("Мин:"))
+        filter_layout.addWidget(self.min_progress)
+        filter_layout.addStretch()
+
+        return filter_layout
+
+    def _filter_table(self):
+        """Фильтрация записей по поиску и параметрам"""
+        search = self.search_edit.text().lower()
+        gpu_filter = self.gpu_filter.currentText()
+        min_percent = self.min_progress.value()
+
+        for row in range(self.table.rowCount()):
+            # Получаем данные
+            item_gpu = self.table.item(row, 0).text() if self.table.item(row, 0) else ""
+            item_start = self.table.item(row, 1).text().lower() if self.table.item(row, 1) else ""
+            item_end = self.table.item(row, 2).text().lower() if self.table.item(row, 2) else ""
+            item_percent_text = self.table.item(row, 3).text() if self.table.item(row, 3) else "0%"
+            item_percent = int(item_percent_text.replace('%', ''))
+
+            # Проверяем условия
+            match_search = not search or (search in item_start or search in item_end)
+            match_gpu = (gpu_filter == "Все GPU" or item_gpu == gpu_filter)
+            match_percent = item_percent >= min_percent
+
+            # Показываем/скрываем строку
+            self.table.setRowHidden(row, not (match_search and match_gpu and match_percent))
+
     def _dialog_style(self) -> str:
         return """
             QDialog {
@@ -192,7 +273,9 @@ class GpuProgressTrackerWindow(QDialog):
         """
 
     def _load_data(self):
+        """Загрузка и отображение данных из файла прогресса"""
         self.table.setRowCount(0)
+
         if not self.log_file_path.exists():
             self.stats_label.setText("Записей: 0")
             return
@@ -202,7 +285,8 @@ class GpuProgressTrackerWindow(QDialog):
                 lines = f.readlines()
 
             pattern = re.compile(
-                r"([0-9a-fA-F]+)-([0-9a-fA-F]+)\s+(\d+)%\s+пройдено\s+GPU\s*(\d+)", re.IGNORECASE
+                r"([0-9a-fA-F]+)-([0-9a-fA-F]+)\s+(\d+)%\s+пройдено\s+GPU\s*(\d+)",
+                re.IGNORECASE
             )
 
             count = 0
@@ -210,6 +294,7 @@ class GpuProgressTrackerWindow(QDialog):
                 match = pattern.search(line)
                 if not match:
                     continue
+
                 start, end, percent, gpu_id = match.groups()
                 row = self.table.rowCount()
                 self.table.insertRow(row)
@@ -226,16 +311,28 @@ class GpuProgressTrackerWindow(QDialog):
 
             self.stats_label.setText(f"Записей: {count}")
 
+            # 🔧 Автоочистка дубликатов при большом количестве записей
+            if count > 1000:
+                self._cleanup_duplicates()
+
         except Exception as e:
             logger.error(f"Ошибка загрузки прогресса: {e}")
             QMessageBox.warning(self, "Ошибка", f"Не удалось прочитать файл:\n{e}")
             self.stats_label.setText("Записей: 0")
 
+
+
     def _set_item(self, row: int, col: int, text: str):
+        """Создание элемента таблицы с улучшенными tooltip"""
         item = QTableWidgetItem(str(text))
         item.setTextAlignment(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignVCenter)
-        if col in (1, 2):
-            item.setToolTip(text)  # Подсказка с полным HEX при наведении
+
+        if col in (1, 2):  # HEX колонки
+            # 🔧 Полный HEX в tooltip с переносом
+            item.setToolTip(f"Полный HEX:\n{text}")
+            # 🔧 Сохраняем полный HEX в UserRole для копирования
+            item.setData(Qt.ItemDataRole.UserRole, text)
+
         self.table.setItem(row, col, item)
 
     def _create_action_row(self, start: str, end: str) -> QWidget:
@@ -307,12 +404,125 @@ class GpuProgressTrackerWindow(QDialog):
                 self.log_file_path.unlink()
             self._load_data()
 
+    def _cleanup_duplicates(self):
+        """
+        Оставляет только последнюю запись с максимальным % для каждого уникального диапазона.
+        Вызывается после загрузки данных при большом количестве записей (>1000).
+        """
+        if self.table.rowCount() == 0:
+            return
+
+        # Словарь: (start, end, gpu_id) -> (row_index, max_percent)
+        best_entries = {}
+
+        # Проходим по всем строкам и находим лучший прогресс для каждого диапазона
+        for row in range(self.table.rowCount()):
+            item_start = self.table.item(row, 1)
+            item_end = self.table.item(row, 2)
+            item_gpu = self.table.item(row, 0)
+            item_percent = self.table.item(row, 3)
+
+            # Пропускаем строки с пустыми ячейками
+            if not all([item_start, item_end, item_gpu, item_percent]):
+                continue
+
+            start = item_start.text()
+            end = item_end.text()
+            gpu = item_gpu.text()
+            percent = int(item_percent.text().replace('%', ''))
+
+            key = (start, end, gpu)
+
+            # Сохраняем строку если её ещё нет ИЛИ если прогресс больше
+            if key not in best_entries or percent > best_entries[key][1]:
+                best_entries[key] = (row, percent)
+
+        # Собираем индексы строк для удаления (все КРОМЕ лучших)
+        rows_to_keep = {info[0] for info in best_entries.values()}
+        rows_to_delete = [r for r in range(self.table.rowCount()) if r not in rows_to_keep]
+
+        # Удаляем в обратном порядке (чтобы индексы не сдвигались при удалении)
+        for row in sorted(rows_to_delete, reverse=True):
+            self.table.removeRow(row)
+
+        # Обновляем статистику
+        cleaned_count = len(rows_to_delete)
+        self.stats_label.setText(f"Записей: {self.table.rowCount()} (очищено {cleaned_count})")
+        logger.info(f"🧹 Очищено {cleaned_count} дубликатов прогресса, осталось {self.table.rowCount()} записей")
+
+
+    def keyPressEvent(self, event):
+        """Обработка горячих клавиш"""
+        if event.key() == Qt.Key.Key_Return and self.table.selectedItems():
+            self._apply_selected()  # Enter = загрузить в поиск
+        elif event.key() == Qt.Key.Key_F5:
+            self._load_data()  # F5 = обновить
+        elif event.key() == Qt.Key.Key_Delete and event.modifiers() == Qt.KeyboardModifier.ControlModifier:
+            self._clear_log()  # Ctrl+Del = очистить лог
+        else:
+            super().keyPressEvent(event)
+
+    def _show_context_menu(self, pos):
+        """Контекстное меню для строки таблицы"""
+        menu = QMenu()
+
+        # Действия
+        load_action = menu.addAction("📥 Загрузить в поиск")
+        copy_action = menu.addAction("📋 Копировать диапазон")
+        menu.addSeparator()
+        delete_action = menu.addAction("🗑 Удалить запись")
+
+        action = menu.exec(self.table.mapToGlobal(pos))
+
+        if not self.table.selectedItems():
+            return
+
+        row = self.table.selectedItems()[0].row()
+
+        if action == load_action:
+            self._apply_selected()
+        elif action == copy_action:
+            start = self.table.item(row, 1).text()
+            end = self.table.item(row, 2).text()
+            self._copy_to_clipboard(start, end)
+        elif action == delete_action:
+            self._delete_row(row)
+
+    def _delete_row(self, row: int):
+        """Удаление строки из таблицы и лога"""
+        # Получаем данные для удаления из файла
+        start = self.table.item(row, 1).text()
+        end = self.table.item(row, 2).text()
+        gpu_id = self.table.item(row, 0).text().replace("GPU ", "")
+
+        # Удаляем из UI
+        self.table.removeRow(row)
+
+        # Перезаписываем лог без этой строки
+        if self.log_file_path.exists():
+            pattern = re.compile(
+                rf"{re.escape(start)}-{re.escape(end)}\s+\d+%\s+пройдено\s+GPU\s*{re.escape(gpu_id)}",
+                re.IGNORECASE
+            )
+            with open(self.log_file_path, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+
+            with open(self.log_file_path, 'w', encoding='utf-8') as f:
+                for line in lines:
+                    if not pattern.search(line):
+                        f.write(line)
+
+            self.stats_label.setText(f"Записей: {self.table.rowCount()}")
+
     @staticmethod
     def log_progress(start_hex: str, end_hex: str, percent: float, gpu_id: int, log_file_path: Path) -> None:
         try:
             log_file_path.parent.mkdir(parents=True, exist_ok=True)
             line = f"{start_hex.zfill(64)}-{end_hex.zfill(64)} {int(percent)}% пройдено GPU{gpu_id}\n"
-            with open(log_file_path, 'a', encoding='utf-8') as f:
+
+            # 📦 Буферизированная запись (уменьшает количество системных вызовов)
+            with open(log_file_path, 'a', encoding='utf-8', buffering=8192) as f:
                 f.write(line)
+                f.flush()  # Гарантируем запись, но не слишком часто
         except Exception as e:
             logger.error(f"Ошибка сохранения прогресса: {e}")
