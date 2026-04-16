@@ -443,14 +443,28 @@ class GPULogic:
 
     def _parse_gpu_devices(self) -> List[str]:
         """Парсит строку ввода устройств GPU в список ID."""
+        import re
         devices_input = self.main_window.gpu_device_combo.currentText()
         devices = []
+
         for part in devices_input.split(','):
-            # Извлекаем только цифры из начала строки: "1 (Multi-GPU)" → "1"
-            cleaned = ''.join(c for c in part.strip() if c.isdigit())
-            if cleaned:
-                devices.append(cleaned)
-        return devices
+            part = part.strip()
+            if not part:
+                continue
+            match = re.match(r'^(\d+)', part)
+            if match:
+                device_id = match.group(1)
+                # 🔧 ПРОСТОЙ ФИКС: меняем 0↔1 местами
+                if device_id == "0":
+                    device_id = "1"
+                elif device_id == "1":
+                    device_id = "0"
+                devices.append(device_id)
+            else:
+                logger.warning(f"Не удалось извлечь GPU ID из: '{part}'")
+
+        valid_devices = [d for d in devices if d.isdigit() and 0 <= int(d) <= 16]
+        return valid_devices if valid_devices else []
 
     def _connect_worker_signals(self, output_reader: Any) -> None:
         """Подключает сигналы воркера к слотам главного окна."""

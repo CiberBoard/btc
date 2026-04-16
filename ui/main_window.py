@@ -139,10 +139,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.setup_connections()
         self.load_settings()
         # ✅ Теперь безопасно заполняем GPU combo
+        # 3. Теперь виджеты существуют, можно безопасно работать с ними
         if self.gpu_monitor_available:
             self.ui._populate_gpu_combo()
-            if self.gpu_device_combo.count() > 0:
-                self.gpu_device_combo.setCurrentIndex(0)
+        if hasattr(self, 'gpu_device_combo') and self.gpu_device_combo.count() > 0:
+            self.gpu_device_combo.setCurrentIndex(0)
         self.ensure_file_exists(config.FOUND_KEYS_FILE)
 
         # --- Инициализация таймеров ---

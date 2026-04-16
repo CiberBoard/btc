@@ -11,6 +11,7 @@ from typing import Dict, Any, Optional, TYPE_CHECKING
 from dataclasses import dataclass, field
 
 from PyQt6.QtCore import QObject, pyqtSignal
+from PyQt6.QtWidgets import QMessageBox
 
 if TYPE_CHECKING:  # 🛠 УЛУЧШЕНИЕ 2: Избегаем циклических импортов для type hints
     from ui.main_window import BitcoinGPUCPUScanner

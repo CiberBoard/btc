@@ -1,11 +1,4 @@
 # main.py
-import faulthandler
-faulthandler.enable()
-faulthandler.dump_traceback_later(
-    timeout=10,
-    repeat=False,
-    file=open('crash.log', 'w', encoding='utf-8')
-)
 import sys
 import os
 os.environ["OMP_NUM_THREADS"] = "1"
@@ -28,10 +21,13 @@ import logging
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
 
+# Сбрасываем флаг инициализации логгера (на случай повторного запуска)
+import utils.helpers
+
+utils.helpers._logger_initialized = False
 
 from PyQt6.QtWidgets import QApplication
-
-
+from ui.main_window import BitcoinGPUCPUScanner
 import multiprocessing
 
 
@@ -41,12 +37,6 @@ def main():
 
     # ✅ Создаём QApplication ОДИН раз
     app = QApplication(sys.argv)
-
-    # Сбрасываем флаг инициализации логгера (на случай повторного запуска)
-    import utils.helpers
-
-    utils.helpers._logger_initialized = False
-    from ui.main_window import BitcoinGPUCPUScanner
     app.setApplicationName("BitcoinGPUCPUScanner")
     app.setOrganizationName("Jasst")
 
