@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 
 from PyQt6.QtCore import QObject, pyqtSignal
 from PyQt6.QtWidgets import QMessageBox
+
 if TYPE_CHECKING:  # 🛠 УЛУЧШЕНИЕ 2: Избегаем циклических импортов для type hints
     from ui.main_window import BitcoinGPUCPUScanner
 
@@ -265,23 +266,6 @@ class CPULogic(QObject):
         self._on_search_started()
 
     def _initialize_search_state(self) -> None:
-        """
-        Инициализация состояния перед запуском поиска.
-        🛡 КРИТИЧНО: Пересоздание очереди и события для избежания наследования дескрипторов
-        """
-        # 🔥 КРИТИЧНО: Закрываем старую очередь перед созданием новой
-        try:
-            if hasattr(self.process_queue, 'close'):
-                self.process_queue.close()
-            if hasattr(self.process_queue, 'join_thread'):
-                self.process_queue.join_thread()
-        except (BrokenPipeError, OSError, ValueError) as e:
-            logger.debug(f"Очередь уже закрыта при инициализации: {e}")
-
-        # 🔥 КРИТИЧНО: Создаём НОВЫЕ объекты для каждого запуска
-        # (при spawn процессы наследуют дескрипторы, старая очередь может быть в невалидном состоянии)
-        self.process_queue = multiprocessing.Queue()
-        self.shutdown_event = multiprocessing.Event()
         """Инициализация состояния перед запуском поиска."""
         self.cpu_stop_requested = False
         self.cpu_pause_requested = False
@@ -562,46 +546,20 @@ class CPULogic(QObject):
     def close_queue(self) -> None:
         """
         Закрытие и очистка очереди сообщений.
-        🛡 Безопасная очистка с проверкой состояния
+
+        🛠 УЛУЧШЕНИЕ 17: Улучшена обработка ошибок при закрытии очереди
         """
         try:
             self.queue_active = False
-
-            # 🛡 Проверяем, не закрыта ли очередь уже
-            if hasattr(self.process_queue, '_closed') and self.process_queue._closed:
-                logger.debug("Очередь уже закрыта")
-                return
-
             if hasattr(self.process_queue, 'close'):
                 self.process_queue.close()
             if hasattr(self.process_queue, 'join_thread'):
-                # 🛡 join_thread только если очередь была запущена с cancel_join_thread=False
-                try:
-                    self.process_queue.join_thread()
-                except (AssertionError, OSError) as e:
-                    logger.debug(f"join_thread не требуется или уже выполнен: {e}")
-
-        except (BrokenPipeError, OSError, ValueError) as e:
-            logger.debug(f"Очередь уже закрыта или невалидна: {e}")
+                self.process_queue.join_thread()
+        except (BrokenPipeError, OSError) as e:
+            logger.debug(f"Очередь уже закрыта: {e}")
         except Exception as e:
-            logger.error(f"Непредвиденная ошибка при закрытии очереди: {type(e).__name__}: {str(e)}")
-        finally:
-            # 🛡 Гарантированный сброс ссылки
-            try:
-                del self.process_queue
-            except AttributeError:
-                pass
+            logger.error(f"Ошибка закрытия очереди: {type(e).__name__}: {str(e)}")
 
-
-def __del__(self) -> None:
-    """
-    Деструктор для гарантированной очистки ресурсов.
-    🛡 Предотвращает утечки дескрипторов при аварийном завершении
-    """
-    try:
-        self.close_queue()
-    except Exception:
-        pass  # В деструкторе не логируем, чтобы не вызвать рекурсию
 
 # 🛠 УЛУЧШЕНИЕ 18: Явный экспорт публичного API модуля
 __all__ = [
