@@ -1,6 +1,11 @@
 # main.py
+import multiprocessing
 import sys
 import os
+# 🔥 КРИТИЧНО: УСТАНАВЛИВАЕМ МЕТОД ЗАПУСКА ДО ВСЕГО ОСТАЛЬНОГО
+if sys.platform == 'win32':
+    multiprocessing.set_start_method('spawn', force=True)
+
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
 os.environ["OPENBLAS_NUM_THREADS"] = "1"
@@ -23,12 +28,11 @@ for handler in logging.root.handlers[:]:
 
 # Сбрасываем флаг инициализации логгера (на случай повторного запуска)
 import utils.helpers
-
 utils.helpers._logger_initialized = False
 
 from PyQt6.QtWidgets import QApplication
 from ui.main_window import BitcoinGPUCPUScanner
-import multiprocessing
+
 
 
 def main():

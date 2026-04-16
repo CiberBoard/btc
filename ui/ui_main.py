@@ -623,12 +623,47 @@ class MainWindowUI:
         self.parent.cpu_start_stop_btn.setMinimumHeight(38)
         self.parent.cpu_pause_resume_btn = QPushButton("⏸ Пауза")
         set_button_style(self.parent.cpu_pause_resume_btn, "warning")
+        # После кнопок старт/пауза добавьте:
+        matrix_btn = QPushButton("🔷 Matrix Search")
+        matrix_btn.setStyleSheet("""
+            QPushButton { background: #8e44ad; color: white; font-weight: bold; padding: 8px; border-radius: 6px; }
+            QPushButton:hover { background: #9b59b6; }
+        """)
+        matrix_btn.clicked.connect(self.parent.open_matrix_window)
+        cpu_btns.addWidget(matrix_btn)
         self.parent.cpu_pause_resume_btn.setMinimumHeight(38)
         self.parent.cpu_pause_resume_btn.setEnabled(False)
         cpu_btns.addWidget(self.parent.cpu_start_stop_btn)
         cpu_btns.addWidget(self.parent.cpu_pause_resume_btn)
         cpu_btns.addStretch()
         cpu_layout.addLayout(cpu_btns)
+        # ── Кнопка Матрицы Триплетов ─────────────────────
+        matrix_btn_row = QHBoxLayout()
+        matrix_btn_row.setSpacing(10)
+
+        self.parent.cpu_matrix_btn = QPushButton("🔷 Матрица Триплетов")
+        self.parent.cpu_matrix_btn.setToolTip(
+            "Конвертация: HEX ↔ Триплеты (3 бита = 1 буква)\n"
+            "Визуализация битовых паттернов приватного ключа"
+        )
+        self.parent.cpu_matrix_btn.setStyleSheet("""
+            QPushButton {
+                background: #8e44ad;
+                color: white;
+                font-weight: bold;
+                padding: 8px 16px;
+                border-radius: 6px;
+            }
+            QPushButton:hover { background: #9b59b6; }
+            QPushButton:pressed { background: #7d3c98; }
+        """)
+        self.parent.cpu_matrix_btn.setMinimumHeight(38)
+        # 🔗 Подключение сигнала — обработчик в main_window.py
+        self.parent.cpu_matrix_btn.clicked.connect(self.parent.open_matrix_window)
+
+        matrix_btn_row.addWidget(self.parent.cpu_matrix_btn)
+        matrix_btn_row.addStretch()
+        cpu_layout.addLayout(matrix_btn_row)
 
         # Прогресс
         cpu_prog = QGroupBox("📊 Прогресс")
