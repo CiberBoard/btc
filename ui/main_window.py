@@ -23,15 +23,15 @@ from PyQt6.QtWidgets import (
 
 # 🛠 УЛУЧШЕНИЕ 4: Локальные импорты сгруппированы и отсортированы
 import config
-from core.hextowif import generate_all_from_hex
-from ui.hex_calc_window import HexCalcWindow
-from ui.gpu_monitor_window import GPUMonitorWindow
-from ui.kangaroo_logic import KangarooLogic
+from utils.hextowif import generate_all_from_hex
+from utils.hex_calc_window import HexCalcWindow
+from utils.gpu_monitor_window import GPUMonitorWindow
+from core.kangaroo_logic import KangarooLogic
 from ui.theme import apply_dark_theme
 from ui.ui_main import MainWindowUI
-from ui.cpu_logic import CPULogic
-from ui.gpu_logic import GPULogic
-from ui.vanity_logic import VanityLogic
+from core.cpu_logic import CPULogic
+from core.gpu_logic import GPULogic
+from core.vanity_logic import VanityLogic
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
 
 # 🛠 УЛУЧШЕНИЕ 5: Инициализация логгера один раз в начале модуля

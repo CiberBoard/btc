@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 import config
 from utils.helpers import validate_key_range
 import core.gpu_scanner as gpu_core
-from ui.gpu_auto_config import auto_configure_gpu  # 🛠 ИМПОРТ: автоконфигурация для GPU
+from utils.gpu_auto_config import auto_configure_gpu  # 🛠 ИМПОРТ: автоконфигурация для GPU
 
 logger = logging.getLogger(__name__)
 

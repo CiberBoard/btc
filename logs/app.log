@@ -6231,3 +6231,6 @@
 [2026-04-16 20:15:08] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce G 2735 / 6143MB | 1 target 187.39 MKey/s (3,548,381,184 total) [00:00:17]
 [2026-04-16 20:15:08] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce G 2735 / 6143MB | 1 target 188.15 MKey/s (3,906,994,176 total) [00:00:18]
 [2026-04-16 20:15:08] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce G 2735 / 6143MB | 1 target 189.74 MKey/s (4,265,607,168 total) [00:00:20]
+[2026-04-16 22:13:14] INFO [main:46]: ==================================================
+[2026-04-16 22:13:14] INFO [main:47]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-04-16 22:13:14] INFO [main:48]: ==================================================
