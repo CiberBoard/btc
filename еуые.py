@@ -1,43 +1,34 @@
-# test_import_chain.py
-import sys
-import multiprocessing
+# test_locking.py
+from core.matrix_logic import TripletMutator, MatrixConverter
 
-if sys.platform == 'win32':
-    multiprocessing.set_start_method('spawn', force=True)
+# Диапазон для теста
+start_hex = "0" * 64
+end_hex = "f" * 64
+start_t = MatrixConverter.hex_to_triplets(start_hex)
+end_t = MatrixConverter.hex_to_triplets(end_hex)
 
-print("[1] Setting spawn method... OK")
+# Создаём мутатор с фиксацией позиций 0, 10, 20
+mutator = TripletMutator(
+    start_t, end_t,
+    locked_positions={0, 10, 20},
+    mutation_strength=0.1,  # ~9 позиций на мутацию
+    mutation_probability=1.0
+)
 
-print("[2] Importing PyQt6...")
-from PyQt6.QtWidgets import QApplication
+base = mutator.generate_random_in_range()
+print(f"🔹 Базовый: {base}")
+print(f"🔹 Зафиксировано: {mutator.locked_positions}")
 
-print("[2] OK")
+# Выполняем 5 мутаций
+for i in range(5):
+    new_t, changed = mutator.mutate_random_triplet(base)
+    print(f"\n{i + 1}. Изменено: {changed}")
+    print(f"   Зафиксированные в изменённых: {set(changed) & mutator.locked_positions}")
 
-print("[3] Creating QApplication...")
-app = QApplication(sys.argv)
-print("[3] OK")
+    # 🔍 Проверка: зафиксированные позиции НЕ должны меняться
+    for pos in mutator.locked_positions:
+        if pos < len(base) and pos < len(new_t):
+            assert base[pos] == new_t[pos], f"❌ Позиция {pos} изменилась!"
 
-print("[4] Importing main_window (с матрицей)...")
-try:
-    from ui.main_window import BitcoinGPUCPUScanner
-
-    print("[4] OK — импорт успешен")
-
-    print("[5] Creating window...")
-    window = BitcoinGPUCPUScanner()
-    print("[5] OK — окно создано")
-
-    print("[6] Testing matrix_logic property...")
-    logic = window.matrix_logic
-    print("[6] OK — логика инициализирована")
-
-    print("\n✅ ВСЕ ТЕСТЫ ПРОЙДЕНЫ!")
-
-except Exception as e:
-    print(f"\n❌ ПАДЕНИЕ: {e}")
-    import traceback
-
-    traceback.print_exc()
-    sys.exit(1)
-
-print("\n🎉 Приложение должно работать!")
-sys.exit(0)
+    print(f"   ✅ Фиксации соблюдены")
+    base = new_t

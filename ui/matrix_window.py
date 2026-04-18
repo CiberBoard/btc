@@ -537,6 +537,7 @@ class MatrixWindow(QDialog):
                 mutation_probability=mutation_prob,
                 visualize_mutations=visualize,
                 locked_positions=locked  # ✅ Передаём зафиксированные позиции
+
         ):
             self._found_addresses.clear()
             self.start_btn.setEnabled(False)

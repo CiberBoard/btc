@@ -178,11 +178,15 @@ class MatrixConverter:
 # 🔐 ADDRESS GENERATOR
 # ═══════════════════════════════════════════════
 
+# ═══════════════════════════════════════════════
+# 🔐 ADDRESS GENERATOR (ИСПРАВЛЕННЫЙ)
+# ═══════════════════════════════════════════════
+
 class MatrixAddressGenerator:
     def __init__(self, target_address: str):
         self.target_address = target_address.strip()
+        # ✅ Оставляем только sha256 (это фабрика/функция)
         self._sha256 = hashlib.sha256
-        self._ripemd160 = hashlib.new('ripemd160')
 
     def generate_address(self, priv_int: int) -> Optional[str]:
         if not (MATRIX_CONFIG.MIN_PRIVATE_KEY <= priv_int <= MATRIX_CONFIG.MAX_PRIVATE_KEY):
@@ -195,13 +199,18 @@ class MatrixAddressGenerator:
             else:
                 logger.error("coincurve не установлен!")
                 return None
+
             pub_sha = self._sha256(pub).digest()
-            ripemd = self._ripemd160()
+
+            # ✅ ИСПРАВЛЕНИЕ: создаём новый объект хеша при каждом вызове
+            ripemd = hashlib.new('ripemd160')
             ripemd.update(pub_sha)
             pub_ripemd = ripemd.digest()
+
             return _generate_p2pkh(pub_ripemd)
         except Exception as e:
-            logger.debug(f"Ошибка генерации адреса: {e}")
+            # 🔴 Временно раскомментируйте для отладки:
+            # logger.error(f"Ошибка генерации адреса: {e}")
             return None
 
     def check_match(self, address: Optional[str]) -> bool:
