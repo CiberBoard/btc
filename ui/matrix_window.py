@@ -28,6 +28,8 @@ from PyQt6.QtWidgets import (
 )
 
 from core.matrix_logic import MatrixConverter, COINCURVE_AVAILABLE, MatrixLogic
+# В начале файла, после других импортов:
+from utils.settings_manager import get_settings
 
 if TYPE_CHECKING:
     from ui.main_window import BitcoinGPUCPUScanner
@@ -243,7 +245,8 @@ class MatrixWindow(QDialog):
         self._viz_throttle = 0.025
         self._found_addresses: Set[str] = set()
         self._worker_stats: Dict[int, Dict[str, Any]] = {}
-        self._settings = QSettings("MatrixEngine", "MatrixWindow")
+        self.settings = get_settings(parent.BASE_DIR if parent else None)
+        self.settings._ui_parent = self  # Для работы load_ui_settings
 
         self._setup_ui()
         self._connect_signals()
@@ -930,28 +933,38 @@ class MatrixWindow(QDialog):
         self._on_log(msg, level)
 
     def _load_settings(self):
-        """✅ Загрузить сохранённые настройки"""
+        """✅ Загрузить настройки через SettingsManager (авто-синк)"""
         try:
-            if self._settings.contains("target"):
-                self.target_edit.setText(self._settings.value("target", ""))
-            if self._settings.contains("start_hex"):
-                self.start_edit.setText(self._settings.value("start_hex", ""))
-            if self._settings.contains("end_hex"):
-                self.end_edit.setText(self._settings.value("end_hex", ""))
-            if self._settings.contains("workers"):
-                self.workers_spin.setValue(int(self._settings.value("workers", 4)))
-        except:
-            pass
+            # 🔄 Авто-загрузка всех стандартных виджетов в неймспейс 'matrix'
+            self.settings.auto_sync_all_widgets(self, namespace='matrix', save_mode=False)
+
+            # 🔐 Загрузка зафиксированных позиций триплетов (специальный случай)
+            locked = self.settings.get('locked_triplets', [], 'matrix')
+            if locked:
+                self.triplet_display.set_locked_positions(set(locked))
+
+            logger.info("✅ Настройки Matrix загружены")
+
+        except Exception as e:
+            logger.warning(f"⚠️ Ошибка загрузки настроек Matrix: {e}")
 
     def _save_settings(self):
-        """✅ Сохранить настройки"""
+        """✅ Сохранить настройки через SettingsManager (авто-синк)"""
         try:
-            self._settings.setValue("target", self.target_edit.text())
-            self._settings.setValue("start_hex", self.start_edit.text())
-            self._settings.setValue("end_hex", self.end_edit.text())
-            self._settings.setValue("workers", self.workers_spin.value())
-        except:
-            pass
+            # 🔄 Авто-сохранение всех стандартных виджетов в неймспейс 'matrix'
+            self.settings.auto_sync_all_widgets(self, namespace='matrix', save_mode=True)
+
+            # 🔐 Сохранение зафиксированных позиций триплетов (специальный случай)
+            locked = list(self.triplet_display.get_locked_positions())
+            self.settings.set('locked_triplets', locked, 'matrix')
+
+            # 💾 Запись на диск
+            self.settings.save()
+
+            logger.info("💾 Настройки Matrix сохранены")
+
+        except Exception as e:
+            logger.warning(f"⚠️ Ошибка сохранения настроек Matrix: {e}")
 
     def closeEvent(self, event):
         """✅ Обработка закрытия окна"""
@@ -964,13 +977,13 @@ class MatrixWindow(QDialog):
             )
             if reply == QMessageBox.StandardButton.Yes:
                 self._on_stop()
-                self._save_settings()
+                self._save_settings()  # ← Сохранение
                 self.queue_timer.stop()
                 event.accept()
             else:
                 event.ignore()
         else:
-            self._save_settings()
+            self._save_settings()  # ← Сохранение
             self.queue_timer.stop()
             event.accept()
 

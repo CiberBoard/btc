@@ -1,8 +1,8 @@
 {
     "gpu_target": "1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua",
-    "gpu_start_key": "000000000000000000000000000000033e7665705359f04f28b88cf090c003c9",
-    "gpu_end_key": "000000000000000000000000000000033e7665705359f04f28b88cff98c603c9",
-    "gpu_device": "0,1",
+    "gpu_start_key": "000000000000000000000000000000033e7665705359f04f28b88cf5d12003c9",
+    "gpu_end_key": "000000000000000000000000000000033e7665705359f04f28b88cf898c603c9",
+    "gpu_device": "0 - NVIDIA GeForce GTX 1660 SUPER",
     "blocks": "288",
     "threads": "128",
     "points": "512",
