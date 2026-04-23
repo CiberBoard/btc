@@ -1,4 +1,4 @@
-# core/hextowif.py
+# utils/hextowif.py
 from __future__ import annotations
 
 import hashlib

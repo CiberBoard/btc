@@ -1,38 +1,43 @@
 # ui/main_window.py
-# 🛠 УЛУЧШЕНИЕ 1: Оптимизированы импорты — стандартная библиотека → third-party → локальные
 import os
 import subprocess
 import time
 import json
 import platform
-import logging  # 🛠 УЛУЧШЕНИЕ 2: Импорт logging вынесен в начало (было дублирование)
+import logging
 import psutil
 import multiprocessing
 import queue
 from typing import Dict, Any, Optional, List, Tuple
 from pathlib import Path
 
-from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QMetaObject, QPoint
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QMetaObject, QPoint , QByteArray
 from PyQt6.QtGui import QFont, QColor, QPalette, QKeySequence, QRegularExpressionValidator, QCursor, QPixmap
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
     QPushButton, QTextEdit, QMessageBox, QGroupBox, QGridLayout, QTableWidget,
     QTableWidgetItem, QHeaderView, QMenu, QProgressBar, QCheckBox, QComboBox,
-    QTabWidget, QFileDialog, QSpinBox, QSizePolicy
+    QTabWidget, QFileDialog, QSpinBox, QSizePolicy, QDialog
 )
 
 # 🛠 УЛУЧШЕНИЕ 4: Локальные импорты сгруппированы и отсортированы
 import config
-from core.hextowif import generate_all_from_hex
-from ui.hex_calc_window import HexCalcWindow
-from ui.gpu_monitor_window import GPUMonitorWindow
-from ui.kangaroo_logic import KangarooLogic
+from core.matrix_logic import MatrixLogic
+
+from utils.hextowif import generate_all_from_hex
+from utils.hex_calc_window import HexCalcWindow
+from utils.gpu_monitor_window import GPUMonitorWindow
+from core.kangaroo_logic import KangarooLogic
 from ui.theme import apply_dark_theme
 from ui.ui_main import MainWindowUI
-from ui.cpu_logic import CPULogic
-from ui.gpu_logic import GPULogic
-from ui.vanity_logic import VanityLogic
+from core.cpu_logic import CPULogic
+from core.gpu_logic import GPULogic
+from core.vanity_logic import VanityLogic
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
+from utils.settings_manager import get_settings
+# После других импортов из ui/
+from ui.matrix_window import MatrixWindow
+
 
 # 🛠 УЛУЧШЕНИЕ 5: Инициализация логгера один раз в начале модуля
 logger = logging.getLogger(__name__)
@@ -90,6 +95,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # 🛠 УЛУЧШЕНИЕ 9: Экспорт констант конфигурации с явными типами
         self.MAX_KEY_HEX: str = config.MAX_KEY_HEX
         self.BASE_DIR: Path = config.BASE_DIR
+        self.settings = get_settings(self.BASE_DIR)
+        self.settings._ui_parent = self
 
         # --- Инициализация pynvml для мониторинга GPU ---
         self.gpu_monitor_available: bool = False
@@ -127,7 +134,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.cpu_logic: CPULogic = CPULogic(self)
         self.kangaroo_logic: KangarooLogic = KangarooLogic(self)
         self.vanity_logic: VanityLogic = VanityLogic(self)
+        # 🛠 УЛУЧШЕНИЕ: Атрибут для окна матрицы
+        self._matrix_logic: Optional[MatrixLogic] = None
 
+        # 🔥 ДОБАВИТЬ ЭТУ СТРОКУ:
+        self.matrix_window: Optional[MatrixWindow] = None  # ← КРИТИЧНО!
         # 🛠 УЛУЧШЕНИЕ 11: Подключение сигнала после создания vanity_logic
         self.vanity_update_ui_signal.connect(self.vanity_logic.handle_stats)
 
@@ -162,6 +173,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.hex_calc_window: Optional[HexCalcWindow] = None
         self.gpu_monitor_window: Optional[GPUMonitorWindow] = None
         self.progress_tracker_window: Optional[Any] = None  # 👈 ДОБАВИТЬ!
+        logger.info(f"📁 Settings path: {self.settings.filepath}")
+
 
 
 
@@ -241,6 +254,72 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 f"Не удалось открыть монитор:\n{type(e).__name__}: {e}"
             )
 
+    @property
+    def matrix_logic(self) -> 'MatrixLogic':
+        """
+        Ленивая инициализация матричной логики.
+        Импорт и создание происходит ТОЛЬКО при первом обращении.
+        """
+        if not hasattr(self, '_matrix_logic_instance'):
+            # 🔥 Локальный импорт — только когда действительно нужно
+            from core.matrix_logic import MatrixLogic
+            self._matrix_logic_instance = MatrixLogic()
+            # Подключаем сигналы к методам главного окна
+            self._matrix_logic_instance.log_message.connect(self.append_log)
+            self._matrix_logic_instance.key_found.connect(self.handle_found_key)
+        return self._matrix_logic_instance
+
+    def open_matrix_window(self) -> None:
+        """Открывает окно матрицы триплетов (немодальное)"""
+        import sys
+        print("[DEBUG] open_matrix_window: START", flush=True, file=sys.stderr)
+
+        try:
+            print("[DEBUG] Getting matrix_logic property...", flush=True, file=sys.stderr)
+            logic = self.matrix_logic
+            print("[DEBUG] matrix_logic obtained", flush=True, file=sys.stderr)
+
+            if self.matrix_window is None or not self.matrix_window.isVisible():
+                print("[DEBUG] Creating MatrixWindow...", flush=True, file=sys.stderr)
+                self.matrix_window = MatrixWindow(self)
+                print("[DEBUG] MatrixWindow created", flush=True, file=sys.stderr)
+
+                # 🔥 Для немодального окна: показать и активировать
+                self.matrix_window.show()
+                self.matrix_window.raise_()
+                self.matrix_window.activateWindow()
+            else:
+                # Если окно уже открыто — просто активируем его
+                self.matrix_window.raise_()
+                self.matrix_window.activateWindow()
+
+            print("[DEBUG] Window shown successfully", flush=True, file=sys.stderr)
+
+        except Exception as e:
+            print(f"[DEBUG] ❌ CRASH: {type(e).__name__}: {e}", flush=True, file=sys.stderr)
+            import traceback
+            traceback.print_exc(file=sys.stderr)
+            QMessageBox.critical(self, "Ошибка матрицы", f"{e}")
+
+    def _on_triplet_from_matrix(self, triplet_str: str) -> None:
+        """
+        Обработчик: триплет из матрицы → можно использовать в CPU поиске.
+        Здесь демо: просто логгируем. В продакшене можно конвертировать в int и подставить в диапазон.
+        """
+        try:
+            # Конвертируем обратно в int для потенциального использования
+            key_int = MatrixLogic.triplets_to_int(triplet_str)
+            key_hex = hex(key_int)[2:].zfill(64)
+            self.append_log(f"🔷 Из матрицы: {triplet_str[:20]}... → {key_hex[:32]}...", "success")
+
+            # Опционально: подставить в поля диапазона (с подтверждением)
+            # reply = QMessageBox.question(...)
+            # if reply == QMessageBox.StandardButton.Yes:
+            #     self.cpu_start_key_edit.setText(key_hex)
+
+        except Exception as e:
+            logger.warning(f"Ошибка обработки триплета из матрицы: {e}")
+
     def open_gpu_progress_tracker(self) -> None:
         """Открывает окно сохраненного прогресса GPU"""
         logger.debug("🔍 [1/4] Вход в open_gpu_progress_tracker")  # 👈 ДОБАВИТЬ
@@ -248,7 +327,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             if self.progress_tracker_window is None or not self.progress_tracker_window.isVisible():
                 logger.debug("🔍 [2/4] Создание экземпляра...")  # 👈 ДОБАВИТЬ
                 from pathlib import Path
-                from ui.gpu_progress_tracker import GpuProgressTrackerWindow
+                from utils.gpu_progress_tracker import GpuProgressTrackerWindow
 
                 log_path = Path(config.BASE_DIR) / "gpu_progress.txt"
                 self.progress_tracker_window = GpuProgressTrackerWindow(self, log_path)
@@ -273,7 +352,69 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.append_log(f"📥 Загружен сохраненный диапазон: {start_hex[:16]}... -> {end_hex[:16]}...", "success")
         QMessageBox.information(self, "✅ Загружено",
                                 "Диапазон применен к полям поиска. Нажмите 'Запустить GPU' для продолжения.")
+
+
+    # ═══════════════════════════════════════════════════════
+    # 🔽 ВСТАВЬТЕ НОВЫЙ МЕТОД НИЖЕ ЭТОЙ СТРОКИ 🔽
+    # ═══════════════════════════════════════════════════════
+
+    def generate_and_show_random_range(self) -> None:
+        """Показывает диалог генерации случайного диапазона ключей."""
+        try:
+            from utils.random_range_dialog import RandomRangeDialog
+
+            global_start = self.gpu_start_key_edit.text().strip() or "1"
+            global_end = self.gpu_end_key_edit.text().strip() or config.MAX_KEY_HEX
+
+            def get_min_distance() -> int:
+                """Получает минимальную дистанцию из спинбокса или возвращает дефолт."""
+                try:
+                    spin = getattr(self, 'gpu_min_distance_spin', None)
+                    if spin:
+                        return spin.value() * 1_000_000_000
+                except Exception as e:
+                    logger.error(f"Ошибка чтения мин. дистанции: {e}")
+                return 2_000_000_000
+
+            def on_apply(start_hex: str, end_hex: str) -> None:
+                """Применяет выбранный диапазон в поля ввода."""
+                self.gpu_start_key_edit.setText(start_hex)
+                self.gpu_end_key_edit.setText(end_hex)
+                self.append_log("✅ Диапазон применён в поля ввода", "success")
+
+            dialog = RandomRangeDialog(
+                parent=self,
+                global_start_hex=global_start,
+                global_end_hex=global_end,
+                min_distance_callback=get_min_distance,
+                on_apply_callback=on_apply,
+                on_log_callback=self.append_log,
+            )
+
+            dialog.exec()
+
+        except ImportError as e:
+            logger.error(f"Не удалось импортировать RandomRangeDialog: {e}")
+            QMessageBox.critical(self, "Ошибка импорта", f"Модуль диалога не найден:\n{e}")
+        except Exception as e:
+            logger.exception("Критическая ошибка при открытии диалога случайного диапазона")
+            QMessageBox.critical(self, "Ошибка", f"Не удалось открыть диалог:\n{type(e).__name__}: {e}")
+
+    def _apply_random_range_to_inputs(self, start_hex: str, end_hex: str, dialog: QDialog) -> None:
+        """Применяет сгенерированный диапазон в поля ввода и закрывает диалог."""
+        self.gpu_start_key_edit.setText(start_hex)
+        self.gpu_end_key_edit.setText(end_hex)
+        self.append_log(f"✅ Диапазон применён в поля ввода", "success")
+        dialog.accept()
+
+    # ═══════════════════════════════════════════════════════
+    # 🔼 КОНЕЦ ВСТАВКИ 🔼
+    # ═══════════════════════════════════════════════════════
+
     # ==================== МЕТОДЫ НАВИГАЦИИ ====================
+
+
+
 
     def browse_kangaroo_exe(self) -> None:
         """Выбор файла etarkangaroo.exe"""
@@ -515,7 +656,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def load_keys_for_preview(self, file_path: str) -> None:
         """Загрузка и валидация ключей из файла ЛЮБОГО формата"""
-        from ui.predict_logic import parse_keys_from_file, validate_keys
+        from core.predict_logic import parse_keys_from_file, validate_keys
 
         try:
             raw_keys = parse_keys_from_file(file_path)
@@ -535,7 +676,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def preview_predict_keys(self) -> None:
         """Показать первые 10 ключей"""
-        from ui.predict_logic import parse_keys_from_file, validate_keys
+        from core.predict_logic import parse_keys_from_file, validate_keys
 
         file_path = self.predict_file_edit.text().strip()
         if not file_path or not os.path.exists(file_path):
@@ -555,7 +696,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
     def on_predict_plot_data_ready(self, plot_data: dict) -> None:
         """Генерация графика в главном потоке (безопасно для matplotlib)"""
         try:
-            from ui.predict_logic import PredictWorker  # для доступа к _generate_plot
+            from core.predict_logic import PredictWorker  # для доступа к _generate_plot
             # Создаём временный экземпляр только для вызова статического метода
             worker = PredictWorker([], {})
             worker._generate_plot(
@@ -584,7 +725,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def run_predict_analysis(self) -> None:
         """Запуск анализа предсказания"""
-        from ui.predict_logic import PredictWorker, parse_keys_from_file, validate_keys
+        from core.predict_logic import PredictWorker, parse_keys_from_file, validate_keys
 
         file_path = self.predict_file_edit.text().strip()
         if not file_path or not os.path.exists(file_path):
@@ -1362,27 +1503,48 @@ class BitcoinGPUCPUScanner(QMainWindow):
         except Exception as e:
             self.append_log(f"Не удалось открыть файл лога: {str(e)}", "error")
 
+
+
     def load_settings(self) -> None:
-        """Загружает настройки из settings.json"""
-        settings_path = os.path.join(str(self.BASE_DIR), "settings.json")
-        if os.path.exists(settings_path):
-            try:
-                with open(settings_path, "r", encoding="utf-8") as f:
-                    settings = json.load(f)
+        """✅ Загружает ВСЕ настройки автоматически"""
+        try:
+            # 📥 Авто-загрузка всех виджетов по неймспейсам
+            self.settings.auto_sync_all_widgets(self, namespace='main', save_mode=False)
+            self.settings.auto_sync_all_widgets(self, namespace='cpu', save_mode=False)
+            self.settings.auto_sync_all_widgets(self, namespace='gpu', save_mode=False)
+            self.settings.auto_sync_all_widgets(self, namespace='kangaroo', save_mode=False)
+            self.settings.auto_sync_all_widgets(self, namespace='vanity', save_mode=False)
 
-                settings = self.validate_settings(settings)
-                config.apply_settings_to_ui(self, settings)
+            # 🪟 Геометрия окна
+            if geom := self.settings.get_global('window_geometry'):
+                self.restoreGeometry(QByteArray.fromBase64(geom.encode('ascii')))
+            if state := self.settings.get_global('window_state'):
+                self.restoreState(QByteArray.fromBase64(state.encode('ascii')))
 
-                if "cpu_mode" in settings:
-                    self.cpu_logic.cpu_mode = settings["cpu_mode"]
-                    idx = 1 if settings["cpu_mode"] == "random" else 0
-                    self.cpu_mode_combo.setCurrentIndex(idx)
+            self.append_log("✅ Настройки загружены", "success")
+        except Exception as e:
+            logger.error(f"❌ Ошибка загрузки: {e}")
+            self.append_log(f"❌ Ошибка загрузки: {e}", "error")
 
-                self.append_log("✅ Настройки загружены", "success")
+    def save_settings(self) -> None:
+        """✅ Сохраняет ВСЕ настройки автоматически"""
+        try:
+            # 💾 Авто-сохранение всех виджетов
+            self.settings.auto_sync_all_widgets(self, namespace='main', save_mode=True)
+            self.settings.auto_sync_all_widgets(self, namespace='cpu', save_mode=True)
+            self.settings.auto_sync_all_widgets(self, namespace='gpu', save_mode=True)
+            self.settings.auto_sync_all_widgets(self, namespace='kangaroo', save_mode=True)
+            self.settings.auto_sync_all_widgets(self, namespace='vanity', save_mode=True)
 
-            except Exception as e:
-                logger.error(f"Ошибка загрузки настроек: {str(e)}")
-                self.append_log(f"❌ Ошибка загрузки настроек: {str(e)}", "error")
+            # 🪟 Геометрия
+            self.settings.set_global('window_geometry', self.saveGeometry())
+            self.settings.set_global('window_state', self.saveState())
+
+            self.settings.save()
+            self.append_log("💾 Настройки сохранены", "success")
+        except Exception as e:
+            logger.error(f"❌ Ошибка сохранения: {e}")
+            self.append_log(f"❌ Ошибка сохранения: {e}", "error")
 
     def validate_settings(self, settings: Dict[str, Any]) -> Dict[str, Any]:
         """Валидация и исправление настроек по умолчанию"""
@@ -1409,21 +1571,6 @@ class BitcoinGPUCPUScanner(QMainWindow):
                     settings[key] = default_value
 
         return settings
-
-    def save_settings(self) -> None:
-        """Сохраняет настройки в settings.json"""
-        try:
-            settings = config.extract_settings_from_ui(self)
-            settings_path = os.path.join(str(self.BASE_DIR), "settings.json")
-
-            with open(settings_path, "w", encoding="utf-8") as f:
-                json.dump(settings, f, indent=4, ensure_ascii=False)
-
-            self.append_log("✅ Настройки сохранены", "success")
-
-        except Exception as e:
-            logger.error(f"Ошибка сохранения настроек: {str(e)}")
-            self.append_log(f"❌ Ошибка сохранения: {str(e)}", "error")
 
     def _save_gpu_progress(self, start_hex: str, end_hex: str, percent: float, gpu_id: int) -> None:
         """Безопасное сохранение прогресса (вызывается только в главном потоке)"""
@@ -1455,6 +1602,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
             active_processes.append("Kangaroo")
         if self.vanity_logic.is_running:
             active_processes.append("VanitySearch")
+
 
         if active_processes:
             reply = QMessageBox.question(
@@ -1509,6 +1657,12 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if hasattr(self, 'gpu_monitor_window') and self.gpu_monitor_window:
             try:
                 self.gpu_monitor_window.close()
+            except RuntimeError:
+                pass  # Объект уже удалён
+        # 🛠 УЛУЧШЕНИЕ: Закрытие окна матрицы
+        if hasattr(self, 'matrix_window') and self.matrix_window:
+            try:
+                self.matrix_window.close()
             except RuntimeError:
                 pass  # Объект уже удалён
 

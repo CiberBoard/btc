@@ -17,9 +17,9 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QFileDialog, QSpinBox)
 import config
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
-from ui.kangaroo_logic import KangarooLogic
+from core.kangaroo_logic import KangarooLogic
 # Добавьте после других импортов
-from core.hextowif import generate_all_from_hex
+from utils.hextowif import generate_all_from_hex
 # Импорт pynvml (предполагается, что он установлен)
 try:
     import pynvml
@@ -31,8 +31,8 @@ except ImportError:
 logger = setup_logger()
 
 # Импорт логики
-from ui.gpu_logic import GPULogic
-from ui.cpu_logic import CPULogic
+from core.gpu_logic import GPULogic
+from core.cpu_logic import CPULogic
 
 
 class BitcoinGPUCPUScanner(QMainWindow):

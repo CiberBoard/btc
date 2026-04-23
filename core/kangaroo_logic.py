@@ -409,7 +409,7 @@ class KangarooLogic:
         :param private_hex: Найденный приватный ключ в формате HEX
         """
         try:
-            from core.hextowif import generate_all_from_hex
+            from utils.hextowif import generate_all_from_hex
 
             # Генерация всех форматов ключа
             result = generate_all_from_hex(private_hex, compressed=True, testnet=False)
@@ -534,7 +534,7 @@ class KangarooLogic:
         """
         try:
             # 🛠 1. Импортируем функцию автоконфигурации
-            from ui.gpu_auto_config import auto_configure_kangaroo
+            from utils.gpu_auto_config import auto_configure_kangaroo
 
             # 🛠 2. Вызываем с передачей main_window
             result = auto_configure_kangaroo(self.main_window)
