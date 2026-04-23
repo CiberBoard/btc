@@ -200,7 +200,6 @@ class MainWindowUI:
         self.parent.gpu_random_checkbox.toggled.connect(
             lambda checked: self.parent.gpu_restart_interval_combo.setEnabled(checked)
         )
-
         # Ряд 4: Размер диапазона
         params_layout.addWidget(QLabel("Мин. диапазон:"), 3, 0)
         self.parent.gpu_min_range_edit = QLineEdit("134217728")
@@ -279,6 +278,69 @@ class MainWindowUI:
         """)
         self.parent.gpu_progress_btn.clicked.connect(self.parent.open_gpu_progress_tracker)
         btn_row.addWidget(self.parent.gpu_progress_btn)
+        # 👇 ВСТАВЬТЕ ПОСЛЕ gpu_progress_btn, ПЕРЕД gpu_random_range_btn:
+
+        # 🔽 Спинбокс "Мин. дистанция" — рядом с кнопкой генерации
+        self.parent.gpu_min_distance_spin = QSpinBox()
+        self.parent.gpu_min_distance_spin.setRange(10, 5000)  # 10–5000 млрд
+        self.parent.gpu_min_distance_spin.setValue(2)  # по умолчанию 2 млрд
+        self.parent.gpu_min_distance_spin.setSuffix(" млрд")
+        self.parent.gpu_min_distance_spin.setFixedWidth(110)  # компактный размер
+        self.parent.gpu_min_distance_spin.setMinimumHeight(40)
+        self.parent.gpu_min_distance_spin.setToolTip(
+            "Мин. размер случайного диапазона:\n"
+            "1 = 1 млрд ключей, 10 = 10 млрд и т.д."
+        )
+        self.parent.gpu_min_distance_spin.setStyleSheet("""
+            QSpinBox {
+                background: #2c3e50;
+                color: white;
+                border: 2px solid #2c3e50;
+                border-radius: 6px;
+                padding: 5px;
+                font-weight: bold;
+            }
+            QSpinBox::up-button, QSpinBox::down-button {
+                background: #2c3e50;
+                border-radius: 3px;
+                width: 16px;
+            }
+            QSpinBox::up-button:hover, QSpinBox::down-button:hover {
+                background: #e67e22;
+            }
+        """)
+        # После создания спинбокса добавьте подключение:
+        self.parent.gpu_min_distance_spin.valueChanged.connect(
+            lambda val: self.parent.gpu_random_range_btn.setToolTip(
+                f"Сгенерировать случайный диапазон ключей\n"
+                f"Мин. дистанция: {val} млрд ключей (0x{val * 1_000_000_000:X})\n"
+                "Результат можно скопировать"
+            )
+        )
+        btn_row.addWidget(self.parent.gpu_min_distance_spin)
+
+        # 🔽 Кнопка генерации случайного диапазона (теперь сразу после спинбокса)
+        self.parent.gpu_random_range_btn = QPushButton("🎲 Случайный диапазон")
+        self.parent.gpu_random_range_btn.setFixedWidth(160)
+        self.parent.gpu_random_range_btn.setMinimumHeight(40)
+        self.parent.gpu_random_range_btn.setStyleSheet("""
+                    QPushButton { 
+                        background: #e67e22; 
+                        color: white; 
+                        font-weight: bold; 
+                        border-radius: 6px; 
+                    }
+                    QPushButton:hover { background: #d35400; }
+                    QPushButton:pressed { background: #a04000; }
+                """)
+        self.parent.gpu_random_range_btn.setToolTip(
+            "Сгенерировать случайный диапазон ключей\n"
+            f"Мин. дистанция: {self.parent.gpu_min_distance_spin.value()} млрд ключей\n"
+            "Результат можно скопировать"
+        )
+        self.parent.gpu_random_range_btn.clicked.connect(self.parent.generate_and_show_random_range)
+        btn_row.addWidget(self.parent.gpu_random_range_btn)
+
         # 👆 КОНЕЦ ВСТАВКИ
         btn_row.addStretch()
         gpu_layout.addLayout(btn_row)

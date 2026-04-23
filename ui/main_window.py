@@ -1,17 +1,15 @@
 # ui/main_window.py
-# 🛠 УЛУЧШЕНИЕ 1: Оптимизированы импорты — стандартная библиотека → third-party → локальные
 import os
 import subprocess
 import time
 import json
 import platform
-import logging  # 🛠 УЛУЧШЕНИЕ 2: Импорт logging вынесен в начало (было дублирование)
+import logging
 import psutil
 import multiprocessing
 import queue
 from typing import Dict, Any, Optional, List, Tuple
 from pathlib import Path
-# 🔍 ТОЧНЫЙ ПОИСК ВСЕХ ИНТЕРЕКТИВНЫХ ВИДЖЕТОВ
 
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QMetaObject, QPoint , QByteArray
 from PyQt6.QtGui import QFont, QColor, QPalette, QKeySequence, QRegularExpressionValidator, QCursor, QPixmap
@@ -19,7 +17,7 @@ from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
     QPushButton, QTextEdit, QMessageBox, QGroupBox, QGridLayout, QTableWidget,
     QTableWidgetItem, QHeaderView, QMenu, QProgressBar, QCheckBox, QComboBox,
-    QTabWidget, QFileDialog, QSpinBox, QSizePolicy
+    QTabWidget, QFileDialog, QSpinBox, QSizePolicy, QDialog
 )
 
 # 🛠 УЛУЧШЕНИЕ 4: Локальные импорты сгруппированы и отсортированы
@@ -354,7 +352,69 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.append_log(f"📥 Загружен сохраненный диапазон: {start_hex[:16]}... -> {end_hex[:16]}...", "success")
         QMessageBox.information(self, "✅ Загружено",
                                 "Диапазон применен к полям поиска. Нажмите 'Запустить GPU' для продолжения.")
+
+
+    # ═══════════════════════════════════════════════════════
+    # 🔽 ВСТАВЬТЕ НОВЫЙ МЕТОД НИЖЕ ЭТОЙ СТРОКИ 🔽
+    # ═══════════════════════════════════════════════════════
+
+    def generate_and_show_random_range(self) -> None:
+        """Показывает диалог генерации случайного диапазона ключей."""
+        try:
+            from utils.random_range_dialog import RandomRangeDialog
+
+            global_start = self.gpu_start_key_edit.text().strip() or "1"
+            global_end = self.gpu_end_key_edit.text().strip() or config.MAX_KEY_HEX
+
+            def get_min_distance() -> int:
+                """Получает минимальную дистанцию из спинбокса или возвращает дефолт."""
+                try:
+                    spin = getattr(self, 'gpu_min_distance_spin', None)
+                    if spin:
+                        return spin.value() * 1_000_000_000
+                except Exception as e:
+                    logger.error(f"Ошибка чтения мин. дистанции: {e}")
+                return 2_000_000_000
+
+            def on_apply(start_hex: str, end_hex: str) -> None:
+                """Применяет выбранный диапазон в поля ввода."""
+                self.gpu_start_key_edit.setText(start_hex)
+                self.gpu_end_key_edit.setText(end_hex)
+                self.append_log("✅ Диапазон применён в поля ввода", "success")
+
+            dialog = RandomRangeDialog(
+                parent=self,
+                global_start_hex=global_start,
+                global_end_hex=global_end,
+                min_distance_callback=get_min_distance,
+                on_apply_callback=on_apply,
+                on_log_callback=self.append_log,
+            )
+
+            dialog.exec()
+
+        except ImportError as e:
+            logger.error(f"Не удалось импортировать RandomRangeDialog: {e}")
+            QMessageBox.critical(self, "Ошибка импорта", f"Модуль диалога не найден:\n{e}")
+        except Exception as e:
+            logger.exception("Критическая ошибка при открытии диалога случайного диапазона")
+            QMessageBox.critical(self, "Ошибка", f"Не удалось открыть диалог:\n{type(e).__name__}: {e}")
+
+    def _apply_random_range_to_inputs(self, start_hex: str, end_hex: str, dialog: QDialog) -> None:
+        """Применяет сгенерированный диапазон в поля ввода и закрывает диалог."""
+        self.gpu_start_key_edit.setText(start_hex)
+        self.gpu_end_key_edit.setText(end_hex)
+        self.append_log(f"✅ Диапазон применён в поля ввода", "success")
+        dialog.accept()
+
+    # ═══════════════════════════════════════════════════════
+    # 🔼 КОНЕЦ ВСТАВКИ 🔼
+    # ═══════════════════════════════════════════════════════
+
     # ==================== МЕТОДЫ НАВИГАЦИИ ====================
+
+
+
 
     def browse_kangaroo_exe(self) -> None:
         """Выбор файла etarkangaroo.exe"""

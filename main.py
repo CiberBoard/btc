@@ -18,8 +18,6 @@ try:
 except:
     pass
 
-
-
 import logging
 
 # 🔑 КРИТИЧНО: Очищаем ВСЕ handlers ДО импорта наших модулей
