@@ -55,17 +55,16 @@ class MainWindowUI:
 
         # ✅ Все вкладки должны быть определены в этом классе
         self._setup_gpu_tab()
-        self._setup_kangaroo_tab()      # ✅ ДОБАВЛЕНО
-        self._setup_cpu_tab()           # ✅ ДОБАВЛЕНО
-        self._setup_vanity_tab()        # ✅ ДОБАВЛЕНО
-        self._setup_found_keys_tab()    # ✅ ДОБАВЛЕНО
+        self._setup_kangaroo_tab()
+        self._setup_cpu_tab()
+        self._setup_vanity_tab()
+        self._setup_found_keys_tab()
         self.parent.setup_converter_tab()
-        self._setup_log_tab()           # ✅ ДОБАВЛЕНО
-        self._setup_predict_tab()       # ✅ ДОБАВЛЕНО
-        self._setup_about_tab()         # ✅ ДОБАВЛЕНО
+        self._setup_log_tab()
+        self._setup_predict_tab()
+        self._setup_about_tab()
 
         self._ui_initialized = True
-
 
     # ─────────────────────────────────────────────────────
     # ВСПОМОГАТЕЛЬНЫЙ МЕТОД: Заполнение списка GPU
@@ -99,11 +98,10 @@ class MainWindowUI:
             logger.error(f"Не удалось получить список GPU: {e}")
             self.parent.gpu_device_combo.addItems(["0", "1", "2"])
 
-
     # ─────────────────────────────────────────────────────
     # GPU TAB
     # ─────────────────────────────────────────────────────
-    def _setup_gpu_tab(self) -> None:  # 🛠 УЛУЧШЕНИЕ 6: Добавлен тип возврата
+    def _setup_gpu_tab(self) -> None:
         gpu_tab = QWidget()
         gpu_layout = QVBoxLayout(gpu_tab)
         gpu_layout.setContentsMargins(10, 10, 10, 10)
@@ -148,7 +146,6 @@ class MainWindowUI:
         params_layout.addWidget(QLabel("GPU:"), 0, 0)
         self.parent.gpu_device_combo = QComboBox()
         self.parent.gpu_device_combo.setEditable(True)
-        # ✅ Стало (динамическое заполнение с userData):
         self.parent.gpu_device_combo.clear()
         try:
             import pynvml
@@ -157,10 +154,8 @@ class MainWindowUI:
                 handle = pynvml.nvmlDeviceGetHandleByIndex(idx)
                 raw_name = pynvml.nvmlDeviceGetName(handle)
                 gpu_name = raw_name.decode('utf-8') if isinstance(raw_name, bytes) else raw_name
-                # 🔧 Ключевое: сохраняем реальный NVML-индекс в userData
                 self.parent.gpu_device_combo.addItem(f"{idx} - {gpu_name}", userData=idx)
 
-            # Опции для мульти-GPU (используют первый индекс для мониторинга)
             if device_count >= 2:
                 self.parent.gpu_device_combo.addItem("0,1 (Multi-GPU)", userData=0)
             if device_count >= 3:
@@ -196,7 +191,6 @@ class MainWindowUI:
         self.parent.gpu_restart_interval_combo.setCurrentText("300")
         self.parent.gpu_restart_interval_combo.setEnabled(False)
         params_layout.addWidget(self.parent.gpu_restart_interval_combo, 2, 3)
-        # 🛠 УЛУЧШЕНИЕ 7: Использование lambda для передачи аргумента в connect
         self.parent.gpu_random_checkbox.toggled.connect(
             lambda checked: self.parent.gpu_restart_interval_combo.setEnabled(checked)
         )
@@ -241,7 +235,6 @@ class MainWindowUI:
         self.parent.gpu_start_stop_btn = QPushButton("▶ Запустить GPU")
         set_button_style(self.parent.gpu_start_stop_btn, "success")
         self.parent.gpu_start_stop_btn.setMinimumHeight(42)
-        # ✅ Стало (PyQt6)
         self.parent.gpu_start_stop_btn.setSizePolicy(
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Fixed
@@ -250,8 +243,7 @@ class MainWindowUI:
         self.parent.gpu_optimize_btn = QPushButton("⚡ Авто-оптимизация")
         set_button_style(self.parent.gpu_optimize_btn, "primary")
         self.parent.gpu_optimize_btn.setMinimumHeight(42)
-        # Добавьте подключение (если ещё нет):
-        self.parent.gpu_optimize_btn.clicked.connect(self.parent.gpu_logic.auto_optimize_gpu_parameters)
+        # 🔧 ИСПРАВЛЕНО: удалена строка с gpu_logic (подключение будет в main_window.setup_connections)
 
         btn_row.addWidget(self.parent.gpu_start_stop_btn)
         btn_row.addWidget(self.parent.gpu_optimize_btn)
@@ -267,7 +259,7 @@ class MainWindowUI:
         """)
         self.parent.gpu_monitor_btn.clicked.connect(self.parent.open_gpu_monitor)
         btn_row.addWidget(self.parent.gpu_monitor_btn)
-        # 👇 ВСТАВЬТЕ СЮДА:
+
         self.parent.gpu_progress_btn = QPushButton("💾 Прогресс")
         self.parent.gpu_progress_btn.setFixedWidth(100)
         self.parent.gpu_progress_btn.setMinimumHeight(40)
@@ -278,14 +270,13 @@ class MainWindowUI:
         """)
         self.parent.gpu_progress_btn.clicked.connect(self.parent.open_gpu_progress_tracker)
         btn_row.addWidget(self.parent.gpu_progress_btn)
-        # 👇 ВСТАВЬТЕ ПОСЛЕ gpu_progress_btn, ПЕРЕД gpu_random_range_btn:
 
         # 🔽 Спинбокс "Мин. дистанция" — рядом с кнопкой генерации
         self.parent.gpu_min_distance_spin = QSpinBox()
-        self.parent.gpu_min_distance_spin.setRange(10, 5000)  # 10–5000 млрд
-        self.parent.gpu_min_distance_spin.setValue(2)  # по умолчанию 2 млрд
+        self.parent.gpu_min_distance_spin.setRange(10, 5000)
+        self.parent.gpu_min_distance_spin.setValue(2)
         self.parent.gpu_min_distance_spin.setSuffix(" млрд")
-        self.parent.gpu_min_distance_spin.setFixedWidth(110)  # компактный размер
+        self.parent.gpu_min_distance_spin.setFixedWidth(110)
         self.parent.gpu_min_distance_spin.setMinimumHeight(40)
         self.parent.gpu_min_distance_spin.setToolTip(
             "Мин. размер случайного диапазона:\n"
@@ -309,7 +300,6 @@ class MainWindowUI:
                 background: #e67e22;
             }
         """)
-        # После создания спинбокса добавьте подключение:
         self.parent.gpu_min_distance_spin.valueChanged.connect(
             lambda val: self.parent.gpu_random_range_btn.setToolTip(
                 f"Сгенерировать случайный диапазон ключей\n"
@@ -319,7 +309,7 @@ class MainWindowUI:
         )
         btn_row.addWidget(self.parent.gpu_min_distance_spin)
 
-        # 🔽 Кнопка генерации случайного диапазона (теперь сразу после спинбокса)
+        # 🔽 Кнопка генерации случайного диапазона
         self.parent.gpu_random_range_btn = QPushButton("🎲 Случайный диапазон")
         self.parent.gpu_random_range_btn.setFixedWidth(160)
         self.parent.gpu_random_range_btn.setMinimumHeight(40)
@@ -341,11 +331,8 @@ class MainWindowUI:
         self.parent.gpu_random_range_btn.clicked.connect(self.parent.generate_and_show_random_range)
         btn_row.addWidget(self.parent.gpu_random_range_btn)
 
-        # 👆 КОНЕЦ ВСТАВКИ
         btn_row.addStretch()
         gpu_layout.addLayout(btn_row)
-
-
 
         # ── Прогресс и статистика ─────────────────────────
         progress_group = QGroupBox("📊 Статистика")
@@ -384,13 +371,12 @@ class MainWindowUI:
         gpu_layout.addWidget(self.parent.gpu_range_label)
 
         # ── Аппаратный мониторинг (если доступен) ─────────
-        # 🛠 УЛУЧШЕНИЕ 8: Проверка PYNVML_AVAILABLE вынесена из try/except
         PYNVML_AVAILABLE = False
         try:
             import pynvml
             PYNVML_AVAILABLE = True
         except ImportError:
-            pass  # 🛠 УЛУЧШЕНИЕ 9: Явный pass вместо молчаливого игнорирования
+            pass
 
         if PYNVML_AVAILABLE:
             hw_group = QGroupBox("🌡 Аппаратный статус")
@@ -527,7 +513,7 @@ class MainWindowUI:
         self.parent.kang_auto_config_btn = QPushButton("🔧 Автонастройка")
         set_button_style(self.parent.kang_auto_config_btn, "primary")
         self.parent.kang_auto_config_btn.setMinimumHeight(38)
-        self.parent.kang_auto_config_btn.clicked.connect(self.parent.kangaroo_logic.auto_configure)
+        # 🔧 ИСПРАВЛЕНО: удалена строка с kangaroo_logic (подключение будет в main_window.setup_connections)
         auto_row.addWidget(self.parent.kang_auto_config_btn)
         auto_row.addStretch()
         kang_layout.addLayout(auto_row)
@@ -536,7 +522,7 @@ class MainWindowUI:
         self.parent.kang_start_stop_btn = QPushButton("🚀 Запустить Kangaroo")
         set_button_style(self.parent.kang_start_stop_btn, "success")
         self.parent.kang_start_stop_btn.setMinimumHeight(48)
-        self.parent.kang_start_stop_btn.clicked.connect(self.parent.kangaroo_logic.toggle_kangaroo_search)
+        # 🔧 ИСПРАВЛЕНО: удалена строка с kangaroo_logic (подключение будет в main_window.setup_connections)
         start_row.addWidget(self.parent.kang_start_stop_btn)
         start_row.addStretch()
         kang_layout.addLayout(start_row)
@@ -663,7 +649,6 @@ class MainWindowUI:
         sp_layout.addWidget(QLabel("Воркеры:"), 1, 2)
         self.parent.cpu_workers_spin = QSpinBox()
         self.parent.cpu_workers_spin.setRange(1, multiprocessing.cpu_count() * 2)
-        # 🛠 УЛУЧШЕНИЕ 10: Безопасное получение значения с дефолтом
         self.parent.cpu_workers_spin.setValue(getattr(self.parent, 'optimal_workers', 4))
         sp_layout.addWidget(self.parent.cpu_workers_spin, 1, 3)
         sp_layout.addWidget(QLabel("Приоритет:"), 2, 0)
@@ -685,7 +670,6 @@ class MainWindowUI:
         self.parent.cpu_start_stop_btn.setMinimumHeight(38)
         self.parent.cpu_pause_resume_btn = QPushButton("⏸ Пауза")
         set_button_style(self.parent.cpu_pause_resume_btn, "warning")
-        # После кнопок старт/пауза добавьте:
         matrix_btn = QPushButton("🔷 Matrix Search")
         matrix_btn.setStyleSheet("""
             QPushButton { background: #8e44ad; color: white; font-weight: bold; padding: 8px; border-radius: 6px; }
@@ -699,6 +683,7 @@ class MainWindowUI:
         cpu_btns.addWidget(self.parent.cpu_pause_resume_btn)
         cpu_btns.addStretch()
         cpu_layout.addLayout(cpu_btns)
+
         # ── Кнопка Матрицы Триплетов ─────────────────────
         matrix_btn_row = QHBoxLayout()
         matrix_btn_row.setSpacing(10)
@@ -720,7 +705,6 @@ class MainWindowUI:
             QPushButton:pressed { background: #7d3c98; }
         """)
         self.parent.cpu_matrix_btn.setMinimumHeight(38)
-        # 🔗 Подключение сигнала — обработчик в main_window.py
         self.parent.cpu_matrix_btn.clicked.connect(self.parent.open_matrix_window)
 
         matrix_btn_row.addWidget(self.parent.cpu_matrix_btn)
@@ -758,7 +742,6 @@ class MainWindowUI:
 
         self.parent.cpu_workers_table = QTableWidget(0, 5)
         self.parent.cpu_workers_table.setHorizontalHeaderLabels(["ID", "Проверено", "Найдено", "Скорость", "Прогресс"])
-        # ✅ Стало (PyQt6)
         self.parent.cpu_workers_table.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.Stretch
         )
@@ -892,7 +875,6 @@ class MainWindowUI:
 
         self.parent.found_keys_table = QTableWidget(0, 5)
         self.parent.found_keys_table.setHorizontalHeaderLabels(["Время", "Адрес", "HEX", "WIF", "Источник"])
-        # ✅ Стало (PyQt6)
         self.parent.found_keys_table.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.Stretch
         )
@@ -1045,7 +1027,6 @@ class MainWindowUI:
         # Легенда
         legend = QHBoxLayout()
         legend.setSpacing(12)
-        # 🛠 УЛУЧШЕНИЕ 11: Безопасный доступ к COLORS с .get()
         for txt, col in [("🔵 Position", COLORS.get('accent_primary', '#5B8CFF')),
                          ("🟢 LogGrowth", COLORS.get('accent_success', '#2ECC71')),
                          ("🟠 Ensemble", COLORS.get('accent_warning', '#F39C12')),
@@ -1242,7 +1223,7 @@ class MainWindowUI:
         about_layout.setSpacing(15)
 
         coincurve_status = "✓ Доступна" if is_coincurve_available() else "✗ Не установлена"
-        cubitcrack_status = "✓ Найден" if os.path.exists(os.path.join(config.BASE_DIR, "cuBitcrack.exe")) else "✗ Не найден"  # 🛠 УЛУЧШЕНИЕ 12: os.path.exists вместо os.path.join
+        cubitcrack_status = "✓ Найден" if os.path.exists(os.path.join(config.BASE_DIR, "cuBitcrack.exe")) else "✗ Не найден"
 
         about_text = QLabel(
             f"<div style='text-align:center; padding:20px; background:{COLORS.get('bg_input', '#232332')}; "
@@ -1276,7 +1257,6 @@ class MainWindowUI:
     # БЕЗОПАСНЫЕ МЕТОДЫ ОБНОВЛЕНИЯ UI
     # ─────────────────────────────────────────────────────
     def _safe_update_label(self, label_attr: str, text: str, css_class: Optional[str] = None) -> None:
-        """Безопасное обновление QLabel с проверкой инициализации"""
         if not self._ui_initialized:
             return
         label = getattr(self.parent, label_attr, None)
@@ -1287,11 +1267,10 @@ class MainWindowUI:
                     label.setProperty("cssClass", css_class)
                     label.style().unpolish(label)
                     label.style().polish(label)
-            except (AttributeError, RuntimeError):  # 🛠 УЛУЧШЕНИЕ 13: Конкретные исключения вместо общего Exception
+            except (AttributeError, RuntimeError):
                 pass
 
     def _safe_update_progress(self, bar_attr: str, value: int, fmt: Optional[str] = None, css_class: Optional[str] = None) -> None:
-        """Безопасное обновление QProgressBar"""
         if not self._ui_initialized:
             return
         bar = getattr(self.parent, bar_attr, None)

@@ -1,13 +1,14 @@
 # ui/matrix_window.py
 """
-🔷 Matrix Window v2.4 — УЛУЧШЕННАЯ UI
-======================================
+🔷 Matrix Window v2.4 — АДАПТИРОВАННАЯ ПОД UNIFIED SCANNER
+=============================================================
 PyQt6 интерфейс для Matrix Search Engine с:
 - Оптимизированной обработкой событий
 - Правильным управлением памятью
 - Расширенной визуализацией
 - Поддержкой сохранения настроек
 - Надёжной обработкой ошибок
+- Использованием ScannerManager (unified_scanner)
 """
 
 from __future__ import annotations
@@ -18,7 +19,7 @@ import json
 import os
 from typing import TYPE_CHECKING, Optional, Dict, Any, List, Set
 
-from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QRegularExpression, QSettings
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QRegularExpression
 from PyQt6.QtGui import QFont, QRegularExpressionValidator, QColor
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
@@ -27,12 +28,12 @@ from PyQt6.QtWidgets import (
     QTableWidgetItem, QHeaderView, QCheckBox, QComboBox, QDoubleSpinBox
 )
 
-from core.matrix_logic import MatrixConverter, COINCURVE_AVAILABLE, MatrixLogic
-# В начале файла, после других импортов:
+from core.matrix_logic import MatrixConverter, COINCURVE_AVAILABLE
 from utils.settings_manager import get_settings
 
 if TYPE_CHECKING:
     from ui.main_window import BitcoinGPUCPUScanner
+    from core.unified_scanner import BaseScanner
 
 logger = logging.getLogger(__name__)
 
@@ -226,7 +227,7 @@ class TripletDisplay(QWidget):
 
 
 # ═══════════════════════════════════════════════
-# 🔧 ГЛАВНОЕ ОКНО MATRIX ENGINE
+# 🔧 ГЛАВНОЕ ОКНО MATRIX ENGINE (АДАПТИРОВАННОЕ)
 # ═══════════════════════════════════════════════
 
 class MatrixWindow(QDialog):
@@ -253,9 +254,15 @@ class MatrixWindow(QDialog):
         self._setup_queue_timer()
         self._load_settings()
 
-    def _get_logic(self) -> Optional['MatrixLogic']:
-        """✅ Получить логику с проверкой"""
-        return getattr(self.parent_window, 'matrix_logic', None) if self.parent_window else None
+    def _get_logic(self) -> Optional['BaseScanner']:
+        """
+        ✅ Получить MatrixScanner через ScannerManager главного окна.
+        Возвращает BaseScanner (MatrixScanner), если родительское окно существует.
+        """
+        if self.parent_window is None:
+            return None
+        # Используем scanner_manager, который уже инициализирован в main_window
+        return self.parent_window.scanner_manager.get_scanner('matrix')
 
     def _setup_ui(self) -> None:
         """✅ Инициализация UI"""
@@ -570,8 +577,9 @@ class MatrixWindow(QDialog):
         if not logic:
             return
 
-        q = logic.get_queue()
-        if not q:
+        # Получаем очередь через метод get_queue (добавлен в MatrixScanner)
+        q = logic.get_queue() if hasattr(logic, 'get_queue') else None
+        if q is None:
             return
 
         now = time.time()
@@ -635,15 +643,18 @@ class MatrixWindow(QDialog):
         """Обновить метку вероятности"""
         self.chaos_label.setText(f"{value}%")
         logic = self._get_logic()
-        if logic and logic.is_running:
-            logic.update_mutation_params(probability=value / 100)
+        if logic and logic.is_running():
+            # Вызываем метод update_mutation_params, добавленный в MatrixScanner
+            if hasattr(logic, 'update_mutation_params'):
+                logic.update_mutation_params(probability=value / 100)
 
     def _update_strength_label(self, value: int):
         """Обновить метку силы"""
         self.strength_label.setText(f"{value}%")
         logic = self._get_logic()
-        if logic and logic.is_running:
-            logic.update_mutation_params(strength=value / 100)
+        if logic and logic.is_running():
+            if hasattr(logic, 'update_mutation_params'):
+                logic.update_mutation_params(strength=value / 100)
 
     def _update_range_info(self):
         """✅ Обновить информацию о диапазоне"""
@@ -689,15 +700,17 @@ class MatrixWindow(QDialog):
         logic = self._get_logic()
         if logic:
             locked_positions = list(self.triplet_display.get_locked_positions())
-            logic.update_locked_positions(locked_positions)
+            # Используем метод update_locked_positions (добавлен в MatrixScanner)
+            if hasattr(logic, 'update_locked_positions'):
+                logic.update_locked_positions(locked_positions)
             msg = f"{'🔒 Locked' if locked else '🔓 Unlocked'} position {pos}"
             self._log(msg, "info")
 
     def _on_start(self):
-        """✅ Запуск поиска"""
+        """✅ Запуск поиска через единый интерфейс BaseScanner"""
         logic = self._get_logic()
         if not logic:
-            return QMessageBox.critical(self, "Error", "MatrixLogic not initialized")
+            return QMessageBox.critical(self, "Error", "Matrix scanner not initialized")
 
         target = self.target_edit.text().strip()
         start_hex = self.start_edit.text().strip()
@@ -717,18 +730,21 @@ class MatrixWindow(QDialog):
         mode = self.mode_combo.currentText()
         locked = list(self.triplet_display.get_locked_positions())
 
-        if logic.start_search(
-                target_address=target,
-                start_hex=start_hex,
-                end_hex=end_hex,
-                num_workers=num_workers,
-                mutation_mode=mode,
-                mutation_strength=mutation_strength,
-                mutation_probability=mutation_prob,
-                visualize_mutations=visualize,
-                locked_positions=locked,
-                adaptive_mode=adaptive
-        ):
+        # Подготовка параметров в формате, ожидаемом MatrixScanner.start()
+        params = {
+            'target': target,
+            'start_hex': start_hex,
+            'end_hex': end_hex,
+            'num_workers': num_workers,
+            'mutation_mode': mode,
+            'mutation_strength': mutation_strength,
+            'mutation_probability': mutation_prob,
+            'visualize_mutations': visualize,
+            'locked_positions': locked,
+            'adaptive_mode': adaptive,
+        }
+
+        if logic.start(params):
             self._found_addresses.clear()
             self._worker_stats.clear()
             self.start_btn.setEnabled(False)
@@ -744,7 +760,7 @@ class MatrixWindow(QDialog):
         """Остановка поиска"""
         logic = self._get_logic()
         if logic:
-            logic.stop_search()
+            logic.stop()
         self.start_btn.setEnabled(True)
         self.stop_btn.setEnabled(False)
         self.progress_bar.setVisible(False)
@@ -893,9 +909,8 @@ class MatrixWindow(QDialog):
 
         logic = self._get_logic()
         if logic:
-            # Проверка, все ли воркеры завершены
-            active_workers = sum(1 for p in logic.processes.values() if p.is_alive())
-            if active_workers == 0 and not logic.is_running:
+            # Проверяем, все ли воркеры завершены (через is_running)
+            if not logic.is_running():
                 self.start_btn.setEnabled(True)
                 self.stop_btn.setEnabled(False)
                 self.progress_bar.setVisible(False)
@@ -969,7 +984,7 @@ class MatrixWindow(QDialog):
     def closeEvent(self, event):
         """✅ Обработка закрытия окна"""
         logic = self._get_logic()
-        if logic and logic.is_running:
+        if logic and logic.is_running():
             reply = QMessageBox.question(
                 self, "Confirm",
                 "Search is active. Stop and close?",
@@ -977,13 +992,13 @@ class MatrixWindow(QDialog):
             )
             if reply == QMessageBox.StandardButton.Yes:
                 self._on_stop()
-                self._save_settings()  # ← Сохранение
+                self._save_settings()
                 self.queue_timer.stop()
                 event.accept()
             else:
                 event.ignore()
         else:
-            self._save_settings()  # ← Сохранение
+            self._save_settings()
             self.queue_timer.stop()
             event.accept()
 
