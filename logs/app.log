@@ -7922,3 +7922,293 @@
 [2026-07-15 23:46:52] INFO [main:49]: 🚀 Запуск Bitcoin GPU/CPU Scanner
 [2026-07-15 23:46:52] INFO [main:50]: ==================================================
 [2026-07-15 23:49:09] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf897c593c9 → 0x33e7665705359f04f28b88cf897c593c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=16805889
+[2026-07-15 23:52:26] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf897c593c9 → 0x33e7665705359f04f28b88cf897c593c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=16805889
+[2026-07-15 23:56:03] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf897c593c9 → 0x33e7665705359f04f28b88cf897c593c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=16805889
+[2026-07-15 23:56:37] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf897c593c9 → 0x33e7665705359f04f28b88cf897c593c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=16805889
+[2026-07-15 23:56:50] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-15 23:56:50] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-15 23:56:50] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-15 23:56:50] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 128 -t 128 -p 128 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:50] [Info] Compression: compressed
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:50] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:50] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:50] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:50] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] Generating 2,097,152 starting points (80.0MB)
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] 10.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] 20.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] 30.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] 40.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] 50.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] 60.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:51] [Info] 70.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:52] [Info] 80.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:52] [Info] 90.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:52] [Info] 100.0%
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:56:52] [Info] Done
+[2026-07-15 23:56:55] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 525.45 MKey/s (952,107,008 total) [00:00:00]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 522.84 MKey/s (1,900,019,712 total) [00:00:01]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 523.13 MKey/s (2,847,932,416 total) [00:00:03]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 528.63 MKey/s (3,806,330,880 total) [00:00:05]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 526.60 MKey/s (4,760,535,040 total) [00:00:07]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 527.47 MKey/s (5,716,836,352 total) [00:00:09]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 526.60 MKey/s (6,671,040,512 total) [00:00:10]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 527.47 MKey/s (7,627,341,824 total) [00:00:12]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 526.60 MKey/s (8,581,545,984 total) [00:00:14]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 525.16 MKey/s (9,533,652,992 total) [00:00:16]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 524.29 MKey/s (10,483,662,848 total) [00:00:18]
+[2026-07-15 23:57:15] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 524.00 MKey/s (11,433,672,704 total) [00:00:19]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 523.13 MKey/s (12,381,585,408 total) [00:00:21]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 521.69 MKey/s (13,327,400,960 total) [00:00:23]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 524.29 MKey/s (14,277,410,816 total) [00:00:25]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 521.69 MKey/s (15,223,226,368 total) [00:00:27]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 523.13 MKey/s (16,171,139,072 total) [00:00:29]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 520.53 MKey/s (17,114,857,472 total) [00:00:30]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 521.97 MKey/s (18,060,673,024 total) [00:00:32]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 521.69 MKey/s (19,006,488,576 total) [00:00:34]
+[2026-07-15 23:57:30] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 1226 / 12287MB | 1 target 523.13 MKey/s (19,954,401,280 total) [00:00:36][2026-07-15.23:57:30] [Info] Reached end of keyspace
+[2026-07-15 23:58:01] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-15 23:58:01] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-15 23:58:01] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-15 23:58:01] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 128 -t 128 -p 128 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-15 23:58:03] INFO [gpu_scanner:483]: Остановка GPU процессов...
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:01] [Info] Compression: compressed
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:01] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:01] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:01] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:01] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:02] [Info] Generating 2,097,152 starting points (80.0MB)
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:02] [Info] 10.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:02] [Info] 20.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:02] [Info] 30.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] 40.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] 50.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] 60.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] 70.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] 80.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] 90.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] 100.0%
+[2026-07-15 23:58:03] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:03] [Info] Done
+[2026-07-15 23:58:03] INFO [gpu_scanner:492]: GPU процессы остановлены.
+[2026-07-15 23:58:08] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-15 23:58:08] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-15 23:58:08] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-15 23:58:08] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:08] [Info] Compression: compressed
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:08] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:08] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:08] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:08] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:08] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:15] [Info] 10.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:15] [Info] 20.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:16] [Info] 30.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:16] [Info] 40.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:17] [Info] 50.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:17] [Info] 60.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:17] [Info] 70.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:17] [Info] 80.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:17] [Info] 90.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:17] [Info] 100.0%
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:58:17] [Info] Done
+[2026-07-15 23:58:21] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.46 MKey/s (1,245,708,288 total) [00:00:00]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.46 MKey/s (2,491,416,576 total) [00:00:01]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.46 MKey/s (3,737,124,864 total) [00:00:03]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.46 MKey/s (4,982,833,152 total) [00:00:05]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 666.28 MKey/s (6,190,792,704 total) [00:00:07]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (7,417,626,624 total) [00:00:09]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (8,644,460,544 total) [00:00:10]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (9,871,294,464 total) [00:00:12]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 666.28 MKey/s (11,079,254,016 total) [00:00:14]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 666.64 MKey/s (12,287,213,568 total) [00:00:16]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (13,514,047,488 total) [00:00:18]
+[2026-07-15 23:58:41] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (14,740,881,408 total) [00:00:20]
+[2026-07-15 23:58:47] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 670.77 MKey/s (15,967,715,328 total) [00:00:21]
+[2026-07-15 23:58:47] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (17,194,549,248 total) [00:00:23]
+[2026-07-15 23:58:47] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (18,421,383,168 total) [00:00:25]
+[2026-07-15 23:58:47] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (19,648,217,088 total) [00:00:27][2026-07-15.23:58:47] [Info] Reached end of keyspace
+[2026-07-15 23:59:06] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-15 23:59:06] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-15 23:59:06] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-15 23:59:06] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-15 23:59:08] INFO [gpu_scanner:483]: Остановка GPU процессов...
+[2026-07-15 23:59:08] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:06] [Info] Compression: compressed
+[2026-07-15 23:59:08] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:06] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-15 23:59:08] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:06] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-15 23:59:08] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:06] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-15 23:59:08] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:06] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-15 23:59:08] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:07] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-15 23:59:08] INFO [gpu_scanner:492]: GPU процессы остановлены.
+[2026-07-15 23:59:09] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-15 23:59:09] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-15 23:59:09] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-15 23:59:09] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:09] [Info] Compression: compressed
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:09] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:09] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:09] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:09] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:09] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:16] [Info] 10.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:16] [Info] 20.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:17] [Info] 30.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:17] [Info] 40.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:17] [Info] 50.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:18] [Info] 60.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:18] [Info] 70.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:18] [Info] 80.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:18] [Info] 90.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:18] [Info] 100.0%
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-15.23:59:18] [Info] Done
+[2026-07-15 23:59:22] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.09 MKey/s (1,245,708,288 total) [00:00:00]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (2,472,542,208 total) [00:00:01]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (3,699,376,128 total) [00:00:03]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (4,926,210,048 total) [00:00:05]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 666.28 MKey/s (6,134,169,600 total) [00:00:07]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (7,361,003,520 total) [00:00:09]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (8,587,837,440 total) [00:00:10]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 670.77 MKey/s (9,814,671,360 total) [00:00:12]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (11,041,505,280 total) [00:00:14]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (12,268,339,200 total) [00:00:16]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (13,495,173,120 total) [00:00:18]
+[2026-07-15 23:59:42] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (14,722,007,040 total) [00:00:20]
+[2026-07-15 23:59:48] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 666.64 MKey/s (15,929,966,592 total) [00:00:21]
+[2026-07-15 23:59:48] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (17,156,800,512 total) [00:00:23]
+[2026-07-15 23:59:48] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (18,383,634,432 total) [00:00:25]
+[2026-07-15 23:59:48] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 671.13 MKey/s (19,610,468,352 total) [00:00:27][2026-07-15.23:59:48] [Info] Reached end of keyspace
+[2026-07-16 00:00:14] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-16 00:00:14] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-16 00:00:14] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-16 00:00:14] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:00:17] INFO [gpu_scanner:483]: Остановка GPU процессов...
+[2026-07-16 00:00:17] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:14] [Info] Compression: compressed
+[2026-07-16 00:00:17] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:14] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-16 00:00:17] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:14] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-16 00:00:17] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:14] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-16 00:00:17] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:14] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-16 00:00:17] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:15] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-16 00:00:17] INFO [gpu_scanner:492]: GPU процессы остановлены.
+[2026-07-16 00:00:19] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-16 00:00:19] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-16 00:00:19] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-16 00:00:19] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:00:27] INFO [gpu_scanner:483]: Остановка GPU процессов...
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:19] [Info] Compression: compressed
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:19] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:19] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:19] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:19] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:19] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:25] [Info] 10.0%
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:26] [Info] 20.0%
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:26] [Info] 30.0%
+[2026-07-16 00:00:27] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:27] [Info] 40.0%
+[2026-07-16 00:00:27] INFO [gpu_scanner:492]: GPU процессы остановлены.
+[2026-07-16 00:00:28] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566 → 0x33e7665705359f04f28b499dec4f4a566] ... [000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66 → 0x33e7665705359f04f28b499e36d0c6d66], total=20000000001
+[2026-07-16 00:00:28] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b499dec4f4a566 - 0x33e7665705359f04f28b499e36d0c6d66 на устройстве 0 (compressed=True)
+[2026-07-16 00:00:28] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-16 00:00:28] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B499DEC4F4A566:33E7665705359F04F28B499E36D0C6D66 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:28] [Info] Compression: compressed
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:28] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B499DEC4F4A566
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:28] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B499E36D0C6D66
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:28] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:28] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:28] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:34] [Info] 10.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:35] [Info] 20.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:35] [Info] 30.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:36] [Info] 40.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:36] [Info] 50.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:36] [Info] 60.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:36] [Info] 70.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:36] [Info] 80.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:36] [Info] 90.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:37] [Info] 100.0%
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:00:37] [Info] Done
+[2026-07-16 00:00:40] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (1,226,833,920 total) [00:00:00]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.09 MKey/s (2,472,542,208 total) [00:00:01]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (3,699,376,128 total) [00:00:03]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.46 MKey/s (4,945,084,416 total) [00:00:05]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (6,171,918,336 total) [00:00:07]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (7,398,752,256 total) [00:00:09]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (8,625,586,176 total) [00:00:10]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (9,852,420,096 total) [00:00:12]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (11,079,254,016 total) [00:00:14]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (12,306,087,936 total) [00:00:16]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (13,532,921,856 total) [00:00:18]
+[2026-07-16 00:01:00] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 666.64 MKey/s (14,740,881,408 total) [00:00:19]
+[2026-07-16 00:01:06] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 676.69 MKey/s (15,967,715,328 total) [00:00:21]
+[2026-07-16 00:01:06] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (17,194,549,248 total) [00:00:23]
+[2026-07-16 00:01:06] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 666.28 MKey/s (18,402,508,800 total) [00:00:25]
+[2026-07-16 00:01:06] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 677.06 MKey/s (19,629,342,720 total) [00:00:27][2026-07-16.00:01:06] [Info] Reached end of keyspace
+[2026-07-16 00:01:33] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf807c593c9 → 0x33e7665705359f04f28b88cf807c593c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=2432724993
+[2026-07-16 00:01:33] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b88cf807c593c9 - 0x33e7665705359f04f28b88cf898c603c9 на устройстве 0 (compressed=True)
+[2026-07-16 00:01:33] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-16 00:01:33] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B88CF807C593C9:33E7665705359F04F28B88CF898C603C9 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:33] [Info] Compression: compressed
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:33] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B88CF807C593C9
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:33] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B88CF898C603C9
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:33] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:33] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:34] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:40] [Info] 10.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:40] [Info] 20.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:40] [Info] 30.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:41] [Info] 40.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:41] [Info] 50.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:42] [Info] 60.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:42] [Info] 70.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:42] [Info] 80.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:42] [Info] 90.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:42] [Info] 100.0%
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:42] [Info] Done
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.46 MKey/s (1,245,708,288 total) [00:00:00][2026-07-16.00:01:46] [Info] Address:     1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: Private key: 000000000000000000000000000000033E7665705359F04F28B88CF897C603C9
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: Compressed:  yes
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: Public key:
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: 03633CBE3EC02B9401C5EFFA144C5B4D22F87940259634858FC7E59B1C09937852
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:46] [Info] No targets remaining
+[2026-07-16 00:01:46] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:46] [Info] Reached end of keyspace
+[2026-07-16 00:01:51] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf807c593c9 → 0x33e7665705359f04f28b88cf807c593c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=2432724993
+[2026-07-16 00:01:51] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b88cf807c593c9 - 0x33e7665705359f04f28b88cf898c603c9 на устройстве 0 (compressed=True)
+[2026-07-16 00:01:51] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-16 00:01:51] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B88CF807C593C9:33E7665705359F04F28B88CF898C603C9 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:51] [Info] Compression: compressed
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:51] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B88CF807C593C9
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:51] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B88CF898C603C9
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:51] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:51] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:51] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:58] [Info] 10.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:58] [Info] 20.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:58] [Info] 30.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:59] [Info] 40.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:59] [Info] 50.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:01:59] [Info] 60.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:00] [Info] 70.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:00] [Info] 80.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:00] [Info] 90.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:00] [Info] 100.0%
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:00] [Info] Done
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: NVIDIA GeForce R 2762 / 12287MB | 1 target 681.46 MKey/s (1,245,708,288 total) [00:00:00][2026-07-16.00:02:04] [Info] Address:     1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: Private key: 000000000000000000000000000000033E7665705359F04F28B88CF897C603C9
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: Compressed:  yes
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: Public key:
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: 03633CBE3EC02B9401C5EFFA144C5B4D22F87940259634858FC7E59B1C09937852
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:04] [Info] No targets remaining
+[2026-07-16 00:02:04] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:04] [Info] Reached end of keyspace
+[2026-07-16 00:02:08] DEBUG [helpers:170]: validate_key_range: [000000000000000000000000000000033e7665705359f04f28b88cf807c593c9 → 0x33e7665705359f04f28b88cf807c593c9] ... [000000000000000000000000000000033e7665705359f04f28b88cf898c603c9 → 0x33e7665705359f04f28b88cf898c603c9], total=2432724993
+[2026-07-16 00:02:08] INFO [gpu_scanner:373]: Запуск GPU поиска для диапазона 0x33e7665705359f04f28b88cf807c593c9 - 0x33e7665705359f04f28b88cf898c603c9 на устройстве 0 (compressed=True)
+[2026-07-16 00:02:08] DEBUG [gpu_scanner:389]: GPU: добавлен флаг -c (сжатые ключи)
+[2026-07-16 00:02:08] DEBUG [gpu_scanner:399]: Команда запуска cuBitcrack: C:\Users\PC\PycharmProjects\btc\cuBitcrack.exe -d 0 -b 288 -t 128 -p 512 --keyspace 33E7665705359F04F28B88CF807C593C9:33E7665705359F04F28B88CF898C603C9 -c 1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua
+[2026-07-16 00:02:14] INFO [gpu_scanner:483]: Остановка GPU процессов...
+[2026-07-16 00:02:14] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:08] [Info] Compression: compressed
+[2026-07-16 00:02:14] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:08] [Info] Starting at: 000000000000000000000000000000033E7665705359F04F28B88CF807C593C9
+[2026-07-16 00:02:14] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:08] [Info] Ending at:   000000000000000000000000000000033E7665705359F04F28B88CF898C603C9
+[2026-07-16 00:02:14] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:08] [Info] Counting by: 0000000000000000000000000000000000000000000000000000000000000001
+[2026-07-16 00:02:14] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:08] [Info] Initializing NVIDIA GeForce RTX 3060
+[2026-07-16 00:02:14] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:02:08] [Info] Generating 18,874,368 starting points (720.0MB)
+[2026-07-16 00:02:14] INFO [gpu_scanner:492]: GPU процессы остановлены.
+[2026-07-16 00:09:53] INFO [main:48]: ==================================================
+[2026-07-16 00:09:53] INFO [main:49]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-07-16 00:09:53] INFO [main:50]: ==================================================

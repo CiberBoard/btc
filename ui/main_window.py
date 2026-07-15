@@ -195,6 +195,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
     def open_matrix_window(self) -> None:
         if self.matrix_window is None or not self.matrix_window.isVisible():
             self.matrix_window = MatrixWindow(self)
+            # ✅ Подключаем сигнал найденного ключа к обработчику главного окна
+            self.matrix_window.key_found.connect(self.handle_found_key)
         self.matrix_window.show()
         self.matrix_window.raise_()
         self.matrix_window.activateWindow()
@@ -1285,13 +1287,15 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 'GPU': QColor(50, 205, 50),
                 'CPU': QColor(100, 149, 237),
                 'KANGAROO': QColor(255, 140, 0),
-                'VANITY': QColor(255, 105, 180)  # розовый
+                'VANITY': QColor(255, 105, 180),
+                'MATRIX': QColor(155, 89, 182)  # фиолетовый
             }
             source_emoji = {
                 'GPU': '🎮',
                 'CPU': '💻',
                 'KANGAROO': '🦘',
-                'VANITY': '🎨'
+                'VANITY': '🎨',
+                'MATRIX': '🔷'
             }
             source_text = f"{source_emoji.get(source, '❓')} {source}"
             source_item = QTableWidgetItem(source_text)

@@ -850,8 +850,7 @@ class MatrixWindow(QDialog):
             self.log_output.verticalScrollBar().maximum()
         )
 
-    def _on_key_found(self, data: Dict[str, Any]):
-        """✅ Обработка найденного ключа"""
+    def _on_key_found(self, data: Dict[str, Any]) -> None:
         addr = data.get('address', '')
         hex_key = data.get('hex_key', '')
         wif = data.get('wif_key', 'N/A')
@@ -861,10 +860,9 @@ class MatrixWindow(QDialog):
 
         self._found_addresses.add(addr)
 
-        # Добавка в таблицу
+        # Добавка в таблицу (локальная)
         row = self.results_table.rowCount()
         self.results_table.insertRow(row)
-
         items = [
             data.get('timestamp', ''),
             addr,
@@ -872,7 +870,6 @@ class MatrixWindow(QDialog):
             wif,
             str(data.get('worker_id', '?'))
         ]
-
         for col, text in enumerate(items):
             item = QTableWidgetItem(text)
             item.setBackground(QColor("#27ae60"))
@@ -882,7 +879,7 @@ class MatrixWindow(QDialog):
 
         self._log(f"🎉 KEY FOUND: {addr[:12]}...", "success")
 
-        # Сохранение
+        # Сохранение в локальный файл (опционально)
         try:
             with open("found_keys.txt", "a", encoding='utf-8') as f:
                 f.write(
@@ -892,13 +889,22 @@ class MatrixWindow(QDialog):
         except Exception as e:
             self._log(f"❌ File write error: {e}", "error")
 
-        # Уведомление
+        # ✅ ДОБАВЛЯЕМ ИСТОЧНИК И ЭМИТИМ СИГНАЛ ДЛЯ ГЛАВНОГО ОКНА
+        key_data = {
+            'timestamp': data.get('timestamp', time.strftime('%Y-%m-%d %H:%M:%S')),
+            'address': addr,
+            'hex_key': hex_key,
+            'wif_key': wif,
+            'source': 'MATRIX',  # <- Ключевое поле
+            'worker_id': data.get('worker_id', '?')
+        }
+        self.key_found.emit(key_data)  # <- Отправляем в главное окно
+
+        # Уведомление (оставляем)
         QTimer.singleShot(0, lambda: QMessageBox.information(
             self, "🎉 SUCCESS!",
             f"Address: {addr}\nHEX: {hex_key}\nWIF: {wif}\n✅ Saved to found_keys.txt"
         ))
-
-        self.key_found.emit(data)
 
     def _on_worker_done(self, wid: int, scanned: int, found: int):
         """✅ Обработка завершения воркера"""
