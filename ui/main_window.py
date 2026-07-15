@@ -181,6 +181,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
         try:
             if self.gpu_monitor_window is None or not self.gpu_monitor_window.isVisible():
                 self.gpu_monitor_window = GPUMonitorWindow(self)
+                self.gpu_monitor_window.show()  # <--- ДОБАВЛЕНО
             if self.gpu_monitor_window.isVisible():
                 self.gpu_monitor_window.raise_()
                 self.gpu_monitor_window.activateWindow()
