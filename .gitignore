@@ -1,11 +1,40 @@
-*.pkg
-*.toc
-*.zip
-*.pyz
-/build
-/build/bild2
-/dist
+```
+# Compiled Python files
 *.pyc
-*.pyc
-*.dat
-*.temp
+__pycache__/
+
+# UI/Build artifacts
+build/
+dist/
+*.pyd
+*.so
+*.dll
+
+# Dependencies
+.venv/
+venv/
+env/
+pip-log.txt
+pipenv.lock
+requirements.txt.bak
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*~
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+*.env.*
+```

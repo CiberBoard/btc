@@ -4,14 +4,14 @@ import os
 import multiprocessing
 import logging
 
-from PyQt6.QtCore import Qt, QRegularExpression, QSize
-from PyQt6.QtGui import QFont, QRegularExpressionValidator
+from PyQt6.QtCore import Qt, QRegularExpression, QSize, QPropertyAnimation, QEasingCurve, pyqtProperty
+from PyQt6.QtGui import QFont, QRegularExpressionValidator, QIcon
 from PyQt6.QtWidgets import (QAbstractItemView, QSizePolicy,
                              QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
                              QPushButton, QTextEdit, QGroupBox, QGridLayout,
                              QTableWidget, QHeaderView, QProgressBar, QCheckBox,
                              QComboBox, QTabWidget, QSpinBox, QMenu, QApplication,
-                             QScrollArea, QFrame, QSplitter
+                             QScrollArea, QFrame, QSplitter, QSpacerItem
                              )
 
 if TYPE_CHECKING:
@@ -24,13 +24,86 @@ from ui.theme import apply_dark_theme, set_button_style, COLORS
 logger = logging.getLogger(__name__)
 
 
+class CollapsibleSection(QFrame):
+    """Сворачиваемая секция с анимацией"""
+    
+    def __init__(self, title: str, parent=None):
+        super().__init__(parent)
+        self.setStyleSheet(f"""
+            CollapsibleSection {{
+                background: {COLORS.get('bg_card', '#2A2A3A')};
+                border: 1px solid {COLORS.get('border', '#3A3A4A')};
+                border-radius: 8px;
+            }}
+        """)
+        
+        self.main_layout = QVBoxLayout(self)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.setSpacing(0)
+        
+        # Кнопка заголовка
+        self.header_btn = QPushButton(title)
+        self.header_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: {COLORS.get('bg_header', '#232332')};
+                color: {COLORS.get('text_primary', '#FFFFFF')};
+                font-weight: bold;
+                font-size: 13px;
+                padding: 10px 15px;
+                border: none;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                text-align: left;
+            }}
+            QPushButton:hover {{
+                background: {COLORS.get('accent_primary', '#5B8CFF')};
+            }}
+            QPushButton:pressed {{
+                background: {COLORS.get('accent_primary_dark', '#4A7AE8')};
+            }}
+        """)
+        self.header_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.main_layout.addWidget(self.header_btn)
+        
+        # Контейнер контента
+        self.content_widget = QWidget()
+        self.content_layout = QVBoxLayout(self.content_widget)
+        self.content_layout.setContentsMargins(12, 12, 12, 12)
+        self.content_layout.setSpacing(8)
+        self.main_layout.addWidget(self.content_widget)
+        
+        # Анимация
+        self.animation = QPropertyAnimation(self.content_widget, b"maximumHeight")
+        self.animation.setDuration(200)
+        self.animation.setEasingCurve(QEasingCurve.Type.InOutQuad)
+        
+        self.is_expanded = True
+        self.header_btn.clicked.connect(self.toggle)
+        
+    def toggle(self):
+        self.is_expanded = not self.is_expanded
+        if self.is_expanded:
+            self.animation.setEndValue(16777215)
+            self.header_btn.setText(self.header_btn.text().replace("▶ ", "▼ "))
+        else:
+            self.animation.setEndValue(0)
+            self.header_btn.setText(self.header_btn.text().replace("▼ ", "▶ "))
+        self.animation.start()
+        
+    def addWidget(self, widget):
+        self.content_layout.addWidget(widget)
+        
+    def addLayout(self, layout):
+        self.content_layout.addLayout(layout)
+
+
 class MainWindowUI:
-    _MARGIN = 12
-    _SPACING = 8
-    _MIN_WINDOW_WIDTH = 1200
-    _MIN_WINDOW_HEIGHT = 800
-    _DEFAULT_WINDOW_WIDTH = 1400
-    _DEFAULT_WINDOW_HEIGHT = 950
+    _MARGIN = 8
+    _SPACING = 6
+    _MIN_WINDOW_WIDTH = 1100
+    _MIN_WINDOW_HEIGHT = 700
+    _DEFAULT_WINDOW_WIDTH = 1280
+    _DEFAULT_WINDOW_HEIGHT = 800
 
     def __init__(self, parent: 'BitcoinGPUCPUScanner'):
         self.parent = parent
@@ -99,67 +172,68 @@ class MainWindowUI:
             self.parent.gpu_device_combo.addItems(["0", "1", "2"])
 
     # ─────────────────────────────────────────────────────
-    # GPU TAB
+    # GPU TAB - Компактный дизайн со сворачиваемыми секциями
     # ─────────────────────────────────────────────────────
     def _setup_gpu_tab(self) -> None:
         gpu_tab = QWidget()
         gpu_layout = QVBoxLayout(gpu_tab)
-        gpu_layout.setContentsMargins(12, 12, 12, 12)
-        gpu_layout.setSpacing(12)
+        gpu_layout.setContentsMargins(8, 8, 8, 8)
+        gpu_layout.setSpacing(6)
 
+        # Заголовок в одну строку
+        header_row = QHBoxLayout()
         header = QLabel("🎮 GPU Поиск приватных ключей")
-        header.setProperty("cssClass", "header")
-        header.setStyleSheet("font-size: 16px; font-weight: bold; padding: 8px;")
-        gpu_layout.addWidget(header)
+        header.setStyleSheet(f"font-size: 15px; font-weight: bold; color: {COLORS.get('accent_primary', '#5B8CFF')}; padding: 4px;")
+        header_row.addWidget(header)
+        header_row.addStretch()
+        gpu_layout.addLayout(header_row)
 
-        # ── Целевой адрес и диапазон ──────────────────────
-        addr_group = QGroupBox("🎯 Цель и диапазон")
-        addr_layout = QGridLayout(addr_group)
-        addr_layout.setContentsMargins(12, 12, 12, 12)
-        addr_layout.setVerticalSpacing(10)
-        addr_layout.setHorizontalSpacing(10)
-        addr_layout.setColumnStretch(1, 2)
-        addr_layout.setColumnStretch(3, 2)
-        addr_layout.setColumnMinimumWidth(0, 100)
-        addr_layout.setColumnMinimumWidth(2, 100)
+        # ── Секция 1: Цель и диапазон (сворачиваемая) ────
+        target_section = CollapsibleSection("▼ 🎯 Цель и диапазон")
+        target_section.content_layout.setContentsMargins(10, 8, 10, 8)
+        
+        target_grid = QGridLayout()
+        target_grid.setVerticalSpacing(6)
+        target_grid.setHorizontalSpacing(8)
+        target_grid.setColumnStretch(1, 2)
+        target_grid.setColumnStretch(3, 2)
 
-        addr_layout.addWidget(QLabel("BTC адрес:"), 0, 0)
+        target_grid.addWidget(QLabel("BTC адрес:"), 0, 0)
         self.parent.gpu_target_edit = QLineEdit()
         self.parent.gpu_target_edit.setPlaceholderText("1ABC... или 3XYZ... или bc1q...")
-        self.parent.gpu_target_edit.setMinimumHeight(32)
-        addr_layout.addWidget(self.parent.gpu_target_edit, 0, 1, 1, 3)
+        self.parent.gpu_target_edit.setMinimumHeight(30)
+        target_grid.addWidget(self.parent.gpu_target_edit, 0, 1, 1, 3)
 
-        addr_layout.addWidget(QLabel("Начало (hex):"), 1, 0)
+        target_grid.addWidget(QLabel("Начало (hex):"), 1, 0)
         self.parent.gpu_start_key_edit = QLineEdit("1")
         self.parent.gpu_start_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
-        self.parent.gpu_start_key_edit.setMinimumHeight(32)
-        addr_layout.addWidget(self.parent.gpu_start_key_edit, 1, 1)
+        self.parent.gpu_start_key_edit.setMinimumHeight(30)
+        target_grid.addWidget(self.parent.gpu_start_key_edit, 1, 1)
 
-        addr_layout.addWidget(QLabel("Конец (hex):"), 1, 2)
+        target_grid.addWidget(QLabel("Конец (hex):"), 1, 2)
         self.parent.gpu_end_key_edit = QLineEdit(config.MAX_KEY_HEX)
         self.parent.gpu_end_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
-        self.parent.gpu_end_key_edit.setMinimumHeight(32)
-        addr_layout.addWidget(self.parent.gpu_end_key_edit, 1, 3)
+        self.parent.gpu_end_key_edit.setMinimumHeight(30)
+        target_grid.addWidget(self.parent.gpu_end_key_edit, 1, 3)
 
-        gpu_layout.addWidget(addr_group)
+        target_section.addLayout(target_grid)
+        gpu_layout.addWidget(target_section)
 
-        # ── Параметры GPU ─────────────────────────────────
-        params_group = QGroupBox("⚙️ Параметры сканирования")
-        params_layout = QGridLayout(params_group)
-        params_layout.setContentsMargins(12, 12, 12, 12)
-        params_layout.setVerticalSpacing(10)
-        params_layout.setHorizontalSpacing(10)
-        params_layout.setColumnStretch(1, 1)
-        params_layout.setColumnStretch(3, 1)
-        params_layout.setColumnMinimumWidth(0, 120)
-        params_layout.setColumnMinimumWidth(2, 120)
+        # ── Секция 2: Параметры GPU (сворачиваемая) ───────
+        params_section = CollapsibleSection("▼ ⚙️ Параметры сканирования")
+        params_section.content_layout.setContentsMargins(10, 8, 10, 8)
+        
+        params_grid = QGridLayout()
+        params_grid.setVerticalSpacing(6)
+        params_grid.setHorizontalSpacing(8)
+        params_grid.setColumnStretch(1, 1)
+        params_grid.setColumnStretch(3, 1)
 
         # Ряд 1
-        params_layout.addWidget(QLabel("GPU:"), 0, 0)
+        params_grid.addWidget(QLabel("GPU:"), 0, 0)
         self.parent.gpu_device_combo = QComboBox()
         self.parent.gpu_device_combo.setEditable(True)
-        self.parent.gpu_device_combo.clear()
-        self.parent.gpu_device_combo.setMinimumHeight(32)
+        self.parent.gpu_device_combo.setMinimumHeight(30)
         try:
             import pynvml
             device_count = pynvml.nvmlDeviceGetCount()
@@ -168,289 +242,187 @@ class MainWindowUI:
                 raw_name = pynvml.nvmlDeviceGetName(handle)
                 gpu_name = raw_name.decode('utf-8') if isinstance(raw_name, bytes) else raw_name
                 self.parent.gpu_device_combo.addItem(f"{idx} - {gpu_name}", userData=idx)
-
             if device_count >= 2:
                 self.parent.gpu_device_combo.addItem("0,1 (Multi-GPU)", userData=0)
             if device_count >= 3:
                 self.parent.gpu_device_combo.addItem("0,1,2 (Multi-GPU)", userData=0)
-
             self.parent.gpu_device_combo.setCurrentIndex(0)
         except Exception as e:
             logger.error(f"Не удалось получить список GPU: {e}")
             self.parent.gpu_device_combo.addItems(["0", "1", "2"])
         self.parent.gpu_device_combo.setCurrentText("0")
-        params_layout.addWidget(self.parent.gpu_device_combo, 0, 1)
+        params_grid.addWidget(self.parent.gpu_device_combo, 0, 1)
 
-        params_layout.addWidget(QLabel("Блоки:"), 0, 2)
+        params_grid.addWidget(QLabel("Блоки:"), 0, 2)
         self.parent.blocks_combo = make_combo32(32, 2048, 256)
-        self.parent.blocks_combo.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.blocks_combo, 0, 3)
+        self.parent.blocks_combo.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.blocks_combo, 0, 3)
 
         # Ряд 2
-        params_layout.addWidget(QLabel("Потоки/блок:"), 1, 0)
+        params_grid.addWidget(QLabel("Потоки/блок:"), 1, 0)
         self.parent.threads_combo = make_combo32(32, 1024, 256)
-        self.parent.threads_combo.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.threads_combo, 1, 1)
+        self.parent.threads_combo.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.threads_combo, 1, 1)
 
-        params_layout.addWidget(QLabel("Точки:"), 1, 2)
+        params_grid.addWidget(QLabel("Точки:"), 1, 2)
         self.parent.points_combo = make_combo32(32, 1024, 256)
-        self.parent.points_combo.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.points_combo, 1, 3)
+        self.parent.points_combo.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.points_combo, 1, 3)
 
         # Ряд 3: Случайный режим
-        self.parent.gpu_random_checkbox = QCheckBox("🎲 Случайный поиск в диапазоне")
-        self.parent.gpu_random_checkbox.setStyleSheet("font-weight: bold; padding: 4px;")
-        params_layout.addWidget(self.parent.gpu_random_checkbox, 2, 0, 1, 2)
+        self.parent.gpu_random_checkbox = QCheckBox("🎲 Случайный поиск")
+        self.parent.gpu_random_checkbox.setStyleSheet(f"font-weight: bold; color: {COLORS.get('accent_warning', '#F39C12')};")
+        params_grid.addWidget(self.parent.gpu_random_checkbox, 2, 0, 1, 2)
 
-        params_layout.addWidget(QLabel("Рестарт (сек):"), 2, 2)
+        params_grid.addWidget(QLabel("Рестарт (сек):"), 2, 2)
         self.parent.gpu_restart_interval_combo = QComboBox()
         self.parent.gpu_restart_interval_combo.addItems([str(x) for x in range(10, 3601, 10)])
         self.parent.gpu_restart_interval_combo.setCurrentText("300")
         self.parent.gpu_restart_interval_combo.setEnabled(False)
-        self.parent.gpu_restart_interval_combo.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.gpu_restart_interval_combo, 2, 3)
+        self.parent.gpu_restart_interval_combo.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.gpu_restart_interval_combo, 2, 3)
         self.parent.gpu_random_checkbox.toggled.connect(
             lambda checked: self.parent.gpu_restart_interval_combo.setEnabled(checked)
         )
         
-        # Ряд 4: Размер диапазона
-        params_layout.addWidget(QLabel("Мин. диапазон:"), 3, 0)
+        # Ряд 4: Диапазон
+        params_grid.addWidget(QLabel("Мин. диапазон:"), 3, 0)
         self.parent.gpu_min_range_edit = QLineEdit("134217728")
         self.parent.gpu_min_range_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self.parent))
-        self.parent.gpu_min_range_edit.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.gpu_min_range_edit, 3, 1)
+        self.parent.gpu_min_range_edit.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.gpu_min_range_edit, 3, 1)
 
-        params_layout.addWidget(QLabel("Макс. диапазон:"), 3, 2)
+        params_grid.addWidget(QLabel("Макс. диапазон:"), 3, 2)
         self.parent.gpu_max_range_edit = QLineEdit("536870912")
         self.parent.gpu_max_range_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self.parent))
-        self.parent.gpu_max_range_edit.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.gpu_max_range_edit, 3, 3)
+        self.parent.gpu_max_range_edit.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.gpu_max_range_edit, 3, 3)
 
         # Ряд 5
-        params_layout.addWidget(QLabel("Приоритет:"), 4, 0)
+        params_grid.addWidget(QLabel("Приоритет:"), 4, 0)
         self.parent.gpu_priority_combo = QComboBox()
         self.parent.gpu_priority_combo.addItems(["Нормальный", "Высокий", "Реального времени"])
-        self.parent.gpu_priority_combo.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.gpu_priority_combo, 4, 1)
+        self.parent.gpu_priority_combo.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.gpu_priority_combo, 4, 1)
 
-        self.parent.gpu_use_compressed_checkbox = QCheckBox("✅ Сжатые ключи (×1.5–2 быстрее)")
+        self.parent.gpu_use_compressed_checkbox = QCheckBox("✅ Сжатые ключи")
         self.parent.gpu_use_compressed_checkbox.setChecked(True)
-        self.parent.gpu_use_compressed_checkbox.setToolTip(
-            "Использует 33-байтный публичный ключ вместо 65-байтного.\n"
-            "Авто-отключается для несовместимых адресов."
-        )
-        self.parent.gpu_use_compressed_checkbox.setStyleSheet("font-weight: bold; padding: 4px;")
-        params_layout.addWidget(self.parent.gpu_use_compressed_checkbox, 4, 2, 1, 2)
+        self.parent.gpu_use_compressed_checkbox.setStyleSheet(f"font-weight: bold; color: {COLORS.get('accent_success', '#2ECC71')};")
+        params_grid.addWidget(self.parent.gpu_use_compressed_checkbox, 4, 2, 1, 2)
 
         # Ряд 6
-        params_layout.addWidget(QLabel("Воркеры/устройство:"), 5, 0)
+        params_grid.addWidget(QLabel("Воркеры:"), 5, 0)
         self.parent.gpu_workers_per_device_spin = QSpinBox()
         self.parent.gpu_workers_per_device_spin.setRange(1, 16)
         self.parent.gpu_workers_per_device_spin.setValue(1)
-        self.parent.gpu_workers_per_device_spin.setMinimumHeight(32)
-        params_layout.addWidget(self.parent.gpu_workers_per_device_spin, 5, 1)
+        self.parent.gpu_workers_per_device_spin.setMinimumHeight(30)
+        params_grid.addWidget(self.parent.gpu_workers_per_device_spin, 5, 1)
 
-        gpu_layout.addWidget(params_group)
+        params_section.addLayout(params_grid)
+        gpu_layout.addWidget(params_section)
 
-        # ── Кнопки управления ─────────────────────────────
-        btn_row = QHBoxLayout()
-        btn_row.setSpacing(12)
+        # ── Кнопки управления (всегда видны) ─────────────
+        btn_frame = QFrame()
+        btn_frame.setStyleSheet(f"background: {COLORS.get('bg_card', '#2A2A3A')}; border-radius: 8px;")
+        btn_layout = QGridLayout(btn_frame)
+        btn_layout.setContentsMargins(10, 8, 10, 8)
+        btn_layout.setVerticalSpacing(6)
+        btn_layout.setHorizontalSpacing(8)
 
         self.parent.gpu_start_stop_btn = QPushButton("▶ Запустить GPU")
         set_button_style(self.parent.gpu_start_stop_btn, "success")
-        self.parent.gpu_start_stop_btn.setMinimumHeight(48)
-        self.parent.gpu_start_stop_btn.setSizePolicy(
-            QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Fixed
-        )
+        self.parent.gpu_start_stop_btn.setMinimumHeight(40)
+        btn_layout.addWidget(self.parent.gpu_start_stop_btn, 0, 0, 1, 2)
 
         self.parent.gpu_optimize_btn = QPushButton("⚡ Авто-оптимизация")
         set_button_style(self.parent.gpu_optimize_btn, "primary")
-        self.parent.gpu_optimize_btn.setMinimumHeight(48)
+        self.parent.gpu_optimize_btn.setMinimumHeight(40)
+        btn_layout.addWidget(self.parent.gpu_optimize_btn, 0, 2, 1, 2)
 
-        btn_row.addWidget(self.parent.gpu_start_stop_btn, 1)
-        btn_row.addWidget(self.parent.gpu_optimize_btn, 0)
-
-        gpu_layout.addLayout(btn_row)
-
-        # Второй ряд кнопок
-        btn_row2 = QHBoxLayout()
-        btn_row2.setSpacing(12)
-
-        # 🔽 Монитор GPU
         self.parent.gpu_monitor_btn = QPushButton("📊 Монитор")
-        self.parent.gpu_monitor_btn.setMinimumHeight(40)
-        self.parent.gpu_monitor_btn.setStyleSheet("""
-            QPushButton { background: #9b59b6; color: white; font-weight: bold; border-radius: 6px; padding: 8px; }
-            QPushButton:hover { background: #8e44ad; }
-            QPushButton:pressed { background: #7d3c98; }
+        self.parent.gpu_monitor_btn.setMinimumHeight(36)
+        self.parent.gpu_monitor_btn.setStyleSheet(f"""
+            QPushButton {{ background: {COLORS.get('accent_secondary', '#9b59b6')}; color: white; font-weight: bold; border-radius: 6px; padding: 6px; }}
+            QPushButton:hover {{ background: {COLORS.get('accent_secondary_dark', '#8e44ad')}; }}
         """)
         self.parent.gpu_monitor_btn.clicked.connect(self.parent.open_gpu_monitor)
-        btn_row2.addWidget(self.parent.gpu_monitor_btn)
+        btn_layout.addWidget(self.parent.gpu_monitor_btn, 1, 0)
 
         self.parent.gpu_progress_btn = QPushButton("💾 Прогресс")
-        self.parent.gpu_progress_btn.setMinimumHeight(40)
-        self.parent.gpu_progress_btn.setStyleSheet("""
-            QPushButton { background: #2c3e50; color: white; font-weight: bold; border-radius: 6px; padding: 8px; }
-            QPushButton:hover { background: #34495e; }
-            QPushButton:pressed { background: #1a252f; }
+        self.parent.gpu_progress_btn.setMinimumHeight(36)
+        self.parent.gpu_progress_btn.setStyleSheet(f"""
+            QPushButton {{ background: {COLORS.get('bg_button', '#2c3e50')}; color: white; font-weight: bold; border-radius: 6px; padding: 6px; }}
+            QPushButton:hover {{ background: {COLORS.get('bg_button_hover', '#34495e')}; }}
         """)
         self.parent.gpu_progress_btn.clicked.connect(self.parent.open_gpu_progress_tracker)
-        btn_row2.addWidget(self.parent.gpu_progress_btn)
+        btn_layout.addWidget(self.parent.gpu_progress_btn, 1, 1)
 
-        # 🔽 Спинбокс "Мин. дистанция"
         self.parent.gpu_min_distance_spin = QSpinBox()
         self.parent.gpu_min_distance_spin.setRange(10, 5000)
         self.parent.gpu_min_distance_spin.setValue(2)
         self.parent.gpu_min_distance_spin.setSuffix(" млрд")
-        self.parent.gpu_min_distance_spin.setMinimumWidth(120)
-        self.parent.gpu_min_distance_spin.setMinimumHeight(40)
-        self.parent.gpu_min_distance_spin.setToolTip(
-            "Мин. размер случайного диапазона:\n"
-            "1 = 1 млрд ключей, 10 = 10 млрд и т.д."
-        )
-        self.parent.gpu_min_distance_spin.setStyleSheet("""
-            QSpinBox {
-                background: #2c3e50;
-                color: white;
-                border: 2px solid #2c3e50;
-                border-radius: 6px;
-                padding: 5px;
-                font-weight: bold;
-            }
-            QSpinBox::up-button, QSpinBox::down-button {
-                background: #2c3e50;
-                border-radius: 3px;
-                width: 16px;
-            }
-            QSpinBox::up-button:hover, QSpinBox::down-button:hover {
-                background: #e67e22;
-            }
+        self.parent.gpu_min_distance_spin.setMinimumHeight(36)
+        self.parent.gpu_min_distance_spin.setStyleSheet(f"""
+            QSpinBox {{ background: {COLORS.get('bg_input', '#232332')}; color: white; border: 2px solid {COLORS.get('border', '#3A3A4A')}; border-radius: 6px; padding: 5px; font-weight: bold; }}
+            QSpinBox::up-button, QSpinBox::down-button {{ background: {COLORS.get('bg_button', '#2c3e50')}; border-radius: 3px; width: 16px; }}
+            QSpinBox::up-button:hover, QSpinBox::down-button:hover {{ background: {COLORS.get('accent_warning', '#e67e22')}; }}
         """)
-        self.parent.gpu_min_distance_spin.valueChanged.connect(
-            lambda val: self.parent.gpu_random_range_btn.setToolTip(
-                f"Сгенерировать случайный диапазон ключей\n"
-                f"Мин. дистанция: {val} млрд ключей (0x{val * 1_000_000_000:X})\n"
-                "Результат можно скопировать"
-            )
-        )
-        btn_row2.addWidget(self.parent.gpu_min_distance_spin)
+        btn_layout.addWidget(self.parent.gpu_min_distance_spin, 1, 2)
 
-        # 🔽 Кнопка генерации случайного диапазона
         self.parent.gpu_random_range_btn = QPushButton("🎲 Случайный диапазон")
-        self.parent.gpu_random_range_btn.setMinimumHeight(40)
-        self.parent.gpu_random_range_btn.setStyleSheet("""
-            QPushButton { 
-                background: #e67e22; 
-                color: white; 
-                font-weight: bold; 
-                border-radius: 6px;
-                padding: 8px;
-            }
-            QPushButton:hover { background: #d35400; }
-            QPushButton:pressed { background: #a04000; }
+        self.parent.gpu_random_range_btn.setMinimumHeight(36)
+        self.parent.gpu_random_range_btn.setStyleSheet(f"""
+            QPushButton {{ background: {COLORS.get('accent_warning', '#e67e22')}; color: white; font-weight: bold; border-radius: 6px; padding: 6px; }}
+            QPushButton:hover {{ background: {COLORS.get('accent_warning_dark', '#d35400')}; }}
         """)
-        self.parent.gpu_random_range_btn.setToolTip(
-            "Сгенерировать случайный диапазон ключей\n"
-            f"Мин. дистанция: {self.parent.gpu_min_distance_spin.value()} млрд ключей\n"
-            "Результат можно скопировать"
-        )
         self.parent.gpu_random_range_btn.clicked.connect(self.parent.generate_and_show_random_range)
-        btn_row2.addWidget(self.parent.gpu_random_range_btn)
+        btn_layout.addWidget(self.parent.gpu_random_range_btn, 1, 3)
 
-        btn_row2.addStretch()
-        gpu_layout.addLayout(btn_row2)
+        gpu_layout.addWidget(btn_frame)
 
-        # ── Прогресс и статистика ─────────────────────────
-        progress_group = QGroupBox("📊 Статистика")
-        progress_layout = QGridLayout(progress_group)
-        progress_layout.setContentsMargins(12, 12, 12, 12)
-        progress_layout.setVerticalSpacing(10)
-        progress_layout.setHorizontalSpacing(10)
+        # ── Прогресс и статистика (всегда видно) ─────────
+        stats_frame = QFrame()
+        stats_frame.setStyleSheet(f"background: {COLORS.get('bg_card', '#2A2A3A')}; border-radius: 8px;")
+        stats_layout = QGridLayout(stats_frame)
+        stats_layout.setContentsMargins(10, 8, 10, 8)
+        stats_layout.setVerticalSpacing(6)
+        stats_layout.setHorizontalSpacing(8)
 
         self.parent.gpu_status_label = QLabel("🟢 Статус: Готов")
-        self.parent.gpu_status_label.setProperty("cssClass", "status")
-        self.parent.gpu_status_label.setStyleSheet("font-weight: bold; font-size: 14px; padding: 4px;")
-        progress_layout.addWidget(self.parent.gpu_status_label, 0, 0, 1, 2)
+        self.parent.gpu_status_label.setStyleSheet(f"font-weight: bold; font-size: 13px; color: {COLORS.get('text_primary', '#FFFFFF')};")
+        stats_layout.addWidget(self.parent.gpu_status_label, 0, 0, 1, 2)
 
         self.parent.gpu_speed_label = QLabel("⚡ Скорость: 0 MKey/s")
-        self.parent.gpu_speed_label.setProperty("cssClass", "speed")
-        self.parent.gpu_speed_label.setStyleSheet("font-weight: bold; padding: 4px;")
-        progress_layout.addWidget(self.parent.gpu_speed_label, 1, 0)
+        self.parent.gpu_speed_label.setStyleSheet(f"font-weight: bold; color: {COLORS.get('accent_primary', '#5B8CFF')};")
+        stats_layout.addWidget(self.parent.gpu_speed_label, 1, 0)
 
         self.parent.gpu_time_label = QLabel("⏱ Время: 00:00:00")
-        self.parent.gpu_time_label.setStyleSheet("padding: 4px;")
-        progress_layout.addWidget(self.parent.gpu_time_label, 1, 1)
+        stats_layout.addWidget(self.parent.gpu_time_label, 1, 1)
 
         self.parent.gpu_checked_label = QLabel("🔍 Проверено: 0")
-        self.parent.gpu_checked_label.setStyleSheet("padding: 4px;")
-        progress_layout.addWidget(self.parent.gpu_checked_label, 2, 0)
+        stats_layout.addWidget(self.parent.gpu_checked_label, 2, 0)
 
         self.parent.gpu_found_label = QLabel("✨ Найдено: 0")
-        self.parent.gpu_found_label.setProperty("cssClass", "found")
-        self.parent.gpu_found_label.setStyleSheet("font-weight: bold; color: #2ECC71; padding: 4px;")
-        progress_layout.addWidget(self.parent.gpu_found_label, 2, 1)
+        self.parent.gpu_found_label.setStyleSheet(f"font-weight: bold; color: {COLORS.get('accent_success', '#2ECC71')};")
+        stats_layout.addWidget(self.parent.gpu_found_label, 2, 1)
 
         self.parent.gpu_progress_bar = QProgressBar()
         self.parent.gpu_progress_bar.setRange(0, 100)
         self.parent.gpu_progress_bar.setValue(0)
         self.parent.gpu_progress_bar.setFormat("Прогресс: %p%")
-        self.parent.gpu_progress_bar.setMinimumHeight(28)
-        progress_layout.addWidget(self.parent.gpu_progress_bar, 3, 0, 1, 2)
-
-        gpu_layout.addWidget(progress_group)
+        self.parent.gpu_progress_bar.setMinimumHeight(24)
+        self.parent.gpu_progress_bar.setStyleSheet(f"""
+            QProgressBar {{ background: {COLORS.get('bg_input', '#232332')}; border: none; border-radius: 12px; text-align: center; }}
+            QProgressBar::chunk {{ background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 {COLORS.get('accent_primary', '#5B8CFF')}, stop:1 {COLORS.get('accent_secondary', '#9b59b6')}); border-radius: 12px; }}
+        """)
+        stats_layout.addWidget(self.parent.gpu_progress_bar, 3, 0, 1, 2)
 
         self.parent.gpu_range_label = QLabel("📐 Диапазон: —")
-        self.parent.gpu_range_label.setProperty("cssClass", "range")
         self.parent.gpu_range_label.setWordWrap(True)
-        self.parent.gpu_range_label.setStyleSheet("padding: 8px; background: #232332; border-radius: 6px; border: 1px solid #3A3A4A;")
-        gpu_layout.addWidget(self.parent.gpu_range_label)
+        self.parent.gpu_range_label.setStyleSheet(f"padding: 6px; background: {COLORS.get('bg_input', '#232332')}; border-radius: 6px; color: {COLORS.get('text_secondary', '#B0B0C0')};")
+        stats_layout.addWidget(self.parent.gpu_range_label, 4, 0, 1, 2)
 
-        # ── Аппаратный мониторинг (если доступен) ─────────
-        PYNVML_AVAILABLE = False
-        try:
-            import pynvml
-            PYNVML_AVAILABLE = True
-        except ImportError:
-            pass
-
-        if PYNVML_AVAILABLE:
-            hw_group = QGroupBox("🌡 Аппаратный статус")
-            hw_layout = QGridLayout(hw_group)
-            hw_layout.setContentsMargins(12, 12, 12, 12)
-            hw_layout.setVerticalSpacing(10)
-            hw_layout.setHorizontalSpacing(10)
-
-            self.parent.gpu_util_label = QLabel("Загрузка: —%")
-            self.parent.gpu_util_label.setProperty("cssClass", "util")
-            self.parent.gpu_util_label.setStyleSheet("font-weight: bold; padding: 4px;")
-            hw_layout.addWidget(self.parent.gpu_util_label, 0, 0)
-
-            self.parent.gpu_mem_label = QLabel("Память: — / — MB")
-            self.parent.gpu_mem_label.setProperty("cssClass", "mem")
-            self.parent.gpu_mem_label.setStyleSheet("padding: 4px;")
-            hw_layout.addWidget(self.parent.gpu_mem_label, 0, 1)
-
-            self.parent.gpu_temp_label = QLabel("Темп: —°C")
-            self.parent.gpu_temp_label.setProperty("cssClass", "temp")
-            self.parent.gpu_temp_label.setStyleSheet("font-weight: bold; padding: 4px;")
-            hw_layout.addWidget(self.parent.gpu_temp_label, 1, 0)
-
-            self.parent.gpu_util_bar = QProgressBar()
-            self.parent.gpu_util_bar.setRange(0, 100)
-            self.parent.gpu_util_bar.setValue(0)
-            self.parent.gpu_util_bar.setFormat("%p%")
-            self.parent.gpu_util_bar.setMinimumHeight(24)
-            hw_layout.addWidget(self.parent.gpu_util_bar, 2, 0)
-
-            self.parent.gpu_mem_bar = QProgressBar()
-            self.parent.gpu_mem_bar.setRange(0, 100)
-            self.parent.gpu_mem_bar.setValue(0)
-            self.parent.gpu_mem_bar.setFormat("%p%")
-            self.parent.gpu_mem_bar.setMinimumHeight(24)
-            hw_layout.addWidget(self.parent.gpu_mem_bar, 2, 1)
-
-            gpu_layout.addWidget(hw_group)
+        gpu_layout.addWidget(stats_frame)
 
         gpu_layout.addStretch()
         self.parent.main_tabs.addTab(gpu_tab, "🎮 GPU")
