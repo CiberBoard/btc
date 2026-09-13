@@ -1,11 +1,1 @@
-*.pkg
-*.toc
-*.zip
-*.pyz
-/build
-/build/bild2
-/dist
-*.pyc
-*.pyc
-*.dat
-*.temp
+(ui/theme.py is a source file, and there are no build artifacts, dependencies, or temporary files in the changes)
