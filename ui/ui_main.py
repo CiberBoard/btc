@@ -80,14 +80,20 @@ class CollapsibleSection(QFrame):
         self.is_expanded = True
         self.header_btn.clicked.connect(self.toggle)
         
-    def toggle(self):
-        self.is_expanded = not self.is_expanded
+    def toggle(self, expand: Optional[bool] = None):
+        if expand is not None:
+            self.is_expanded = expand
+        else:
+            self.is_expanded = not self.is_expanded
+            
         if self.is_expanded:
             self.animation.setEndValue(16777215)
-            self.header_btn.setText(self.header_btn.text().replace("▶ ", "▼ "))
+            if not self.header_btn.text().startswith("▼ "):
+                self.header_btn.setText("▼ " + self.header_btn.text().lstrip("▶ "))
         else:
             self.animation.setEndValue(0)
-            self.header_btn.setText(self.header_btn.text().replace("▼ ", "▶ "))
+            if not self.header_btn.text().startswith("▶ "):
+                self.header_btn.setText("▶ " + self.header_btn.text().lstrip("▼ "))
         self.animation.start()
         
     def addWidget(self, widget):
