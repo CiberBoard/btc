@@ -625,76 +625,100 @@ class MainWindowUI:
     # CPU TAB (с защитой от наезжания)
     # ─────────────────────────────────────────────────────
     def _setup_cpu_tab(self) -> None:
+        """Создание вкладки CPU с компактным дизайном и сворачиваемыми секциями"""
         cpu_tab = QWidget()
         cpu_layout = QVBoxLayout(cpu_tab)
-        cpu_layout.setContentsMargins(10, 10, 10, 10)
-        cpu_layout.setSpacing(10)
+        cpu_layout.setContentsMargins(8, 8, 8, 8)
+        cpu_layout.setSpacing(6)
 
-        # Системная информация
-        sys_info = QGroupBox("💻 Система")
-        si_layout = QGridLayout(sys_info)
-        si_layout.setSpacing(8)
-        si_layout.addWidget(QLabel("Процессор:"), 0, 0)
+        # ── Сворачиваемая секция: Система ─────────────────────
+        sys_section = CollapsibleSection("💻 Система")
+        sys_section.toggle(True)  # Развернута по умолчанию
+        sys_layout = QGridLayout(sys_section.content_frame)
+        sys_layout.setSpacing(8)
+        sys_layout.setColumnStretch(1, 2)
+        sys_layout.setColumnStretch(3, 2)
+
+        sys_layout.addWidget(QLabel("Процессор:"), 0, 0)
         self.parent.cpu_label = QLabel(f"{multiprocessing.cpu_count()} ядер")
-        si_layout.addWidget(self.parent.cpu_label, 0, 1)
-        si_layout.addWidget(QLabel("Память:"), 0, 2)
+        sys_layout.addWidget(self.parent.cpu_label, 0, 1)
+
+        sys_layout.addWidget(QLabel("Память:"), 0, 2)
         self.parent.mem_label = QLabel("")
-        si_layout.addWidget(self.parent.mem_label, 0, 3)
-        si_layout.addWidget(QLabel("Загрузка:"), 1, 0)
+        sys_layout.addWidget(self.parent.mem_label, 0, 3)
+
+        sys_layout.addWidget(QLabel("Загрузка:"), 1, 0)
         self.parent.cpu_usage = QLabel("0%")
-        si_layout.addWidget(self.parent.cpu_usage, 1, 1)
-        si_layout.addWidget(QLabel("Статус:"), 1, 2)
+        sys_layout.addWidget(self.parent.cpu_usage, 1, 1)
+
+        sys_layout.addWidget(QLabel("Статус:"), 1, 2)
         self.parent.cpu_status_label = QLabel("🟡 Ожидание")
-        si_layout.addWidget(self.parent.cpu_status_label, 1, 3)
-        cpu_layout.addWidget(sys_info)
+        sys_layout.addWidget(self.parent.cpu_status_label, 1, 3)
 
-        # Параметры CPU
-        params_cpu = QGroupBox("⚙️ Параметры CPU")
-        pc_layout = QGridLayout(params_cpu)
-        pc_layout.setSpacing(10)
-        pc_layout.setColumnStretch(1, 2)
-        pc_layout.setColumnStretch(3, 2)
+        cpu_layout.addWidget(sys_section)
 
-        pc_layout.addWidget(QLabel("Целевой адрес:"), 0, 0)
+        # ── Сворачиваемая секция: Параметры CPU ─────────────────────
+        params_section = CollapsibleSection("⚙️ Параметры CPU")
+        params_section.toggle(True)
+        params_layout = QGridLayout(params_section.content_frame)
+        params_layout.setSpacing(8)
+        params_layout.setColumnStretch(1, 2)
+        params_layout.setColumnStretch(3, 2)
+
+        # Целевой адрес
+        params_layout.addWidget(QLabel("Целевой адрес:"), 0, 0)
         self.parent.cpu_target_edit = QLineEdit()
-        self.parent.cpu_target_edit.setPlaceholderText("1... или 3...")
-        pc_layout.addWidget(self.parent.cpu_target_edit, 0, 1, 1, 3)
+        self.parent.cpu_target_edit.setPlaceholderText("1... или 3... или bc1...")
+        self.parent.cpu_target_edit.setMinimumHeight(32)
+        params_layout.addWidget(self.parent.cpu_target_edit, 0, 1, 1, 3)
 
+        # Диапазон ключей
         keys_group = QGroupBox("Диапазон ключей")
         kg_layout = QGridLayout(keys_group)
+        kg_layout.setSpacing(6)
         kg_layout.addWidget(QLabel("Начало:"), 0, 0)
         self.parent.cpu_start_key_edit = QLineEdit("1")
         self.parent.cpu_start_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
+        self.parent.cpu_start_key_edit.setMinimumHeight(28)
         kg_layout.addWidget(self.parent.cpu_start_key_edit, 0, 1)
+
         kg_layout.addWidget(QLabel("Конец:"), 0, 2)
         self.parent.cpu_end_key_edit = QLineEdit(config.MAX_KEY_HEX)
         self.parent.cpu_end_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
+        self.parent.cpu_end_key_edit.setMinimumHeight(28)
         kg_layout.addWidget(self.parent.cpu_end_key_edit, 0, 3)
-        pc_layout.addWidget(keys_group, 1, 0, 1, 4)
+        params_layout.addWidget(keys_group, 1, 0, 1, 4)
 
+        # Параметры сканирования
         scan_params = QGroupBox("Сканирование")
         sp_layout = QGridLayout(scan_params)
-        sp_layout.setSpacing(8)
+        sp_layout.setSpacing(6)
+
         sp_layout.addWidget(QLabel("Префикс:"), 0, 0)
         self.parent.cpu_prefix_spin = QSpinBox()
         self.parent.cpu_prefix_spin.setRange(1, 20)
         self.parent.cpu_prefix_spin.setValue(8)
         sp_layout.addWidget(self.parent.cpu_prefix_spin, 0, 1)
+
         sp_layout.addWidget(QLabel("Попыток:"), 0, 2)
         self.parent.cpu_attempts_edit = QLineEdit("10000000")
         self.parent.cpu_attempts_edit.setEnabled(False)
         self.parent.cpu_attempts_edit.setValidator(QRegularExpressionValidator(QRegularExpression("\\d+"), self.parent))
+        self.parent.cpu_attempts_edit.setMinimumHeight(28)
         sp_layout.addWidget(self.parent.cpu_attempts_edit, 0, 3)
+
         sp_layout.addWidget(QLabel("Режим:"), 1, 0)
         self.parent.cpu_mode_combo = QComboBox()
         self.parent.cpu_mode_combo.addItems(["Последовательный", "Случайный"])
         self.parent.cpu_mode_combo.currentIndexChanged.connect(self.parent.on_cpu_mode_changed)
         sp_layout.addWidget(self.parent.cpu_mode_combo, 1, 1)
+
         sp_layout.addWidget(QLabel("Воркеры:"), 1, 2)
         self.parent.cpu_workers_spin = QSpinBox()
         self.parent.cpu_workers_spin.setRange(1, multiprocessing.cpu_count() * 2)
         self.parent.cpu_workers_spin.setValue(getattr(self.parent, 'optimal_workers', 4))
         sp_layout.addWidget(self.parent.cpu_workers_spin, 1, 3)
+
         sp_layout.addWidget(QLabel("Приоритет:"), 2, 0)
         self.parent.cpu_priority_combo = QComboBox()
         self.parent.cpu_priority_combo.addItems(
@@ -702,99 +726,80 @@ class MainWindowUI:
         )
         self.parent.cpu_priority_combo.setCurrentIndex(3)
         sp_layout.addWidget(self.parent.cpu_priority_combo, 2, 1)
-        pc_layout.addWidget(scan_params, 2, 0, 1, 4)
+        params_layout.addWidget(scan_params, 2, 0, 1, 4)
 
-        cpu_layout.addWidget(params_cpu)
+        cpu_layout.addWidget(params_section)
 
-        # Кнопки
-        cpu_btns = QHBoxLayout()
-        cpu_btns.setSpacing(10)
+        # ── Кнопки управления ─────────────────────
+        btn_row = QHBoxLayout()
+        btn_row.setSpacing(8)
+
         self.parent.cpu_start_stop_btn = QPushButton("▶ Старт CPU")
         set_button_style(self.parent.cpu_start_stop_btn, "success")
         self.parent.cpu_start_stop_btn.setMinimumHeight(38)
+        self.parent.cpu_start_stop_btn.setMinimumWidth(140)
+        btn_row.addWidget(self.parent.cpu_start_stop_btn)
+
         self.parent.cpu_pause_resume_btn = QPushButton("⏸ Пауза")
         set_button_style(self.parent.cpu_pause_resume_btn, "warning")
-        matrix_btn = QPushButton("🔷 Matrix Search")
-        matrix_btn.setStyleSheet("""
-            QPushButton { background: #8e44ad; color: white; font-weight: bold; padding: 8px; border-radius: 6px; }
-            QPushButton:hover { background: #9b59b6; }
-        """)
-        matrix_btn.clicked.connect(self.parent.open_matrix_window)
-        cpu_btns.addWidget(matrix_btn)
         self.parent.cpu_pause_resume_btn.setMinimumHeight(38)
+        self.parent.cpu_pause_resume_btn.setMinimumWidth(110)
         self.parent.cpu_pause_resume_btn.setEnabled(False)
-        cpu_btns.addWidget(self.parent.cpu_start_stop_btn)
-        cpu_btns.addWidget(self.parent.cpu_pause_resume_btn)
-        cpu_btns.addStretch()
-        cpu_layout.addLayout(cpu_btns)
+        btn_row.addWidget(self.parent.cpu_pause_resume_btn)
 
-        # ── Кнопка Матрицы Триплетов ─────────────────────
-        matrix_btn_row = QHBoxLayout()
-        matrix_btn_row.setSpacing(10)
-
-        self.parent.cpu_matrix_btn = QPushButton("🔷 Матрица Триплетов")
-        self.parent.cpu_matrix_btn.setToolTip(
-            "Конвертация: HEX ↔ Триплеты (3 бита = 1 буква)\n"
-            "Визуализация битовых паттернов приватного ключа"
-        )
-        self.parent.cpu_matrix_btn.setStyleSheet("""
-            QPushButton {
-                background: #8e44ad;
-                color: white;
-                font-weight: bold;
-                padding: 8px 16px;
-                border-radius: 6px;
-            }
+        matrix_btn = QPushButton("🔷 Матрица Триплетов")
+        matrix_btn.setToolTip("Конвертация: HEX ↔ Триплеты (3 бита = 1 буква)\nВизуализация битовых паттернов")
+        matrix_btn.setStyleSheet("""
+            QPushButton { background: #8e44ad; color: white; font-weight: bold; padding: 8px 16px; border-radius: 6px; }
             QPushButton:hover { background: #9b59b6; }
-            QPushButton:pressed { background: #7d3c98; }
         """)
-        self.parent.cpu_matrix_btn.setMinimumHeight(38)
-        self.parent.cpu_matrix_btn.clicked.connect(self.parent.open_matrix_window)
+        matrix_btn.setMinimumHeight(38)
+        matrix_btn.clicked.connect(self.parent.open_matrix_window)
+        btn_row.addWidget(matrix_btn)
 
-        matrix_btn_row.addWidget(self.parent.cpu_matrix_btn)
-        matrix_btn_row.addStretch()
-        cpu_layout.addLayout(matrix_btn_row)
+        btn_row.addStretch()
+        cpu_layout.addLayout(btn_row)
 
-        # Прогресс
-        cpu_prog = QGroupBox("📊 Прогресс")
-        cpl = QVBoxLayout(cpu_prog)
-        cpl.setSpacing(6)
+        # ── Сворачиваемая секция: Прогресс ─────────────────────
+        progress_section = CollapsibleSection("📊 Прогресс")
+        progress_section.toggle(True)
+        prog_layout = QVBoxLayout(progress_section.content_frame)
+        prog_layout.setSpacing(6)
+
         self.parent.cpu_total_stats_label = QLabel("🟡 Статус: Ожидание")
         self.parent.cpu_total_stats_label.setProperty("cssClass", "status")
-        cpl.addWidget(self.parent.cpu_total_stats_label)
+        prog_layout.addWidget(self.parent.cpu_total_stats_label)
+
         self.parent.cpu_total_progress = QProgressBar()
         self.parent.cpu_total_progress.setRange(0, 100)
         self.parent.cpu_total_progress.setValue(0)
         self.parent.cpu_total_progress.setFormat("%p%")
-        cpl.addWidget(self.parent.cpu_total_progress)
+        self.parent.cpu_total_progress.setMinimumHeight(24)
+        prog_layout.addWidget(self.parent.cpu_total_progress)
+
         self.parent.cpu_eta_label = QLabel("⏳ ETA: —")
         self.parent.cpu_eta_label.setProperty("cssClass", "speed")
-        cpl.addWidget(self.parent.cpu_eta_label)
-        cpu_layout.addWidget(cpu_prog)
+        prog_layout.addWidget(self.parent.cpu_eta_label)
 
-        # Таблица воркеров (в скролл-области)
-        cpu_layout.addWidget(QLabel("🔧 Воркеры:"))
-        scroll_wrapper = QScrollArea()
-        scroll_wrapper.setWidgetResizable(True)
-        scroll_wrapper.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        scroll_wrapper.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        scroll_wrapper.setMaximumHeight(200)
+        cpu_layout.addWidget(progress_section)
 
-        table_container = QWidget()
-        table_layout = QVBoxLayout(table_container)
-        table_layout.setContentsMargins(0, 0, 0, 0)
+        # ── Сворачиваемая секция: Воркеры ─────────────────────
+        workers_section = CollapsibleSection("🔧 Воркеры")
+        workers_section.toggle(False)  # Свернута по умолчанию
+        
+        workers_table_container = QVBoxLayout(workers_section.content_frame)
+        workers_table_container.setContentsMargins(0, 0, 0, 0)
 
         self.parent.cpu_workers_table = QTableWidget(0, 5)
         self.parent.cpu_workers_table.setHorizontalHeaderLabels(["ID", "Проверено", "Найдено", "Скорость", "Прогресс"])
-        self.parent.cpu_workers_table.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeMode.Stretch
-        )
+        self.parent.cpu_workers_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.parent.cpu_workers_table.verticalHeader().setVisible(False)
         self.parent.cpu_workers_table.setAlternatingRowColors(True)
-        table_layout.addWidget(self.parent.cpu_workers_table)
+        self.parent.cpu_workers_table.setMinimumHeight(120)
+        self.parent.cpu_workers_table.setMaximumHeight(200)
+        workers_table_container.addWidget(self.parent.cpu_workers_table)
 
-        scroll_wrapper.setWidget(table_container)
-        cpu_layout.addWidget(scroll_wrapper)
+        cpu_layout.addWidget(workers_section)
 
         cpu_layout.addStretch()
         self.parent.main_tabs.addTab(cpu_tab, "💻 CPU")
@@ -803,11 +808,13 @@ class MainWindowUI:
     # VANITY TAB
     # ─────────────────────────────────────────────────────
     def _setup_vanity_tab(self) -> None:
+        """Создание вкладки Vanity с компактным дизайном и сворачиваемыми секциями"""
         vanity_tab = QWidget()
         vanity_layout = QVBoxLayout(vanity_tab)
-        vanity_layout.setContentsMargins(12, 12, 12, 12)
-        vanity_layout.setSpacing(10)
+        vanity_layout.setContentsMargins(8, 8, 8, 8)
+        vanity_layout.setSpacing(6)
 
+        # ── Информационная панель ─────────────────────
         info_v = QLabel(
             "🎨 <b>VanitySearch</b><br>"
             "Генерация адресов с префиксом: 1Jasst, bc1qjasst и т.д.<br>"
@@ -817,14 +824,17 @@ class MainWindowUI:
         info_v.setProperty("cssClass", "info-box-warning")
         vanity_layout.addWidget(info_v)
 
-        main_v = QGroupBox("🔑 Параметры")
-        mv_layout = QGridLayout(main_v)
-        mv_layout.setSpacing(10)
+        # ── Сворачиваемая секция: Параметры ─────────────────────
+        params_section = CollapsibleSection("🔑 Параметры")
+        params_section.toggle(True)
+        mv_layout = QGridLayout(params_section.content_frame)
+        mv_layout.setSpacing(8)
         mv_layout.setColumnStretch(1, 2)
 
         mv_layout.addWidget(QLabel("Префикс:"), 0, 0)
         self.parent.vanity_prefix_edit = QLineEdit()
         self.parent.vanity_prefix_edit.setPlaceholderText("1Jasst или bc1qj")
+        self.parent.vanity_prefix_edit.setMinimumHeight(32)
         mv_layout.addWidget(self.parent.vanity_prefix_edit, 0, 1, 1, 2)
 
         mv_layout.addWidget(QLabel("Тип адреса:"), 1, 0)
@@ -839,71 +849,98 @@ class MainWindowUI:
         self.parent.vanity_compressed_cb.setChecked(True)
         mv_layout.addWidget(self.parent.vanity_compressed_cb, 1, 3)
 
-        vanity_layout.addWidget(main_v)
+        vanity_layout.addWidget(params_section)
 
-        exec_v = QGroupBox("⚙️ Исполнение")
-        ev_layout = QGridLayout(exec_v)
-        ev_layout.setSpacing(10)
+        # ── Сворачиваемая секция: Исполнение ─────────────────────
+        exec_section = CollapsibleSection("⚙️ Исполнение")
+        exec_section.toggle(True)
+        ev_layout = QGridLayout(exec_section.content_frame)
+        ev_layout.setSpacing(8)
+        
         ev_layout.addWidget(QLabel("GPU:"), 0, 0)
         self.parent.vanity_gpu_combo = QComboBox()
         self.parent.vanity_gpu_combo.setEditable(True)
         self.parent.vanity_gpu_combo.addItems(["0", "0,1", "0,1,2", "CPU"])
         self.parent.vanity_gpu_combo.setCurrentText("0")
         ev_layout.addWidget(self.parent.vanity_gpu_combo, 0, 1)
+
         ev_layout.addWidget(QLabel("CPU потоки:"), 0, 2)
         self.parent.vanity_cpu_spin = QSpinBox()
         self.parent.vanity_cpu_spin.setRange(1, multiprocessing.cpu_count())
         self.parent.vanity_cpu_spin.setValue(max(1, multiprocessing.cpu_count() - 1))
         ev_layout.addWidget(self.parent.vanity_cpu_spin, 0, 3)
-        vanity_layout.addWidget(exec_v)
 
+        vanity_layout.addWidget(exec_section)
+
+        # ── Кнопка запуска ─────────────────────
         start_v = QHBoxLayout()
         self.parent.vanity_start_stop_btn = QPushButton("🚀 Запустить генерацию")
         set_button_style(self.parent.vanity_start_stop_btn, "vanity")
         self.parent.vanity_start_stop_btn.setMinimumHeight(48)
+        self.parent.vanity_start_stop_btn.setMinimumWidth(200)
         start_v.addWidget(self.parent.vanity_start_stop_btn)
         start_v.addStretch()
         vanity_layout.addLayout(start_v)
 
-        stat_v = QGroupBox("📊 Прогресс")
-        sv_layout = QGridLayout(stat_v)
+        # ── Сворачиваемая секция: Прогресс ─────────────────────
+        stat_section = CollapsibleSection("📊 Прогресс")
+        stat_section.toggle(True)
+        sv_layout = QGridLayout(stat_section.content_frame)
         sv_layout.setSpacing(6)
+
         self.parent.vanity_status_label = QLabel("🟢 Готов")
         self.parent.vanity_status_label.setProperty("cssClass", "status")
         sv_layout.addWidget(self.parent.vanity_status_label, 0, 0, 1, 2)
+
         self.parent.vanity_speed_label = QLabel("⚡ 0 Keys/s")
         sv_layout.addWidget(self.parent.vanity_speed_label, 1, 0)
+
         self.parent.vanity_time_label = QLabel("⏱ 00:00:00")
         sv_layout.addWidget(self.parent.vanity_time_label, 1, 1)
+
         self.parent.vanity_found_label = QLabel("✨ Найдено: 0")
         self.parent.vanity_found_label.setProperty("cssClass", "found")
         sv_layout.addWidget(self.parent.vanity_found_label, 2, 0)
+
         self.parent.vanity_progress_bar = QProgressBar()
         self.parent.vanity_progress_bar.setRange(0, 0)
         self.parent.vanity_progress_bar.setFormat("Работает...")
+        self.parent.vanity_progress_bar.setMinimumHeight(24)
         sv_layout.addWidget(self.parent.vanity_progress_bar, 3, 0, 1, 2)
-        vanity_layout.addWidget(stat_v)
 
-        result_v = QGroupBox("✅ Результат")
-        rv_layout = QGridLayout(result_v)
+        vanity_layout.addWidget(stat_section)
+
+        # ── Сворачиваемая секция: Результат ─────────────────────
+        result_section = CollapsibleSection("✅ Результат")
+        result_section.toggle(False)  # Свернута по умолчанию
+        rv_layout = QGridLayout(result_section.content_frame)
         rv_layout.setSpacing(8)
+
+        rv_layout.addWidget(QLabel("Адрес:"), 0, 0)
         self.parent.vanity_result_addr = QLineEdit()
         self.parent.vanity_result_addr.setReadOnly(True)
         self.parent.vanity_result_addr.setProperty("cssClass", "result")
-        rv_layout.addWidget(QLabel("Адрес:"), 0, 0)
+        self.parent.vanity_result_addr.setMinimumHeight(32)
         rv_layout.addWidget(self.parent.vanity_result_addr, 0, 1)
+
+        rv_layout.addWidget(QLabel("HEX:"), 1, 0)
         self.parent.vanity_result_hex = QLineEdit()
         self.parent.vanity_result_hex.setReadOnly(True)
-        rv_layout.addWidget(QLabel("HEX:"), 1, 0)
+        self.parent.vanity_result_hex.setMinimumHeight(32)
         rv_layout.addWidget(self.parent.vanity_result_hex, 1, 1)
+
+        rv_layout.addWidget(QLabel("WIF:"), 2, 0)
         self.parent.vanity_result_wif = QLineEdit()
         self.parent.vanity_result_wif.setReadOnly(True)
-        rv_layout.addWidget(QLabel("WIF:"), 2, 0)
+        self.parent.vanity_result_wif.setMinimumHeight(32)
         rv_layout.addWidget(self.parent.vanity_result_wif, 2, 1)
+
         copy_btn = QPushButton("📋 Копировать")
+        copy_btn.setMinimumHeight(36)
         copy_btn.clicked.connect(self.parent.copy_vanity_result)
         rv_layout.addWidget(copy_btn, 3, 0, 1, 2)
-        vanity_layout.addWidget(result_v)
+
+        vanity_layout.addWidget(result_section)
 
         vanity_layout.addStretch()
         self.parent.main_tabs.addTab(vanity_tab, "🎨 Vanity")
@@ -912,29 +949,37 @@ class MainWindowUI:
     # FOUND KEYS TAB
     # ─────────────────────────────────────────────────────
     def _setup_found_keys_tab(self) -> None:
+        """Создание вкладки найденных ключей с компактным дизайном"""
         keys_tab = QWidget()
         keys_layout = QVBoxLayout(keys_tab)
-        keys_layout.setContentsMargins(10, 10, 10, 10)
-        keys_layout.setSpacing(10)
+        keys_layout.setContentsMargins(8, 8, 8, 8)
+        keys_layout.setSpacing(6)
 
+        # Таблица найденных ключей
         self.parent.found_keys_table = QTableWidget(0, 5)
         self.parent.found_keys_table.setHorizontalHeaderLabels(["Время", "Адрес", "HEX", "WIF", "Источник"])
-        self.parent.found_keys_table.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeMode.Stretch
-        )
+        self.parent.found_keys_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.parent.found_keys_table.verticalHeader().setVisible(False)
         self.parent.found_keys_table.setAlternatingRowColors(True)
         self.parent.found_keys_table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.parent.found_keys_table.customContextMenuRequested.connect(self.parent.show_context_menu)
+        self.parent.found_keys_table.setMinimumHeight(200)
         keys_layout.addWidget(self.parent.found_keys_table)
 
+        # Кнопки экспорта
         export_row = QHBoxLayout()
+        export_row.setSpacing(8)
+
         self.parent.export_keys_btn = QPushButton("📤 Экспорт CSV")
         set_button_style(self.parent.export_keys_btn, "primary")
+        self.parent.export_keys_btn.setMinimumHeight(36)
         self.parent.export_keys_btn.clicked.connect(self.parent.export_keys_csv)
+
         self.parent.save_all_btn = QPushButton("💾 Сохранить все")
         set_button_style(self.parent.save_all_btn, "primary")
+        self.parent.save_all_btn.setMinimumHeight(36)
         self.parent.save_all_btn.clicked.connect(self.parent.save_all_found_keys)
+
         export_row.addWidget(self.parent.export_keys_btn)
         export_row.addWidget(self.parent.save_all_btn)
         export_row.addStretch()
@@ -946,22 +991,32 @@ class MainWindowUI:
     # LOG TAB
     # ─────────────────────────────────────────────────────
     def _setup_log_tab(self) -> None:
+        """Создание вкладки лога с компактным дизайном"""
         log_tab = QWidget()
         log_layout = QVBoxLayout(log_tab)
-        log_layout.setContentsMargins(10, 10, 10, 10)
-        log_layout.setSpacing(10)
+        log_layout.setContentsMargins(8, 8, 8, 8)
+        log_layout.setSpacing(6)
 
+        # Окно вывода логов
         self.parent.log_output = QTextEdit()
         self.parent.log_output.setReadOnly(True)
         self.parent.log_output.setFont(QFont("Consolas", 9))
+        self.parent.log_output.setMinimumHeight(300)
         log_layout.addWidget(self.parent.log_output)
 
+        # Кнопки управления
         log_btns = QHBoxLayout()
+        log_btns.setSpacing(8)
+
         self.parent.clear_log_btn = QPushButton("🗑 Очистить")
         set_button_style(self.parent.clear_log_btn, "warning")
+        self.parent.clear_log_btn.setMinimumHeight(36)
+
         self.parent.open_log_btn = QPushButton("📂 Открыть файл")
         set_button_style(self.parent.open_log_btn, "primary")
+        self.parent.open_log_btn.setMinimumHeight(36)
         self.parent.open_log_btn.clicked.connect(self.parent.open_log_file)
+
         log_btns.addWidget(self.parent.clear_log_btn)
         log_btns.addWidget(self.parent.open_log_btn)
         log_btns.addStretch()
