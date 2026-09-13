@@ -21,7 +21,7 @@ from PyQt6.QtWidgets import (
 )
 
 import config
-from ui.theme import apply_dark_theme
+from ui.theme import apply_dark_theme, set_button_style, COLORS
 from ui.ui_main import MainWindowUI
 from core.unified_scanner import ScannerManager
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
@@ -375,13 +375,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
             }
             if scanner.start(params):
                 self.cpu_start_stop_btn.setText("Стоп CPU (Ctrl+Q)")
-                self.cpu_start_stop_btn.setStyleSheet("background: #e74c3c; font-weight: bold;")
+                set_button_style(self.cpu_start_stop_btn, "danger")
                 self.cpu_pause_resume_btn.setEnabled(True)
                 self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
-                self.cpu_pause_resume_btn.setStyleSheet("background: #f39c12; font-weight: bold;")
+                set_button_style(self.cpu_pause_resume_btn, "warning")
             else:
                 self.cpu_start_stop_btn.setText("Старт CPU (Ctrl+S)")
-                self.cpu_start_stop_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
+                set_button_style(self.cpu_start_stop_btn, "success")
                 self.cpu_pause_resume_btn.setEnabled(False)
 
     def _toggle_cpu_pause(self):
@@ -389,11 +389,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
         if scanner.is_running() and not scanner._is_paused:
             scanner.pause()
             self.cpu_pause_resume_btn.setText("Продолжить")
-            self.cpu_pause_resume_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
+            set_button_style(self.cpu_pause_resume_btn, "success")
         elif scanner._is_paused:
             scanner.resume()
             self.cpu_pause_resume_btn.setText("Пауза (Ctrl+P)")
-            self.cpu_pause_resume_btn.setStyleSheet("background: #f39c12; font-weight: bold;")
+            set_button_style(self.cpu_pause_resume_btn, "warning")
 
     def _toggle_gpu(self):
         scanner = self.gpu_scanner

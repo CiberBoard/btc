@@ -67,6 +67,7 @@ class CollapsibleSection(QFrame):
         
         # Контейнер контента
         self.content_widget = QWidget()
+        self.content_frame = self.content_widget  # ✅ Алиас для совместимости
         self.content_layout = QVBoxLayout(self.content_widget)
         self.content_layout.setContentsMargins(12, 12, 12, 12)
         self.content_layout.setSpacing(8)
