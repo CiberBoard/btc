@@ -1,87 +1,40 @@
 ```
-# Python
-__pycache__/
+# Compiled Python files
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-.ENV
-.venv.bak/
-pip-log.txt
-pip-delete-this-directory.txt
+__pycache__/
 
-# Build artifacts
+# UI/Build artifacts
 build/
 dist/
-*.egg
-*.egg-info/
-*.so
-*.dylib
-*.dll
-*.pyc
-*.pyo
 *.pyd
-*.py.class
-*.o
-*.obj
-*.a
-*.lib
-*.out
-*.exe
-*.jar
-*.war
-*.class
+*.so
+*.dll
 
 # Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+.venv/
+venv/
+env/
+pip-log.txt
+pipenv.lock
+requirements.txt.bak
 
-# Coverage reports
-.coverage
-coverage/
-htmlcov/
-.nyc_output/
-
-# Testing
-.pytest_cache/
-.mypy_cache/
-.hypothesis/
-
-# IDE specific
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
-.DS_Store
-Thumbs.db
 
 # Logs
 *.log
 
-# Environment variables
-.env
-.env.local
-.env.*
-!.env.example
-
 # Temp files
 *.tmp
-*.temp
-*.bak
-*.backup
-
-# OS generated
+*~
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+
+# Environment
+.env
+.env.local
+*.env.*
 ```
