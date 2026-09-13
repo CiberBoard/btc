@@ -8309,3 +8309,6 @@
 [2026-07-16 00:13:09] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:13:08] [Info] Initializing NVIDIA GeForce RTX 3060
 [2026-07-16 00:13:09] DEBUG [gpu_scanner:271]: GPU Output: [2026-07-16.00:13:08] [Info] Generating 18,874,368 starting points (720.0MB)
 [2026-07-16 00:13:09] INFO [gpu_scanner:492]: GPU процессы остановлены.
+[2026-09-13 22:22:31] INFO [main:48]: ==================================================
+[2026-09-13 22:22:31] INFO [main:49]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-09-13 22:22:31] INFO [main:50]: ==================================================
