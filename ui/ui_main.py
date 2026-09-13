@@ -1,4 +1,5 @@
 # ui/ui_main.py
+# Полностью переписанный интерфейс с исправлением всех визуальных багов
 from typing import Optional, TYPE_CHECKING
 import os
 import multiprocessing
