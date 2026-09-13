@@ -14,6 +14,9 @@ COLORS: Dict[str, str] = {
     'bg_hover': '#252535',     # Hover state
     'bg_pressed': '#151520',   # Pressed state
     'bg_elevated': '#1A1A25',  # Elevated surfaces
+    'bg_header': '#232332',    # Header background
+    'bg_button': '#2c3e50',    # Button background
+    'bg_button_hover': '#34495e',  # Button hover background
     
     # Text colors - better contrast
     'text_primary': '#FFFFFF',
@@ -24,15 +27,19 @@ COLORS: Dict[str, str] = {
     # Accent colors - more vibrant and modern
     'accent_primary': '#6B7FFF',    # Brighter blue
     'accent_primary_light': '#8A9BFF',
+    'accent_primary_dark': '#4A7AE8',
     'accent_success': '#00DC82',    # Modern green (Vercel-like)
     'accent_success_dark': '#00B86A',
     'accent_warning': '#FFB800',    # Amber warning
+    'accent_warning_dark': '#d35400',
     'accent_danger': '#FF4757',     # Coral red
     'accent_vanity': '#A855F7',     # Purple
     'accent_predict': '#EC4899',    # Pink
     'accent_info': '#0EA5E9',       # Sky blue
     'accent_gpu': '#10B981',        # Emerald for GPU
     'accent_cpu': '#3B82F6',        # Blue for CPU
+    'accent_secondary': '#9b59b6',  # Purple secondary accent
+    'accent_secondary_dark': '#8e44ad',  # Darker purple
     
     # UI elements
     'border': '#2D2D3A',
@@ -243,6 +250,26 @@ def apply_dark_theme(window: QWidget) -> None:
                 border-radius: 10px;
                 font-weight: 700;
                 font-size: 10.5pt;
+            }}
+            
+            /* GPU Button */
+            QPushButton[cssClass="gpu"] {{
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                    stop:0 {_get_color('accent_gpu')}, 
+                    stop:1 #059669);
+                color: white;
+                border: none;
+                font-weight: 700;
+            }}
+            
+            /* CPU Button */
+            QPushButton[cssClass="cpu"] {{
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                    stop:0 {_get_color('accent_cpu')}, 
+                    stop:1 #2563EB);
+                color: white;
+                border: none;
+                font-weight: 700;
             }}
 
             /* ========== INPUT FIELDS - ENHANCED ========== */
