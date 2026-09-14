@@ -25,12 +25,12 @@ logger = logging.getLogger(__name__)
 
 
 class MainWindowUI:
-    _MARGIN = 12
-    _SPACING = 10
-    _MIN_WINDOW_WIDTH = 1100
-    _MIN_WINDOW_HEIGHT = 750
-    _DEFAULT_WINDOW_WIDTH = 1300
-    _DEFAULT_WINDOW_HEIGHT = 900
+    _MARGIN = 8
+    _SPACING = 6
+    _MIN_WINDOW_WIDTH = 1000
+    _MIN_WINDOW_HEIGHT = 700
+    _DEFAULT_WINDOW_WIDTH = 1200
+    _DEFAULT_WINDOW_HEIGHT = 800
 
     def __init__(self, parent: 'BitcoinGPUCPUScanner'):
         self.parent = parent
@@ -51,6 +51,7 @@ class MainWindowUI:
 
         self.parent.main_tabs = QTabWidget()
         self.parent.main_tabs.setObjectName("mainTabs")
+        self.parent.main_tabs.setDocumentMode(True)
         main_layout.addWidget(self.parent.main_tabs)
 
         # ✅ Все вкладки должны быть определены в этом классе
@@ -104,19 +105,21 @@ class MainWindowUI:
     def _setup_gpu_tab(self) -> None:
         gpu_tab = QWidget()
         gpu_layout = QVBoxLayout(gpu_tab)
-        gpu_layout.setContentsMargins(10, 10, 10, 10)
-        gpu_layout.setSpacing(10)
+        gpu_layout.setContentsMargins(6, 6, 6, 6)
+        gpu_layout.setSpacing(6)
 
         header = QLabel("🎮 GPU Поиск приватных ключей")
         header.setProperty("cssClass", "header")
+        header.setStyleSheet("font-size: 12pt; padding: 2px 0;")
         gpu_layout.addWidget(header)
 
         # ── Целевой адрес и диапазон ──────────────────────
         addr_group = QGroupBox("🎯 Цель и диапазон")
         addr_layout = QGridLayout(addr_group)
-        addr_layout.setSpacing(10)
+        addr_layout.setSpacing(4)
         addr_layout.setColumnStretch(1, 2)
         addr_layout.setColumnStretch(3, 2)
+        addr_group.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         addr_layout.addWidget(QLabel("BTC адрес:"), 0, 0)
         self.parent.gpu_target_edit = QLineEdit()
@@ -138,9 +141,10 @@ class MainWindowUI:
         # ── Параметры GPU ─────────────────────────────────
         params_group = QGroupBox("⚙️ Параметры сканирования")
         params_layout = QGridLayout(params_group)
-        params_layout.setSpacing(10)
+        params_layout.setSpacing(4)
         params_layout.setColumnStretch(1, 1)
         params_layout.setColumnStretch(3, 1)
+        params_group.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         # Ряд 1
         params_layout.addWidget(QLabel("GPU:"), 0, 0)
@@ -230,11 +234,11 @@ class MainWindowUI:
 
         # ── Кнопки управления ─────────────────────────────
         btn_row = QHBoxLayout()
-        btn_row.setSpacing(12)
+        btn_row.setSpacing(8)
 
         self.parent.gpu_start_stop_btn = QPushButton("▶ Запустить GPU")
         set_button_style(self.parent.gpu_start_stop_btn, "success")
-        self.parent.gpu_start_stop_btn.setMinimumHeight(42)
+        self.parent.gpu_start_stop_btn.setMinimumHeight(36)
         self.parent.gpu_start_stop_btn.setSizePolicy(
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Fixed
@@ -242,18 +246,17 @@ class MainWindowUI:
 
         self.parent.gpu_optimize_btn = QPushButton("⚡ Авто-оптимизация")
         set_button_style(self.parent.gpu_optimize_btn, "primary")
-        self.parent.gpu_optimize_btn.setMinimumHeight(42)
-        # 🔧 ИСПРАВЛЕНО: удалена строка с gpu_logic (подключение будет в main_window.setup_connections)
+        self.parent.gpu_optimize_btn.setMinimumHeight(36)
 
         btn_row.addWidget(self.parent.gpu_start_stop_btn)
         btn_row.addWidget(self.parent.gpu_optimize_btn)
 
         # 🔽 Монитор GPU
         self.parent.gpu_monitor_btn = QPushButton("📊 Монитор")
-        self.parent.gpu_monitor_btn.setFixedWidth(100)
-        self.parent.gpu_monitor_btn.setMinimumHeight(40)
+        self.parent.gpu_monitor_btn.setFixedWidth(90)
+        self.parent.gpu_monitor_btn.setMinimumHeight(36)
         self.parent.gpu_monitor_btn.setStyleSheet("""
-            QPushButton { background: #9b59b6; color: white; font-weight: bold; border-radius: 6px; }
+            QPushButton { background: #9b59b6; color: white; font-weight: bold; border-radius: 4px; }
             QPushButton:hover { background: #8e44ad; }
             QPushButton:pressed { background: #7d3c98; }
         """)
@@ -261,10 +264,10 @@ class MainWindowUI:
         btn_row.addWidget(self.parent.gpu_monitor_btn)
 
         self.parent.gpu_progress_btn = QPushButton("💾 Прогресс")
-        self.parent.gpu_progress_btn.setFixedWidth(100)
-        self.parent.gpu_progress_btn.setMinimumHeight(40)
+        self.parent.gpu_progress_btn.setFixedWidth(90)
+        self.parent.gpu_progress_btn.setMinimumHeight(36)
         self.parent.gpu_progress_btn.setStyleSheet("""
-            QPushButton { background: #2c3e50; color: white; font-weight: bold; border-radius: 6px; }
+            QPushButton { background: #2c3e50; color: white; font-weight: bold; border-radius: 4px; }
             QPushButton:hover { background: #34495e; }
             QPushButton:pressed { background: #1a252f; }
         """)
@@ -276,8 +279,8 @@ class MainWindowUI:
         self.parent.gpu_min_distance_spin.setRange(10, 5000)
         self.parent.gpu_min_distance_spin.setValue(2)
         self.parent.gpu_min_distance_spin.setSuffix(" млрд")
-        self.parent.gpu_min_distance_spin.setFixedWidth(110)
-        self.parent.gpu_min_distance_spin.setMinimumHeight(40)
+        self.parent.gpu_min_distance_spin.setFixedWidth(100)
+        self.parent.gpu_min_distance_spin.setMinimumHeight(36)
         self.parent.gpu_min_distance_spin.setToolTip(
             "Мин. размер случайного диапазона:\n"
             "1 = 1 млрд ключей, 10 = 10 млрд и т.д."
@@ -287,14 +290,14 @@ class MainWindowUI:
                 background: #2c3e50;
                 color: white;
                 border: 2px solid #2c3e50;
-                border-radius: 6px;
-                padding: 5px;
+                border-radius: 4px;
+                padding: 4px;
                 font-weight: bold;
             }
             QSpinBox::up-button, QSpinBox::down-button {
                 background: #2c3e50;
                 border-radius: 3px;
-                width: 16px;
+                width: 14px;
             }
             QSpinBox::up-button:hover, QSpinBox::down-button:hover {
                 background: #e67e22;
@@ -311,14 +314,14 @@ class MainWindowUI:
 
         # 🔽 Кнопка генерации случайного диапазона
         self.parent.gpu_random_range_btn = QPushButton("🎲 Случайный диапазон")
-        self.parent.gpu_random_range_btn.setFixedWidth(160)
-        self.parent.gpu_random_range_btn.setMinimumHeight(40)
+        self.parent.gpu_random_range_btn.setFixedWidth(140)
+        self.parent.gpu_random_range_btn.setMinimumHeight(36)
         self.parent.gpu_random_range_btn.setStyleSheet("""
                     QPushButton { 
                         background: #e67e22; 
                         color: white; 
                         font-weight: bold; 
-                        border-radius: 6px; 
+                        border-radius: 4px; 
                     }
                     QPushButton:hover { background: #d35400; }
                     QPushButton:pressed { background: #a04000; }
@@ -337,7 +340,8 @@ class MainWindowUI:
         # ── Прогресс и статистика ─────────────────────────
         progress_group = QGroupBox("📊 Статистика")
         progress_layout = QGridLayout(progress_group)
-        progress_layout.setSpacing(8)
+        progress_layout.setSpacing(4)
+        progress_group.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         self.parent.gpu_status_label = QLabel("🟢 Статус: Готов")
         self.parent.gpu_status_label.setProperty("cssClass", "status")
@@ -368,6 +372,7 @@ class MainWindowUI:
         self.parent.gpu_range_label = QLabel("📐 Диапазон: —")
         self.parent.gpu_range_label.setProperty("cssClass", "range")
         self.parent.gpu_range_label.setWordWrap(True)
+        self.parent.gpu_range_label.setStyleSheet("padding: 2px 0;")
         gpu_layout.addWidget(self.parent.gpu_range_label)
 
         # ── Аппаратный мониторинг (если доступен) ─────────
@@ -418,8 +423,8 @@ class MainWindowUI:
     def _setup_kangaroo_tab(self) -> None:
         kangaroo_tab = QWidget()
         kang_layout = QVBoxLayout(kangaroo_tab)
-        kang_layout.setContentsMargins(12, 12, 12, 12)
-        kang_layout.setSpacing(10)
+        kang_layout.setContentsMargins(6, 6, 6, 6)
+        kang_layout.setSpacing(6)
 
         info = QLabel(
             "🦘 <b>Kangaroo Algorithm</b><br>"
@@ -428,13 +433,15 @@ class MainWindowUI:
         )
         info.setWordWrap(True)
         info.setProperty("cssClass", "info-box")
+        info.setStyleSheet("padding: 4px;")
         kang_layout.addWidget(info)
 
         main_params = QGroupBox("🔑 Основные параметры")
         mp_layout = QGridLayout(main_params)
-        mp_layout.setSpacing(10)
+        mp_layout.setSpacing(4)
         mp_layout.setColumnStretch(1, 2)
         mp_layout.setColumnStretch(3, 2)
+        main_params.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         mp_layout.addWidget(QLabel("Публичный ключ (Hex):"), 0, 0)
         self.parent.kang_pubkey_edit = QLineEdit()
@@ -455,9 +462,10 @@ class MainWindowUI:
 
         algo_params = QGroupBox("⚙️ Алгоритм")
         ap_layout = QGridLayout(algo_params)
-        ap_layout.setSpacing(10)
+        ap_layout.setSpacing(4)
         ap_layout.setColumnStretch(1, 1)
         ap_layout.setColumnStretch(3, 1)
+        algo_params.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         ap_layout.addWidget(QLabel("DP (Distinguished Point):"), 0, 0)
         self.parent.kang_dp_spin = QSpinBox()
@@ -486,14 +494,16 @@ class MainWindowUI:
         # Пути
         paths = QGroupBox("📁 Пути")
         pl = QGridLayout(paths)
-        pl.setSpacing(10)
+        pl.setSpacing(4)
+        paths.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         pl.addWidget(QLabel("Etarkangaroo.exe:"), 0, 0)
         self.parent.kang_exe_edit = QLineEdit()
         self.parent.kang_exe_edit.setText(os.path.join(config.BASE_DIR, "Etarkangaroo.exe"))
         pl.addWidget(self.parent.kang_exe_edit, 0, 1)
         self.parent.kang_browse_exe_btn = QPushButton("📁")
-        self.parent.kang_browse_exe_btn.setFixedWidth(40)
+        self.parent.kang_browse_exe_btn.setFixedWidth(36)
+        self.parent.kang_browse_exe_btn.setMinimumHeight(28)
         self.parent.kang_browse_exe_btn.clicked.connect(self.parent.browse_kangaroo_exe)
         pl.addWidget(self.parent.kang_browse_exe_btn, 0, 2)
 
@@ -502,7 +512,8 @@ class MainWindowUI:
         self.parent.kang_temp_dir_edit.setText(os.path.join(config.BASE_DIR, "kangaroo_temp"))
         pl.addWidget(self.parent.kang_temp_dir_edit, 1, 1)
         self.parent.kang_browse_temp_btn = QPushButton("📁")
-        self.parent.kang_browse_temp_btn.setFixedWidth(40)
+        self.parent.kang_browse_temp_btn.setFixedWidth(36)
+        self.parent.kang_browse_temp_btn.setMinimumHeight(28)
         self.parent.kang_browse_temp_btn.clicked.connect(self.parent.browse_kangaroo_temp)
         pl.addWidget(self.parent.kang_browse_temp_btn, 1, 2)
 
@@ -512,8 +523,7 @@ class MainWindowUI:
         auto_row = QHBoxLayout()
         self.parent.kang_auto_config_btn = QPushButton("🔧 Автонастройка")
         set_button_style(self.parent.kang_auto_config_btn, "primary")
-        self.parent.kang_auto_config_btn.setMinimumHeight(38)
-        # 🔧 ИСПРАВЛЕНО: удалена строка с kangaroo_logic (подключение будет в main_window.setup_connections)
+        self.parent.kang_auto_config_btn.setMinimumHeight(32)
         auto_row.addWidget(self.parent.kang_auto_config_btn)
         auto_row.addStretch()
         kang_layout.addLayout(auto_row)
@@ -521,8 +531,7 @@ class MainWindowUI:
         start_row = QHBoxLayout()
         self.parent.kang_start_stop_btn = QPushButton("🚀 Запустить Kangaroo")
         set_button_style(self.parent.kang_start_stop_btn, "success")
-        self.parent.kang_start_stop_btn.setMinimumHeight(48)
-        # 🔧 ИСПРАВЛЕНО: удалена строка с kangaroo_logic (подключение будет в main_window.setup_connections)
+        self.parent.kang_start_stop_btn.setMinimumHeight(40)
         start_row.addWidget(self.parent.kang_start_stop_btn)
         start_row.addStretch()
         kang_layout.addLayout(start_row)
@@ -530,7 +539,8 @@ class MainWindowUI:
         # Статус
         status = QGroupBox("📊 Прогресс")
         sl = QVBoxLayout(status)
-        sl.setSpacing(6)
+        sl.setSpacing(4)
+        status.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         info_row = QHBoxLayout()
         self.parent.kang_status_label = QLabel("🟢 Готов к запуску")
@@ -540,7 +550,7 @@ class MainWindowUI:
         sl.addLayout(info_row)
 
         stats = QGridLayout()
-        stats.setSpacing(10)
+        stats.setSpacing(6)
         self.parent.kang_speed_label = QLabel("⚡ 0 MKeys/s")
         self.parent.kang_speed_label.setProperty("cssClass", "speed")
         stats.addWidget(self.parent.kang_speed_label, 0, 0)
@@ -553,14 +563,17 @@ class MainWindowUI:
         self.parent.kang_range_label = QLabel("📐 Диапазон: —")
         self.parent.kang_range_label.setProperty("cssClass", "range")
         self.parent.kang_range_label.setWordWrap(True)
+        self.parent.kang_range_label.setStyleSheet("padding: 2px 0;")
         sl.addWidget(self.parent.kang_range_label)
 
         kang_layout.addWidget(status)
 
         # Справка
         help_box = QGroupBox("ℹ️ Справка")
-        help_box.setMaximumHeight(140)
+        help_box.setMaximumHeight(120)
+        help_box.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         hl = QVBoxLayout(help_box)
+        hl.setSpacing(2)
         help_text = QLabel(
             "<b>Как использовать:</b><br>"
             "1. Введите публичный ключ (Hex)<br>"
@@ -583,13 +596,14 @@ class MainWindowUI:
     def _setup_cpu_tab(self) -> None:
         cpu_tab = QWidget()
         cpu_layout = QVBoxLayout(cpu_tab)
-        cpu_layout.setContentsMargins(10, 10, 10, 10)
-        cpu_layout.setSpacing(10)
+        cpu_layout.setContentsMargins(6, 6, 6, 6)
+        cpu_layout.setSpacing(6)
 
         # Системная информация
         sys_info = QGroupBox("💻 Система")
         si_layout = QGridLayout(sys_info)
-        si_layout.setSpacing(8)
+        si_layout.setSpacing(4)
+        sys_info.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         si_layout.addWidget(QLabel("Процессор:"), 0, 0)
         self.parent.cpu_label = QLabel(f"{multiprocessing.cpu_count()} ядер")
         si_layout.addWidget(self.parent.cpu_label, 0, 1)
@@ -607,9 +621,10 @@ class MainWindowUI:
         # Параметры CPU
         params_cpu = QGroupBox("⚙️ Параметры CPU")
         pc_layout = QGridLayout(params_cpu)
-        pc_layout.setSpacing(10)
+        pc_layout.setSpacing(4)
         pc_layout.setColumnStretch(1, 2)
         pc_layout.setColumnStretch(3, 2)
+        params_cpu.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         pc_layout.addWidget(QLabel("Целевой адрес:"), 0, 0)
         self.parent.cpu_target_edit = QLineEdit()
@@ -618,6 +633,8 @@ class MainWindowUI:
 
         keys_group = QGroupBox("Диапазон ключей")
         kg_layout = QGridLayout(keys_group)
+        kg_layout.setSpacing(4)
+        keys_group.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         kg_layout.addWidget(QLabel("Начало:"), 0, 0)
         self.parent.cpu_start_key_edit = QLineEdit("1")
         self.parent.cpu_start_key_edit.setValidator(QRegularExpressionValidator(QRegularExpression("[0-9a-fA-F]+"), self.parent))
@@ -630,7 +647,8 @@ class MainWindowUI:
 
         scan_params = QGroupBox("Сканирование")
         sp_layout = QGridLayout(scan_params)
-        sp_layout.setSpacing(8)
+        sp_layout.setSpacing(4)
+        scan_params.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         sp_layout.addWidget(QLabel("Префикс:"), 0, 0)
         self.parent.cpu_prefix_spin = QSpinBox()
         self.parent.cpu_prefix_spin.setRange(1, 20)
@@ -664,20 +682,21 @@ class MainWindowUI:
 
         # Кнопки
         cpu_btns = QHBoxLayout()
-        cpu_btns.setSpacing(10)
+        cpu_btns.setSpacing(6)
         self.parent.cpu_start_stop_btn = QPushButton("▶ Старт CPU")
         set_button_style(self.parent.cpu_start_stop_btn, "success")
-        self.parent.cpu_start_stop_btn.setMinimumHeight(38)
+        self.parent.cpu_start_stop_btn.setMinimumHeight(32)
         self.parent.cpu_pause_resume_btn = QPushButton("⏸ Пауза")
         set_button_style(self.parent.cpu_pause_resume_btn, "warning")
+        self.parent.cpu_pause_resume_btn.setMinimumHeight(32)
         matrix_btn = QPushButton("🔷 Matrix Search")
         matrix_btn.setStyleSheet("""
-            QPushButton { background: #8e44ad; color: white; font-weight: bold; padding: 8px; border-radius: 6px; }
+            QPushButton { background: #8e44ad; color: white; font-weight: bold; padding: 6px; border-radius: 4px; }
             QPushButton:hover { background: #9b59b6; }
         """)
+        matrix_btn.setMinimumHeight(32)
         matrix_btn.clicked.connect(self.parent.open_matrix_window)
         cpu_btns.addWidget(matrix_btn)
-        self.parent.cpu_pause_resume_btn.setMinimumHeight(38)
         self.parent.cpu_pause_resume_btn.setEnabled(False)
         cpu_btns.addWidget(self.parent.cpu_start_stop_btn)
         cpu_btns.addWidget(self.parent.cpu_pause_resume_btn)
@@ -686,7 +705,7 @@ class MainWindowUI:
 
         # ── Кнопка Матрицы Триплетов ─────────────────────
         matrix_btn_row = QHBoxLayout()
-        matrix_btn_row.setSpacing(10)
+        matrix_btn_row.setSpacing(6)
 
         self.parent.cpu_matrix_btn = QPushButton("🔷 Матрица Триплетов")
         self.parent.cpu_matrix_btn.setToolTip(
@@ -698,13 +717,13 @@ class MainWindowUI:
                 background: #8e44ad;
                 color: white;
                 font-weight: bold;
-                padding: 8px 16px;
-                border-radius: 6px;
+                padding: 6px 12px;
+                border-radius: 4px;
             }
             QPushButton:hover { background: #9b59b6; }
             QPushButton:pressed { background: #7d3c98; }
         """)
-        self.parent.cpu_matrix_btn.setMinimumHeight(38)
+        self.parent.cpu_matrix_btn.setMinimumHeight(32)
         self.parent.cpu_matrix_btn.clicked.connect(self.parent.open_matrix_window)
 
         matrix_btn_row.addWidget(self.parent.cpu_matrix_btn)
@@ -714,7 +733,8 @@ class MainWindowUI:
         # Прогресс
         cpu_prog = QGroupBox("📊 Прогресс")
         cpl = QVBoxLayout(cpu_prog)
-        cpl.setSpacing(6)
+        cpl.setSpacing(4)
+        cpu_prog.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         self.parent.cpu_total_stats_label = QLabel("🟡 Статус: Ожидание")
         self.parent.cpu_total_stats_label.setProperty("cssClass", "status")
         cpl.addWidget(self.parent.cpu_total_stats_label)
@@ -734,7 +754,7 @@ class MainWindowUI:
         scroll_wrapper.setWidgetResizable(True)
         scroll_wrapper.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         scroll_wrapper.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        scroll_wrapper.setMaximumHeight(200)
+        scroll_wrapper.setMaximumHeight(180)
 
         table_container = QWidget()
         table_layout = QVBoxLayout(table_container)
@@ -761,8 +781,8 @@ class MainWindowUI:
     def _setup_vanity_tab(self) -> None:
         vanity_tab = QWidget()
         vanity_layout = QVBoxLayout(vanity_tab)
-        vanity_layout.setContentsMargins(12, 12, 12, 12)
-        vanity_layout.setSpacing(10)
+        vanity_layout.setContentsMargins(6, 6, 6, 6)
+        vanity_layout.setSpacing(6)
 
         info_v = QLabel(
             "🎨 <b>VanitySearch</b><br>"
@@ -771,12 +791,14 @@ class MainWindowUI:
         )
         info_v.setWordWrap(True)
         info_v.setProperty("cssClass", "info-box-warning")
+        info_v.setStyleSheet("padding: 4px;")
         vanity_layout.addWidget(info_v)
 
         main_v = QGroupBox("🔑 Параметры")
         mv_layout = QGridLayout(main_v)
-        mv_layout.setSpacing(10)
+        mv_layout.setSpacing(4)
         mv_layout.setColumnStretch(1, 2)
+        main_v.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
 
         mv_layout.addWidget(QLabel("Префикс:"), 0, 0)
         self.parent.vanity_prefix_edit = QLineEdit()
@@ -799,7 +821,8 @@ class MainWindowUI:
 
         exec_v = QGroupBox("⚙️ Исполнение")
         ev_layout = QGridLayout(exec_v)
-        ev_layout.setSpacing(10)
+        ev_layout.setSpacing(4)
+        exec_v.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         ev_layout.addWidget(QLabel("GPU:"), 0, 0)
         self.parent.vanity_gpu_combo = QComboBox()
         self.parent.vanity_gpu_combo.setEditable(True)
@@ -816,14 +839,15 @@ class MainWindowUI:
         start_v = QHBoxLayout()
         self.parent.vanity_start_stop_btn = QPushButton("🚀 Запустить генерацию")
         set_button_style(self.parent.vanity_start_stop_btn, "vanity")
-        self.parent.vanity_start_stop_btn.setMinimumHeight(48)
+        self.parent.vanity_start_stop_btn.setMinimumHeight(40)
         start_v.addWidget(self.parent.vanity_start_stop_btn)
         start_v.addStretch()
         vanity_layout.addLayout(start_v)
 
         stat_v = QGroupBox("📊 Прогресс")
         sv_layout = QGridLayout(stat_v)
-        sv_layout.setSpacing(6)
+        sv_layout.setSpacing(4)
+        stat_v.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         self.parent.vanity_status_label = QLabel("🟢 Готов")
         self.parent.vanity_status_label.setProperty("cssClass", "status")
         sv_layout.addWidget(self.parent.vanity_status_label, 0, 0, 1, 2)
@@ -842,7 +866,8 @@ class MainWindowUI:
 
         result_v = QGroupBox("✅ Результат")
         rv_layout = QGridLayout(result_v)
-        rv_layout.setSpacing(8)
+        rv_layout.setSpacing(4)
+        result_v.setStyleSheet("QGroupBox { margin-top: 8px; padding-top: 12px; }")
         self.parent.vanity_result_addr = QLineEdit()
         self.parent.vanity_result_addr.setReadOnly(True)
         self.parent.vanity_result_addr.setProperty("cssClass", "result")
@@ -857,6 +882,7 @@ class MainWindowUI:
         rv_layout.addWidget(QLabel("WIF:"), 2, 0)
         rv_layout.addWidget(self.parent.vanity_result_wif, 2, 1)
         copy_btn = QPushButton("📋 Копировать")
+        copy_btn.setMinimumHeight(28)
         copy_btn.clicked.connect(self.parent.copy_vanity_result)
         rv_layout.addWidget(copy_btn, 3, 0, 1, 2)
         vanity_layout.addWidget(result_v)

@@ -1,11 +1,1 @@
-*.pkg
-*.toc
-*.zip
-*.pyz
-/build
-/build/bild2
-/dist
-*.pyc
-*.pyc
-*.dat
-*.temp
+Nothing should be ignored based on the provided file changes. The modification of 'ui/ui_main.py' is a source code file that should be tracked in version control.
