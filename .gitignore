@@ -1,2 +1,10 @@
 __pycache__/
 *.pyc
+*.log
+*.zip
+
+settings.json
+ui_settings.json
+logs/app.log
+/logs
+/logs
