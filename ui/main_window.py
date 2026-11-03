@@ -324,6 +324,13 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # Vanity
         self.vanity_start_stop_btn.clicked.connect(self._toggle_vanity)
 
+        # Публикация найденного ключа: активна только при выбранной строке
+        self.found_keys_table.itemSelectionChanged.connect(
+            lambda: self.publish_key_btn.setEnabled(
+                bool(self.found_keys_table.selectedItems())
+            )
+        )
+
         # Общие
         self.clear_log_btn.clicked.connect(lambda: self.log_output.clear())
 
@@ -1246,6 +1253,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
         copy_hex_action = menu.addAction("Копировать HEX ключ")
         copy_addr_action = menu.addAction("Копировать адрес")
         menu.addSeparator()
+        publish_action = menu.addAction("🔺 Опубликовать")
+        publish_action.setEnabled(False)  # публикация отключена до подтверждения пользователя
+        publish_action.setToolTip("Публикация отключена до подтверждения")
+        menu.addSeparator()
         save_all_action = menu.addAction("Сохранить все ключи в файл")
         clear_action = menu.addAction("Очистить таблицу")
         action = menu.exec(self.found_keys_table.viewport().mapToGlobal(position))
@@ -1295,6 +1306,42 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.append_log(f"Ошибка сохранения ключей: {str(e)}")
         finally:
             self.set_busy(False)
+
+    def publish_found_key(self) -> None:
+        """🔺 Публикация выбранного найденного ключа.
+
+        Функция публикации отключена до подтверждения пользователя:
+        ключ никуда не отправляется, действие фиксируется только в журнале.
+        """
+        selected = self.found_keys_table.selectedItems()
+        if not selected:
+            self.append_log("Для публикации выберите строку с ключом", "warning")
+            return
+        row = selected[0].row()
+        addr_item = self.found_keys_table.item(row, 1)
+        address = addr_item.text() if addr_item else ""
+        reply = QMessageBox.question(
+            self,
+            "Подтверждение публикации",
+            f"Вы уверены, что хотите опубликовать ключ для адреса\n{address}?\n\n"
+            "⚠️ Публикация приватных ключей может привести к их компрометации.",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if reply != QMessageBox.StandardButton.Yes:
+            self.append_log("Публикация отменена пользователем", "normal")
+            return
+        # TODO: здесь будет реальная публикация (ждёт подтверждения функционала)
+        self.append_log(
+            f"🔺 Запрошена публикация ключа {address[:16]}... — "
+            f"функция отключена до подтверждения",
+            "warning",
+        )
+        QMessageBox.information(
+            self,
+            "Публикация",
+            "Функция публикации временно отключена до подтверждения.",
+        )
 
     def handle_found_key(self, key_data: Dict[str, Any]) -> None:
         try:
