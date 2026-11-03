@@ -254,6 +254,13 @@ class MatrixWindow(QDialog):
         self._setup_queue_timer()
         self._load_settings()
 
+        # 🪟 Единый стиль: собственная тёмная шапка вместо полосы Windows
+        try:
+            from ui.frameless import apply_frameless
+            apply_frameless(self)
+        except Exception:
+            pass
+
     def _get_logic(self) -> Optional['BaseScanner']:
         """
         ✅ Получить MatrixScanner через ScannerManager главного окна.
@@ -266,7 +273,7 @@ class MatrixWindow(QDialog):
 
     def _setup_ui(self) -> None:
         """✅ Инициализация UI"""
-        self.setWindowTitle("🔷 Matrix Search Engine v2.4")
+        self.setWindowTitle("Matrix Search Engine v2.4")
         self.setMinimumSize(1400, 900)
         self.setStyleSheet("""
             QDialog { 

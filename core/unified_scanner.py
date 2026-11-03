@@ -686,6 +686,10 @@ class KangarooScanner(BaseScanner):
 
         exe = params.get('etarkangaroo_exe', '')
         if not os.path.exists(exe):
+            # Старый/некорректный путь — пробуем найти утилиту в bin/ автоматически
+            exe = config.migrate_binary_path(exe)
+            params = dict(params, etarkangaroo_exe=exe)
+        if not os.path.exists(exe):
             self.log_message.emit(f"Файл не найден: {exe}", "error")
             return False
         pubkey = params.get('pubkey_hex', '')
@@ -793,7 +797,7 @@ class VanityScanner(BaseScanner):
             self.log_message.emit("Укажите префикс", "error")
             return False
 
-        exe_path = os.path.join(config.BASE_DIR, "VanitySearch.exe")
+        exe_path = config.VANITYSEARCH_EXE  # лежит в bin/ (см. config.find_binary)
         if not os.path.exists(exe_path):
             self.log_message.emit("VanitySearch.exe не найден", "error")
             return False
@@ -843,7 +847,7 @@ class VanityScanner(BaseScanner):
                 stdin=subprocess.PIPE,
                 text=True,
                 bufsize=1,
-                cwd=config.BASE_DIR,
+                cwd=config.BIN_DIR,  # внешние .exe/DLL перенесены в bin/
                 startupinfo=startupinfo,
                 creationflags=creationflags
             )

@@ -21,11 +21,16 @@ class GpuProgressTrackerWindow(QDialog):
         super().__init__(parent)
         self.parent = parent
         self.log_file_path = log_file_path
-        self.setWindowTitle("💾 Сохраненный прогресс GPU поиска")
+        self.setWindowTitle("Сохраненный прогресс GPU поиска")
         self.resize(1150, 680)
         self.setMinimumSize(950, 520)
         self._setup_ui()
         self._load_data()
+        try:
+            from ui.frameless import apply_frameless
+            apply_frameless(self)
+        except Exception:
+            pass
 
     def _setup_ui(self):
         main_layout = QVBoxLayout(self)

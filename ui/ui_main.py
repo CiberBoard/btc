@@ -19,7 +19,9 @@ if TYPE_CHECKING:
 
 import config
 from utils.helpers import make_combo32, is_coincurve_available
-from ui.theme import apply_dark_theme, set_button_style, COLORS
+from ui.theme import apply_dark_theme, set_button_style, COLORS, enhance_buttons
+from ui.sidebar import (build_sidebar_layout, install_tab_animations,
+                        SIDEBAR_QSS, install_content_stagger)
 
 logger = logging.getLogger(__name__)
 
@@ -37,22 +39,22 @@ class MainWindowUI:
         self._ui_initialized = False
 
     def setup_ui(self) -> None:
-        self.parent.setWindowTitle("⛏️ Bitcoin GPU/CPU Scanner v5.0")
+        self.parent.setWindowTitle("Bitcoin GPU/CPU Scanner v5.0")
         self.parent.resize(self._DEFAULT_WINDOW_WIDTH, self._DEFAULT_WINDOW_HEIGHT)
         self.parent.setMinimumSize(self._MIN_WINDOW_WIDTH, self._MIN_WINDOW_HEIGHT)
 
         apply_dark_theme(self.parent)
 
         main_widget = QWidget()
+        main_widget.setObjectName("centralRoot")
         self.parent.setCentralWidget(main_widget)
         main_layout = QVBoxLayout(main_widget)
-        main_layout.setContentsMargins(self._MARGIN, self._MARGIN, self._MARGIN, self._MARGIN)
-        main_layout.setSpacing(self._SPACING)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
         self.parent.main_tabs = QTabWidget()
         self.parent.main_tabs.setObjectName("mainTabs")
         self.parent.main_tabs.setDocumentMode(True)
-        main_layout.addWidget(self.parent.main_tabs)
 
         # ✅ Все вкладки должны быть определены в этом классе
         self._setup_gpu_tab()
@@ -64,6 +66,12 @@ class MainWindowUI:
         self._setup_log_tab()
         self._setup_predict_tab()
         self._setup_about_tab()
+
+        # 🧭 Современное меню: слева — sidebar с пунктами, справа — страницы
+        row_layout, self.parent.sidebar = build_sidebar_layout(self.parent, self.parent.main_tabs)
+        main_layout.addLayout(row_layout)
+        install_tab_animations(self.parent.main_tabs)
+        self.parent.setStyleSheet(self.parent.styleSheet() + "\n" + SIDEBAR_QSS)
 
         self._ui_initialized = True
 
@@ -499,7 +507,9 @@ class MainWindowUI:
 
         pl.addWidget(QLabel("Etarkangaroo.exe:"), 0, 0)
         self.parent.kang_exe_edit = QLineEdit()
-        self.parent.kang_exe_edit.setText(os.path.join(config.BASE_DIR, "Etarkangaroo.exe"))
+        # Внешние .exe перенесены в папку bin/ (защита от конфликта DLL с Qt)
+        self.parent.kang_exe_edit.setText(getattr(config, 'ETARKANGAROO_EXE',
+                                         os.path.join(config.BIN_DIR, "Etarkangaroo.exe")))
         pl.addWidget(self.parent.kang_exe_edit, 0, 1)
         self.parent.kang_browse_exe_btn = QPushButton("📁")
         self.parent.kang_browse_exe_btn.setFixedWidth(36)
@@ -917,8 +927,17 @@ class MainWindowUI:
         self.parent.save_all_btn = QPushButton("💾 Сохранить все")
         set_button_style(self.parent.save_all_btn, "primary")
         self.parent.save_all_btn.clicked.connect(self.parent.save_all_found_keys)
+        # 🔺 Кнопка публикации найденного ключа (отключена до подтверждения пользователя)
+        self.parent.publish_key_btn = QPushButton("🔺 Опубликовать")
+        set_button_style(self.parent.publish_key_btn, "warning")
+        self.parent.publish_key_btn.setEnabled(False)
+        self.parent.publish_key_btn.setToolTip(
+            "Выберите строку в таблице — публикация отключена до подтверждения"
+        )
+        self.parent.publish_key_btn.clicked.connect(self.parent.publish_found_key)
         export_row.addWidget(self.parent.export_keys_btn)
         export_row.addWidget(self.parent.save_all_btn)
+        export_row.addWidget(self.parent.publish_key_btn)
         export_row.addStretch()
         keys_layout.addLayout(export_row)
 
@@ -1249,7 +1268,7 @@ class MainWindowUI:
         about_layout.setSpacing(15)
 
         coincurve_status = "✓ Доступна" if is_coincurve_available() else "✗ Не установлена"
-        cubitcrack_status = "✓ Найден" if os.path.exists(os.path.join(config.BASE_DIR, "cuBitcrack.exe")) else "✗ Не найден"
+        cubitcrack_status = "✓ Найден" if os.path.exists(config.CUBITCRACK_EXE) else "✗ Не найден"
 
         about_text = QLabel(
             f"<div style='text-align:center; padding:20px; background:{COLORS.get('bg_input', '#232332')}; "

@@ -138,7 +138,7 @@ class GPUMonitorWindow(QDialog):
         :param parent: Родительское окно (опционально)
         """
         super().__init__(parent)
-        self.setWindowTitle("🖥️ GPU Monitor Pro")
+        self.setWindowTitle("GPU Monitor Pro")
         self.resize(MONITOR_CONFIG.DEFAULT_WIDTH, MONITOR_CONFIG.DEFAULT_HEIGHT)
         self.setMinimumSize(MONITOR_CONFIG.MIN_WIDTH, MONITOR_CONFIG.MIN_HEIGHT)
 
@@ -154,6 +154,12 @@ class GPUMonitorWindow(QDialog):
         self._init_nvml()
         self._init_ui()
         self._start_timer()
+
+        try:
+            from ui.frameless import apply_frameless
+            apply_frameless(self)
+        except Exception:
+            pass
 
     # ─────────────────────────────────────────────────────
     # 🔧 ИНИЦИАЛИЗАЦИЯ

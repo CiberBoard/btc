@@ -268,6 +268,11 @@ def show_random_range_dialog(
         global_end_hex=global_end_hex,
         min_distance_callback=lambda: min_distance,
     )
+    try:
+        from ui.frameless import apply_frameless
+        apply_frameless(dialog)
+    except Exception:
+        pass
     if dialog.exec() == QDialog.DialogCode.Accepted:
         return dialog.get_result()
     return None

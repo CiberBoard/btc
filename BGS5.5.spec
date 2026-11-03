@@ -70,10 +70,14 @@ for fname in other_files:
         print(f"✅ Добавлен {fname}")
 
 # ========== 4. 🔴 ИСПОЛНЯЕМЫЕ ФАЙЛЫ (GPU/CPU TOOLS) ==========
+# Внешние утилиты и CUDA-рантайм перенесены в папку bin/ (в сборке — тоже bin/),
+# чтобы Qt не подхватывал чужие DLL из корня приложения (access violation).
 exe_files = [
-    ('Etarkangaroo.exe', '.'),
-    ('cuBitcrack.exe', '.'),
-    ('VanitySearch.exe', '.'),
+    ('bin/Etarkangaroo.exe', 'bin'),
+    ('bin/cuBitCrack.exe', 'bin'),
+    ('bin/clBitCrack.exe', 'bin'),
+    ('bin/VanitySearch.exe', 'bin'),
+    ('bin/cudart64_101.dll', 'bin'),
 ]
 
 for exe_name, dest_dir in exe_files:
