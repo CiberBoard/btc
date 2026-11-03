@@ -1,135 +1,26 @@
 # ui/frameless.py
-# 🪟 Frameless-окна в едином стиле приложения:
+# Frameless-окна в едином стиле приложения:
 #    - собственный тёмный titlebar (drag, maximize, close) поверх контента;
-#    - на Windows дополнительно срезаем нативные WS_CAPTION/WS_THICKFRAME
-#      через WM_WINDOWPOSCHANGING (без DWM-щелей и белой полосы);
-#    - корректный maximize без перекрытия taskbar (WM_GETMINMAXINFO);
-#    - перетаскивание за окно, двойной клик = свернуть/развернуть.
+#    - на Windows нативная полоса снимается флагом Qt FramelessWindowHint
+#      (без WNDPROC-сабклассинга и прямых SetWindowLong — именно они
+#      приводили к крашу 0xC0000409 / стековому разрушению);
+#    - перетаскивание за шапку, двойной клик = развернуть/восстановить,
+#      ресайз за края — только средствами Qt (ResizeHelper).
 from __future__ import annotations
 
-import ctypes
 import sys
 
 from PyQt6.QtCore import Qt, QPoint, QSize, QRectF, QObject, QEvent, QTimer
 from PyQt6.QtGui import QColor, QPainter, QPainterPath, QPen, QCursor
 from PyQt6.QtWidgets import (
     QWidget, QMainWindow, QDialog, QHBoxLayout, QVBoxLayout, QLabel,
-    QPushButton, QGraphicsDropShadowEffect, QSizePolicy,
+    QPushButton, QSizePolicy,
 )
 
 from ui.theme import COLORS
 from ui.nav_icons import make_icon, icon_names_for_label
 
 _IS_WIN = sys.platform == "win32"
-
-if _IS_WIN:
-    try:
-        from ctypes import windll, wintypes, byref, sizeof, cast, POINTER
-
-        _GWL_STYLE = -16
-        _WS_CAPTION = 0x00C00000
-        _WS_THICKFRAME = 0x00040000
-        _WS_SYSMENU = 0x00080000
-        _SWP_FLAGS = 0x0002 | 0x0001 | 0x0020 | 0x0004  # NOSIZE|NOMOVE|NOZORDER|FRAMECHANGED
-
-        class RECT(ctypes.Structure):
-            _fields_ = [("left", ctypes.c_long), ("top", ctypes.c_long),
-                        ("right", ctypes.c_long), ("bottom", ctypes.c_long)]
-
-        class POINT(ctypes.Structure):
-            _fields_ = [("x", ctypes.c_long), ("y", ctypes.c_long)]
-
-        class MINMAXINFO(ctypes.Structure):
-            _fields_ = [("ptReserved", POINT), ("ptMaxSize", POINT),
-                        ("ptMaxPosition", POINT), ("ptMinTrackSize", POINT),
-                        ("ptMaxTrackSize", POINT)]
-
-        class WINDOWPOS(ctypes.Structure):
-            _fields_ = [("hwnd", wintypes.HWND), ("hwndInsertAfter", wintypes.HWND),
-                        ("x", ctypes.c_int), ("y", ctypes.c_int),
-                        ("cx", ctypes.c_int), ("cy", ctypes.c_int),
-                        ("flags", wintypes.UINT)]
-
-        _WM_GETMINMAXINFO = 0x0024
-        _WM_WINDOWPOSCHANGING = 0x0046
-        _MONITOR_DEFAULTTONEAREST = 0x00000002
-
-        _user32 = windll.user32
-        _GetWindowLongW = _user32.GetWindowLongW
-        _SetWindowLongW = _user32.SetWindowLongW
-        _DefWindowProcW = _user32.DefWindowProcW
-        _SetWindowPos = _user32.SetWindowPos
-        _MonitorFromWindow = _user32.MonitorFromWindow
-
-        class MONITORINFO(ctypes.Structure):
-            _fields_ = [("cbSize", wintypes.DWORD), ("rcMonitor", RECT),
-                        ("rcWork", RECT), ("dwFlags", wintypes.DWORD)]
-
-        _GetMonitorInfoW = _user32.GetMonitorInfoW
-        _WIN_SUBCLASS_AVAILABLE = True
-    except Exception:
-        _WIN_SUBCLASS_AVAILABLE = False
-else:
-    _WIN_SUBCLASS_AVAILABLE = False
-
-
-# ─────────────────────────────────────────────────────────────
-# Win32: subclass WNDPROC — только для WM_GETMINMAXINFO,
-# чтобы maximize не перекрывал taskbar (work area монитора).
-# ─────────────────────────────────────────────────────────────
-
-_SUBCLASSES = {}  # hwnd -> (callback, holder) — не даём GC собрать callback
-
-if _WIN_SUBCLASS_AVAILABLE:
-    from ctypes import WINFUNCTYPE
-
-    _SUBCLASS_PROC_TYPE = WINFUNCTYPE(
-        wintypes.LPARAM,           # LRESULT (64-bit safe)
-        wintypes.HWND, wintypes.UINT,
-        wintypes.WPARAM, wintypes.LPARAM)
-
-    _SetWindowLongPtrW = _user32.SetWindowLongPtrW
-    _SetWindowLongPtrW.restype = wintypes.LPARAM
-    _SetWindowLongPtrW.argtypes = [wintypes.HWND, ctypes.c_int, ctypes.c_void_p]
-    _CallWindowProcW = _user32.CallWindowProcW
-    _CallWindowProcW.restype = wintypes.LPARAM
-    _CallWindowProcW.argtypes = [ctypes.c_void_p, wintypes.HWND,
-                                 wintypes.UINT, wintypes.WPARAM, wintypes.LPARAM]
-    _GetWindowLongW.restype = wintypes.LONG
-    _SetWindowLongW.restype = wintypes.LONG
-
-    def _install_win_hooks(win):
-        """Subclass WNDPROC: чиним maximize под taskbar через WM_GETMINMAXINFO."""
-        try:
-            hwnd = int(win.winId())
-            if hwnd in _SUBCLASSES:
-                return
-
-            holder = {}
-
-            def wnd_proc(h, msg, wparam, lparam):
-                try:
-                    if msg == _WM_GETMINMAXINFO:
-                        mmi = cast(lparam, POINTER(MINMAXINFO)).contents
-                        mon = _MonitorFromWindow(h, _MONITOR_DEFAULTTONEAREST)
-                        mi = MONITORINFO()
-                        mi.cbSize = sizeof(MONITORINFO)
-                        if _GetMonitorInfoW(mon, byref(mi)):
-                            mmi.ptMaxPosition.x = mi.rcWork.left - mi.rcMonitor.left
-                            mmi.ptMaxPosition.y = mi.rcWork.top - mi.rcMonitor.top
-                            mmi.ptMaxSize.x = mi.rcWork.right - mi.rcWork.left
-                            mmi.ptMaxSize.y = mi.rcWork.bottom - mi.rcWork.top
-                        return 0
-                except Exception:
-                    pass
-                return _CallWindowProcW(holder['old'], h, msg, wparam, lparam)
-
-            cb = _SUBCLASS_PROC_TYPE(wnd_proc)
-            old = _SetWindowLongPtrW(hwnd, -8, ctypes.cast(cb, ctypes.c_void_p))
-            holder['old'] = old
-            _SUBCLASSES[hwnd] = (cb, holder)
-        except Exception:
-            pass
 
 
 # ─────────────────────────────────────────────────────────────
@@ -515,64 +406,10 @@ class ResizeHelper(QObject):
 # Public API
 # ─────────────────────────────────────────────────────────────
 
-if _WIN_SUBCLASS_AVAILABLE:
-    _DWMWA_EXTENDED_FRAME_BOUNDS = 9
-    _DwmGetWindowAttribute = windll.dwmapi.DwmGetWindowAttribute
-    _DwmGetWindowAttribute.restype = ctypes.HRESULT if hasattr(ctypes, "HRESULT") else ctypes.c_long
-
-    def _strip_native_caption(win):
-        """Гарантированно снимает нативную полосу заголовка Windows.
-
-        ДВА взаимодополняющих способа (применяются оба):
-          1) Флаг Qt FramelessWindowHint — самый надёжный: Qt сама
-             пересоздаёт окно без WS_CAPTION/WS_TITLEBAR на любой стадии.
-          2) Прямой SetWindowLongW(GWL_STYLE, ...) со снятием
-             WS_CAPTION|WS_SYSMENU и сохранением WS_THICKFRAME
-             (нативный resize/snap остаётся работает).
-        Применяется ДО show(), поэтому белая полоса не мелькает при старте.
-        """
-        try:
-            win.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
-        except Exception:
-            pass
-        try:
-            hwnd = int(win.winId())
-            styles = _GetWindowLongW(hwnd, _GWL_STYLE)
-            new = (styles & ~(_WS_CAPTION | _WS_SYSMENU)) | _WS_THICKFRAME
-            if new != styles:
-                _SetWindowLongW(hwnd, _GWL_STYLE, new)
-                _SetWindowPos(hwnd, 0, 0, 0, 0, 0, _SWP_FLAGS)
-        except Exception:
-            pass
-
-    def _ensure_no_caption(win):
-        """Повторная страховка после show()/showEvent(): если Windows или Qt
-        вернули WS_CAPTION (например, после showMaximized), снова срезаем его."""
-        try:
-            if not win.isVisible():
-                return
-            hwnd = int(win.winId())
-            styles = _GetWindowLongW(hwnd, _GWL_STYLE)
-            if styles & _WS_CAPTION:
-                _SetWindowLongW(hwnd, _GWL_STYLE,
-                                (styles & ~(_WS_CAPTION | _WS_SYSMENU)) | _WS_THICKFRAME)
-                _SetWindowPos(hwnd, 0, 0, 0, 0, 0, _SWP_FLAGS)
-        except Exception:
-            pass
-
-
-class _CaptionGuard(QObject):
-    """Следит, чтобы нативный caption не возвращался при show/resize/state."""
-
-    def __init__(self, win):
-        super().__init__(win)
-        self._win = win
-
-    def eventFilter(self, obj, e):
-        t = e.type()
-        if t in (QEvent.Type.Show, QEvent.Type.WindowStateChange, QEvent.Type.Resize):
-            QTimer.singleShot(0, lambda: _ensure_no_caption(self._win))
-        return False
+# Примечание: нативная полоса Windows снимается ИСКЛЮЧИТЕЛЬНО флагом Qt
+# FramelessWindowHint. Прямые вызовы SetWindowLong/SetWindowPos и
+# subclass'инг WNDPROC были удалены — именно они вызывали разрушение
+# стека и краш процесса (exit code 0xC0000409) на Windows x64.
 
 
 # ─────────────────────────────────────────────────────────────
@@ -689,24 +526,24 @@ def force_non_native_dialogs() -> None:
 def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
     """Делает окно безрамочным в стиле приложения. Идемпотентно.
 
+    Реализация — только средствами Qt (FramelessWindowHint + собственный
+    titlebar + ResizeHelper). Никаких ctypes/WNDPROC-хуков: они вызывали
+    краш 0xC0000409 на Windows.
+
     Вызывать ДО первого show() окна — тогда белая нативная полоса
     не появляется даже на кадр.
     """
     if getattr(win, "_bgs_titlebar", None) is not None:
         return win
 
-    # 1) Убираем нативную Windows-полосу заголовка (крестики/белая полоса):
-    #    FramelessWindowHint + снятие WS_CAPTION|WS_SYSMENU (оставляем
-    #    WS_THICKFRAME — Qt/native обрабатывают resize/snap, а drag по краю
-    #    работает штатно).
-    if _WIN_SUBCLASS_AVAILABLE:
-        _strip_native_caption(win)
-        win.installEventFilter(_CaptionGuard(win))
-    elif _IS_WIN:
-        try:
-            win.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
-        except Exception:
-            pass
+    # 1) Убираем нативную полосу заголовка Windows (белая полоса с
+    #    крестиками) — штатным флагом Qt. Делаем это ДО создания любых
+    #    дочерних виджетов и ДО show(), чтобы окно один раз пересоздалось
+    #    без WS_CAPTION и не мелькала нативная шапка.
+    try:
+        win.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
+    except Exception:
+        pass
 
     # Единый фон окна (в т.ч. под собственной шапкой) — из палитры темы
     win.setStyleSheet(
@@ -756,49 +593,30 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
     bar.show()
     bar.raise_()
 
-    # 3) Тень под шапкой + тонкая рамка всего окна
-    sh = QGraphicsDropShadowEffect(bar)
-    sh.setBlurRadius(14)
-    sh.setOffset(0, 2)
-    sh.setColor(QColor(0, 0, 0, 90))
-    bar.setGraphicsEffect(sh)
-
+    # 3) Разделитель под шапкой рисует сама TitleBar (paintEvent);
+    #    QGraphicsDropShadowEffect на неё НЕ вешаем: у overlay-шапки,
+    #    перекрывающей край окна, эффект обрезает тень и при каждом
+    #    resize заставляет Qt пересоздавать offscreen-буфер — это один
+    #    из источников нестабильности на Windows.
     overlay = _FrameOverlay(win)
     overlay.setGeometry(win.rect())
     win._bgs_overlay = overlay
     win.installEventFilter(_GeoSync(win, overlay))
 
-    # 4) Resizer по краям — только если Windows-хуки недоступны
-    #    (иначе нативный hit-test сам даёт resize/snap по краям)
-    if not _WIN_SUBCLASS_AVAILABLE:
-        helper = ResizeHelper(win)
-        win.installEventFilter(helper)
-        for c in win.findChildren(QWidget):
-            if c is not bar and not isinstance(c, _WinBtn):
-                c.installEventFilter(helper)
-        win._bgs_resizer = helper
+    # 4) Resizer по краям — реализован только средствами Qt и работает
+    #    одинаково на всех платформах (frameless-окна без нативного
+    #    hit-test'а рамок).
+    helper = ResizeHelper(win)
+    win.installEventFilter(helper)
+    for c in win.findChildren(QWidget):
+        if c is not bar and not isinstance(c, _WinBtn):
+            c.installEventFilter(helper)
+    win._bgs_resizer = helper
 
     # 5) Синхронизация кнопки max/restore
     win.installEventFilter(_MaxSync(win))
 
-    # 6) Win32: снимаем WS_CAPTION/WS_THICKFRAME через subclass WNDPROC,
-    #    чиним maximize под taskbar через WM_GETMINMAXINFO.
-    if _WIN_SUBCLASS_AVAILABLE:
-        if win.isVisible():
-            _install_win_hooks(win)
-        else:
-            win.showEvent = _wrap_show_install_hooks(win)  # type: ignore
     return win
-
-
-def _wrap_show_install_hooks(win):
-    original = win.showEvent
-
-    def show_event(e):
-        original(e)
-        _install_win_hooks(win)
-
-    return show_event
 
 
 class _BarOverlaySync(QObject):
