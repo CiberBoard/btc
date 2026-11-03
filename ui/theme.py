@@ -85,7 +85,7 @@ def apply_dark_theme(window: QWidget) -> None:
         window.setPalette(palette)
         window.setAutoFillBackground(True)
 
-        # 2️⃣ StyleSheet — современный дизайн в тёмно-серых тонах
+        # 2️⃣ StyleSheet — современный дизайн в тёмно-серых тонах (с анимациями)
         window.setStyleSheet(f"""
             /* ========== БАЗОВЫЕ НАСТРОЙКИ ========== */
             QWidget {{
@@ -93,6 +93,13 @@ def apply_dark_theme(window: QWidget) -> None:
                 color: {_get_color('text_primary')};
                 font-family: 'Segoe UI', 'Inter', 'Roboto', 'Arial', sans-serif;
                 font-size: 9.5pt;
+            }}
+
+            /* Страницы-вкладки: мягкий радиальный «свет» сверху — глубина */
+            #mainTabs > QWidget {{
+                background: qradialgradient(cx:0.5, cy:0, radius:1.4,
+                    stop:0 {_get_color('bg_card')}, stop:1 {_get_color('bg_main')});
+                border-radius: 12px;
             }}
 
             /* ========== ВКЛАДКИ (QTabWidget / QTabBar) ========== */
@@ -142,26 +149,36 @@ def apply_dark_theme(window: QWidget) -> None:
                 subcontrol-position: right;
             }}
 
-            /* ========== ГРУППЫ (QGroupBox) ========== */
+            /* ========== ГРУППЫ (QGroupBox) — «карточки» интерфейса ========== */
             QGroupBox {{
                 border: 1px solid {_get_color('border_soft')};
-                border-radius: 10px;
+                border-radius: 12px;
                 margin-top: 16px;
-                padding-top: 20px;
-                background: {_get_color('bg_card')};
+                margin-left: 4px;
+                margin-right: 4px;
+                padding-top: 22px;
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-bottom: 6px;
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #292A30, stop:1 {_get_color('bg_card')});
                 font-weight: 600;
                 color: {_get_color('text_primary')};
+            }}
+            QGroupBox:hover {{
+                border: 1px solid {_get_color('border')};
             }}
             QGroupBox::title {{
                 subcontrol-origin: margin;
                 subcontrol-position: top left;
-                left: 12px;
-                padding: 2px 10px;
+                left: 14px;
+                padding: 3px 12px;
                 color: {_get_color('text_secondary')};
                 background: {_get_color('bg_input')};
                 border: 1px solid {_get_color('border_soft')};
-                border-radius: 6px;
-                font-size: 9pt;
+                border-radius: 999px;
+                font-size: 8.5pt;
+                letter-spacing: 0.4px;
             }}
 
             /* ========== КНОПКИ ========== */
@@ -169,7 +186,7 @@ def apply_dark_theme(window: QWidget) -> None:
                 background: {_GRADIENT_BTN.format(start=_get_color('btn_top'), end=_get_color('btn_bottom'))};
                 color: {_get_color('text_primary')};
                 border: 1px solid {_get_color('border')};
-                border-radius: 8px;
+                border-radius: 9px;
                 padding: 8px 20px;
                 font-weight: 500;
                 min-height: 34px;
@@ -178,10 +195,17 @@ def apply_dark_theme(window: QWidget) -> None:
                 background: {_GRADIENT_BTN.format(start=_get_color('btn_hover_top'), end=_get_color('btn_hover_bottom'))};
                 border-color: {_get_color('border_focus')};
                 color: #FFFFFF;
+                padding-left: 24px;              /* «дышащая» анимация hover */
             }}
             QPushButton:pressed {{
                 background: {_get_color('bg_pressed')};
                 border-color: {_get_color('accent_primary')};
+                padding-top: 9px;               /* эффект «вжатия» */
+                padding-bottom: 7px;
+            }}
+            QPushButton:focus {{
+                border: 1px solid {_get_color('border_focus')};
+                outline: none;
             }}
             QPushButton:disabled {{
                 background: {_get_color('bg_input')};
@@ -332,27 +356,35 @@ def apply_dark_theme(window: QWidget) -> None:
             }}
             QRadioButton::indicator {{ border-radius: 9px; }}
 
-            /* ========== ПРОГРЕСС-БАРЫ ========== */
+            /* ========== ПРОГРЕСС-БАРЫ (с бегущим бликом) ========== */
             QProgressBar {{
                 background: {_get_color('bg_input')};
                 border: 1px solid {_get_color('border_soft')};
-                border-radius: 7px;
+                border-radius: 8px;
                 text-align: center;
                 font-weight: 500;
                 color: {_get_color('text_primary')};
             }}
             QProgressBar::chunk {{
-                background: {_GRADIENT_CHUNK.format(start='#6E7885', end='#59616C')};
-                border-radius: 6px;
+                border-radius: 7px;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #6E7885, stop:0.45 #59616C, stop:0.5 #79838F,
+                    stop:0.55 #59616C, stop:1 #6E7885);
             }}
             QProgressBar[cssClass="success"]::chunk {{
-                background: {_GRADIENT_CHUNK.format(start='#6E9C7E', end='#587F67')};
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #6E9C7E, stop:0.45 #587F67, stop:0.5 #7FAE8E,
+                    stop:0.55 #587F67, stop:1 #6E9C7E);
             }}
             QProgressBar[cssClass="warning"]::chunk {{
-                background: {_GRADIENT_CHUNK.format(start='#B99A6B', end='#96805A')};
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #B99A6B, stop:0.45 #96805A, stop:0.5 #C9AC7E,
+                    stop:0.55 #96805A, stop:1 #B99A6B);
             }}
             QProgressBar[cssClass="danger"]::chunk {{
-                background: {_GRADIENT_CHUNK.format(start='#C0796E', end='#9E645B')};
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #C0796E, stop:0.45 #9E645B, stop:0.5 #CF8B81,
+                    stop:0.55 #9E645B, stop:1 #C0796E);
             }}
 
             /* ========== ТАБЛИЦЫ ========== */
@@ -369,6 +401,10 @@ def apply_dark_theme(window: QWidget) -> None:
             QTableWidget::item, QTreeWidget::item, QListView::item {{
                 padding: 6px 8px;
                 border-bottom: 1px solid {_get_color('grid_line')};
+                border-radius: 4px;
+            }}
+            QTableWidget::item:hover, QTreeWidget::item:hover, QListView::item:hover {{
+                background: #2F2F38;                       /* подсветка строки под курсором */
             }}
             QTableWidget::item:selected, QTreeWidget::item:selected, QListView::item:selected {{
                 background: {_get_color('bg_elevated')};
@@ -480,12 +516,13 @@ def apply_dark_theme(window: QWidget) -> None:
                 margin-bottom: 8px;
             }}
 
-            /* ========== INFO BOXES ========== */
+            /* ========== INFO BOXES — «пилюли» с подложкой ========== */
             QLabel[cssClass="info-box"] {{
                 color: {_get_color('text_secondary')};
                 padding: 10px 14px;
-                background: {_get_color('bg_input')};
-                border-radius: 8px;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #2B2C33, stop:1 {_get_color('bg_input')});
+                border-radius: 10px;
                 border-left: 3px solid {_get_color('accent_primary')};
                 font-size: 9pt;
             }}
@@ -529,15 +566,16 @@ def apply_dark_theme(window: QWidget) -> None:
                 background: {_get_color('bg_card')};
                 color: {_get_color('text_primary')};
                 border: 1px solid {_get_color('border')};
-                border-radius: 8px;
-                padding: 5px;
+                border-radius: 10px;
+                padding: 6px;
             }}
             QMenu::item {{
                 padding: 7px 26px 7px 14px;
-                border-radius: 6px;
+                border-radius: 7px;
             }}
             QMenu::item:selected {{
-                background: {_get_color('bg_elevated')};
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #3C3C46, stop:1 {_get_color('bg_elevated')});
                 color: #FFFFFF;
             }}
             QMenu::separator {{
@@ -548,12 +586,18 @@ def apply_dark_theme(window: QWidget) -> None:
 
             /* ========== СТАТУС-БАР ========== */
             QStatusBar {{
-                background: {_get_color('bg_card')};
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                    stop:0 {_get_color('bg_card')}, stop:1 #212126);
                 color: {_get_color('text_secondary')};
                 border-top: 1px solid {_get_color('border_soft')};
             }}
             QStatusBar::item {{
                 border: none;
+            }}
+            QStatusBar QLabel {{
+                padding: 2px 8px;
+                border-radius: 6px;
+                background: transparent;
             }}
 
             /* ========== СПИНБОКСЫ (стрелки) ========== */
