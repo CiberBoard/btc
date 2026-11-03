@@ -18,12 +18,25 @@ if sys.platform == 'win32':
     multiprocessing.set_start_method('spawn', force=True)
 
 # 🔥 КРИТИЧНО для Windows + PyQt6 + pyqtgraph/numpy:
-# Qt при инициализации рендеринга обращается к драйверу OpenGL
-# (nvoglv64.dll / atig6pxx.dll / igd*.dll). Повреждённый или несовместимый
-# драйвер вызывает мгновенное падение процесса (exit code 0xC0000409) —
-# как правило сразу после логгера «Запуск …», до появления окна.
-# Заставляем Qt использовать безопасный software-рендерер.
-# ВАЖНО: переменную нужно задать ДО импорта модулей PyQt6.
+# Падение с Fatal Python error: Aborted на строке создания окна означает,
+# что Qt аварийно завершил процесс при инициализации GUI-плагина/стиля или
+# аппаратного OpenGL (Qt использует LoadLibrary по системному пути и может
+# подхватить чужую DLL из PATH — например cudart64_101.dll из папки проекта,
+# что даёт fastfail/abort без трейсбека).
+# Решения (переменные задаются ДО импорта модулей PyQt6):
+#   1. QT_QPA_PLATFORM_PLUGIN_PATH — грузим плагин windows только из venv,
+#      перекрывая поиск по PATH.
+#   2. QT_STYLE_OVERRIDE=Fusion — не трогаем нативный стиль Windows.
+#   3. QT_OPENGL=software — не дёргаем видеодрайвер OpenGL вообще.
+if sys.platform == 'win32':
+    _plugin_dir = os.path.join(
+        os.path.dirname(os.path.abspath(sys.executable)),
+        'Lib', 'site-packages', 'PyQt6', 'Qt6', 'plugins', 'platforms'
+    )
+    if os.path.isdir(_plugin_dir):
+        os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = _plugin_dir
+
+os.environ.setdefault("QT_STYLE_OVERRIDE", "Fusion")
 os.environ.setdefault("QT_OPENGL", "software")
 
 os.environ["OMP_NUM_THREADS"] = "1"
