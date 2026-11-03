@@ -143,6 +143,16 @@ class BitcoinGPUCPUScanner(QMainWindow):
         logger.info(f"📁 Settings path: {self.settings.filepath}")
 
     # ==================== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ====================
+    def resizeEvent(self, event):
+        """Синхронизируем позицию «ручки» сайдбара при изменении размера окна."""
+        super().resizeEvent(event)
+        reposition = getattr(self, "_sidebar_handle_reposition", None)
+        if callable(reposition):
+            try:
+                reposition()
+            except Exception:
+                pass
+
     @staticmethod
     def ensure_file_exists(filepath: str) -> None:
         Path(filepath).touch(exist_ok=True)

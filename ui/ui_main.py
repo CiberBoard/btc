@@ -19,8 +19,9 @@ if TYPE_CHECKING:
 
 import config
 from utils.helpers import make_combo32, is_coincurve_available
-from ui.theme import apply_dark_theme, set_button_style, COLORS
-from ui.sidebar import build_sidebar_layout, install_tab_animations, SIDEBAR_QSS
+from ui.theme import apply_dark_theme, set_button_style, COLORS, enhance_buttons
+from ui.sidebar import (build_sidebar_layout, install_tab_animations,
+                        SIDEBAR_QSS, install_content_stagger)
 
 logger = logging.getLogger(__name__)
 
