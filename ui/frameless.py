@@ -10,11 +10,11 @@ from __future__ import annotations
 
 import sys
 
-from PyQt6.QtCore import Qt, QPoint, QSize, QRectF, QObject, QEvent, QTimer
+from PyQt6.QtCore import Qt, QPoint, QPointF, QSize, QRectF, QObject, QEvent, QTimer
 from PyQt6.QtGui import QColor, QPainter, QPainterPath, QPen, QCursor
 from PyQt6.QtWidgets import (
     QWidget, QMainWindow, QDialog, QHBoxLayout, QVBoxLayout, QLabel,
-    QPushButton, QSizePolicy,
+    QPushButton, QSizePolicy, QApplication,
 )
 
 from ui.theme import COLORS
@@ -74,7 +74,11 @@ QPushButton:pressed {{ background: #9d4640; color: #FFFFFF; }}
 class _WinBtn(QPushButton):
     """Миниатюрная кнопка window controls (28×20), рисует символ через QPainter."""
 
+    BTN_W = 40   # ширина кнопки в логических px (компактнее нативных Windows)
+    BTN_H = 32   # высота кнопки ~ вся шапка: символ ровно по центру
+
     def __init__(self, kind: str, parent=None):
+        self._scale = 1.0
         # ВАЖНО: фиксируем размеры ПОСЛЕ установки QSS родителя-окна —
         # polish от чужих stylesheet'ов (min-width/padding у QPushButton)
         # иначе переопределяет sizeHint кнопок и layout растягивает их.
@@ -86,12 +90,20 @@ class _WinBtn(QPushButton):
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
     def set_locked_size(self):
-        """Жёсткая фиксация 30×22 (перепишет любой min-size из чужого QSS)."""
-        self.setFixedSize(30, 22)
+        """Жёсткая фиксация размера (перепишет любой min-size из чужого QSS).
+
+        Кнопки были 30×22 при шапке 36 px: символ рисовался по центру
+        виджета, но сам виджет layout выравнивал по вертикали произвольно,
+        из-за чего крестик/квадратик «ездили» вверх-вниз и выглядели
+        криво масштабированными. Теперь кнопка занимает всю высоту шапки,
+        а глиф рисуется строго по геометрическому центру.
+        """
+        w, h = getattr(self, '_btn_w', self.BTN_W), getattr(self, '_btn_h', self.BTN_H)
+        self.setFixedSize(w, h)
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         try:
-            self.setMinimumSize(QSize(30, 22))
-            self.setMaximumSize(QSize(30, 22))
+            self.setMinimumSize(QSize(w, h))
+            self.setMaximumSize(QSize(w, h))
         except Exception:
             pass
 
@@ -109,26 +121,45 @@ class _WinBtn(QPushButton):
         hovered = self.underMouse()
         col = "#FFFFFF" if (self._kind == 'close' and hovered) else _TEXT_DIM
         pen = QPen(QColor(col))
-        pen.setWidthF(1.3)
-        pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+        pen.setWidthF(1.2)
+        pen.setCapStyle(Qt.PenCapStyle.FlatCap)
         p.setPen(pen)
-        cx, cy = self.width() / 2, self.height() / 2
+        cx, cy = self.width() / 2.0, self.height() / 2.0
+        # Глифы рисуем в координатах с точкой .5 — так штриховые линии
+        # ложатся ровно на пикетную сетку и не «мылятся»/не кажутся кривыми.
+        # s — масштаб глифа (учитывает DPI-масштаб экрана).
+        s = getattr(self, '_glyph_scale', 1.0)
         if self._kind == 'min':
-            p.drawLine(QPoint(int(cx - 5), int(cy)), QPoint(int(cx + 5), int(cy)))
+            # тире как у Windows: 10 px, по центру
+            y = int(cy) + 0.5
+            half = 5.0 * s
+            p.drawLine(QPointF(cx - half, y), QPointF(cx + half, y))
         elif self._kind == 'max':
-            p.drawRect(QRectF(cx - 5, cy - 4.5, 10, 9))
+            # квадрат ~10×10 со стороной на полу-пикселе → чёткие грани
+            side = round(10.0 * s)
+            x0 = int(cx - side / 2) + 0.5
+            y0 = int(cy - side / 2) + 0.5
+            p.drawRect(QRectF(x0, y0, side - 1, side - 1))
         elif self._kind == 'restore':
-            p.drawRect(QRectF(cx - 5, cy - 2.5, 8, 7))
-            path = QPainterPath()
-            path.moveTo(cx - 2, cy - 3.5)
-            path.lineTo(cx - 2, cy - 5.5)
-            path.lineTo(cx + 5, cy - 5.5)
-            path.lineTo(cx + 5, cy + 1.5)
-            path.lineTo(cx + 3, cy + 1.5)
+            # два overlapping окна (стиль Windows restore)
+            side = round(9.0 * s)
+            off = max(2, round(3 * s))
+            x0 = int(cx - side / 2) + 0.5
+            y0 = int(cy - side / 2 + off / 2) + 0.5
+            p.drawRect(QRectF(x0, y0, side - 1, side - 1))
+            path = QPainterPath(QPointF(x0 + off, y0))
+            path.lineTo(QPointF(x0 + off, y0 - off))
+            path.lineTo(QPointF(x0 + side + off - 1, y0 - off))
+            path.lineTo(QPointF(x0 + side + off - 1, y0 + side - off))
+            path.lineTo(QPointF(x0 + side - 1, y0 + side - off))
             p.drawPath(path)
         elif self._kind == 'close':
-            p.drawLine(QPoint(int(cx - 5), int(cy - 4)), QPoint(int(cx + 5), int(cy + 4)))
-            p.drawLine(QPoint(int(cx + 5), int(cy - 4)), QPoint(int(cx - 5), int(cy + 4)))
+            # крестик ~10×10, концы на полу-пикселях — симметричный, без «лесенки»
+            half = round(4.5 * s) + 0.5
+            x0 = int(cx) + 0.5
+            y0 = int(cy) + 0.5
+            p.drawLine(QPointF(x0 - half, y0 - half), QPointF(x0 + half, y0 + half))
+            p.drawLine(QPointF(x0 + half, y0 - half), QPointF(x0 - half, y0 + half))
         p.end()
 
 
@@ -160,7 +191,19 @@ class TitleBar(QWidget):
 
         self.setObjectName("appTitleBar")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        self.setFixedHeight(self.HEIGHT)
+        # Высота шапки и кнопок — в логических px с учётом DPI-масштаба
+        # Windows (125%/150%): иначе при fixed 36px и кнопках 30×22
+        # на HiDPI всё выглядело «криво отмасштабированным».
+        dpr = 1.0
+        try:
+            scr = self.screen() or QApplication.primaryScreen()
+            if scr is not None:
+                dpr = max(1.0, float(scr.devicePixelRatio()))
+        except Exception:
+            dpr = 1.0
+        self._bar_h = max(self.HEIGHT, int(round(self.HEIGHT * dpr)))
+        self._dpr = dpr
+        self.setFixedHeight(self._bar_h)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setStyleSheet(f"""
             #appTitleBar {{ background: {_BG_TITLEBAR}; border: none; }}
@@ -184,13 +227,15 @@ class TitleBar(QWidget):
         """)
 
         lay = QHBoxLayout(self)
-        lay.setContentsMargins(10, 0, 6, 0)
+        # Отступы: слева 10, справа 0 — кнопки управления идут вплотную
+        # к правому краю окна (как нативные controls Windows), иначе
+        # последняя кнопка «утопала» внутрь шапки и ряд выглядел криво.
+        lay.setContentsMargins(10, 0, 0, 0)
         lay.setSpacing(8)
 
         self._icon = QLabel()
         self._icon.setObjectName("appTitleIcon")
         self._icon.setFixedSize(18, 18)
-        self._icon.setScaledContents(True)
         self._icon.setStyleSheet("background: transparent; border: none;")
         self._set_icon_for_title(host.windowTitle())
         lay.addWidget(self._icon)
@@ -207,9 +252,16 @@ class TitleBar(QWidget):
             self.btn_min.clicked.connect(host.showMinimized)
             self.btn_max.clicked.connect(self._toggle_max)
             self.btn_close.clicked.connect(self._close_host)
-            lay.addWidget(self.btn_min)
-            lay.addWidget(self.btn_max)
-            lay.addWidget(self.btn_close)
+            # spacing=0 между control-кнопками: они образуют единый блок
+            # у правого края, как в стандартных окнах
+            lay.addSpacing(4)
+            btn_h = self._bar_h - 4
+            glyph_scale = max(1.0, min(1.5, dpr))
+            for b in (self.btn_min, self.btn_max, self.btn_close):
+                b._btn_h = btn_h
+                b._glyph_scale = glyph_scale
+                lay.addWidget(b)
+                b.set_locked_size()
         else:
             self.btn_min = None
             self.btn_max = None
@@ -225,7 +277,19 @@ class TitleBar(QWidget):
     def refresh_geometry(self):
         h = self._host
         try:
-            self.setGeometry(0, 0, max(h.width(), 0), self.HEIGHT)
+            # Ширина шапки не должна превышать ширину самого layout'а
+            # содержимого (для QDialog с компактным sizeHint иначе окно
+            # «распирается» и кнопки уезжают за правый край).
+            max_w = h.width()
+            try:
+                inner = h.layout()
+                if inner is not None:
+                    need = inner.minimumSize().width()
+                    if need > 0:
+                        max_w = min(max_w, max(need, inner.sizeHint().width()))
+            except Exception:
+                pass
+            self.setGeometry(0, 0, max(max_w, 0), self._bar_h)
             self.raise_()
         except Exception:
             pass
@@ -284,7 +348,7 @@ class TitleBar(QWidget):
                 w.showNormal()
                 geo = w.geometry()
                 w.move(int(e.globalPosition().x() - geo.width() * ratio),
-                       int(e.globalPosition().y() - self.HEIGHT // 2))
+                       int(e.globalPosition().y() - self._bar_h // 2))
             self._dragging = True
             self._drag_pos = self._grab_offset(e)
             e.accept()
@@ -564,7 +628,7 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
         wrap = QWidget()
         wrap.setObjectName("framelessRoot")
         v = QVBoxLayout(wrap)
-        v.setContentsMargins(0, TitleBar.HEIGHT, 0, 0)
+        v.setContentsMargins(0, bar.height(), 0, 0)
         v.setSpacing(0)
         if old is not None:
             v.addWidget(old, 1)
@@ -575,13 +639,13 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
             # Простой и надёжный вариант: НЕ трогаем layout содержимого
             # dialog'а, а добавляем сверху отступ под overlay-шапку.
             m_ = old_lay.contentsMargins()
-            old_lay.setContentsMargins(m_.left(), m_.top() + TitleBar.HEIGHT,
+            old_lay.setContentsMargins(m_.left(), m_.top() + bar.height(),
                                        m_.right(), m_.bottom())
         else:
             body = QWidget(win)
             body.setObjectName("framelessBody")
             v = QVBoxLayout(win)
-            v.setContentsMargins(0, TitleBar.HEIGHT, 0, 0)
+            v.setContentsMargins(0, bar.height(), 0, 0)
             v.setSpacing(0)
             v.addWidget(body, 1)
     else:
