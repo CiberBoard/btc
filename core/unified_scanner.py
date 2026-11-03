@@ -382,12 +382,17 @@ class ProcessManager:
 #  CPU СКАНЕР
 # ============================================================
 class CPUScanner(BaseScanner):
+    # Если воркеры молчат дольше этого времени — шлём heartbeat-статистику,
+    # чтобы UI видел прогресс даже при медленных/зависших воркерах
+    HEARTBEAT_INTERVAL = 2.0
+
     def __init__(self, parent: Optional[QObject] = None):
         super().__init__(parent)
         self._pm = ProcessManager()
         self._worker_stats: Dict[int, dict] = {}
         self._total_scanned = 0
         self._total_found = 0
+        self._last_stats_time = 0.0
 
     def start(self, params: Dict[str, Any]) -> bool:
         if self._is_running:
@@ -416,6 +421,20 @@ class CPUScanner(BaseScanner):
         workers_count = params.get('workers', 4)
         mode = params.get('mode', 'sequential')
         attempts = params.get('attempts', 0)
+
+        # Предупреждаем сразу, если запуск явно некорректный — иначе UI
+        # выглядит «мёртвым»: воркеры стартуют и мгновенно завершаются
+        if mode == 'random' and attempts <= 0:
+            self.log_message.emit(
+                "⚠️ Режим «Случайный» выбран, но количество попыток = 0. "
+                "Укажите число попыток, иначе воркеры завершатся сразу.", "warning")
+            return False
+        if mode == 'sequential' and total_keys < workers_count:
+            self.log_message.emit(
+                f"⚠️ Диапазон слишком мал для {workers_count} воркеров: "
+                f"всего {total_keys:,} ключей. Уменьшите число воркеров или расширьте диапазон.",
+                "warning")
+
         prefix_len = params.get('prefix_len', 8)
         target_prefix = target[:prefix_len]
 
@@ -435,12 +454,29 @@ class CPUScanner(BaseScanner):
                 ),
                 worker_id=wid
             )
-            self._worker_stats[wid] = {'scanned': 0, 'found': 0, 'speed': 0.0, 'progress': 0}
+            self._worker_stats[wid] = {'scanned': 0, 'found': 0, 'speed': 0.0,
+                                       'progress': 0, 'last_update': time.time()}
 
         self._set_running(True)
         self._total_scanned = 0
         self._total_found = 0
-        self.log_message.emit(f"Запущено {workers_count} CPU воркеров в режиме {mode}", "info")
+        self._last_stats_time = time.time()
+        # Сразу рисуем строки воркеров в таблице — UI не выглядит «мёртвым»,
+        # даже пока процессы ещё не прислали первую статистику
+        self.stats_updated.emit({
+            'total_scanned': 0,
+            'total_found': 0,
+            'total_speed': 0.0,
+            'workers': dict(self._worker_stats),
+        })
+        if mode == 'random':
+            self.log_message.emit(
+                f"Запущено {workers_count} CPU воркеров в режиме {mode}. "
+                f"Всего попыток: {attempts:,}", "info")
+        else:
+            self.log_message.emit(
+                f"Запущено {workers_count} CPU воркеров в режиме {mode}. "
+                f"Диапазон: {start_hex} → {end_hex} ({total_keys:,} ключей)", "info")
         return True
 
     def stop(self) -> None:
@@ -464,27 +500,81 @@ class CPUScanner(BaseScanner):
 
     def process_queue(self) -> None:
         self._pm.process_messages(self._handle_message)
+        self._heartbeat()
+
+    def _heartbeat(self) -> None:
+        """Периодически обновляет UI и логирует «молчащие/мёртвые» воркеры,
+        чтобы при запуске на CPU всегда было видно, что происходит."""
+        if not self._is_running or self._is_paused:
+            return
+        now = time.time()
+        if now - self._last_stats_time < self.HEARTBEAT_INTERVAL:
+            return
+        self._last_stats_time = now
+
+        silent_workers: List[int] = []
+        dead_workers: List[int] = []
+        for wid, proc in list(self._pm._processes.items()):
+            alive = proc.is_alive()
+            if not alive:
+                dead_workers.append(wid)
+            last_ts = self._worker_stats.get(wid, {}).get('last_update', 0.0)
+            if now - last_ts > self.HEARTBEAT_INTERVAL * 2:
+                silent_workers.append(wid)
+
+        # принудительно обновляем прогресс по времени работы (защита от «зависшего» 0%)
+        elapsed = max(0.001, self.elapsed_time())
+        total_keys = (self._params or {}).get('total_keys', 0)
+        progress_by_time = min(99, int(self._total_scanned / total_keys * 100)) \
+            if total_keys > 0 else 0
+
+        self.stats_updated.emit({
+            'total_scanned': self._total_scanned,
+            'total_found': self._total_found,
+            'total_speed': sum(s.get('speed', 0.0) for s in self._worker_stats.values()),
+            'workers': dict(self._worker_stats),
+            'progress': progress_by_time,
+            'elapsed': elapsed,
+        })
+
+        if silent_workers and dead_workers and len(dead_workers) == len(self._pm._processes):
+            self.log_message.emit(
+                f"⚠️ Все {len(dead_workers)} CPU воркеров завершились без статистики. "
+                f"Возможно, диапазон слишком мал или процессы были остановлены ОС.", "warning")
+        elif silent_workers:
+            self.log_message.emit(
+                f"⏳ Воркеры {silent_workers} не присылают статистику более "
+                f"{self.HEARTBEAT_INTERVAL * 2:.0f} сек — они всё ещё работают "
+                f"(проверено всего: {self._total_scanned:,})", "warning")
 
     def _handle_message(self, msg: dict) -> None:
         typ = msg.get('type')
         if typ == 'stats':
             wid = msg['worker_id']
-            if wid in self._worker_stats:
-                self._worker_stats[wid].update({
-                    'scanned': msg.get('scanned', 0),
-                    'found': msg.get('found', 0),
-                    'speed': msg.get('speed', 0.0),
-                    'progress': msg.get('progress', 0),
-                })
-                self._total_scanned = sum(s['scanned'] for s in self._worker_stats.values())
-                self._total_found = sum(s['found'] for s in self._worker_stats.values())
-                total_speed = sum(s['speed'] for s in self._worker_stats.values())
-                self.stats_updated.emit({
-                    'total_scanned': self._total_scanned,
-                    'total_found': self._total_found,
-                    'total_speed': total_speed,
-                    'workers': self._worker_stats,
-                })
+            stats = self._worker_stats.setdefault(wid, {})
+            prev_scanned = stats.get('scanned', 0)
+            new_scanned = msg.get('scanned', 0)
+            # Воркеры шлют счётчик сканирований за свой запуск — суммируем,
+            # иначе прогресс «откатывается» и выглядит как отсутствие прогресса
+            if new_scanned < prev_scanned:
+                self._total_scanned -= prev_scanned
+            self._total_scanned += max(0, new_scanned - prev_scanned)
+            self._worker_stats[wid].update({
+                'scanned': msg.get('scanned', 0),
+                'found': msg.get('found', 0),
+                'speed': msg.get('speed', 0.0),
+                'progress': msg.get('progress', 0),
+                'last_update': time.time(),
+            })
+            total_speed = sum(s.get('speed', 0.0) for s in self._worker_stats.values())
+            self._total_found = sum(s.get('found', 0) for s in self._worker_stats.values())
+            self._last_stats_time = time.time()
+            self.stats_updated.emit({
+                'total_scanned': self._total_scanned,
+                'total_found': self._total_found,
+                'total_speed': total_speed,
+                'workers': self._worker_stats,
+            })
         elif typ == 'found':
             self.key_found.emit(msg)
         elif typ == 'log':

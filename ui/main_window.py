@@ -325,6 +325,17 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.clear_log_btn.clicked.connect(lambda: self.log_output.clear())
 
         # Таймеры
+        # КРИТИЧНО: таймер обработки очередей. Без него сообщения от CPU-воркеров
+        # (прогресс/статистика/логи) никогда не попадают в UI — выглядит как
+        # «нет прогресса и воркеров».
+        self.queue_timer = QTimer()
+        self.queue_timer.timeout.connect(self.process_all_queues)
+        self.queue_timer.start(self.QUEUE_TIMER_INTERVAL)
+
+        self.health_check_timer = QTimer()
+        self.health_check_timer.timeout.connect(self.health_check)
+        self.health_check_timer.start(self.HEALTH_CHECK_INTERVAL)
+
         self.gpu_stats_timer = QTimer()
         self.gpu_stats_timer.timeout.connect(self._update_gpu_time)
         self.gpu_stats_timer.start(self.GPU_STATS_TIMER_INTERVAL)
@@ -1005,7 +1016,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.safe_set_text('cpu_usage', f"{psutil.cpu_percent()}%")
             if self.cpu_scanner.is_running():
                 status = "Работает" if not self.cpu_scanner._is_paused else "На паузе"
-                self.safe_set_text('cpu_status_label', f"{status} ({len(self.cpu_scanner._pm._processes)} воркеров)")
+                procs = self.cpu_scanner._pm._processes
+                alive = sum(1 for p in procs.values() if p.is_alive())
+                self.safe_set_text('cpu_status_label',
+                                   f"{status} ({alive}/{len(procs)} воркеров активно)")
             else:
                 self.safe_set_text('cpu_status_label', "Ожидание запуска")
             cpu_temp = self._get_cpu_temperature()
