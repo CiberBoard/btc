@@ -2,11 +2,12 @@ base58~=2.1.1
 coincurve~=21.0.0
 pyinstaller~=6.14.1
 numpy==1.26.4
-pycuda~=2025.1.1
-numba~=0.61.2
+# ⚠️ pycuda УДАЛЁН: пакет не импортируется нигде в коде, но при установке
+# тянет/кладёт рядом свои нативные DLL (cuda driver/runtime wrappers). В
+# .venv\Scripts это приводит к конфликту DLL с PyQt6 и падению процесса на
+# window.show() с "Fatal Python error: Aborted" (exit code 3 / 0xC0000409).
+# Если он уже установлен — удалите:  pip uninstall -y pycuda appdirs pytools
 psutil~=7.0.0
-numba~=0.61.2
-ecdsa~=0.19.1
 pynvml~=12.0.0
 nvidia-ml-py~=12.575.51
 # УДАЛЕНО: utils, logger, the-new-hotness — эти пакеты с PyPI не используются
