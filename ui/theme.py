@@ -655,5 +655,45 @@ def set_button_style(button: QPushButton, style_type: str) -> None:
         style.polish(button)
 
 
+class AnimatedButton(QPushButton):
+    """QPushButton + ripple-волна от точки клика (поверх стандартного стиля).
+
+    Полностью совместим с QPushButton: можно использовать везде, где
+    использовалась обычная кнопка. Анимация — только визуальная.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        try:
+            from ui.animations import attach_ripple
+            attach_ripple(self, "#FFFFFF")
+        except Exception:
+            pass
+
+
+def enhance_buttons(widget) -> int:
+    """Включает ripple-анимацию для всех обычных кнопок внутри `widget`
+    (кнопки с собственным paintEvent не трогаем). Меняется только внешний
+    вид/ощущение — обработчики сигналов и логика не затрагиваются."""
+    n = 0
+    try:
+        from ui.animations import attach_ripple
+    except Exception:
+        return 0
+    for b in widget.findChildren(QPushButton):
+        try:
+            # пропускаем кнопки с кастомной отрисовкой (sidebar nav и т.п.)
+            if type(b).paintEvent is not QPushButton.paintEvent:
+                continue
+            if getattr(b, "_ripple_filter", None) is not None:
+                continue
+            attach_ripple(b, "#FFFFFF")
+            n += 1
+        except Exception:
+            continue
+    return n
+
+
 # Явный экспорт публичного API модуля
-__all__ = ["COLORS", "apply_dark_theme", "set_button_style"]
+__all__ = ["COLORS", "apply_dark_theme", "set_button_style",
+           "AnimatedButton", "enhance_buttons"]
