@@ -33,7 +33,12 @@ pg.setConfigOptions(
     antialias=True,
     background='#1a1a20',
     foreground='#ffffff',
-    useOpenGL=True  # Аппаратное ускорение для Windows
+    # ⚠️ useOpenGL=True — вероятная причина падения процесса на Windows
+    # с кодом 0xC0000409 (STATUS_STACK_BUFFER_OVERRUN): pyqtgraph вызывает
+    # OpenGL через системный драйвер (nvoglv64.dll и т.п.), и при
+    # несовместимом/повреждённом драйвере процесс падает без трейсбека.
+    # Рендеринг через Qt-растеризатор чуть медленнее, но стабилен:
+    useOpenGL=False,
 )
 
 logger = logging.getLogger(__name__)

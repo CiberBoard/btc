@@ -1,10 +1,30 @@
 # main.py
+import faulthandler
 import multiprocessing
 import sys
 import os
+
+# 🔥 ДИАГНОСТИКА: код 0xC0000409 (STATUS_STACK_BUFFER_OVERRUN) — это падение
+# внутри нативной библиотеки, а не ошибка Python. faulthandler печатает
+# трейсбек Python-потоков прямо перед падением — по нему видно, какой модуль
+# (какой импорт/вызов) стал причиной.
+try:
+    faulthandler.enable()
+except Exception:
+    pass
+
 # 🔥 КРИТИЧНО: УСТАНАВЛИВАЕМ МЕТОД ЗАПУСКА ДО ВСЕГО ОСТАЛЬНОГО
 if sys.platform == 'win32':
     multiprocessing.set_start_method('spawn', force=True)
+
+# 🔥 КРИТИЧНО для Windows + PyQt6 + pyqtgraph/numpy:
+# Qt при инициализации рендеринга обращается к драйверу OpenGL
+# (nvoglv64.dll / atig6pxx.dll / igd*.dll). Повреждённый или несовместимый
+# драйвер вызывает мгновенное падение процесса (exit code 0xC0000409) —
+# как правило сразу после логгера «Запуск …», до появления окна.
+# Заставляем Qt использовать безопасный software-рендерер.
+# ВАЖНО: переменную нужно задать ДО импорта модулей PyQt6.
+os.environ.setdefault("QT_OPENGL", "software")
 
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
