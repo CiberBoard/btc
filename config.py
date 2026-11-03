@@ -1,5 +1,6 @@
 # config.py
 import os
+import shutil
 import sys
 import re
 from PyQt6.QtWidgets import QComboBox
@@ -21,35 +22,122 @@ os.makedirs(BIN_DIR, exist_ok=True)
 os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
 
 
+def _find_in_dir(d, names):
+    """Ищет первый найденный файл из names в директории d (регистрационно-
+    независимый поиск — имена Windows могут отличаться от git-имён)."""
+    for name in names:
+        p = os.path.join(d, name)
+        if os.path.isfile(p):
+            return p
+    try:
+        listing = os.listdir(d)
+    except OSError:
+        return None
+    lowered = {n.lower(): n for n in listing}
+    for name in names:
+        orig = lowered.get(name.lower())
+        if orig:
+            return os.path.join(d, orig)
+    return None
+
+
 def find_binary(*names):
-    """Ищет исполняемый файл по списку имён в папке bin (с учётом регистра),
-    затем в корне проекта (обратная совместимость со старыми сборками)."""
-    for d in (BIN_DIR, BASE_DIR):
-        for name in names:
-            p = os.path.join(d, name)
-            if os.path.isfile(p):
-                return p
-        # регистронезависимый поиск (Windows-имена могут отличаться от git-имён)
+    """Ищет исполняемый файл по списку имён.
+
+    Порядок поиска:
+      1. папка bin/ (основное место внешних утилит);
+      2. корень проекта — обратная совместимость со старыми сборками; ЕСЛИ
+         файл найден в корне, он автоматически ПЕРЕМЕЩАЕТСЯ в bin/, чтобы при
+         запуске Windows/Qt не подхватывал чужие нативные DLL (.exe/.dll) из
+         текущей директории проекта (это вызывало access violation 0xC0000005).
+    """
+    found = _find_in_dir(BIN_DIR, names)
+    if found:
+        return found
+
+    found = _find_in_dir(BASE_DIR, names)
+    if found:
+        # Автоперенос старых файлов из корня проекта в bin/
         try:
-            listing = os.listdir(d)
+            os.makedirs(BIN_DIR, exist_ok=True)
+            dest = os.path.join(BIN_DIR, os.path.basename(found))
+            if not os.path.exists(dest):
+                shutil.move(found, dest)
+            return dest
         except OSError:
-            listing = []
-        lowered = {n.lower(): n for n in listing}
-        for name in names:
-            orig = lowered.get(name.lower())
-            if orig:
-                return os.path.join(d, orig)
+            return found  # перенести не удалось — используем как есть
+
     return os.path.join(BIN_DIR, names[0])
 
 
 # Файлы
 LOG_FILE = os.path.join(BASE_DIR, "logs", "app.log")
 FOUND_KEYS_FILE = os.path.join(BASE_DIR, "Found_key_CUDA.txt")
-# Пути к внешним утилитам (теперь живут в bin/)
+# Пути к внешним утилитам (живут в bin/; старые файлы из корня автопереносятся)
 CUBITCRACK_EXE = find_binary("cuBitCrack.exe", "cuBitcrack.exe", "cuBitcrack.exe", "BitCrack.exe")
 VANITYSEARCH_EXE = find_binary("VanitySearch.exe")
 ETARKANGAROO_EXE = find_binary("Etarkangaroo.exe", "etarkangaroo.exe")
 CLBITCRACK_EXE = find_binary("clBitCrack.exe", "clBitcrack.exe")
+
+# Все внешние бинарники и нативные DLL проекта — для миграции сохранённых
+# настроек: любые старые пути вида "<проект>/File.exe" перенаправляются в bin/,
+# а отсутствующие файлы автоматически переносятся из корня проекта в bin/.
+EXTERNAL_BINARIES = (CUBITCRACK_EXE, VANITYSEARCH_EXE, ETARKANGAROO_EXE, CLBITCRACK_EXE)
+
+
+def _norm_key(k):
+    return str(k).replace('\\', '/').rstrip('/').lower()
+
+
+def migrate_binary_path(path):
+    """Возвращает актуальный путь к внешнему .exe/.dll.
+
+    1. Если файл уже существует по указанному пути — возвращаем как есть.
+    2. Иначе ищем файл с таким же именем в bin/ / корне проекта (при нахождении
+       в корне — автоматически переносим в bin/).
+    3. Если нигде не найден — стандартный путь в bin/ (программа продолжит
+       работать, пользователь сможет указать путь вручную через 📁).
+    """
+    if not path:
+        return path
+    p = str(path)
+    # Относительный путь из config.json ("bin/Etarkangaroo.exe")
+    if not os.path.isabs(p):
+        cand = os.path.normpath(os.path.join(BASE_DIR, p))
+        if os.path.isfile(cand):
+            return cand
+    if os.path.isfile(p):
+        return p
+    name = os.path.basename(p)
+    found = _find_in_dir(BIN_DIR, [name]) or _find_in_dir(BASE_DIR, [name])
+    if found:
+        # старый файл в корне — переносим в bin/
+        if os.path.dirname(os.path.abspath(found)) == os.path.abspath(BASE_DIR):
+            dest = os.path.join(BIN_DIR, name)
+            try:
+                if not os.path.exists(dest):
+                    shutil.move(found, dest)
+                return dest
+            except OSError:
+                return found
+        return found
+    return os.path.join(BIN_DIR, name)
+
+
+def fix_settings_paths(settings_dict):
+    """Исправляет пути к внешним утилитам в словаре настроек (по имени файла)."""
+    known = {_norm_key(b) for b in EXTERNAL_BINARIES}
+    changed = False
+    for k, v in list(settings_dict.items()):
+        if isinstance(v, str) and ('.exe' in v.lower() or '.dll' in v.lower()):
+            if (_norm_key(v) in known
+                    or os.path.basename(_norm_key(v)).lower()
+                    in {os.path.basename(x).lower() for x in known}):
+                nv = migrate_binary_path(v)
+                if nv != v:
+                    settings_dict[k] = nv
+                    changed = True
+    return changed
 
 # Константы
 MAX_KEY = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140

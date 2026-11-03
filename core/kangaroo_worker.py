@@ -21,6 +21,26 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+
+def _kangaroo_env():
+    """Окружение для Etarkangaroo.exe: папка bin/ (сам .exe + cudart64_*.dll)
+    добавлена в PATH первой, чтобы утилита гарантированно находила свои CUDA
+    библиотеки и не подхватывала чужие DLL из текущей директории."""
+    try:
+        import config as _cfg
+        env = os.environ.copy()
+        exe_dir = ''
+        try:
+            exe_dir = os.path.dirname(os.path.abspath(_cfg.ETARKANGAROO_EXE))
+        except Exception:
+            pass
+        parts = [p for p in (exe_dir, _cfg.BIN_DIR) if p and os.path.isdir(p)]
+        if parts:
+            env['PATH'] = os.pathsep.join(parts) + os.pathsep + env.get('PATH', '')
+        return env
+    except Exception:
+        return None  # fallback — наследовать окружение как раньше
+
 # ═══════════════════════════════════════════════
 # 🔧 КОНФИГУРАЦИЯ
 # ═══════════════════════════════════════════════
@@ -320,7 +340,10 @@ class KangarooWorker(QObject):
     ) -> Optional[str]:
         proc = subprocess.Popen(
             cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            text=True, bufsize=1, universal_newlines=True, cwd=self.params['temp_dir']
+            text=True, bufsize=1, universal_newlines=True, cwd=self.params['temp_dir'],
+            # bin/ добавлен к поиску DLL: там лежат cudart64_*.dll и сам .exe —
+            # так утилита не подхватывает чужие нативные библиотеки из корня проекта
+            env=_kangaroo_env()
         )
 
         start_time = time.time()

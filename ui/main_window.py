@@ -514,13 +514,14 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.append_log("Kangaroo поиск остановлен", "warning")
         else:
             _kang_exe = self.kang_exe_edit.text().strip()
-            # Если сохранённый путь устарел (файл лежал в корне проекта, а теперь
-            # он в bin/) — автоматически исправить на актуальный путь из config.
+            # Если сохранённый путь устарел (файл лежал в корне проекта/в другой
+            # папке, а теперь все .exe перенесены в bin/) — автоматически
+            # исправить на актуальный путь.
             if not os.path.exists(_kang_exe):
-                _fallback = getattr(config, 'ETARKANGAROO_EXE', '')
-                if _fallback and os.path.exists(_fallback):
-                    _kang_exe = _fallback
-                    self.kang_exe_edit.setText(_fallback)
+                _fixed = config.migrate_binary_path(_kang_exe)
+                if os.path.exists(_fixed):
+                    _kang_exe = _fixed
+                    self.kang_exe_edit.setText(_fixed)
             params = {
                 'pubkey_hex': self.kang_pubkey_edit.text().strip(),
                 'rb_hex': self.kang_start_key_edit.text().strip(),

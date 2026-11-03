@@ -170,7 +170,10 @@ def _detect_gpus_detailed(exe_path: str) -> Tuple[int, List[str]]:
             result = subprocess.run(
                 [exe_path] + args,
                 capture_output=True, text=True, timeout=5,
-                creationflags=creation_flags
+                creationflags=creation_flags,
+                # запуск из bin/ — там лежат CUDA-DLL утилиты; так они не
+                # подхватывают чужие нативные библиотеки из корня проекта
+                cwd=config.BIN_DIR if os.path.isdir(config.BIN_DIR) else None
             )
             output = result.stdout + result.stderr
             gpu_ids = _extract_gpu_ids(output)
@@ -243,6 +246,11 @@ def auto_configure_kangaroo(main_window) -> Optional[Dict[str, Any]]:
         return None
 
     exe_path = main_window.kang_exe_edit.text().strip()
+    if not os.path.exists(exe_path):
+        # Старый путь — пробуем найти утилиту в bin/ автоматически
+        exe_path = config.migrate_binary_path(exe_path)
+        if os.path.exists(exe_path):
+            main_window.kang_exe_edit.setText(exe_path)
     if not os.path.exists(exe_path):
         QMessageBox.warning(main_window, "Ошибка", "Сначала укажите правильный путь к etarkangaroo.exe")
         return None
