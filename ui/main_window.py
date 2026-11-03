@@ -65,31 +65,27 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        print("STEP 1: super().__init__ OK", flush=True)
 
         self.MAX_KEY_HEX = config.MAX_KEY_HEX
         self.BASE_DIR = config.BASE_DIR
         self.settings = get_settings(self.BASE_DIR)
         self.settings._ui_parent = self
 
-        # --- Инициализация pynvml для мониторинга GPU ---
+        # --- Инициализация pynvml ---
         self.gpu_monitor_available = False
         if PYNVML_AVAILABLE:
             try:
+                print("STEP 2: pynvml.nvmlInit() ...", flush=True)
                 pynvml.nvmlInit()
                 self.gpu_monitor_available = True
                 device_count = pynvml.nvmlDeviceGetCount()
-                if device_count > 0:
-                    logger.info(f"Найдено {device_count} NVIDIA GPU устройств.")
-                else:
-                    logger.warning("NVIDIA GPU не найдены.")
-                    self.gpu_monitor_available = False
+                print(f"STEP 2: nvml OK, {device_count} devices", flush=True)
             except Exception as e:
                 logger.error(f"Ошибка инициализации pynvml: {e}")
                 self.gpu_monitor_available = False
-        else:
-            logger.warning("pynvml не установлена. Мониторинг GPU недоступен.")
 
-        # --- Атрибуты GPU (для UI) ---
+        # --- Атрибуты ---
         self.gpu_range_label = None
         self.random_mode = False
         self.last_random_ranges = set()
@@ -99,15 +95,17 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_restart_delay = 1000
         self.selected_gpu_device_id = 0
         self.optimal_workers = max(1, multiprocessing.cpu_count() - 1)
+        print("STEP 3: attributes OK", flush=True)
 
         # --- Менеджер сканеров ---
+        print("STEP 4: ScannerManager() ...", flush=True)
         self.scanner_manager = ScannerManager(self)
-        # Получаем ссылки на сканеры для удобства
         self.cpu_scanner = self.scanner_manager.get_scanner('cpu')
         self.gpu_scanner = self.scanner_manager.get_scanner('gpu')
         self.kangaroo_scanner = self.scanner_manager.get_scanner('kangaroo')
         self.vanity_scanner = self.scanner_manager.get_scanner('vanity')
         self.matrix_scanner = self.scanner_manager.get_scanner('matrix')
+        print("STEP 4: ScannerManager OK", flush=True)
 
         # --- Вспомогательные окна ---
         self.matrix_window = None
@@ -116,33 +114,24 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.progress_tracker_window = None
 
         # --- UI ---
+        print("STEP 5: apply_dark_theme ...", flush=True)
         apply_dark_theme(self)
-        self.log_gpu_progress_signal.connect(self._save_gpu_progress)
+        print("STEP 5: apply_dark_theme OK", flush=True)
+
+        print("STEP 6: MainWindowUI ...", flush=True)
         self.ui = MainWindowUI(self)
         self.ui.setup_ui()
+        print("STEP 6b: setup_ui OK", flush=True)
+
+        print("STEP 7: setup_connections ...", flush=True)
         self.setup_connections()
+        print("STEP 7: setup_connections OK", flush=True)
+
+        print("STEP 8: load_settings ...", flush=True)
         self.load_settings()
+        print("STEP 8: load_settings OK", flush=True)
 
-        if self.gpu_monitor_available:
-            self.ui._populate_gpu_combo()
-        if hasattr(self, 'gpu_device_combo') and self.gpu_device_combo.count() > 0:
-            self.gpu_device_combo.setCurrentIndex(0)
-        self.ensure_file_exists(config.FOUND_KEYS_FILE)
-
-        # --- Таймеры ---
-        self.queue_timer = QTimer()
-        self.queue_timer.timeout.connect(self.process_all_queues)
-        self.queue_timer.start(self.QUEUE_TIMER_INTERVAL)
-
-        self.health_timer = QTimer()
-        self.health_timer.timeout.connect(self.health_check)
-        self.health_timer.start(self.HEALTH_CHECK_INTERVAL)
-
-        self.setWindowTitle("Bitcoin GPU/CPU Scanner")
-        self.resize(1200, 900)
-
-        # 🪟 Единый стиль окна: own titlebar вместо белой полосы Windows.
-        #    Вызываем в конце __init__ (когда UI уже собран), но до show().
+        print("STEP 9: apply_frameless ...", flush=True)
         try:
             from PyQt6.QtWidgets import QApplication as _QApp
             app = _QApp.instance()
@@ -150,10 +139,11 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 style_app_popups(app)
             force_non_native_dialogs()
             apply_frameless(self)
+            print("STEP 9: apply_frameless OK", flush=True)
         except Exception as _e:
-            logger.warning(f"frameless init failed, native caption remains: {_e}")
+            print(f"STEP 9: apply_frameless FAILED: {_e}", flush=True)
 
-        logger.info(f"📁 Settings path: {self.settings.filepath}")
+        print("STEP 10: __init__ DONE", flush=True)
 
     # ==================== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ====================
     def resizeEvent(self, event):

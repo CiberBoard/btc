@@ -540,8 +540,11 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
     #    крестиками) — штатным флагом Qt. Делаем это ДО создания любых
     #    дочерних виджетов и ДО show(), чтобы окно один раз пересоздалось
     #    без WS_CAPTION и не мелькала нативная шапка.
+    # СТАЛО: только если флаг ещё не стоит (иначе Qt пересоздаст окно и
+    # invalidates любые QGraphicsOpacityEffect-кэши на дочерних виджетах).
     try:
-        win.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
+        if not (win.windowFlags() & Qt.WindowType.FramelessWindowHint):
+            win.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
     except Exception:
         pass
 
@@ -557,7 +560,7 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
     win._bgs_titlebar = bar
 
     if isinstance(win, QMainWindow):
-        old = win.centralWidget()
+        old = win.takeCentralWidget()
         wrap = QWidget()
         wrap.setObjectName("framelessRoot")
         v = QVBoxLayout(wrap)
