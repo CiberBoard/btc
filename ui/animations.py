@@ -44,13 +44,16 @@ class RippleOverlay(QObject):
         self._anim.setEasingCurve(QEasingCurve.Type.OutQuart)
         self._anim.finished.connect(self._cleanup)
 
-    progress = pyqtProperty(float, lambda self: self._progress,
-                            self._set_progress)
+    # ВАЖНО: pyqtProperty объявляется ПОСЛЕ _set_progress — в теле класса
+    # имя метода ещё не существует на момент его вызова выше (NameError).
 
     def _set_progress(self, v: float):
         self._progress = v
         if self._overlay is not None:
             self._overlay.update()
+
+    progress = pyqtProperty(float, fget=lambda self: self._progress,
+                            fset=_set_progress)
 
     def fire(self, pos: Optional[QPoint] = None):
         w = self._widget
@@ -201,11 +204,13 @@ class PulseDot(QWidget):
         self._anim.setLoopCount(-1)
         self._anim.setEasingCurve(QEasingCurve.Type.Linear)
 
-    phase = pyqtProperty(float, lambda self: self._phase, self._set_phase)
-
     def _set_phase(self, v):
         self._phase = v
         self.update()
+
+    # pyqtProperty объявляется после сеттера (иначе NameError в теле класса)
+    phase = pyqtProperty(float, fget=lambda self: self._phase,
+                         fset=_set_phase)
 
     def showEvent(self, e):
         self._anim.start()
@@ -254,11 +259,12 @@ class GlowBar(QWidget):
         self._anim.setLoopCount(-1)
         self._anim.setEasingCurve(QEasingCurve.Type.Linear)
 
-    t = pyqtProperty(float, lambda self: self._t, self._set_t)
-
     def _set_t(self, v):
         self._t = v
         self.update()
+
+    # pyqtProperty объявляется после сеттера (иначе NameError в теле класса)
+    t = pyqtProperty(float, fget=lambda self: self._t, fset=_set_t)
 
     def showEvent(self, e):
         self._anim.start()

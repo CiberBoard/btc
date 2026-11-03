@@ -1023,11 +1023,12 @@ class _EdgeHandle(QWidget):
         self._anim.setEasingCurve(QEasingCurve.Type.OutCubic)
         self.hide()
 
-    t = pyqtProperty(float, lambda self: self._t, self._set_t)
-
     def _set_t(self, v):
         self._t = v
         self.update()
+
+    # pyqtProperty объявляется после сеттера (иначе NameError в теле класса)
+    t = pyqtProperty(float, fget=lambda self: self._t, fset=_set_t)
 
     def enterEvent(self, e):
         self._anim.stop()
