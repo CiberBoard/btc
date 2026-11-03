@@ -10,11 +10,11 @@ from __future__ import annotations
 
 import sys
 
-from PyQt6.QtCore import Qt, QPoint, QSize, QRectF, QObject, QEvent, QTimer
+from PyQt6.QtCore import Qt, QPoint, QPointF, QSize, QRectF, QObject, QEvent, QTimer
 from PyQt6.QtGui import QColor, QPainter, QPainterPath, QPen, QCursor
 from PyQt6.QtWidgets import (
     QWidget, QMainWindow, QDialog, QHBoxLayout, QVBoxLayout, QLabel,
-    QPushButton, QSizePolicy,
+    QPushButton, QSizePolicy, QApplication,
 )
 
 from ui.theme import COLORS
@@ -72,35 +72,51 @@ QPushButton:pressed {{ background: #9d4640; color: #FFFFFF; }}
 
 
 class _WinBtn(QPushButton):
-    """Миниатюрная кнопка window controls (28×20), рисует символ через QPainter."""
+    """Кнопка window controls, рисует символ через QPainter.
+
+    Размер НЕ задаётся через setFixedSize(): глобальный QSS приложения
+    (`QPushButton { padding: 8px 20px; min-height: 34px; }`) при каждом
+    StyleChange перезаписывал minimumSize кнопок, они раздувались до
+    50×50 внутри 36-пиксельной шапки, выходили за её границы и «съедали»
+    всю ширину layout'а — из-за чего шапка визуально «ломалась».
+    Теперь размеры контролируются только sizeHint + Fixed sizePolicy
+    (QSS не может их переопределить), а геометрия кнопок выставляется
+    вручную в TitleBar.resizeEvent.
+    """
+
+    BTN_W = 40   # ширина кнопки в логических px (как нативные Windows controls)
 
     def __init__(self, kind: str, parent=None):
-        # ВАЖНО: фиксируем размеры ПОСЛЕ установки QSS родителя-окна —
-        # polish от чужих stylesheet'ов (min-width/padding у QPushButton)
-        # иначе переопределяет sizeHint кнопок и layout растягивает их.
         super().__init__(parent)
         self._kind = kind  # 'min' | 'max' | 'restore' | 'close'
+        self._btn_h = 32
         if kind == 'close':
             self.setObjectName("appTitleBarClose")
         self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-
-    def set_locked_size(self):
-        """Жёсткая фиксация 30×22 (перепишет любой min-size из чужого QSS)."""
-        self.setFixedSize(30, 22)
+        # никаких margin/padding из чужого QSS не останется:
+        self.setContentsMargins(0, 0, 0, 0)
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        try:
-            self.setMinimumSize(QSize(30, 22))
-            self.setMaximumSize(QSize(30, 22))
-        except Exception:
-            pass
+
+    def set_bar_height(self, h: int):
+        self._btn_h = h
+        self.updateGeometry()
 
     def changeEvent(self, e):
-        # после любого polish/смены стиля снова блокируем размер
+        # QSS с `min-height` может при StyleChange раздуть our widget за
+        # пределы шапки (Qt применяет minimum из стиля). Возвращаем размер.
         from PyQt6.QtCore import QEvent as _QE
-        if e.type() in (_QE.Type.StyleChange, _QE.Type.ShowToParent):
-            self.set_locked_size()
+        if e.type() == _QE.Type.StyleChange:
+            g = self.geometry()
+            if g.height() != self._btn_h or g.width() != self.BTN_W:
+                self.setGeometry(g.x(), g.y(), self.BTN_W, self._btn_h)
         super().changeEvent(e)
+
+    def sizeHint(self):
+        return QSize(self.BTN_W, self._btn_h)
+
+    def minimumSizeHint(self):
+        return QSize(self.BTN_W, self._btn_h)
 
     def paintEvent(self, e):
         super().paintEvent(e)  # фон hover/pressed из QSS
@@ -109,44 +125,66 @@ class _WinBtn(QPushButton):
         hovered = self.underMouse()
         col = "#FFFFFF" if (self._kind == 'close' and hovered) else _TEXT_DIM
         pen = QPen(QColor(col))
-        pen.setWidthF(1.3)
-        pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+        pen.setWidthF(1.2)
+        pen.setCapStyle(Qt.PenCapStyle.FlatCap)
         p.setPen(pen)
-        cx, cy = self.width() / 2, self.height() / 2
+        cx, cy = self.width() / 2.0, self.height() / 2.0
+        # Глифы рисуем в координатах с точкой .5 — так штриховые линии
+        # ложатся ровно на пикетную сетку и не «мылятся»/не кажутся кривыми.
+        # s — масштаб глифа (учитывает DPI-масштаб экрана).
+        s = getattr(self, '_glyph_scale', 1.0)
         if self._kind == 'min':
-            p.drawLine(QPoint(int(cx - 5), int(cy)), QPoint(int(cx + 5), int(cy)))
+            # тире как у Windows: 10 px, по центру
+            y = int(cy) + 0.5
+            half = 5.0 * s
+            p.drawLine(QPointF(cx - half, y), QPointF(cx + half, y))
         elif self._kind == 'max':
-            p.drawRect(QRectF(cx - 5, cy - 4.5, 10, 9))
+            # квадрат ~10×10 со стороной на полу-пикселе → чёткие грани
+            side = round(10.0 * s)
+            x0 = int(cx - side / 2) + 0.5
+            y0 = int(cy - side / 2) + 0.5
+            p.drawRect(QRectF(x0, y0, side - 1, side - 1))
         elif self._kind == 'restore':
-            p.drawRect(QRectF(cx - 5, cy - 2.5, 8, 7))
-            path = QPainterPath()
-            path.moveTo(cx - 2, cy - 3.5)
-            path.lineTo(cx - 2, cy - 5.5)
-            path.lineTo(cx + 5, cy - 5.5)
-            path.lineTo(cx + 5, cy + 1.5)
-            path.lineTo(cx + 3, cy + 1.5)
+            # два overlapping окна (стиль Windows restore)
+            side = round(9.0 * s)
+            off = max(2, round(3 * s))
+            x0 = int(cx - side / 2) + 0.5
+            y0 = int(cy - side / 2 + off / 2) + 0.5
+            p.drawRect(QRectF(x0, y0, side - 1, side - 1))
+            path = QPainterPath(QPointF(x0 + off, y0))
+            path.lineTo(QPointF(x0 + off, y0 - off))
+            path.lineTo(QPointF(x0 + side + off - 1, y0 - off))
+            path.lineTo(QPointF(x0 + side + off - 1, y0 + side - off))
+            path.lineTo(QPointF(x0 + side - 1, y0 + side - off))
             p.drawPath(path)
         elif self._kind == 'close':
-            p.drawLine(QPoint(int(cx - 5), int(cy - 4)), QPoint(int(cx + 5), int(cy + 4)))
-            p.drawLine(QPoint(int(cx + 5), int(cy - 4)), QPoint(int(cx - 5), int(cy + 4)))
+            # крестик ~10×10, концы на полу-пикселях — симметричный, без «лесенки»
+            half = round(4.5 * s) + 0.5
+            x0 = int(cx) + 0.5
+            y0 = int(cy) + 0.5
+            p.drawLine(QPointF(x0 - half, y0 - half), QPointF(x0 + half, y0 + half))
+            p.drawLine(QPointF(x0 + half, y0 - half), QPointF(x0 - half, y0 + half))
         p.end()
 
 
 class TitleBar(QWidget):
     """Собственная тёмная шапка окна: drag + double-click + controls.
 
-    Кнопки управления ВСЕГДА прибиты к правому краю шапки, заголовок —
-    слева. Для этого TitleBar живёт поверх верхней части окна (_BarOverlay)
-    и сам синхронизирует свою геометрию с шириной окна, поэтому layout'ы
-    содержимого не могут сместить кнопки «налево» (исправлен баг, когда
-    кнопки оказывались сбоку слева от контента).
-
-    Собственный QSS шапки также переопределяет локальные стили окна
-    (`QWidget {...}`, `QLabel {...}`, `QPushButton {...}`), которые иначе
-    заливали бы шапку и кнопки чужими цветами/рамками.
+    Архитектура (исправляет «съезжающую» шапку):
+      • Шапка — overlay поверх верхней части окна, ширина = width(host),
+        высота = _bar_h. Синхронизируется в refresh_geometry() по Resize/Show.
+      • Кнопки min/max/close НЕ участвуют в layout'е вообще — их геометрия
+        выставляется вручную в resizeEvent (right-to-left, вплотную к правому
+        краю). Layout содержит только иконку + заголовок слева, поэтому ни
+        один внешний QSS (padding/min-height у QPushButton из темы) не может
+        раздуть кнопки и сломать ряд.
+      • Собственный QSS шапки понижает специфичность правил окна до нуля для
+        её дочерних виджетов (фон/рамка/отступы заданы явно).
     """
 
-    HEIGHT = 36
+    HEIGHT = 36          # базовая высота шапки (лог. px при DPR 1.0)
+    BTN_W = 40           # ширина window-control кнопки (как в Windows)
+    LEFT_PAD = 10        # отступ слева под иконку/заголовок
 
     def __init__(self, host: QWidget, with_controls=None):
         # None → controls включены по умолчанию для всех окон (в т.ч. диалогов)
@@ -157,49 +195,65 @@ class TitleBar(QWidget):
         self._dragging = False
         self._drag_pos = QPoint()
         self._with_controls = bool(with_controls)
+        self._buttons: tuple = ()   # заполняется ниже, до создания layout'а
 
         self.setObjectName("appTitleBar")
-        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        self.setFixedHeight(self.HEIGHT)
+        # Высота шапки — константа приложения (Qt уже работает в
+        # логических DIP-координатах на Windows; умножать ещё раз на DPR
+        # означало бы «гигантскую» шапку при 125/150% масштабировании).
+        self._bar_h = self.HEIGHT
+        self._btn_h = self._bar_h
+        try:
+            scr = self.screen() or QApplication.primaryScreen()
+            dpr = float(scr.devicePixelRatio()) if scr is not None else 1.0
+        except Exception:
+            dpr = 1.0
+        self._dpr = max(1.0, dpr)
+        # глифы чуть крупнее на HiDPI, но без искажений пропорций
+        self._glyph_scale = max(1.0, min(1.25, self._dpr))
+        self.setFixedHeight(self._bar_h)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setStyleSheet(f"""
             #appTitleBar {{ background: {_BG_TITLEBAR}; border: none; }}
             #appTitleBar QLabel {{ background: transparent; border: none;
                                   color: {_TEXT}; font-size: 12px; }}
             #appTitleLabel {{ color: {_TEXT}; font-size: 12px; font-weight: 600;
-                             background: transparent; }}
+                             background: transparent; border: none; }}
             #appTitleSub {{ color: {_TEXT_DIM}; font-size: 11px; background: transparent; }}
             #appTitleBar QPushButton {{
-                background: transparent; border: none; border-radius: 6px;
-                color: {_TEXT_DIM};
+                background: transparent; border: none; border-radius: 0;
+                color: {_TEXT_DIM}; padding: 0; margin: 0;
             }}
             #appTitleBar QPushButton:hover {{ background: {_HOVER}; }}
             #appTitleBar QPushButton:pressed {{ background: {_PRESSED}; }}
-            #appTitleBarClose QPushButton {{
-                background: transparent; border: none; border-radius: 6px;
-                color: {_TEXT_DIM};
+            #appTitleBarClose {{
+                background: transparent; border: none; border-radius: 0;
+                color: {_TEXT_DIM}; padding: 0; margin: 0;
             }}
-            #appTitleBarClose QPushButton:hover {{ background: {_CLOSE_HOVER}; color: #FFFFFF; }}
-            #appTitleBarClose QPushButton:pressed {{ background: #9d4640; color: #FFFFFF; }}
+            #appTitleBarClose:hover {{ background: {_CLOSE_HOVER}; color: #FFFFFF; }}
+            #appTitleBarClose:pressed {{ background: #9d4640; color: #FFFFFF; }}
         """)
 
+        # ── layout ТОЛЬКО для левой части (иконка + заголовок) ──
         lay = QHBoxLayout(self)
-        lay.setContentsMargins(10, 0, 6, 0)
+        lay.setContentsMargins(self.LEFT_PAD, 0,
+                               self._controls_block_width() + 6, 0)
         lay.setSpacing(8)
 
         self._icon = QLabel()
         self._icon.setObjectName("appTitleIcon")
         self._icon.setFixedSize(18, 18)
-        self._icon.setScaledContents(True)
         self._icon.setStyleSheet("background: transparent; border: none;")
         self._set_icon_for_title(host.windowTitle())
         lay.addWidget(self._icon)
 
         self._title = QLabel(_clean_title(host.windowTitle()))
         self._title.setObjectName("appTitleLabel")
+        self._title.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
         lay.addWidget(self._title)
         lay.addStretch(1)
 
+        # ── window controls: вне layout, прибиты к правому краю ──
         if with_controls:
             self.btn_min = _WinBtn('min', self)
             self.btn_max = _WinBtn('max', self)
@@ -207,13 +261,17 @@ class TitleBar(QWidget):
             self.btn_min.clicked.connect(host.showMinimized)
             self.btn_max.clicked.connect(self._toggle_max)
             self.btn_close.clicked.connect(self._close_host)
-            lay.addWidget(self.btn_min)
-            lay.addWidget(self.btn_max)
-            lay.addWidget(self.btn_close)
+            self._buttons = (self.btn_min, self.btn_max, self.btn_close)
+            for b in self._buttons:
+                b._glyph_scale = self._glyph_scale
+                b.set_bar_height(self._btn_h)
         else:
             self.btn_min = None
             self.btn_max = None
             self.btn_close = None
+            self._buttons = ()
+
+        self._layout_controls()
 
         def _on_title_changed(t: str):
             self._title.setText(_clean_title(t))
@@ -221,14 +279,36 @@ class TitleBar(QWidget):
 
         host.windowTitleChanged.connect(_on_title_changed)
 
-    # ── geometry: шапка всегда во всю ширину окна, поверх его верхней части ──
+    # ── geometry ──────────────────────────────────────────────
+    def _controls_block_width(self) -> int:
+        return len(self._buttons) * self.BTN_W if self._buttons else 0
+
+    def _layout_controls(self):
+        """Кнопки управления — строго у правого края, справа налево:
+        close, max, min. Высотой во всю шапку, как нативные Windows."""
+        w = self.width()
+        x = w
+        for b in reversed(self._buttons):
+            bw = self.BTN_W
+            x -= bw
+            b.setGeometry(x, 0, bw, self._btn_h)
+            b.raise_()
+
     def refresh_geometry(self):
-        h = self._host
+        """Шапка = вся ширина окна, поверх его верхней части."""
         try:
-            self.setGeometry(0, 0, max(h.width(), 0), self.HEIGHT)
+            self.setGeometry(0, 0, max(self._host.width(), 0), self._bar_h)
+            self._layout_controls()
             self.raise_()
         except Exception:
             pass
+
+    def resizeEvent(self, e):
+        super().resizeEvent(e)
+        # пересчитываем правый margin layout'а и позиции кнопок
+        self.layout().setContentsMargins(
+            self.LEFT_PAD, 0, self._controls_block_width() + 6, 0)
+        self._layout_controls()
 
     def showEvent(self, e):
         super().showEvent(e)
@@ -260,6 +340,8 @@ class TitleBar(QWidget):
             w.showNormal()
         else:
             w.showMaximized()
+        # сразу пересобираем геометрию шапки под новый размер окна
+        QTimer.singleShot(0, self.refresh_geometry)
 
     def sync_max_button(self):
         if self.btn_max is not None:
@@ -284,7 +366,7 @@ class TitleBar(QWidget):
                 w.showNormal()
                 geo = w.geometry()
                 w.move(int(e.globalPosition().x() - geo.width() * ratio),
-                       int(e.globalPosition().y() - self.HEIGHT // 2))
+                       int(e.globalPosition().y() - self._bar_h // 2))
             self._dragging = True
             self._drag_pos = self._grab_offset(e)
             e.accept()
@@ -564,7 +646,7 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
         wrap = QWidget()
         wrap.setObjectName("framelessRoot")
         v = QVBoxLayout(wrap)
-        v.setContentsMargins(0, TitleBar.HEIGHT, 0, 0)
+        v.setContentsMargins(0, bar.height(), 0, 0)
         v.setSpacing(0)
         if old is not None:
             v.addWidget(old, 1)
@@ -575,13 +657,13 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
             # Простой и надёжный вариант: НЕ трогаем layout содержимого
             # dialog'а, а добавляем сверху отступ под overlay-шапку.
             m_ = old_lay.contentsMargins()
-            old_lay.setContentsMargins(m_.left(), m_.top() + TitleBar.HEIGHT,
+            old_lay.setContentsMargins(m_.left(), m_.top() + bar.height(),
                                        m_.right(), m_.bottom())
         else:
             body = QWidget(win)
             body.setObjectName("framelessBody")
             v = QVBoxLayout(win)
-            v.setContentsMargins(0, TitleBar.HEIGHT, 0, 0)
+            v.setContentsMargins(0, bar.height(), 0, 0)
             v.setSpacing(0)
             v.addWidget(body, 1)
     else:
