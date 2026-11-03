@@ -1,4 +1,5 @@
 # main.py
+import ctypes
 import faulthandler
 import multiprocessing
 import sys
@@ -36,10 +37,35 @@ if sys.platform == 'win32':
 # Также: QT_STYLE_OVERRIDE=Fusion — не трогаем нативный стиль Windows,
 # QT_OPENGL=software — не дёргаем видеодрайвер OpenGL.
 if sys.platform == 'win32':
-    _plugins_root = os.path.join(
-        os.path.dirname(os.path.abspath(sys.executable)),
-        'Lib', 'site-packages', 'PyQt6', 'Qt6', 'plugins'
-    )
+    # 🔥 ГЛАВНОЕ исправление 0xC0000005: запрещаем Windows искать DLL в текущей
+    # директории проекта (она всегда среди первых мест поиска LoadLibrary).
+    # Без этого Qt/ctypes могут подхватить cudart64_101.dll или чужие нативные
+    # библиотеки из папки запуска и упасть с access violation на window.show().
+    try:
+        ctypes.windll.kernel32.SetDllDirectoryW(None)
+    except Exception:
+        pass
+
+    # Путь к плагинам PyQt6 берём ИЗ РЕАЛЬНОГО РАСПОЛОЖЕНИЯ ПАКЕТА, а не гадаем
+    # по sys.executable (в нестандартных venv/запускаторах PyCharm догадка не
+    # срабатывала, и Qt искал platforms/windows.dll вслепую).
+    _plugins_root = ''
+    try:
+        import PyQt6.QtCore as _qc
+        _qt_core = os.path.dirname(os.path.abspath(_qc.__file__))
+        for _cand in (os.path.join(_qt_core, 'Qt6', 'plugins'),
+                      os.path.join(_qt_core, 'plugins')):
+            if os.path.isdir(_cand):
+                _plugins_root = _cand
+                break
+    except Exception:
+        pass
+    if not _plugins_root:
+        # Запасной вариант — классическая структура venv на Windows
+        _plugins_root = os.path.join(
+            os.path.dirname(os.path.abspath(sys.executable)),
+            'Lib', 'site-packages', 'PyQt6', 'Qt6', 'plugins'
+        )
     _plugin_dir = os.path.join(_plugins_root, 'platforms')
     if os.path.isdir(_plugin_dir):
         os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = _plugin_dir
