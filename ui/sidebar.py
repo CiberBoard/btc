@@ -11,10 +11,10 @@ import os
 from typing import Optional
 
 from PyQt6.QtCore import (
-    Qt, QPropertyAnimation, QEasingCurve, QPoint, QRect, QTimer,
+    Qt, QPropertyAnimation, QEasingCurve, QPoint, QRect, QTimer, QSize,
     pyqtSignal, pyqtProperty, QObject,
 )
-from PyQt6.QtGui import QColor, QPainter, QPen, QLinearGradient
+from PyQt6.QtGui import QColor, QPainter, QPen, QLinearGradient, QIcon
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QFrame,
     QTabWidget, QGraphicsOpacityEffect, QSizePolicy, QApplication,
@@ -26,6 +26,7 @@ from ui.theme import COLORS as C
 from ui.animations import (
     RippleOverlay, PulseDot, GlowBar, fade_in, attach_ripple,
 )
+from ui.nav_icons import make_icon, icon_names_for_label
 
 SIDEBAR_EXPANDED_W = 230
 SIDEBAR_COLLAPSED_W = 68
@@ -63,14 +64,32 @@ def _save_ui_settings(data: dict):
         pass
 
 
-class NavButton(QPushButton):
-    """Кнопка пункта бокового меню с полным набором анимаций."""
+def _strip_emoji(text: str) -> str:
+    """Убирает из заголовка вкладки ведущие эмодзи/символы-пиктограммы."""
+    s = (text or "").strip()
+    while s and not s[0].isalnum():
+        s = s[1:]
+        if s and s[0] in (' ', '️', '‍', ' '):
+            s = s.lstrip(' \u200d\ufe0f\u2060 ')
+    return s.strip()
 
-    def __init__(self, icon: str, text: str, parent=None):
+
+class NavButton(QPushButton):
+    """Кнопка пункта бокового меню.
+
+    Свёрнутый режим — только монохромная векторная иконка;
+    развёрнутый — иконка + подпись. Подпись проявится плавно
+    (opacity + сдвиг), без посимвольного «печатания».
+    """
+
+    ICON_SIZE = 22
+    TEXT_X = 40          # x-координата начала подписи (развёрнутое меню)
+
+    def __init__(self, icon_name: str, text: str, parent=None):
         super().__init__(parent)
-        self._icon = icon or "•"
+        self._icon_name = icon_name
         self._label = text
-        self.setText(f"{self._icon}  {self._label}")
+        self.setText("")                    # рисуем сами — текста нет
         self.setCheckable(True)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -81,7 +100,7 @@ class NavButton(QPushButton):
         self._select_t = 0.0    # 0..1 прогресс выбора
         self._press_t = 0.0     # 0..1 «ripple» при клике
         self._pop_t = 0.0       # pop-эффект иконки при выборе
-        self._text_w = -1.0     # доля ширины подписи (анимация collapse)
+        self._text_t = 1.0      # 0..1 доля видимости подписи
 
         self._ripple = RippleOverlay(self, QColor(C['accent_primary']), 420)
 
@@ -98,6 +117,24 @@ class NavButton(QPushButton):
         self._anim_press.setEasingCurve(QEasingCurve.Type.OutCubic)
 
         self.toggled.connect(self._on_toggled)
+
+    # ── кэш иконок по состоянию (обычная / hover / выбранная) ──
+    def _state_color(self, state: int) -> str:
+        # state: 0 — обычная, 1 — наведение, 2 — выбрана
+        if state == 2:
+            return C['text_primary']
+        if state == 1:
+            return C['text_primary']
+        return C['text_secondary']
+
+    def _icon_for(self, state: int) -> QIcon:
+        key = f"ic{state}"
+        cached = getattr(self, key, None)
+        if cached is None:
+            cached = make_icon(self._icon_name, self._state_color(state),
+                               size=self.ICON_SIZE * 2, stroke_width=1.7)
+            setattr(self, key, cached)
+        return cached
 
     # --- dynamic properties for QPropertyAnimation ---
     def get_hoverT(self):
@@ -136,14 +173,14 @@ class NavButton(QPushButton):
 
     popT = pyqtProperty(float, fget=get_popT, fset=set_popT)
 
-    def get_textW(self):
-        return self._text_w
+    def get_textT(self):
+        return self._text_t
 
-    def set_textW(self, v):
-        self._text_w = v
-        self._apply_text(v)
+    def set_textT(self, v):
+        self._text_t = max(0.0, min(1.0, v))
+        self.update()
 
-    textW = pyqtProperty(float, fget=get_textW, fset=set_textW)
+    textT = pyqtProperty(float, fget=get_textT, fset=set_textT)
 
     # --- поведение ---
     def _on_toggled(self, checked: bool):
@@ -197,45 +234,32 @@ class NavButton(QPushButton):
             self._ripple.fire(e.position().toPoint())
         super().mouseReleaseEvent(e)
 
-    # --- режим значков (collapsed): подпись плавно «схлопывается» ---
+    # --- режим значков (collapsed): подпись плавно гаснет, иконка центрируется ---
     def set_labels_visible(self, visible: bool, animate: bool = True):
         target = 1.0 if visible else 0.0
-        if self._text_w >= 0 and abs(self._text_w - target) < 0.001 \
-                and not animate:
-            self._apply_text(target)
-            return
-        if not animate:
-            self._apply_text(target)
+        if not animate or abs(self._text_t - target) < 0.001:
+            self._text_t = target
+            self.update()
             return
         a = getattr(self, "_anim_text", None)
         if a is None:
-            a = QPropertyAnimation(self, b"textW", self)
+            a = QPropertyAnimation(self, b"textT", self)
+            a.setEasingCurve(QEasingCurve.Type.InOutCubic)
             self._anim_text = a
-        a.setDuration(230)
-        a.setEasingCurve(QEasingCurve.Type.OutCubic)
         a.stop()
-        a.setStartValue(self._text_w if self._text_w >= 0 else target)
+        a.setDuration(240 if visible else 150)
+        a.setStartValue(self._text_t)
         a.setEndValue(target)
         a.start()
-
-    def _apply_text(self, t: float):
-        if t < 0:
-            t = 1.0
-        if t > 0.995:
-            self.setText(f"{self._icon}  {self._label}")
-        elif t < 0.02:
-            self.setText(self._icon)
-        else:
-            n = max(0, round(len(self._label) * t))
-            shown = self._label[:n].rstrip()
-            self.setText(f"{self._icon}  {shown}" if shown else self._icon)
 
     def paintEvent(self, e):
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
+        p.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
         r = self.rect().adjusted(1, 1, -1, -1)
 
-        # фон pill: прозрачный → лёгкий hover → выбранный градиент
+        tt = self._text_t           # 0 = collapsed (иконка по центру)
+        # ── фон pill: прозрачный → лёгкий hover → выбранный градиент ──
         base = QColor(255, 255, 255, int(6 + 14 * self._hover_t))
         p.setPen(Qt.PenStyle.NoPen)
         p.setBrush(base)
@@ -249,7 +273,11 @@ class NavButton(QPushButton):
             grad.setColorAt(0, g1)
             grad.setColorAt(1, g0)
             p.setBrush(grad)
-            p.setPen(_pen(QColor(C['border']), 1.0 * t))
+            border_c = QColor(C['border'])
+            border_c.setAlpha(int(255 * t))
+            pen = QPen(border_c)
+            pen.setWidthF(1.0)
+            p.setPen(pen)
             p.drawRoundedRect(r, 9, 9)
         elif self._hover_t > 0.01:
             hv = QColor(C['bg_hover'])
@@ -269,13 +297,13 @@ class NavButton(QPushButton):
         # анимированная левая индикаторная полоса (растёт сверху вниз)
         if self._select_t > 0.01:
             full = int(r.height() * 0.62)
-            h = int(full * self._select_t)
+            h = max(3, int(full * self._select_t))
             y = r.center().y() - h // 2
             col = QColor(C['accent_primary'])
             col.setAlpha(int(235 * self._select_t))
             p.setPen(Qt.PenStyle.NoPen)
             p.setBrush(col)
-            p.drawRoundedRect(QRect(r.left() + 3, y, 3, max(h, 3)), 2, 2)
+            p.drawRoundedRect(QRect(r.left() + 3, y, 3, h), 2, 2)
 
         # pop-«вспышка» вокруг иконки при выборе
         if 0.0 < self._pop_t < 1.0:
@@ -284,13 +312,49 @@ class NavButton(QPushButton):
             col = QColor(C['accent_primary'])
             col.setAlpha(int(60 * (1.0 - pt)))
             cy = r.center().y()
-            cx = 22
+            cx = int(8 + (self.TEXT_X - 8 - self.ICON_SIZE / 2.0) * self._icon_center_progress())
             p.setBrush(col)
             p.setPen(Qt.PenStyle.NoPen)
             p.drawEllipse(QPoint(cx, cy), int(rad), int(rad * 0.6))
 
+        # ── иконка: позиция плавно скользит из центра (collapsed) к левому краю ──
+        s = self.ICON_SIZE
+        x_collapsed = (r.width() - s) // 2
+        x_expanded = 10
+        prog = self._icon_center_progress()
+        ix = int(round(x_collapsed + (x_expanded - x_collapsed) * prog))
+        iy = r.center().y() - s // 2
+
+        state = 2 if self.isChecked() else (1 if self._hover_t > 0.45 else 0)
+        pm = self._icon_for(state).pixmap(s * 2, s * 2)
+        p.drawPixmap(QRect(ix, iy, s, s), pm, QRect(0, 0, s * 2, s * 2))
+
+        # ── подпись: fade + лёгкий сдвиг, без посимвольного «печатания» ──
+        t = self._text_t
+        if t > 0.02:
+            alpha = int(255 * (t ** 1.3))
+            col_txt = QColor(C['text_primary'] if (self.isChecked()
+                                                   or self._hover_t > 0.45)
+                             else C['text_secondary'])
+            col_txt.setAlpha(alpha)
+            f = self.font()
+            f.setBold(self.isChecked())
+            p.setFont(f)
+            pen = QPen(col_txt)
+            pen.setWidthF(0.0)
+            p.setPen(pen)
+            dx = int(round((1.0 - t) * 8))
+            text_x = min(self.TEXT_X, r.width() - 6)
+            avail = max(0, r.right() - (text_x + dx) - 6)
+            rect = QRect(text_x + dx, r.top(), avail, r.height())
+            p.drawText(rect,
+                       Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft,
+                       self._label)
         p.end()
-        super().paintEvent(e)
+
+    def _icon_center_progress(self) -> float:
+        """0 — иконка у левого края (развёрнуто), 1 — по центру (свёрнуто)."""
+        return 1.0 - self._text_t
 
 
 class _FlyoutPanel(QWidget):
@@ -349,9 +413,12 @@ class _FlyoutPanel(QWidget):
 
         self._rows: list[QPushButton] = []
         for i in range(self._sidebar.tabs.count()):
-            t = self._sidebar.tabs.tabText(i).strip()
-            icon, _, label = t.partition(' ')
-            btn = QPushButton(f"{icon or '•'}  {label or t}")
+            t = _strip_emoji(self._sidebar.tabs.tabText(i))
+            name = icon_names_for_label(t)
+            btn = QPushButton(f"  {t}")
+            btn.setIcon(make_icon(name, C['text_secondary'], size=36,
+                                  stroke_width=1.7))
+            btn.setIconSize(QSize(18, 18))
             btn.setCheckable(True)
             btn.setCursor(Qt.CursorShape.PointingHandCursor)
             btn.setProperty("cssClass", "navItem")
@@ -443,22 +510,33 @@ class SidebarMenu(QWidget):
         # ── Шапка: бренд + кнопка toggle ──
         head = QHBoxLayout()
         head.setSpacing(4)
-        brand_box = QVBoxLayout()
-        brand_box.setSpacing(1)
-        brand = QLabel("⛏️ BGS Scanner")
+        brand_box = QHBoxLayout()
+        brand_box.setSpacing(8)
+        self._brand_icon = QLabel()
+        self._brand_icon.setFixedSize(26, 26)
+        self._brand_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._brand_icon.setPixmap(
+            make_icon("brand", C['text_primary'], size=44,
+                      stroke_width=1.7).pixmap(22, 22))
+        brand_txt = QVBoxLayout()
+        brand_txt.setSpacing(1)
+        brand = QLabel("BGS Scanner")
         brand.setObjectName("brandLabel")
         sub = QLabel("инструменты анализа ключей")
         sub.setObjectName("brandSub")
         self._brand = brand
         self._brand_sub = sub
-        brand_box.addWidget(brand)
-        brand_box.addWidget(sub)
+        brand_txt.addWidget(brand)
+        brand_txt.addWidget(sub)
+        brand_box.addWidget(self._brand_icon, 0, Qt.AlignmentFlag.AlignVCenter)
+        brand_box.addLayout(brand_txt, 1)
         head.addLayout(brand_box, 1)
 
         self._toggle = QToolButton()
         self._toggle.setObjectName("sideToggle")
         self._toggle.setCursor(Qt.CursorShape.PointingHandCursor)
         self._toggle.setFixedSize(30, 30)
+        self._toggle.setIconSize(QSize(18, 18))
         self._toggle.setToolTip("Свернуть / развернуть меню")
         self._toggle.clicked.connect(lambda: self.toggle_collapsed(user=True))
         head.addWidget(self._toggle, 0, Qt.AlignmentFlag.AlignTop)
