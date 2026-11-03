@@ -270,7 +270,7 @@ def show_random_range_dialog(
     )
     try:
         from ui.frameless import apply_frameless
-        apply_frameless(dialog, with_controls=False)
+        apply_frameless(dialog)
     except Exception:
         pass
     if dialog.exec() == QDialog.DialogCode.Accepted:

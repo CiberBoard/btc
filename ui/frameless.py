@@ -222,16 +222,25 @@ class _WinBtn(QPushButton):
 
 
 class TitleBar(QWidget):
-    """Собственная тёмная шапка окна: drag + double-click + controls."""
+    """Собственная тёмная шапка окна: drag + double-click + controls.
+
+    Управление окном доступно всегда (перемещение мышью, двойной клик),
+    кнопки min/max/close скрываются только если явно передан
+    with_controls=False — по умолчанию они есть на КАЖДОМ окне приложения,
+    включая диалоги, в едином стиле темы.
+    """
 
     HEIGHT = 36
 
-    def __init__(self, host: QWidget, with_controls: bool = True):
+    def __init__(self, host: QWidget, with_controls=None):
+        # None → controls включены по умолчанию для всех окон (в т.ч. диалогов)
+        if with_controls is None:
+            with_controls = True
         super().__init__(host)
         self._host = host
         self._dragging = False
         self._drag_pos = QPoint()
-        self._with_controls = with_controls
+        self._with_controls = bool(with_controls)
 
         self.setObjectName("appTitleBar")
         self.setFixedHeight(self.HEIGHT)
@@ -265,7 +274,7 @@ class TitleBar(QWidget):
             self.btn_close = _WinBtn('close', self)
             self.btn_min.clicked.connect(host.showMinimized)
             self.btn_max.clicked.connect(self._toggle_max)
-            self.btn_close.clicked.connect(host.close)
+            self.btn_close.clicked.connect(self._close_host)
             lay.addWidget(self.btn_min)
             lay.addWidget(self.btn_max)
             lay.addWidget(self.btn_close)
@@ -279,6 +288,18 @@ class TitleBar(QWidget):
             self._set_icon_for_title(t)
 
         host.windowTitleChanged.connect(_on_title_changed)
+
+    def _close_host(self):
+        """Закрытие окна: exec-диалог закрываем через reject(), остальное — close()."""
+        w = self._host
+        try:
+            from PyQt6.QtWidgets import QDialog
+            if isinstance(w, QDialog) and w.isModal():
+                w.reject()
+                return
+        except Exception:
+            pass
+        w.close()
 
     # ── brand/title icon ──
     def _set_icon_for_title(self, title: str):
@@ -661,16 +682,46 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
         body = QWidget(win)
         body.setObjectName("framelessBody")
         if old_lay is not None:
-            win.takeLayout()          # отвязываем старый layout от dialog
-            body_lay = QVBoxLayout(body)
-            body_lay.setContentsMargins(0, 0, 0, 0)
-            body_lay.setSpacing(0)
-            body_lay.addLayout(old_lay)
-        v = QHBoxLayout(win)
-        v.setContentsMargins(0, 0, 0, 0)
-        v.setSpacing(0)
-        v.addWidget(bar)
-        v.addWidget(body, 1)
+            moved = False
+            try:
+                win.takeLayout()          # Qt >= 6.4
+                moved = True
+            except AttributeError:
+                pass                      # нет takeLayout — старый layout
+                                          # переедет на body ниже сам
+            if moved:
+                body_lay = QVBoxLayout(body)
+                body_lay.setContentsMargins(0, 0, 0, 0)
+                body_lay.setSpacing(0)
+                body_lay.addLayout(old_lay)
+            else:
+                # takeLayout недоступен: НЕ отвязываем старый layout от dialog
+                # (в этой версии PyQt его нельзя удалить корректно). Вместо это
+                # переносим все item'ы в новый layout поверх body, а у dialog
+                # переиспользуем ОСТАВШИЙСЯ пустой layout под [bar, body].
+                new_host_lay = type(old_lay)(body)
+                try:
+                    m_ = old_lay.contentsMargins()
+                    new_host_lay.setContentsMargins(m_.left(), m_.top(), m_.right(), m_.bottom())
+                except Exception:
+                    pass
+                try:
+                    new_host_lay.setSpacing(old_lay.spacing())
+                except Exception:
+                    pass
+                while old_lay.count():
+                    new_host_lay.addItem(old_lay.takeAt(0))
+                # old_lay теперь пустой, но всё ещё layout dialog'а —
+                # наполним им структуру окна вместо создания нового layout
+                v = old_lay
+                v.addWidget(bar)
+                v.addWidget(body, 1)
+        else:
+            v = QHBoxLayout(win)
+            v.setContentsMargins(0, 0, 0, 0)
+            v.setSpacing(0)
+            v.addWidget(bar)
+            v.addWidget(body, 1)
     else:
         raise TypeError("apply_frameless поддерживает QMainWindow/QDialog")
 
