@@ -39,7 +39,7 @@ class MainWindowUI:
         self._ui_initialized = False
 
     def setup_ui(self) -> None:
-        self.parent.setWindowTitle("⛏️ Bitcoin GPU/CPU Scanner v5.0")
+        self.parent.setWindowTitle("Bitcoin GPU/CPU Scanner v5.0")
         self.parent.resize(self._DEFAULT_WINDOW_WIDTH, self._DEFAULT_WINDOW_HEIGHT)
         self.parent.setMinimumSize(self._MIN_WINDOW_WIDTH, self._MIN_WINDOW_HEIGHT)
 

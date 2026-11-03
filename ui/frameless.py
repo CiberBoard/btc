@@ -301,6 +301,14 @@ class TitleBar(QWidget):
             self.btn_max.update()
 
     # ── drag & double click ──
+    def _grab_offset(self, e) -> QPoint:
+        """Смещение курсора от левого верхнего угла CLIENT-видимой области окна.
+
+        geometry() — это client area (без нативной рамки/тени), поэтому
+        корректно и для окон с WS_THICKFRAME, и для полностью frameless.
+        """
+        return e.globalPosition().toPoint() - self._host.geometry().topLeft()
+
     def mousePressEvent(self, e):
         if e.button() == Qt.MouseButton.LeftButton:
             w = self._host
@@ -312,7 +320,7 @@ class TitleBar(QWidget):
                 w.move(int(e.globalPosition().x() - geo.width() * ratio),
                        int(e.globalPosition().y() - self.HEIGHT // 2))
             self._dragging = True
-            self._drag_pos = e.globalPosition().toPoint() - w.frameGeometry().topLeft()
+            self._drag_pos = self._grab_offset(e)
             e.accept()
 
     def mouseMoveEvent(self, e):
@@ -432,42 +440,196 @@ class ResizeHelper(QObject):
 # Public API
 # ─────────────────────────────────────────────────────────────
 
-class _PolishedWatcher(QObject):
-    """После show() окна пересчитываем нативный frame (снимает WS_CAPTION)."""
+if _WIN_SUBCLASS_AVAILABLE:
+    _DWMWA_EXTENDED_FRAME_BOUNDS = 9
+    _DwmGetWindowAttribute = windll.dwmapi.DwmGetWindowAttribute
+    _DwmGetWindowAttribute.restype = ctypes.HRESULT if hasattr(ctypes, "HRESULT") else ctypes.c_long
+
+    def _strip_native_caption(win):
+        """Гарантированно снимает нативную полосу заголовка Windows.
+
+        ДВА взаимодополняющих способа (применяются оба):
+          1) Флаг Qt FramelessWindowHint — самый надёжный: Qt сама
+             пересоздаёт окно без WS_CAPTION/WS_TITLEBAR на любой стадии.
+          2) Прямой SetWindowLongW(GWL_STYLE, ...) со снятием
+             WS_CAPTION|WS_SYSMENU и сохранением WS_THICKFRAME
+             (нативный resize/snap остаётся работает).
+        Применяется ДО show(), поэтому белая полоса не мелькает при старте.
+        """
+        try:
+            win.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
+        except Exception:
+            pass
+        try:
+            hwnd = int(win.winId())
+            styles = _GetWindowLongW(hwnd, _GWL_STYLE)
+            new = (styles & ~(_WS_CAPTION | _WS_SYSMENU)) | _WS_THICKFRAME
+            if new != styles:
+                _SetWindowLongW(hwnd, _GWL_STYLE, new)
+                _SetWindowPos(hwnd, 0, 0, 0, 0, 0, _SWP_FLAGS)
+        except Exception:
+            pass
+
+    def _ensure_no_caption(win):
+        """Повторная страховка после show()/showEvent(): если Windows или Qt
+        вернули WS_CAPTION (например, после showMaximized), снова срезаем его."""
+        try:
+            if not win.isVisible():
+                return
+            hwnd = int(win.winId())
+            styles = _GetWindowLongW(hwnd, _GWL_STYLE)
+            if styles & _WS_CAPTION:
+                _SetWindowLongW(hwnd, _GWL_STYLE,
+                                (styles & ~(_WS_CAPTION | _WS_SYSMENU)) | _WS_THICKFRAME)
+                _SetWindowPos(hwnd, 0, 0, 0, 0, 0, _SWP_FLAGS)
+        except Exception:
+            pass
+
+
+class _CaptionGuard(QObject):
+    """Следит, чтобы нативный caption не возвращался при show/resize/state."""
 
     def __init__(self, win):
         super().__init__(win)
         self._win = win
 
     def eventFilter(self, obj, e):
-        if e.type() == QEvent.Type.Show:
-            QTimer.singleShot(0, self._repolish)
+        t = e.type()
+        if t in (QEvent.Type.Show, QEvent.Type.WindowStateChange, QEvent.Type.Resize):
+            QTimer.singleShot(0, lambda: _ensure_no_caption(self._win))
         return False
 
-    def _repolish(self):
-        try:
-            self._win.windowHandle().frameStrutChanged()
-        except Exception:
-            pass
+
+# ─────────────────────────────────────────────────────────────
+# Единый стиль для нативных попапов: QMessageBox / QFileDialog / QMenu
+# (ставим Fusion + стили через app stylesheet — диалоги наследуют его).
+# ─────────────────────────────────────────────────────────────
+
+_POPUP_QSS = f"""
+    QMessageBox, QDialog {{ background: {_BG_WINDOW}; color: {_TEXT}; }}
+    QMessageBox QLabel {{ background: transparent; color: {_TEXT}; font-size: 10pt; }}
+    QMessageBox QPushButton, QDialog QPushButton {{
+        background: {_BG_TITLEBAR}; color: {_TEXT};
+        border: 1px solid {_BORDER}; border-radius: 6px;
+        padding: 6px 18px; min-width: 72px; font-weight: 600;
+    }}
+    QMessageBox QPushButton:hover, QDialog QPushButton:hover {{
+        background: {_HOVER}; border-color: #4A4A55;
+    }}
+    QMessageBox QPushButton:pressed, QDialog QPushButton:pressed {{
+        background: {_PRESSED};
+    }}
+    QMessageBox QPushButton:default {{
+        background: #3A6D8F; border-color: #4E86AC; color: #FFFFFF;
+    }}
+    QMessageBox QPushButton:default:hover {{ background: #44799C; }}
+    QFileDialog {{ background: {_BG_WINDOW}; }}
+    QFileDialog QLabel {{ background: transparent; color: {_TEXT_DIM}; }}
+    QFileDialog QLineEdit#nameFilterLineEdit,
+    QFileDialog QLineEdit {{
+        background: #1A1A1F; color: {_TEXT};
+        border: 1px solid {_BORDER}; border-radius: 6px; padding: 5px 8px;
+    }}
+    QFileDialog QListView, QFileDialog QTreeView {{
+        background: #1A1A1F; alternate-background-color: #212127;
+        color: {_TEXT}; border: 1px solid {_BORDER}; border-radius: 6px;
+        outline: none; selection-background-color: #3A6D8F;
+        selection-color: #FFFFFF;
+    }}
+    QFileDialog QComboBox {{
+        background: {_BG_TITLEBAR}; color: {_TEXT};
+        border: 1px solid {_BORDER}; border-radius: 6px; padding: 4px 8px;
+    }}
+    QMenu {{
+        background: {_BG_TITLEBAR}; color: {_TEXT};
+        border: 1px solid {_BORDER}; border-radius: 8px; padding: 4px;
+    }}
+    QMenu::item {{ padding: 6px 22px; border-radius: 5px; background: transparent; }}
+    QMenu::item:selected {{ background: {_HOVER}; }}
+    QMenu::separator {{ height: 1px; background: {_BORDER}; margin: 4px 8px; }}
+    QToolTip {{
+        background: {_BG_TITLEBAR}; color: {_TEXT};
+        border: 1px solid {_BORDER}; border-radius: 5px; padding: 4px 8px;
+    }}
+"""
+
+
+def style_app_popups(app) -> None:
+    """Единый тёмный стиль для всех всплывающих окон приложения
+    (QMessageBox, QFileDialog, QMenu, тултипы). Наследуется дочерними окнами."""
+    try:
+        from PyQt6.QtWidgets import QApplication, QStyleFactory
+        app.setStyle(QStyleFactory.create("Fusion"))
+    except Exception:
+        pass
+    try:
+        base = app.styleSheet()
+        if "#appPopupStyleRoot" not in base:
+            app.setStyleSheet(base + "\n/* appPopupStyleRoot */\n" + _POPUP_QSS)
+    except Exception:
+        pass
+
+
+def force_non_native_dialogs() -> None:
+    """Глобально отключает нативные Windows-диалоги файлов/папок.
+
+    QFileDialog больше не создаёт нативное окно Windows (со своей белой
+    полосой и крестиками) — всегда рисуется Qt в теме приложения.
+    Реализация: переопределяем статический getSaveFileName / getOpenFileName
+    / getExistingDirectory с предустановленным DontUseNativeDialog.
+    """
+    try:
+        from PyQt6.QtWidgets import QFileDialog
+
+        _DontNative = QFileDialog.Option.DontUseNativeDialog
+        orig_save = QFileDialog.getSaveFileName
+        orig_open = QFileDialog.getOpenFileName
+        orig_openf = QFileDialog.getOpenFileNames
+        orig_dir = QFileDialog.getExistingDirectory
+
+        def getSaveFileName(*a, **kw):
+            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            return orig_save(*a, **kw)
+
+        def getOpenFileName(*a, **kw):
+            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            return orig_open(*a, **kw)
+
+        def getOpenFileNames(*a, **kw):
+            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            return orig_openf(*a, **kw)
+
+        def getExistingDirectory(*a, **kw):
+            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            return orig_dir(*a, **kw)
+
+        QFileDialog.getSaveFileName = staticmethod(getSaveFileName)
+        QFileDialog.getOpenFileName = staticmethod(getOpenFileName)
+        QFileDialog.getOpenFileNames = staticmethod(getOpenFileNames)
+        QFileDialog.getExistingDirectory = staticmethod(getExistingDirectory)
+    except Exception:
+        pass
 
 
 def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
-    """Делает окно безрамочным в стиле приложения. Идемпотентно."""
+    """Делает окно безрамочным в стиле приложения. Идемпотентно.
+
+    Вызывать ДО первого show() окна — тогда белая нативная полоса
+    не появляется даже на кадр.
+    """
     if getattr(win, "_bgs_titlebar", None) is not None:
         return win
 
-    # 1) Убираем нативную Windows-полосу заголовка (крестики/белая полоса).
-    #    Снимаем WS_CAPTION|WS_SYSMENU, оставляем WS_THICKFRAME — тогда
-    #    Qt сама обрабатывает native resize/snap, а QWindow.frameGeometry
-    #    корректно учитывает толщину рамки.
-    if _IS_WIN:
+    # 1) Убираем нативную Windows-полосу заголовка (крестики/белая полоса):
+    #    FramelessWindowHint + снятие WS_CAPTION|WS_SYSMENU (оставляем
+    #    WS_THICKFRAME — Qt/native обрабатывают resize/snap, а drag по краю
+    #    работает штатно).
+    if _WIN_SUBCLASS_AVAILABLE:
+        _strip_native_caption(win)
+        win.installEventFilter(_CaptionGuard(win))
+    elif _IS_WIN:
         try:
-            hwnd = int(win.winId())
-            styles = windll.user32.GetWindowLongW(hwnd, _GWL_STYLE)
-            windll.user32.SetWindowLongW(
-                hwnd, _GWL_STYLE,
-                (styles & ~(_WS_CAPTION | _WS_SYSMENU)) | _WS_THICKFRAME)
-            windll.user32.SetWindowPos(hwnd, 0, 0, 0, 0, 0, _SWP_FLAGS)
+            win.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
         except Exception:
             pass
 

@@ -22,6 +22,7 @@ from PyQt6.QtWidgets import (
 
 import config
 from ui.theme import apply_dark_theme
+from ui.frameless import apply_frameless, style_app_popups, force_non_native_dialogs
 from ui.ui_main import MainWindowUI
 from core.unified_scanner import ScannerManager
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
@@ -139,6 +140,18 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
         self.setWindowTitle("Bitcoin GPU/CPU Scanner")
         self.resize(1200, 900)
+
+        # 🪟 Единый стиль окна: own titlebar вместо белой полосы Windows.
+        #    Вызываем в конце __init__ (когда UI уже собран), но до show().
+        try:
+            from PyQt6.QtWidgets import QApplication as _QApp
+            app = _QApp.instance()
+            if app is not None:
+                style_app_popups(app)
+            force_non_native_dialogs()
+            apply_frameless(self)
+        except Exception as _e:
+            logger.warning(f"frameless init failed, native caption remains: {_e}")
 
         logger.info(f"📁 Settings path: {self.settings.filepath}")
 
@@ -260,6 +273,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 on_apply_callback=on_apply,
                 on_log_callback=self.append_log,
             )
+            try:
+                apply_frameless(dialog, with_controls=False)
+            except Exception:
+                pass
             dialog.exec()
         except Exception as e:
             logger.exception("Ошибка открытия диалога случайного диапазона")
