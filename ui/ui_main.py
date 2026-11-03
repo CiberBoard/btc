@@ -927,8 +927,17 @@ class MainWindowUI:
         self.parent.save_all_btn = QPushButton("💾 Сохранить все")
         set_button_style(self.parent.save_all_btn, "primary")
         self.parent.save_all_btn.clicked.connect(self.parent.save_all_found_keys)
+        # 🔺 Кнопка публикации найденного ключа (отключена до подтверждения пользователя)
+        self.parent.publish_key_btn = QPushButton("🔺 Опубликовать")
+        set_button_style(self.parent.publish_key_btn, "warning")
+        self.parent.publish_key_btn.setEnabled(False)
+        self.parent.publish_key_btn.setToolTip(
+            "Выберите строку в таблице — публикация отключена до подтверждения"
+        )
+        self.parent.publish_key_btn.clicked.connect(self.parent.publish_found_key)
         export_row.addWidget(self.parent.export_keys_btn)
         export_row.addWidget(self.parent.save_all_btn)
+        export_row.addWidget(self.parent.publish_key_btn)
         export_row.addStretch()
         keys_layout.addLayout(export_row)
 

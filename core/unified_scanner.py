@@ -686,6 +686,10 @@ class KangarooScanner(BaseScanner):
 
         exe = params.get('etarkangaroo_exe', '')
         if not os.path.exists(exe):
+            # Старый/некорректный путь — пробуем найти утилиту в bin/ автоматически
+            exe = config.migrate_binary_path(exe)
+            params = dict(params, etarkangaroo_exe=exe)
+        if not os.path.exists(exe):
             self.log_message.emit(f"Файл не найден: {exe}", "error")
             return False
         pubkey = params.get('pubkey_hex', '')

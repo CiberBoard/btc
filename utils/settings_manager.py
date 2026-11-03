@@ -107,6 +107,22 @@ class SettingsManager(QObject):
                 self.namespaces[ns] = data.get(ns, {})
 
             self._cache = data
+
+            # 🔧 Миграция устаревших путей к внешним утилитам: после переноса
+            # .exe/.dll из корня проекта в bin/ старые абсолютные пути в
+            # настройках больше не существуют — исправляем их автоматически.
+            try:
+                import config as _cfg
+                migrated = False
+                for ns_data in list(self.namespaces.values()) + [self._cache]:
+                    if isinstance(ns_data, dict) and _cfg.fix_settings_paths(ns_data):
+                        migrated = True
+                if migrated:
+                    logger.info("🔧 Пути к внешним утилитам в настройках обновлены (bin/)")
+                    self.save()
+            except Exception as e:
+                logger.warning(f"Не удалось исправить пути в настройках: {e}")
+
             self._loaded = True
 
             logger.info(f"✅ Настройки загружены: {self.filepath}")

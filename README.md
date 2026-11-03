@@ -149,8 +149,8 @@ pip install PyQt6 psutil coincurve pywin32 pynvml matplotlib scipy
 ### 3. Получение бинарных файлов
 | Инструмент | Источник | Куда поместить |
 |------------|----------|----------------|
-| `cuBitcrack.exe` | [brichard19/BitCrack](https://github.com/brichard19/BitCrack/releases) | Корень проекта |
-| `Etarkangaroo.exe` | *(Сборка сообщества)* | Корень проекта |
+| `cuBitCrack.exe` | [brichard19/BitCrack](https://github.com/brichard19/BitCrack/releases) | Папка `bin/` |
+| `Etarkangaroo.exe` | *(Сборка сообщества)* | Папка `bin/` |
 
 > 🔧 Обновите драйверы NVIDIA и CUDA Toolkit до актуальных версий.
 
@@ -184,8 +184,9 @@ python main.py
 BTCScanner/
 ├── 📄 main.py                    # Точка входа
 ├── ⚙️ config.py                 # Глобальные константы
-├── 🔧 cuBitcrack.exe            # GPU-сканер
-├── 🔧 Etarkangaroo.exe          # Kangaroo-солвер
+├── 📁 bin/                    # Внешние утилиты (.exe) и cudart64_101.dll
+│   ├── 🔧 cuBitCrack.exe        # GPU-сканер
+│   └── 🔧 Etarkangaroo.exe      # Kangaroo-солвер
 ├── 📁 kangaroo_temp/            # Временные файлы Kangaroo
 ├── 💾 Found_key_CUDA.txt        # Найденные ключи
 ├── 💾 gpu_progress.txt          # Сохранённый прогресс GPU ← NEW
