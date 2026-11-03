@@ -8345,3 +8345,6 @@
 [2026-11-03 18:49:30] DEBUG [gpu_scanner:271]: GPU Output: 03633CBE3EC02B9401C5EFFA144C5B4D22F87940259634858FC7E59B1C09937852
 [2026-11-03 18:49:30] DEBUG [gpu_scanner:271]: GPU Output: [2026-11-03.18:49:30] [Info] No targets remaining
 [2026-11-03 18:49:30] DEBUG [gpu_scanner:271]: GPU Output: [2026-11-03.18:49:30] [Info] Reached end of keyspace
+[2026-11-03 17:09:36] INFO [main:48]: ==================================================
+[2026-11-03 17:09:36] INFO [main:49]: 🚀 Запуск Bitcoin GPU/CPU Scanner
+[2026-11-03 17:09:36] INFO [main:50]: ==================================================
