@@ -20,6 +20,7 @@ if TYPE_CHECKING:
 import config
 from utils.helpers import make_combo32, is_coincurve_available
 from ui.theme import apply_dark_theme, set_button_style, COLORS
+from ui.sidebar import build_sidebar_layout, install_tab_animations, SIDEBAR_QSS
 
 logger = logging.getLogger(__name__)
 
@@ -44,15 +45,15 @@ class MainWindowUI:
         apply_dark_theme(self.parent)
 
         main_widget = QWidget()
+        main_widget.setObjectName("centralRoot")
         self.parent.setCentralWidget(main_widget)
         main_layout = QVBoxLayout(main_widget)
-        main_layout.setContentsMargins(self._MARGIN, self._MARGIN, self._MARGIN, self._MARGIN)
-        main_layout.setSpacing(self._SPACING)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
         self.parent.main_tabs = QTabWidget()
         self.parent.main_tabs.setObjectName("mainTabs")
         self.parent.main_tabs.setDocumentMode(True)
-        main_layout.addWidget(self.parent.main_tabs)
 
         # ✅ Все вкладки должны быть определены в этом классе
         self._setup_gpu_tab()
@@ -64,6 +65,12 @@ class MainWindowUI:
         self._setup_log_tab()
         self._setup_predict_tab()
         self._setup_about_tab()
+
+        # 🧭 Современное меню: слева — sidebar с пунктами, справа — страницы
+        row_layout, self.parent.sidebar = build_sidebar_layout(self.parent, self.parent.main_tabs)
+        main_layout.addLayout(row_layout)
+        install_tab_animations(self.parent.main_tabs)
+        self.parent.setStyleSheet(self.parent.styleSheet() + "\n" + SIDEBAR_QSS)
 
         self._ui_initialized = True
 
