@@ -84,15 +84,15 @@ def _strip_emoji(text: str) -> str:
         out.append(ch)
         i += 1
     s = "".join(out).lstrip()
-    # затем снимаем оставшиеся ведущие небуквенно-цифровые значки
-    # (в т.ч. «похожие на буквы» символы вроде ℹ U+2139)
-    while s and not (s[0].isalnum() and s[0].isalpha()):
-        s = s[1:].lstrip(' \u200d\ufe0f\u2060 ')
-    # «похожие на буквы» символы (ℹ, ⓐ и т.п.) проходят isalpha() —
-    # вырезаем их явно, если они идут до первого настоящего слова
-    m = re.match(r'^[\W_]+', s, re.UNICODE)
-    if m:
-        s = s[m.end():]
+    # символы-«буквы», не относящиеся к обычному алфавиту (ℹ U+2139, ⓐ и т.п.):
+    # они проходят str.isalpha(), поэтому отсекаем всё, что не кириллица/латиница
+    def _plain_letter(ch: str) -> bool:
+        o = ord(ch)
+        return (0x41 <= o <= 0x5A or 0x61 <= o <= 0x7A      # A-Z a-z
+                or 0x400 <= o <= 0x4FF                       # кириллица
+                or ch.isdigit())
+    while s and not _plain_letter(s[0]):
+        s = s[1:].lstrip(' \u200d\ufe0f\u2060')
     return s.strip()
 
 
@@ -105,7 +105,8 @@ class NavButton(QPushButton):
     """
 
     ICON_SIZE = 22
-    TEXT_X = 40          # x-координата начала подписи (развёрнутое меню)
+    ICON_X_EXPANDED = 12   # левый отступ иконки в развёрнутом меню
+    TEXT_X = 46            # x-координата начала подписи (после иконки + зазор)
 
     def __init__(self, icon_name: str, text: str, parent=None):
         super().__init__(parent)
@@ -334,7 +335,11 @@ class NavButton(QPushButton):
             col = QColor(C['accent_primary'])
             col.setAlpha(int(60 * (1.0 - pt)))
             cy = r.center().y()
-            cx = int(8 + (self.TEXT_X - 8 - self.ICON_SIZE / 2.0) * self._icon_center_progress())
+            # центр иконки интерполируется между collapsed/expanded
+            s = self.ICON_SIZE
+            x_collapsed = (r.width() - s) // 2
+            prog = self._icon_center_progress()   # 1 → collapsed, 0 → expanded
+            cx = int(x_collapsed + (self.ICON_X_EXPANDED - x_collapsed) * (1 - prog) + s / 2)
             p.setBrush(col)
             p.setPen(Qt.PenStyle.NoPen)
             p.drawEllipse(QPoint(cx, cy), int(rad), int(rad * 0.6))
@@ -342,9 +347,9 @@ class NavButton(QPushButton):
         # ── иконка: позиция плавно скользит из центра (collapsed) к левому краю ──
         s = self.ICON_SIZE
         x_collapsed = (r.width() - s) // 2
-        x_expanded = 10
-        prog = self._icon_center_progress()
-        ix = int(round(x_collapsed + (x_expanded - x_collapsed) * prog))
+        x_expanded = self.ICON_X_EXPANDED
+        prog = self._icon_center_progress()       # 1 → collapsed, 0 → expanded
+        ix = int(round(x_collapsed + (x_expanded - x_collapsed) * (1 - prog)))
         iy = r.center().y() - s // 2
 
         state = 2 if self.isChecked() else (1 if self._hover_t > 0.45 else 0)
@@ -365,8 +370,11 @@ class NavButton(QPushButton):
             pen = QPen(col_txt)
             pen.setWidthF(0.0)
             p.setPen(pen)
-            dx = int(round((1.0 - t) * 8))
-            text_x = min(self.TEXT_X, r.width() - 6)
+            # текст начинается строго после иконки + зазор, не наезжает на неё
+            icon_right = ix + s + 8
+            base_text_x = max(self.TEXT_X, icon_right)
+            dx = int(round((1.0 - t) * 8))     # лёгкий slide при проявлении
+            text_x = min(base_text_x, r.width() - 6)
             avail = max(0, r.right() - (text_x + dx) - 6)
             rect = QRect(text_x + dx, r.top(), avail, r.height())
             p.drawText(rect,
