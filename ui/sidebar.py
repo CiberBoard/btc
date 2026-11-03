@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import re
 import os
 from typing import Optional
 
@@ -67,10 +68,31 @@ def _save_ui_settings(data: dict):
 def _strip_emoji(text: str) -> str:
     """Убирает из заголовка вкладки ведущие эмодзи/символы-пиктограммы."""
     s = (text or "").strip()
-    while s and not s[0].isalnum():
-        s = s[1:]
-        if s and s[0] in (' ', '️', '‍', ' '):
-            s = s.lstrip(' \u200d\ufe0f\u2060 ')
+    # сначала вырезаем суррогатные пары и символы-модификаторы целиком
+    out, i = [], 0
+    while i < len(s):
+        ch = s[i]
+        o = ord(ch)
+        if 0xD800 <= o <= 0xDBFF and i + 1 < len(s) and \
+                0xDC00 <= ord(s[i + 1]) <= 0xDFFF:
+            i += 2                      # эмодзи как суррогатная пара — пропускаем
+            continue
+        if (o >= 0x1F000 or o in (0xFE0F, 0x200D, 0x2060)
+                or 0x2600 <= o <= 0x27BF or o == 0x2B50):
+            i += 1                      # символы BMP-эмо/варианты/zero-width
+            continue
+        out.append(ch)
+        i += 1
+    s = "".join(out).lstrip()
+    # затем снимаем оставшиеся ведущие небуквенно-цифровые значки
+    # (в т.ч. «похожие на буквы» символы вроде ℹ U+2139)
+    while s and not (s[0].isalnum() and s[0].isalpha()):
+        s = s[1:].lstrip(' \u200d\ufe0f\u2060 ')
+    # «похожие на буквы» символы (ℹ, ⓐ и т.п.) проходят isalpha() —
+    # вырезаем их явно, если они идут до первого настоящего слова
+    m = re.match(r'^[\W_]+', s, re.UNICODE)
+    if m:
+        s = s[m.end():]
     return s.strip()
 
 
@@ -499,6 +521,8 @@ class SidebarMenu(QWidget):
         self._idle_ticks = 0
         self._user_pinned = not self._collapsed  # развёрнут вручную?
         self._mouse_inside = False
+        self._header_t = 1.0 if not self._collapsed else 0.0  # прогресс шапки
+        self._head_lay = None   # заполняется при сборке шапки
 
         self.setMouseTracking(True)
 
@@ -508,9 +532,14 @@ class SidebarMenu(QWidget):
         self._lay = lay
 
         # ── Шапка: бренд + кнопка toggle ──
+        # Стабильная структура без перестроений layout'а во время анимации:
+        # [brand_box (иконка + текст) | toggle]. Плавность даёт только
+        # изменение ширины текстового блока и opacity — интерфейс не дёргается.
         head = QHBoxLayout()
+        self._head_lay = head
         head.setSpacing(4)
         brand_box = QHBoxLayout()
+        self._brand_box = brand_box
         brand_box.setSpacing(8)
         self._brand_icon = QLabel()
         self._brand_icon.setFixedSize(26, 26)
@@ -526,6 +555,7 @@ class SidebarMenu(QWidget):
         sub.setObjectName("brandSub")
         self._brand = brand
         self._brand_sub = sub
+        self._brand_txt = brand_txt
         brand_txt.addWidget(brand)
         brand_txt.addWidget(sub)
         brand_box.addWidget(self._brand_icon, 0, Qt.AlignmentFlag.AlignVCenter)
@@ -542,6 +572,9 @@ class SidebarMenu(QWidget):
         head.addWidget(self._toggle, 0, Qt.AlignmentFlag.AlignTop)
         lay.addLayout(head)
 
+        # стартовое состояние шапки без анимации
+        self._apply_header_state(self._collapsed, animate=False)
+
         self._pulse = PulseDot(self, C['accent_success'], size=8)
         self._pulse.move(14, 16)
         self._pulse.show()
@@ -554,11 +587,10 @@ class SidebarMenu(QWidget):
         lay.addWidget(line)
         lay.addSpacing(4)
 
-        # ── Пункты меню из вкладок ──
+        # ── Пункты меню из вкладок (монохромные векторные иконки) ──
         for i in range(tab_widget.count()):
-            title = tab_widget.tabText(i).strip()
-            icon, _, label = title.partition(' ')
-            btn = NavButton(icon if icon else "•", label or title, self)
+            title = _strip_emoji(tab_widget.tabText(i))
+            btn = NavButton(icon_names_for_label(title), title, self)
             btn.clicked.connect(lambda _c=False, idx=i: self.select_index(idx))
             lay.addWidget(btn)
             self._buttons.append(btn)
@@ -585,8 +617,7 @@ class SidebarMenu(QWidget):
         self.setFixedWidth(SIDEBAR_COLLAPSED_W if self._collapsed
                            else SIDEBAR_EXPANDED_W)
         for b in self._buttons:
-            b._text_w = 0.0 if self._collapsed else 1.0
-            b._apply_text(b._text_w)
+            b.set_labels_visible(not self._collapsed, animate=False)
         self._update_toggle_icon()
         if self._collapsed:
             self._foot.hide()
@@ -622,6 +653,7 @@ class SidebarMenu(QWidget):
 
         for b in self._buttons:
             b.set_labels_visible(not collapsed, animate=animate)
+        self._apply_header_state(collapsed, animate=animate)
         if collapsed:
             self._foot.hide()
         else:
@@ -648,19 +680,80 @@ class SidebarMenu(QWidget):
         self.collapsed_changed.emit(collapsed)
 
     # ---------- internals ----------
+    def _set_headerT(self, v):
+        self._header_t = max(0.0, min(1.0, v))
+        self._layout_header()
+
+    def _get_headerT(self):
+        return self._header_t
+
+    headerT = pyqtProperty(float, fget=_get_headerT, fset=_set_headerT)
+
+    def _layout_header(self):
+        """Распределяет содержимое шапки по прогрессу self._header_t (0..1).
+
+        0 — collapsed: только brand-иконка по центру, toggle скрыт;
+        1 — expanded: иконка + текст слева, кнопка toggle справа.
+        Структура layout стабильна ([brand_box | toggle]) — меняются лишь
+        выравнивание brand_box, ширина текста и opacity, без перестроений,
+        поэтому анимация плавная и без скачков."""
+        t = self._header_t
+        # центрирование иконки в collapsed / выравнивание влево в expanded
+        if t < 0.5:
+            self._brand_box.setAlignment(
+                Qt.AlignmentFlag.AlignCenter)
+        else:
+            self._brand_box.setAlignment(
+                Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        # текстовый блок — плавное расширение + fade
+        txt_w = max(0, int(t * 168))
+        for wdg in (self._brand, self._brand_sub):
+            wdg.setFixedWidth(max(1, txt_w))
+            eff = getattr(wdg, "_fade_eff", None)
+            if eff is None:
+                eff = QGraphicsOpacityEffect(wdg)
+                wdg.setGraphicsEffect(eff)
+                wdg._fade_eff = eff
+            eff.setOpacity(max(0.0, min(1.0, (t - 0.15) / 0.5)))
+        # кнопка toggle: прячем полностью в collapsed-состоянии
+        self._toggle.setVisible(t > 0.35)
+
+    def _apply_header_state(self, collapsed: bool, animate: bool = True):
+        target = 0.0 if collapsed else 1.0
+        a = getattr(self, "_anim_header", None)
+        if a is None:
+            a = QPropertyAnimation(self, b"headerT", self)
+            a.setEasingCurve(QEasingCurve.Type.InOutCubic)
+            self._anim_header = a
+        a.stop()
+        if not animate or abs(self._header_t - target) < 0.001:
+            self._header_t = target
+            self._layout_header()
+            return
+        a.setDuration(260)
+        a.setStartValue(self._header_t)
+        a.setEndValue(target)
+        a.start()
+
     def _on_width_value(self, w):
         w = int(w)
         self.setFixedWidth(w)
-        t = max(0.0, min(1.0, (w - SIDEBAR_COLLAPSED_W) / float(
-            SIDEBAR_EXPANDED_W - SIDEBAR_COLLAPSED_W)))
-        self._brand.setFixedWidth(max(1, int(t * 168)))
-        self._brand_sub.setFixedWidth(max(1, int(t * 168)))
+        # синхронизируем шапку с текущей шириной (плавность без «дерганья»)
+        if not (getattr(self, "_anim_header", None) and
+                self._anim_header.state() == QPropertyAnimation.State.Running):
+            t = max(0.0, min(1.0, (w - SIDEBAR_COLLAPSED_W) / float(
+                SIDEBAR_EXPANDED_W - SIDEBAR_COLLAPSED_W)))
+            self._header_t = t
+            self._layout_header()
         cur = self.tabs.currentIndex()
         if 0 <= cur < len(self._buttons):
             self._indicator.reposition(self._buttons[cur])
 
     def _update_toggle_icon(self):
-        self._toggle.setText("◀" if not self._collapsed else "▶")
+        name = "chevron_left" if not self._collapsed else "chevron_right"
+        self._toggle.setIcon(make_icon(name, C['text_secondary'], size=36,
+                                       stroke_width=1.9))
+        self._toggle.setText("")
 
     def enterEvent(self, e):
         self._mouse_inside = True
