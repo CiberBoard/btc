@@ -12,8 +12,8 @@ import os
 from typing import Optional
 
 from PyQt6.QtCore import (
-    Qt, QPropertyAnimation, QEasingCurve, QPoint, QRect, QTimer, QSize,
-    pyqtSignal, pyqtProperty, QObject,
+    Qt, QPropertyAnimation, QEasingCurve, QPoint, QPointF, QRect, QTimer,
+    QSize, pyqtSignal, pyqtProperty, QObject,
 )
 from PyQt6.QtGui import QColor, QPainter, QPen, QLinearGradient, QIcon
 from PyQt6.QtWidgets import (
@@ -151,6 +151,11 @@ class NavButton(QPushButton):
         return C['text_secondary']
 
     def _icon_for(self, state: int) -> QIcon:
+        # состояние «выбрана» и «наведение» визуально одинаковы по цвету;
+        # при снятии выбора возвращаем обычную (неподсвеченную) иконку,
+        # чтобы пункт не оставался залитым после перехода на другую страницу
+        if state == 2 and self._state_color(2) == self._state_color(1):
+            state = 1
         key = f"ic{state}"
         cached = getattr(self, key, None)
         if cached is None:
@@ -213,6 +218,11 @@ class NavButton(QPushButton):
         self._anim_select.start()
         if checked:
             self._pop()
+        # при снятии выбора принудительно перерисовываем: анимация selectT
+        # сама вызывает update(), но страховка от «залипшей» подсветки не помешает
+        else:
+            QTimer.singleShot(340, self.update)
+        self.update()
 
     def _pop(self):
         """Pop-эффект: вокруг иконки «расходится» вспышка при активации."""
@@ -640,6 +650,10 @@ class SidebarMenu(QWidget):
     def select_index(self, index: int):
         if 0 <= index < self.tabs.count():
             animate_page(self.tabs, index)
+            # если вкладка уже активна (setCurrentIndex не вызовет сигнал),
+            # всё равно синхронизируем подсветку меню
+            if self.tabs.currentIndex() == index:
+                self._sync_from_tabs(index)
             self._idle_ticks = 0
             if self._collapsed:
                 self._timer_popup.stop()
@@ -879,9 +893,15 @@ class SidebarMenu(QWidget):
 
     def _sync_from_tabs(self, index: int):
         for i, b in enumerate(self._buttons):
-            b.blockSignals(True)
-            b.setChecked(i == index)
-            b.blockSignals(False)
+            want = (i == index)
+            cur = b.isChecked()
+            if want and not cur:
+                # сначала «вкл» новому пункту — так не бывает мгновения
+                # вообще без подсветки при смене страницы
+                b.setChecked(True)
+            if cur and not want:
+                b.setChecked(False)   # без blockSignals — иначе toggled не
+                                      # доходит до анимации и подсветка залипает
         if 0 <= index < len(self._buttons):
             self._indicator.move_to(self._buttons[index])
 
@@ -1245,16 +1265,18 @@ class _EdgeHandle(QWidget):
         p.setPen(pen)
         p.drawRoundedRect(r, radius, radius)
 
+        # нейтральная «ручка» вместо стрелок: три мягкие горизонтальные
+        # штрих-линии, слегка расходящиеся при наведении (без «бага»)
         col = QColor(C['text_secondary'])
         col.setAlpha(int(150 + 105 * self._t))
         pen2 = QPen(col)
-        pen2.setWidthF(1.6)
+        pen2.setWidthF(1.8)
         pen2.setCapStyle(Qt.PenCapStyle.RoundCap)
         p.setPen(pen2)
-        cx = r.center().x() + 1
-        cy = r.center().y()
-        shift = int(2 * self._t)
-        for dy in (-14, 0, 14):
-            p.drawLine(cx - 3 + shift, cy + dy - 4, cx + 3 + shift, cy + dy)
-            p.drawLine(cx + 3 + shift, cy + dy, cx - 3 + shift, cy + dy + 4)
+        cx = float(r.center().x()) + 0.5
+        cy = float(r.center().y()) + 0.5
+        half = 3.0 + 1.5 * self._t
+        gap = 4.5 + 0.8 * self._t
+        for dy in (-gap, 0.0, gap):
+            p.drawLine(QPointF(cx - half, cy + dy), QPointF(cx + half, cy + dy))
         p.end()
