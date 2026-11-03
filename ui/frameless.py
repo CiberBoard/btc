@@ -581,20 +581,38 @@ def force_non_native_dialogs() -> None:
         orig_openf = QFileDialog.getOpenFileNames
         orig_dir = QFileDialog.getExistingDirectory
 
+        def _with_non_native(value):
+            """Добавляет DontUseNativeDialog к переданным опциям.
+
+            ВАЖНО: в PyQt6 >= 6.5 вызов пустого флага (QFileDialog.Option())
+            бросает TypeError("EnumType.__call__() missing 1 required
+            positional argument: 'value'"), поэтому пустое значение
+            подменяется нулём напрямую, без конструирования enum-объекта.
+            """
+            if value is None:
+                return _DontNative
+            try:
+                return value | _DontNative
+            except Exception:
+                try:
+                    return int(value) | int(_DontNative)
+                except Exception:
+                    return _DontNative
+
         def getSaveFileName(*a, **kw):
-            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            kw['options'] = _with_non_native(kw.get('options'))
             return orig_save(*a, **kw)
 
         def getOpenFileName(*a, **kw):
-            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            kw['options'] = _with_non_native(kw.get('options'))
             return orig_open(*a, **kw)
 
         def getOpenFileNames(*a, **kw):
-            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            kw['options'] = _with_non_native(kw.get('options'))
             return orig_openf(*a, **kw)
 
         def getExistingDirectory(*a, **kw):
-            kw['options'] = kw.get('options', QFileDialog.Option()) | _DontNative
+            kw['options'] = _with_non_native(kw.get('options'))
             return orig_dir(*a, **kw)
 
         QFileDialog.getSaveFileName = staticmethod(getSaveFileName)

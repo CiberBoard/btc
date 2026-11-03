@@ -1,5 +1,5 @@
 __pycache__/
 *.zip
-/build
 /dist
-/logs
+/build
+/ui/__pycache__
