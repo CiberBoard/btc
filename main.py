@@ -52,6 +52,15 @@ if sys.platform == 'win32':
                     os.add_dll_directory(_p)
         except Exception:
             pass
+    # Папка bin/ с внешними утилитами (там же cudart64_101.dll) — легальный путь
+    # поиска DLL; сами .exe запускаются subprocess с cwd=bin, но регистрация
+    # гарантирует, что CUDA-рантайм найдётся в любом случае.
+    _bin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bin')
+    if os.path.isdir(_bin_dir):
+        try:
+            os.add_dll_directory(_bin_dir)
+        except Exception:
+            pass
 
 os.environ.setdefault("QT_STYLE_OVERRIDE", "Fusion")
 os.environ.setdefault("QT_OPENGL", "software")

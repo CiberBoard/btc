@@ -506,11 +506,19 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.kang_status_label.setText("Статус: Готов к запуску")
             self.append_log("Kangaroo поиск остановлен", "warning")
         else:
+            _kang_exe = self.kang_exe_edit.text().strip()
+            # Если сохранённый путь устарел (файл лежал в корне проекта, а теперь
+            # он в bin/) — автоматически исправить на актуальный путь из config.
+            if not os.path.exists(_kang_exe):
+                _fallback = getattr(config, 'ETARKANGAROO_EXE', '')
+                if _fallback and os.path.exists(_fallback):
+                    _kang_exe = _fallback
+                    self.kang_exe_edit.setText(_fallback)
             params = {
                 'pubkey_hex': self.kang_pubkey_edit.text().strip(),
                 'rb_hex': self.kang_start_key_edit.text().strip(),
                 're_hex': self.kang_end_key_edit.text().strip(),
-                'etarkangaroo_exe': self.kang_exe_edit.text().strip(),
+                'etarkangaroo_exe': _kang_exe,
                 'temp_dir': self.kang_temp_dir_edit.text().strip(),
                 'dp': self.kang_dp_spin.value(),
                 'grid_params': self.kang_grid_edit.text().strip(),

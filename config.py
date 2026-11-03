@@ -10,15 +10,46 @@ if getattr(sys, 'frozen', False):
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Папка bin — внешние исполняемые файлы и нативные DLL.
+# ВАЖНО: .exe/.dll больше НЕ лежат в корне проекта, иначе Windows/Qt при
+# загрузке своих плагинов может подхватить их (access violation 0xC0000005).
+BIN_DIR = os.path.join(BASE_DIR, "bin")
+
 # Создаём директории
 os.makedirs(BASE_DIR, exist_ok=True)
+os.makedirs(BIN_DIR, exist_ok=True)
 os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
+
+
+def find_binary(*names):
+    """Ищет исполняемый файл по списку имён в папке bin (с учётом регистра),
+    затем в корне проекта (обратная совместимость со старыми сборками)."""
+    for d in (BIN_DIR, BASE_DIR):
+        for name in names:
+            p = os.path.join(d, name)
+            if os.path.isfile(p):
+                return p
+        # регистронезависимый поиск (Windows-имена могут отличаться от git-имён)
+        try:
+            listing = os.listdir(d)
+        except OSError:
+            listing = []
+        lowered = {n.lower(): n for n in listing}
+        for name in names:
+            orig = lowered.get(name.lower())
+            if orig:
+                return os.path.join(d, orig)
+    return os.path.join(BIN_DIR, names[0])
+
 
 # Файлы
 LOG_FILE = os.path.join(BASE_DIR, "logs", "app.log")
 FOUND_KEYS_FILE = os.path.join(BASE_DIR, "Found_key_CUDA.txt")
-CUBITCRACK_EXE = os.path.join(BASE_DIR, "cuBitcrack.exe")
-VANITYSEARCH_EXE = os.path.join(BASE_DIR, "VanitySearch.exe")  # ✅ Добавлено
+# Пути к внешним утилитам (теперь живут в bin/)
+CUBITCRACK_EXE = find_binary("cuBitCrack.exe", "cuBitcrack.exe", "cuBitcrack.exe", "BitCrack.exe")
+VANITYSEARCH_EXE = find_binary("VanitySearch.exe")
+ETARKANGAROO_EXE = find_binary("Etarkangaroo.exe", "etarkangaroo.exe")
+CLBITCRACK_EXE = find_binary("clBitCrack.exe", "clBitcrack.exe")
 
 # Константы
 MAX_KEY = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140

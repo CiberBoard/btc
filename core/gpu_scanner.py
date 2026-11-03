@@ -403,7 +403,7 @@ def start_gpu_search_with_range(
             stderr=subprocess.STDOUT,
             universal_newlines=True,
             bufsize=0,
-            cwd=config.BASE_DIR,
+            cwd=config.BIN_DIR,  # внешние .exe/DLL перенесены в bin/
             creationflags=creationflags
         )
 

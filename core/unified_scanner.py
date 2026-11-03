@@ -793,7 +793,7 @@ class VanityScanner(BaseScanner):
             self.log_message.emit("Укажите префикс", "error")
             return False
 
-        exe_path = os.path.join(config.BASE_DIR, "VanitySearch.exe")
+        exe_path = config.VANITYSEARCH_EXE  # лежит в bin/ (см. config.find_binary)
         if not os.path.exists(exe_path):
             self.log_message.emit("VanitySearch.exe не найден", "error")
             return False
@@ -843,7 +843,7 @@ class VanityScanner(BaseScanner):
                 stdin=subprocess.PIPE,
                 text=True,
                 bufsize=1,
-                cwd=config.BASE_DIR,
+                cwd=config.BIN_DIR,  # внешние .exe/DLL перенесены в bin/
                 startupinfo=startupinfo,
                 creationflags=creationflags
             )
