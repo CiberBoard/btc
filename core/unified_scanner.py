@@ -686,18 +686,30 @@ class KangarooScanner(BaseScanner):
 
         exe = params.get('etarkangaroo_exe', '')
         if not os.path.exists(exe):
-            # Старый/некорректный путь — пробуем найти утилиту в bin/ автоматически
             exe = config.migrate_binary_path(exe)
             params = dict(params, etarkangaroo_exe=exe)
         if not os.path.exists(exe):
             self.log_message.emit(f"Файл не найден: {exe}", "error")
             return False
+
         pubkey = params.get('pubkey_hex', '')
         rb = params.get('rb_hex', '')
         re = params.get('re_hex', '')
         if not pubkey or not rb or not re:
             self.log_message.emit("Не заполнены обязательные поля", "error")
             return False
+
+        # 🆕 Валидация temp_dir: должен быть под BASE_DIR (рядом с .exe)
+        temp_dir = (params.get('temp_dir') or '').strip()
+        if not temp_dir or not os.path.isabs(temp_dir):
+            temp_dir = os.path.join(config.BASE_DIR, 'kangaroo_temp')
+        try:
+            os.makedirs(temp_dir, exist_ok=True)
+        except (OSError, PermissionError) as e:
+            logger.warning(f"temp_dir {temp_dir} недоступен ({e}), откат на дефолт")
+            temp_dir = os.path.join(config.BASE_DIR, 'kangaroo_temp')
+            os.makedirs(temp_dir, exist_ok=True)
+        params = dict(params, temp_dir=temp_dir)
 
         self._params = params.copy()
 

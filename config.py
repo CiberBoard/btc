@@ -6,25 +6,45 @@ import re
 from PyQt6.QtWidgets import QComboBox
 
 # ============== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==============
+# ONEFILE:
+#   BASE_DIR — папка рядом с .exe (settings.json, logs, found_keys,
+#              kangaroo_temp переживают перезапуск).
+#   BIN_DIR  — sys._MEIPASS/bin/ (временная папка, распаковывается при
+#              КАЖДОМ запуске).
+# ONEDIR/DEV:
+#   BASE_DIR = папка проекта, BIN_DIR = BASE_DIR/bin.
 if getattr(sys, 'frozen', False):
     BASE_DIR = os.path.dirname(sys.executable)
+    _MEIPASS = getattr(sys, '_MEIPASS', None)
+    if _MEIPASS and os.path.isdir(os.path.join(_MEIPASS, 'bin')):
+        BIN_DIR = os.path.join(_MEIPASS, 'bin')       # onefile: temp/bin
+    else:
+        BIN_DIR = os.path.join(BASE_DIR, 'bin')       # fallback onedir
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    BIN_DIR = os.path.join(BASE_DIR, 'bin')
 
-# Папка bin — внешние исполняемые файлы и нативные DLL.
-# ВАЖНО: .exe/.dll больше НЕ лежат в корне проекта, иначе Windows/Qt при
-# загрузке своих плагинов может подхватить их (access violation 0xC0000005).
-BIN_DIR = os.path.join(BASE_DIR, "bin")
-
-# Создаём директории
+# Создаём директории (BIN_DIR в onefile уже существует — makedirs не падает)
 os.makedirs(BASE_DIR, exist_ok=True)
 os.makedirs(BIN_DIR, exist_ok=True)
 os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
 
 
+def _is_meipass_dir(path: str) -> bool:
+    """True если путь внутри sys._MEIPASS (временная папка onefile)."""
+    meipass = getattr(sys, '_MEIPASS', None)
+    if not meipass:
+        return False
+    try:
+        return os.path.commonpath(
+            [os.path.abspath(path), os.path.abspath(meipass)]
+        ) == os.path.abspath(meipass)
+    except ValueError:
+        return False
+
+
 def _find_in_dir(d, names):
-    """Ищет первый найденный файл из names в директории d (регистрационно-
-    независимый поиск — имена Windows могут отличаться от git-имён)."""
+    """Ищет первый найденный файл из names в директории d (регистронезависимо)."""
     for name in names:
         p = os.path.join(d, name)
         if os.path.isfile(p):
@@ -44,12 +64,9 @@ def _find_in_dir(d, names):
 def find_binary(*names):
     """Ищет исполняемый файл по списку имён.
 
-    Порядок поиска:
-      1. папка bin/ (основное место внешних утилит);
-      2. корень проекта — обратная совместимость со старыми сборками; ЕСЛИ
-         файл найден в корне, он автоматически ПЕРЕМЕЩАЕТСЯ в bin/, чтобы при
-         запуске Windows/Qt не подхватывал чужие нативные DLL (.exe/.dll) из
-         текущей директории проекта (это вызывало access violation 0xC0000005).
+    ONEDIR:  bin/ → корень проекта (с автопереносом в bin/).
+    ONEFILE: _MEIPASS/bin/ (там уже всё распаковано) → папка рядом с exe
+             (пользователь мог положить exe вручную). НЕ переносим в _MEIPASS.
     """
     found = _find_in_dir(BIN_DIR, names)
     if found:
@@ -57,7 +74,10 @@ def find_binary(*names):
 
     found = _find_in_dir(BASE_DIR, names)
     if found:
-        # Автоперенос старых файлов из корня проекта в bin/
+        # В onefile BIN_DIR — это _MEIPASS; перенос туда бессмысленен
+        # (папка удаляется при выходе). Возвращаем как есть.
+        if _is_meipass_dir(BIN_DIR):
+            return found
         try:
             os.makedirs(BIN_DIR, exist_ok=True)
             dest = os.path.join(BIN_DIR, os.path.basename(found))
@@ -65,7 +85,7 @@ def find_binary(*names):
                 shutil.move(found, dest)
             return dest
         except OSError:
-            return found  # перенести не удалось — используем как есть
+            return found
 
     return os.path.join(BIN_DIR, names[0])
 
@@ -73,15 +93,13 @@ def find_binary(*names):
 # Файлы
 LOG_FILE = os.path.join(BASE_DIR, "logs", "app.log")
 FOUND_KEYS_FILE = os.path.join(BASE_DIR, "Found_key_CUDA.txt")
-# Пути к внешним утилитам (живут в bin/; старые файлы из корня автопереносятся)
+
+# Пути к внешним утилитам
 CUBITCRACK_EXE = find_binary("cuBitCrack.exe", "cuBitcrack.exe", "cuBitcrack.exe", "BitCrack.exe")
 VANITYSEARCH_EXE = find_binary("VanitySearch.exe")
 ETARKANGAROO_EXE = find_binary("Etarkangaroo.exe", "etarkangaroo.exe")
 CLBITCRACK_EXE = find_binary("clBitCrack.exe", "clBitcrack.exe")
 
-# Все внешние бинарники и нативные DLL проекта — для миграции сохранённых
-# настроек: любые старые пути вида "<проект>/File.exe" перенаправляются в bin/,
-# а отсутствующие файлы автоматически переносятся из корня проекта в bin/.
 EXTERNAL_BINARIES = (CUBITCRACK_EXE, VANITYSEARCH_EXE, ETARKANGAROO_EXE, CLBITCRACK_EXE)
 
 
@@ -92,27 +110,29 @@ def _norm_key(k):
 def migrate_binary_path(path):
     """Возвращает актуальный путь к внешнему .exe/.dll.
 
-    1. Если файл уже существует по указанному пути — возвращаем как есть.
-    2. Иначе ищем файл с таким же именем в bin/ / корне проекта (при нахождении
-       в корне — автоматически переносим в bin/).
-    3. Если нигде не найден — стандартный путь в bin/ (программа продолжит
-       работать, пользователь сможет указать путь вручную через 📁).
+    1. Если файл существует по указанному пути — возвращаем как есть.
+    2. Иначе ищем файл с таким же именем в bin/ / корне.
+       ONEDIR: при нахождении в корне — переносим в bin/.
+       ONEFILE: не переносим (bin/ = _MEIPASS).
+    3. Если не найден — возвращаем стандартный путь в BIN_DIR.
     """
     if not path:
         return path
     p = str(path)
-    # Относительный путь из config.json ("bin/Etarkangaroo.exe")
+
+    # Относительный путь из config.json
     if not os.path.isabs(p):
         cand = os.path.normpath(os.path.join(BASE_DIR, p))
         if os.path.isfile(cand):
             return cand
     if os.path.isfile(p):
         return p
+
     name = os.path.basename(p)
     found = _find_in_dir(BIN_DIR, [name]) or _find_in_dir(BASE_DIR, [name])
     if found:
-        # старый файл в корне — переносим в bin/
-        if os.path.dirname(os.path.abspath(found)) == os.path.abspath(BASE_DIR):
+        if (os.path.dirname(os.path.abspath(found)) == os.path.abspath(BASE_DIR)
+                and not _is_meipass_dir(BIN_DIR)):
             dest = os.path.join(BIN_DIR, name)
             try:
                 if not os.path.exists(dest):
@@ -125,11 +145,18 @@ def migrate_binary_path(path):
 
 
 def fix_settings_paths(settings_dict):
-    """Исправляет пути к внешним утилитам в словаре настроек (по имени файла)."""
+    """Исправляет пути в словаре настроек:
+    - exe/dll → migrate_binary_path
+    - temp_dir вне BASE_DIR → сбрасываем на BASE_DIR/kangaroo_temp
+    """
     known = {_norm_key(b) for b in EXTERNAL_BINARIES}
     changed = False
     for k, v in list(settings_dict.items()):
-        if isinstance(v, str) and ('.exe' in v.lower() or '.dll' in v.lower()):
+        if not isinstance(v, str):
+            continue
+
+        # 1) exe/dll
+        if '.exe' in v.lower() or '.dll' in v.lower():
             if (_norm_key(v) in known
                     or os.path.basename(_norm_key(v)).lower()
                     in {os.path.basename(x).lower() for x in known}):
@@ -137,7 +164,22 @@ def fix_settings_paths(settings_dict):
                 if nv != v:
                     settings_dict[k] = nv
                     changed = True
+
+        # 2) temp_dir — если вне BASE_DIR или родителя нет → сброс
+        elif k in ('kang_temp_dir_edit', 'temp_dir'):
+            if os.path.isabs(v):
+                try:
+                    under_base = os.path.commonpath(
+                        [os.path.abspath(v), os.path.abspath(BASE_DIR)]
+                    ) == os.path.abspath(BASE_DIR)
+                except ValueError:
+                    under_base = False
+                if not under_base or not os.path.isdir(os.path.dirname(v)):
+                    settings_dict[k] = os.path.join(BASE_DIR, 'kangaroo_temp')
+                    changed = True
+
     return changed
+
 
 # Константы
 MAX_KEY = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364140
@@ -236,7 +278,6 @@ def apply_settings_to_ui(window, settings: dict):
                 widget.setCurrentText(str(value))
             elif access_type == "currentIndex":
                 widget.setCurrentIndex(int(value))
-            # runtime — обрабатываем отдельно
         except Exception as e:
             print(f"⚠️ Ошибка применения настройки {key}: {e}")
 
@@ -258,9 +299,6 @@ def extract_settings_from_ui(window) -> dict:
             settings[key] = widget.currentText()
         elif access_type == "currentIndex":
             settings[key] = widget.currentIndex()
-        elif access_type == "runtime":
-            if key == "cpu_mode":
-                settings[key] = getattr(window.cpu_logic, "cpu_mode", "sequential")
 
     return settings
 
