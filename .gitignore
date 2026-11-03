@@ -2,3 +2,4 @@ __pycache__/
 *.zip
 /dist
 /build
+/ui/__pycache__
