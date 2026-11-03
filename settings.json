@@ -66,7 +66,10 @@
         "mutation_mode": "drift",
         "visualization_enabled": true,
         "adaptive_mode": true,
-        "locked_triplets": [],
+        "locked_triplets": [
+            26,
+            36
+        ],
         "target_edit": "1Fo65aKq8s8iquMt6weF1rku1moWVEd5Ua",
         "start_edit": "000000000000000000000000000000033e7665705359f04f28b88cf897c003c9",
         "end_edit": "000000000000000000000000000000033e7665705359f04f28b88cf898c603c9",
