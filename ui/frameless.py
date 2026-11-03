@@ -72,47 +72,51 @@ QPushButton:pressed {{ background: #9d4640; color: #FFFFFF; }}
 
 
 class _WinBtn(QPushButton):
-    """Миниатюрная кнопка window controls (28×20), рисует символ через QPainter."""
+    """Кнопка window controls, рисует символ через QPainter.
 
-    BTN_W = 40   # ширина кнопки в логических px (компактнее нативных Windows)
-    BTN_H = 32   # высота кнопки ~ вся шапка: символ ровно по центру
+    Размер НЕ задаётся через setFixedSize(): глобальный QSS приложения
+    (`QPushButton { padding: 8px 20px; min-height: 34px; }`) при каждом
+    StyleChange перезаписывал minimumSize кнопок, они раздувались до
+    50×50 внутри 36-пиксельной шапки, выходили за её границы и «съедали»
+    всю ширину layout'а — из-за чего шапка визуально «ломалась».
+    Теперь размеры контролируются только sizeHint + Fixed sizePolicy
+    (QSS не может их переопределить), а геометрия кнопок выставляется
+    вручную в TitleBar.resizeEvent.
+    """
+
+    BTN_W = 40   # ширина кнопки в логических px (как нативные Windows controls)
 
     def __init__(self, kind: str, parent=None):
-        self._scale = 1.0
-        # ВАЖНО: фиксируем размеры ПОСЛЕ установки QSS родителя-окна —
-        # polish от чужих stylesheet'ов (min-width/padding у QPushButton)
-        # иначе переопределяет sizeHint кнопок и layout растягивает их.
         super().__init__(parent)
         self._kind = kind  # 'min' | 'max' | 'restore' | 'close'
+        self._btn_h = 32
         if kind == 'close':
             self.setObjectName("appTitleBarClose")
         self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-
-    def set_locked_size(self):
-        """Жёсткая фиксация размера (перепишет любой min-size из чужого QSS).
-
-        Кнопки были 30×22 при шапке 36 px: символ рисовался по центру
-        виджета, но сам виджет layout выравнивал по вертикали произвольно,
-        из-за чего крестик/квадратик «ездили» вверх-вниз и выглядели
-        криво масштабированными. Теперь кнопка занимает всю высоту шапки,
-        а глиф рисуется строго по геометрическому центру.
-        """
-        w, h = getattr(self, '_btn_w', self.BTN_W), getattr(self, '_btn_h', self.BTN_H)
-        self.setFixedSize(w, h)
+        # никаких margin/padding из чужого QSS не останется:
+        self.setContentsMargins(0, 0, 0, 0)
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        try:
-            self.setMinimumSize(QSize(w, h))
-            self.setMaximumSize(QSize(w, h))
-        except Exception:
-            pass
+
+    def set_bar_height(self, h: int):
+        self._btn_h = h
+        self.updateGeometry()
 
     def changeEvent(self, e):
-        # после любого polish/смены стиля снова блокируем размер
+        # QSS с `min-height` может при StyleChange раздуть our widget за
+        # пределы шапки (Qt применяет minimum из стиля). Возвращаем размер.
         from PyQt6.QtCore import QEvent as _QE
-        if e.type() in (_QE.Type.StyleChange, _QE.Type.ShowToParent):
-            self.set_locked_size()
+        if e.type() == _QE.Type.StyleChange:
+            g = self.geometry()
+            if g.height() != self._btn_h or g.width() != self.BTN_W:
+                self.setGeometry(g.x(), g.y(), self.BTN_W, self._btn_h)
         super().changeEvent(e)
+
+    def sizeHint(self):
+        return QSize(self.BTN_W, self._btn_h)
+
+    def minimumSizeHint(self):
+        return QSize(self.BTN_W, self._btn_h)
 
     def paintEvent(self, e):
         super().paintEvent(e)  # фон hover/pressed из QSS
@@ -166,18 +170,21 @@ class _WinBtn(QPushButton):
 class TitleBar(QWidget):
     """Собственная тёмная шапка окна: drag + double-click + controls.
 
-    Кнопки управления ВСЕГДА прибиты к правому краю шапки, заголовок —
-    слева. Для этого TitleBar живёт поверх верхней части окна (_BarOverlay)
-    и сам синхронизирует свою геометрию с шириной окна, поэтому layout'ы
-    содержимого не могут сместить кнопки «налево» (исправлен баг, когда
-    кнопки оказывались сбоку слева от контента).
-
-    Собственный QSS шапки также переопределяет локальные стили окна
-    (`QWidget {...}`, `QLabel {...}`, `QPushButton {...}`), которые иначе
-    заливали бы шапку и кнопки чужими цветами/рамками.
+    Архитектура (исправляет «съезжающую» шапку):
+      • Шапка — overlay поверх верхней части окна, ширина = width(host),
+        высота = _bar_h. Синхронизируется в refresh_geometry() по Resize/Show.
+      • Кнопки min/max/close НЕ участвуют в layout'е вообще — их геометрия
+        выставляется вручную в resizeEvent (right-to-left, вплотную к правому
+        краю). Layout содержит только иконку + заголовок слева, поэтому ни
+        один внешний QSS (padding/min-height у QPushButton из темы) не может
+        раздуть кнопки и сломать ряд.
+      • Собственный QSS шапки понижает специфичность правил окна до нуля для
+        её дочерних виджетов (фон/рамка/отступы заданы явно).
     """
 
-    HEIGHT = 36
+    HEIGHT = 36          # базовая высота шапки (лог. px при DPR 1.0)
+    BTN_W = 40           # ширина window-control кнопки (как в Windows)
+    LEFT_PAD = 10        # отступ слева под иконку/заголовок
 
     def __init__(self, host: QWidget, with_controls=None):
         # None → controls включены по умолчанию для всех окон (в т.ч. диалогов)
@@ -188,21 +195,22 @@ class TitleBar(QWidget):
         self._dragging = False
         self._drag_pos = QPoint()
         self._with_controls = bool(with_controls)
+        self._buttons: tuple = ()   # заполняется ниже, до создания layout'а
 
         self.setObjectName("appTitleBar")
-        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        # Высота шапки и кнопок — в логических px с учётом DPI-масштаба
-        # Windows (125%/150%): иначе при fixed 36px и кнопках 30×22
-        # на HiDPI всё выглядело «криво отмасштабированным».
-        dpr = 1.0
+        # Высота шапки — константа приложения (Qt уже работает в
+        # логических DIP-координатах на Windows; умножать ещё раз на DPR
+        # означало бы «гигантскую» шапку при 125/150% масштабировании).
+        self._bar_h = self.HEIGHT
+        self._btn_h = self._bar_h
         try:
             scr = self.screen() or QApplication.primaryScreen()
-            if scr is not None:
-                dpr = max(1.0, float(scr.devicePixelRatio()))
+            dpr = float(scr.devicePixelRatio()) if scr is not None else 1.0
         except Exception:
             dpr = 1.0
-        self._bar_h = max(self.HEIGHT, int(round(self.HEIGHT * dpr)))
-        self._dpr = dpr
+        self._dpr = max(1.0, dpr)
+        # глифы чуть крупнее на HiDPI, но без искажений пропорций
+        self._glyph_scale = max(1.0, min(1.25, self._dpr))
         self.setFixedHeight(self._bar_h)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setStyleSheet(f"""
@@ -210,27 +218,26 @@ class TitleBar(QWidget):
             #appTitleBar QLabel {{ background: transparent; border: none;
                                   color: {_TEXT}; font-size: 12px; }}
             #appTitleLabel {{ color: {_TEXT}; font-size: 12px; font-weight: 600;
-                             background: transparent; }}
+                             background: transparent; border: none; }}
             #appTitleSub {{ color: {_TEXT_DIM}; font-size: 11px; background: transparent; }}
             #appTitleBar QPushButton {{
-                background: transparent; border: none; border-radius: 6px;
-                color: {_TEXT_DIM};
+                background: transparent; border: none; border-radius: 0;
+                color: {_TEXT_DIM}; padding: 0; margin: 0;
             }}
             #appTitleBar QPushButton:hover {{ background: {_HOVER}; }}
             #appTitleBar QPushButton:pressed {{ background: {_PRESSED}; }}
-            #appTitleBarClose QPushButton {{
-                background: transparent; border: none; border-radius: 6px;
-                color: {_TEXT_DIM};
+            #appTitleBarClose {{
+                background: transparent; border: none; border-radius: 0;
+                color: {_TEXT_DIM}; padding: 0; margin: 0;
             }}
-            #appTitleBarClose QPushButton:hover {{ background: {_CLOSE_HOVER}; color: #FFFFFF; }}
-            #appTitleBarClose QPushButton:pressed {{ background: #9d4640; color: #FFFFFF; }}
+            #appTitleBarClose:hover {{ background: {_CLOSE_HOVER}; color: #FFFFFF; }}
+            #appTitleBarClose:pressed {{ background: #9d4640; color: #FFFFFF; }}
         """)
 
+        # ── layout ТОЛЬКО для левой части (иконка + заголовок) ──
         lay = QHBoxLayout(self)
-        # Отступы: слева 10, справа 0 — кнопки управления идут вплотную
-        # к правому краю окна (как нативные controls Windows), иначе
-        # последняя кнопка «утопала» внутрь шапки и ряд выглядел криво.
-        lay.setContentsMargins(10, 0, 0, 0)
+        lay.setContentsMargins(self.LEFT_PAD, 0,
+                               self._controls_block_width() + 6, 0)
         lay.setSpacing(8)
 
         self._icon = QLabel()
@@ -242,9 +249,11 @@ class TitleBar(QWidget):
 
         self._title = QLabel(_clean_title(host.windowTitle()))
         self._title.setObjectName("appTitleLabel")
+        self._title.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
         lay.addWidget(self._title)
         lay.addStretch(1)
 
+        # ── window controls: вне layout, прибиты к правому краю ──
         if with_controls:
             self.btn_min = _WinBtn('min', self)
             self.btn_max = _WinBtn('max', self)
@@ -252,20 +261,17 @@ class TitleBar(QWidget):
             self.btn_min.clicked.connect(host.showMinimized)
             self.btn_max.clicked.connect(self._toggle_max)
             self.btn_close.clicked.connect(self._close_host)
-            # spacing=0 между control-кнопками: они образуют единый блок
-            # у правого края, как в стандартных окнах
-            lay.addSpacing(4)
-            btn_h = self._bar_h - 4
-            glyph_scale = max(1.0, min(1.5, dpr))
-            for b in (self.btn_min, self.btn_max, self.btn_close):
-                b._btn_h = btn_h
-                b._glyph_scale = glyph_scale
-                lay.addWidget(b)
-                b.set_locked_size()
+            self._buttons = (self.btn_min, self.btn_max, self.btn_close)
+            for b in self._buttons:
+                b._glyph_scale = self._glyph_scale
+                b.set_bar_height(self._btn_h)
         else:
             self.btn_min = None
             self.btn_max = None
             self.btn_close = None
+            self._buttons = ()
+
+        self._layout_controls()
 
         def _on_title_changed(t: str):
             self._title.setText(_clean_title(t))
@@ -273,26 +279,36 @@ class TitleBar(QWidget):
 
         host.windowTitleChanged.connect(_on_title_changed)
 
-    # ── geometry: шапка всегда во всю ширину окна, поверх его верхней части ──
+    # ── geometry ──────────────────────────────────────────────
+    def _controls_block_width(self) -> int:
+        return len(self._buttons) * self.BTN_W if self._buttons else 0
+
+    def _layout_controls(self):
+        """Кнопки управления — строго у правого края, справа налево:
+        close, max, min. Высотой во всю шапку, как нативные Windows."""
+        w = self.width()
+        x = w
+        for b in reversed(self._buttons):
+            bw = self.BTN_W
+            x -= bw
+            b.setGeometry(x, 0, bw, self._btn_h)
+            b.raise_()
+
     def refresh_geometry(self):
-        h = self._host
+        """Шапка = вся ширина окна, поверх его верхней части."""
         try:
-            # Ширина шапки не должна превышать ширину самого layout'а
-            # содержимого (для QDialog с компактным sizeHint иначе окно
-            # «распирается» и кнопки уезжают за правый край).
-            max_w = h.width()
-            try:
-                inner = h.layout()
-                if inner is not None:
-                    need = inner.minimumSize().width()
-                    if need > 0:
-                        max_w = min(max_w, max(need, inner.sizeHint().width()))
-            except Exception:
-                pass
-            self.setGeometry(0, 0, max(max_w, 0), self._bar_h)
+            self.setGeometry(0, 0, max(self._host.width(), 0), self._bar_h)
+            self._layout_controls()
             self.raise_()
         except Exception:
             pass
+
+    def resizeEvent(self, e):
+        super().resizeEvent(e)
+        # пересчитываем правый margin layout'а и позиции кнопок
+        self.layout().setContentsMargins(
+            self.LEFT_PAD, 0, self._controls_block_width() + 6, 0)
+        self._layout_controls()
 
     def showEvent(self, e):
         super().showEvent(e)
@@ -324,6 +340,8 @@ class TitleBar(QWidget):
             w.showNormal()
         else:
             w.showMaximized()
+        # сразу пересобираем геометрию шапки под новый размер окна
+        QTimer.singleShot(0, self.refresh_geometry)
 
     def sync_max_button(self):
         if self.btn_max is not None:
