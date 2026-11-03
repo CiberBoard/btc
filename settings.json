@@ -53,7 +53,7 @@
         "gpu_max_range_edit": "8600008600023050000",
         "gpu_priority_combo": "Высокий",
         "gpu_use_compressed_checkbox": true,
-        "gpu_workers_per_device_spin": 5,
+        "gpu_workers_per_device_spin": 7,
         "gpu_min_distance_spin": 20
     },
     "matrix": {
@@ -129,7 +129,7 @@
         "gpu_max_range_edit": "8600008600023050000",
         "gpu_priority_combo": "Высокий",
         "gpu_use_compressed_checkbox": true,
-        "gpu_workers_per_device_spin": 5,
+        "gpu_workers_per_device_spin": 7,
         "gpu_min_distance_spin": 20
     },
     "cpu": {
@@ -186,7 +186,7 @@
         "gpu_max_range_edit": "8600008600023050000",
         "gpu_priority_combo": "Высокий",
         "gpu_use_compressed_checkbox": true,
-        "gpu_workers_per_device_spin": 5,
+        "gpu_workers_per_device_spin": 7,
         "gpu_min_distance_spin": 20
     },
     "vanity": {
@@ -243,7 +243,7 @@
         "gpu_max_range_edit": "8600008600023050000",
         "gpu_priority_combo": "Высокий",
         "gpu_use_compressed_checkbox": true,
-        "gpu_workers_per_device_spin": 5,
+        "gpu_workers_per_device_spin": 7,
         "gpu_min_distance_spin": 20
     },
     "kangaroo": {
@@ -300,10 +300,10 @@
         "gpu_max_range_edit": "8600008600023050000",
         "gpu_priority_combo": "Высокий",
         "gpu_use_compressed_checkbox": true,
-        "gpu_workers_per_device_spin": 5,
+        "gpu_workers_per_device_spin": 7,
         "gpu_min_distance_spin": 20
     },
     "ui": {},
-    "window_geometry": "AdnQywADAAAAAAMWAAAANQAABv0AAAPXAAADFgAAAFQAAAb9AAAD1wAAAAAAAAAAB4AAAAMWAAAAVAAABv0AAAPX",
-    "window_state": "AAAA/wAAAAD9AAAAAAAAA+gAAAOEAAAABAAAAAQAAAAIAAAACPwAAAAA"
+    "window_geometry": "AdnQywADAAAAAAIPAAAAXgAABr4AAAQAAAACDwAAAH0AAAa+AAAEAAAAAAAAAAAAB4AAAAIPAAAAfQAABr4AAAQA",
+    "window_state": "AAAA/wAAAAD9AAAAAAAABLAAAAOEAAAABAAAAAQAAAAIAAAACPwAAAAA"
 }
