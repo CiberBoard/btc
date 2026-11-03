@@ -25,12 +25,17 @@ class HexCalcWindow(QDialog):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("🔢 HEX Calculator Pro")
+        self.setWindowTitle("HEX Calculator Pro")
         self.resize(800, 580)
         self.setMinimumSize(680, 480)
 
         apply_dark_theme(self)
         self._init_ui()
+        try:
+            from ui.frameless import apply_frameless
+            apply_frameless(self)
+        except Exception:
+            pass
 
     def _init_ui(self):
         main_layout = QVBoxLayout(self)

@@ -42,6 +42,12 @@ def main():
     app.setApplicationName("BitcoinGPUCPUScanner")
     app.setOrganizationName("Jasst")
 
+    # 🪟 Единый стиль всех окон и попапов (QMessageBox/QFileDialog/QMenu):
+    #    Fusion + тёмная тема вместо белых нативных окон Windows.
+    from ui.frameless import style_app_popups, force_non_native_dialogs
+    style_app_popups(app)
+    force_non_native_dialogs()
+
     # ✅ Инициализируем логгер ТОЛЬКО ЗДЕСЬ (перед созданием окна)
     from utils.helpers import setup_logger
     logger = setup_logger()
