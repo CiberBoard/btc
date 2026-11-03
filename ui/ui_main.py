@@ -507,7 +507,9 @@ class MainWindowUI:
 
         pl.addWidget(QLabel("Etarkangaroo.exe:"), 0, 0)
         self.parent.kang_exe_edit = QLineEdit()
-        self.parent.kang_exe_edit.setText(os.path.join(config.BASE_DIR, "Etarkangaroo.exe"))
+        # Внешние .exe перенесены в папку bin/ (защита от конфликта DLL с Qt)
+        self.parent.kang_exe_edit.setText(getattr(config, 'ETARKANGAROO_EXE',
+                                         os.path.join(config.BIN_DIR, "Etarkangaroo.exe")))
         pl.addWidget(self.parent.kang_exe_edit, 0, 1)
         self.parent.kang_browse_exe_btn = QPushButton("📁")
         self.parent.kang_browse_exe_btn.setFixedWidth(36)
@@ -1257,7 +1259,7 @@ class MainWindowUI:
         about_layout.setSpacing(15)
 
         coincurve_status = "✓ Доступна" if is_coincurve_available() else "✗ Не установлена"
-        cubitcrack_status = "✓ Найден" if os.path.exists(os.path.join(config.BASE_DIR, "cuBitcrack.exe")) else "✗ Не найден"
+        cubitcrack_status = "✓ Найден" if os.path.exists(config.CUBITCRACK_EXE) else "✗ Не найден"
 
         about_text = QLabel(
             f"<div style='text-align:center; padding:20px; background:{COLORS.get('bg_input', '#232332')}; "
