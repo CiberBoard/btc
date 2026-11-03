@@ -14,7 +14,7 @@ from PyQt6.QtCore import Qt, QPoint, QSize, QRectF, QObject, QEvent, QTimer
 from PyQt6.QtGui import QColor, QPainter, QPainterPath, QPen, QCursor
 from PyQt6.QtWidgets import (
     QWidget, QMainWindow, QDialog, QHBoxLayout, QVBoxLayout, QLabel,
-    QPushButton, QGraphicsDropShadowEffect,
+    QPushButton, QGraphicsDropShadowEffect, QSizePolicy,
 )
 
 from ui.theme import COLORS
@@ -184,12 +184,32 @@ class _WinBtn(QPushButton):
     """Миниатюрная кнопка window controls (28×20), рисует символ через QPainter."""
 
     def __init__(self, kind: str, parent=None):
+        # ВАЖНО: фиксируем размеры ПОСЛЕ установки QSS родителя-окна —
+        # polish от чужих stylesheet'ов (min-width/padding у QPushButton)
+        # иначе переопределяет sizeHint кнопок и layout растягивает их.
         super().__init__(parent)
         self._kind = kind  # 'min' | 'max' | 'restore' | 'close'
-        self.setFixedSize(30, 22)
+        if kind == 'close':
+            self.setObjectName("appTitleBarClose")
         self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.setStyleSheet(_CLOSE_QSS if kind == 'close' else _BTN_QSS)
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+    def set_locked_size(self):
+        """Жёсткая фиксация 30×22 (перепишет любой min-size из чужого QSS)."""
+        self.setFixedSize(30, 22)
+        self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        try:
+            self.setMinimumSize(QSize(30, 22))
+            self.setMaximumSize(QSize(30, 22))
+        except Exception:
+            pass
+
+    def changeEvent(self, e):
+        # после любого polish/смены стиля снова блокируем размер
+        from PyQt6.QtCore import QEvent as _QE
+        if e.type() in (_QE.Type.StyleChange, _QE.Type.ShowToParent):
+            self.set_locked_size()
+        super().changeEvent(e)
 
     def paintEvent(self, e):
         super().paintEvent(e)  # фон hover/pressed из QSS
@@ -224,10 +244,15 @@ class _WinBtn(QPushButton):
 class TitleBar(QWidget):
     """Собственная тёмная шапка окна: drag + double-click + controls.
 
-    Управление окном доступно всегда (перемещение мышью, двойной клик),
-    кнопки min/max/close скрываются только если явно передан
-    with_controls=False — по умолчанию они есть на КАЖДОМ окне приложения,
-    включая диалоги, в едином стиле темы.
+    Кнопки управления ВСЕГДА прибиты к правому краю шапки, заголовок —
+    слева. Для этого TitleBar живёт поверх верхней части окна (_BarOverlay)
+    и сам синхронизирует свою геометрию с шириной окна, поэтому layout'ы
+    содержимого не могут сместить кнопки «налево» (исправлен баг, когда
+    кнопки оказывались сбоку слева от контента).
+
+    Собственный QSS шапки также переопределяет локальные стили окна
+    (`QWidget {...}`, `QLabel {...}`, `QPushButton {...}`), которые иначе
+    заливали бы шапку и кнопки чужими цветами/рамками.
     """
 
     HEIGHT = 36
@@ -243,13 +268,28 @@ class TitleBar(QWidget):
         self._with_controls = bool(with_controls)
 
         self.setObjectName("appTitleBar")
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.setFixedHeight(self.HEIGHT)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setStyleSheet(f"""
-            #appTitleBar {{ background: {_BG_TITLEBAR}; }}
+            #appTitleBar {{ background: {_BG_TITLEBAR}; border: none; }}
+            #appTitleBar QLabel {{ background: transparent; border: none;
+                                  color: {_TEXT}; font-size: 12px; }}
             #appTitleLabel {{ color: {_TEXT}; font-size: 12px; font-weight: 600;
                              background: transparent; }}
             #appTitleSub {{ color: {_TEXT_DIM}; font-size: 11px; background: transparent; }}
+            #appTitleBar QPushButton {{
+                background: transparent; border: none; border-radius: 6px;
+                color: {_TEXT_DIM};
+            }}
+            #appTitleBar QPushButton:hover {{ background: {_HOVER}; }}
+            #appTitleBar QPushButton:pressed {{ background: {_PRESSED}; }}
+            #appTitleBarClose QPushButton {{
+                background: transparent; border: none; border-radius: 6px;
+                color: {_TEXT_DIM};
+            }}
+            #appTitleBarClose QPushButton:hover {{ background: {_CLOSE_HOVER}; color: #FFFFFF; }}
+            #appTitleBarClose QPushButton:pressed {{ background: #9d4640; color: #FFFFFF; }}
         """)
 
         lay = QHBoxLayout(self)
@@ -257,9 +297,10 @@ class TitleBar(QWidget):
         lay.setSpacing(8)
 
         self._icon = QLabel()
+        self._icon.setObjectName("appTitleIcon")
         self._icon.setFixedSize(18, 18)
         self._icon.setScaledContents(True)
-        self._icon.setStyleSheet("background: transparent;")
+        self._icon.setStyleSheet("background: transparent; border: none;")
         self._set_icon_for_title(host.windowTitle())
         lay.addWidget(self._icon)
 
@@ -288,6 +329,19 @@ class TitleBar(QWidget):
             self._set_icon_for_title(t)
 
         host.windowTitleChanged.connect(_on_title_changed)
+
+    # ── geometry: шапка всегда во всю ширину окна, поверх его верхней части ──
+    def refresh_geometry(self):
+        h = self._host
+        try:
+            self.setGeometry(0, 0, max(h.width(), 0), self.HEIGHT)
+            self.raise_()
+        except Exception:
+            pass
+
+    def showEvent(self, e):
+        super().showEvent(e)
+        self.refresh_geometry()
 
     def _close_host(self):
         """Закрытие окна: exec-диалог закрываем через reject(), остальное — close()."""
@@ -669,61 +723,38 @@ def apply_frameless(win, with_controls: bool = True, add_shadow: bool = True):
         old = win.centralWidget()
         wrap = QWidget()
         wrap.setObjectName("framelessRoot")
-        v = QHBoxLayout(wrap)
-        v.setContentsMargins(0, 0, 0, 0)
+        v = QVBoxLayout(wrap)
+        v.setContentsMargins(0, TitleBar.HEIGHT, 0, 0)
         v.setSpacing(0)
-        v.addWidget(bar)
         if old is not None:
             v.addWidget(old, 1)
         win.setCentralWidget(wrap)
     elif isinstance(win, QDialog):
         old_lay = win.layout()
-        # оборачиваем исходный layout dialog'а во внутренний widget
-        body = QWidget(win)
-        body.setObjectName("framelessBody")
         if old_lay is not None:
-            moved = False
-            try:
-                win.takeLayout()          # Qt >= 6.4
-                moved = True
-            except AttributeError:
-                pass                      # нет takeLayout — старый layout
-                                          # переедет на body ниже сам
-            if moved:
-                body_lay = QVBoxLayout(body)
-                body_lay.setContentsMargins(0, 0, 0, 0)
-                body_lay.setSpacing(0)
-                body_lay.addLayout(old_lay)
-            else:
-                # takeLayout недоступен: НЕ отвязываем старый layout от dialog
-                # (в этой версии PyQt его нельзя удалить корректно). Вместо это
-                # переносим все item'ы в новый layout поверх body, а у dialog
-                # переиспользуем ОСТАВШИЙСЯ пустой layout под [bar, body].
-                new_host_lay = type(old_lay)(body)
-                try:
-                    m_ = old_lay.contentsMargins()
-                    new_host_lay.setContentsMargins(m_.left(), m_.top(), m_.right(), m_.bottom())
-                except Exception:
-                    pass
-                try:
-                    new_host_lay.setSpacing(old_lay.spacing())
-                except Exception:
-                    pass
-                while old_lay.count():
-                    new_host_lay.addItem(old_lay.takeAt(0))
-                # old_lay теперь пустой, но всё ещё layout dialog'а —
-                # наполним им структуру окна вместо создания нового layout
-                v = old_lay
-                v.addWidget(bar)
-                v.addWidget(body, 1)
+            # Простой и надёжный вариант: НЕ трогаем layout содержимого
+            # dialog'а, а добавляем сверху отступ под overlay-шапку.
+            m_ = old_lay.contentsMargins()
+            old_lay.setContentsMargins(m_.left(), m_.top() + TitleBar.HEIGHT,
+                                       m_.right(), m_.bottom())
         else:
-            v = QHBoxLayout(win)
-            v.setContentsMargins(0, 0, 0, 0)
+            body = QWidget(win)
+            body.setObjectName("framelessBody")
+            v = QVBoxLayout(win)
+            v.setContentsMargins(0, TitleBar.HEIGHT, 0, 0)
             v.setSpacing(0)
-            v.addWidget(bar)
             v.addWidget(body, 1)
     else:
         raise TypeError("apply_frameless поддерживает QMainWindow/QDialog")
+
+    # 2c) Шапка — поверх верхней части окна, всегда на всю ширину;
+    #     кнопки гарантированно справа, layout содержимого их не сдвигает.
+    bar.setParent(None)
+    bar.setParent(win)
+    _BarOverlaySync(win, bar)
+    bar.refresh_geometry()
+    bar.show()
+    bar.raise_()
 
     # 3) Тень под шапкой + тонкая рамка всего окна
     sh = QGraphicsDropShadowEffect(bar)
@@ -768,6 +799,21 @@ def _wrap_show_install_hooks(win):
         _install_win_hooks(win)
 
     return show_event
+
+
+class _BarOverlaySync(QObject):
+    """Держит overlay-шапку во всю ширину окна и поверх содержимого."""
+
+    def __init__(self, win, bar):
+        super().__init__(win)
+        self._bar = bar
+        win.installEventFilter(self)
+
+    def eventFilter(self, obj, e):
+        t = e.type()
+        if t in (QEvent.Type.Resize, QEvent.Type.Show):
+            self._bar.refresh_geometry()
+        return False
 
 
 class _FrameOverlay(QWidget):
