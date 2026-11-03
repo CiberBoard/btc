@@ -274,7 +274,7 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 on_log_callback=self.append_log,
             )
             try:
-                apply_frameless(dialog, with_controls=False)
+                apply_frameless(dialog)
             except Exception:
                 pass
             dialog.exec()
