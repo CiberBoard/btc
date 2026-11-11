@@ -437,6 +437,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.gpu_start_stop_btn.setText("Запустить GPU поиск")
             self.gpu_start_stop_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
             self.gpu_status_label.setText("Статус: Готов к работе")
+            self.gpu_progress_bar.setRange(0, 100)
+            self.gpu_progress_bar.setValue(0)
+            self.gpu_progress_bar.setFormat("Прогресс: %p%")
+            self.gpu_range_label.setText("📐 Диапазон: —")
         else:
             params = {
                 'target': self.gpu_target_edit.text().strip(),
@@ -572,13 +576,74 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.update_cpu_total_stats()
 
     def update_gpu_stats(self, stats: dict):
-        # Обновление GPU статистики
-        progress = stats.get('progress', 0)
+        bar = self.gpu_progress_bar
+        is_random = bool(stats.get('indeterminate', False))
+
+        if is_random:
+            # Busy state — анимированная полоса, никаких «100%»
+            if bar.minimum() != 0 or bar.maximum() != 0:
+                bar.setRange(0, 0)
+            bar.setFormat("🎲 Сканирование…")
+        else:
+            # Возврат из busy в нормальный режим
+            if bar.minimum() == 0 and bar.maximum() == 0:
+                bar.setRange(0, 100)
+            bar.setFormat("Прогресс: %p%")
+            bar.setValue(int(stats.get('progress', 0)))
+
         total_speed = stats.get('total_speed', 0)
         total_checked = stats.get('total_scanned', 0)
-        self.gpu_progress_bar.setValue(progress)
         self.gpu_speed_label.setText(f"Скорость: {total_speed:.2f} MKey/s")
         self.gpu_checked_label.setText(f"Проверено ключей: {total_checked:,}")
+
+        try:
+            self._update_gpu_range_label(stats)
+        except Exception:
+            logger.exception("Ошибка обновления gpu_range_label")
+
+    def _update_gpu_range_label(self, stats: dict) -> None:
+        """Заполняет метку '📐 Диапазон' под блоком статистики GPU."""
+        label = getattr(self, 'gpu_range_label', None)
+        if label is None:
+            return
+
+        target = (stats.get('target') or '').strip()
+        random_mode = bool(stats.get('random_mode', False))
+        ranges = stats.get('ranges') or {}
+        start_key = int(stats.get('start_key', 0) or 0)
+        end_key = int(stats.get('end_key', 0) or 0)
+
+        def fmt_short(k: int) -> str:
+            if k <= 0:
+                return '—'
+            h = format(k, 'X')
+            return h if len(h) <= 20 else f"{h[:10]}…{h[-8:]}"
+
+        tgt = (target if len(target) <= 22
+               else f"{target[:11]}…{target[-7:]}") or '—'
+
+        total_keys = max(0, end_key - start_key + 1) if end_key > start_key else 0
+
+        if random_mode:
+            worker_parts = []
+            for wid in sorted(ranges.keys()):
+                s, e = ranges[wid]
+                worker_parts.append(f"W{wid}: {fmt_short(s)}→{fmt_short(e)}")
+            workers_line = "  |  ".join(worker_parts) if worker_parts else "запуск…"
+            text = (
+                f"🎲 <b>Случайный режим</b> &nbsp;|&nbsp; 🎯 {tgt}<br>"
+                f"📐 Глобальный: {fmt_short(start_key)} → {fmt_short(end_key)} "
+                f"({total_keys:,} ключей)<br>"
+                f"{workers_line}"
+            )
+        else:
+            text = (
+                f"▶ <b>Последовательный</b> &nbsp;|&nbsp; 🎯 {tgt}<br>"
+                f"📐 {fmt_short(start_key)} → {fmt_short(end_key)} "
+                f"({total_keys:,} ключей)"
+            )
+
+        label.setText(text)
 
     def update_kangaroo_stats(self, stats: dict):
         speed = stats.get('total_speed', 0)
@@ -1209,6 +1274,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             self.gpu_time_label.setText("Время работы: 00:00:00")
             self.gpu_status_label.setText("Статус: Готов к работе")
+            self.gpu_range_label.setText("📐 Диапазон: —")
+
 
     # ==================== HEALTH CHECK ====================
     def health_check(self) -> None:
