@@ -22,6 +22,7 @@ from PyQt6.QtWidgets import (
 
 import config
 from ui.theme import apply_dark_theme
+from ui.frameless import apply_frameless, style_app_popups, force_non_native_dialogs
 from ui.ui_main import MainWindowUI
 from core.unified_scanner import ScannerManager
 from utils.helpers import setup_logger, format_time, is_coincurve_available, make_combo32
@@ -64,31 +65,27 @@ class BitcoinGPUCPUScanner(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        print("STEP 1: super().__init__ OK", flush=True)
 
         self.MAX_KEY_HEX = config.MAX_KEY_HEX
         self.BASE_DIR = config.BASE_DIR
         self.settings = get_settings(self.BASE_DIR)
         self.settings._ui_parent = self
 
-        # --- Инициализация pynvml для мониторинга GPU ---
+        # --- Инициализация pynvml ---
         self.gpu_monitor_available = False
         if PYNVML_AVAILABLE:
             try:
+                print("STEP 2: pynvml.nvmlInit() ...", flush=True)
                 pynvml.nvmlInit()
                 self.gpu_monitor_available = True
                 device_count = pynvml.nvmlDeviceGetCount()
-                if device_count > 0:
-                    logger.info(f"Найдено {device_count} NVIDIA GPU устройств.")
-                else:
-                    logger.warning("NVIDIA GPU не найдены.")
-                    self.gpu_monitor_available = False
+                print(f"STEP 2: nvml OK, {device_count} devices", flush=True)
             except Exception as e:
                 logger.error(f"Ошибка инициализации pynvml: {e}")
                 self.gpu_monitor_available = False
-        else:
-            logger.warning("pynvml не установлена. Мониторинг GPU недоступен.")
 
-        # --- Атрибуты GPU (для UI) ---
+        # --- Атрибуты ---
         self.gpu_range_label = None
         self.random_mode = False
         self.last_random_ranges = set()
@@ -98,15 +95,17 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.gpu_restart_delay = 1000
         self.selected_gpu_device_id = 0
         self.optimal_workers = max(1, multiprocessing.cpu_count() - 1)
+        print("STEP 3: attributes OK", flush=True)
 
         # --- Менеджер сканеров ---
+        print("STEP 4: ScannerManager() ...", flush=True)
         self.scanner_manager = ScannerManager(self)
-        # Получаем ссылки на сканеры для удобства
         self.cpu_scanner = self.scanner_manager.get_scanner('cpu')
         self.gpu_scanner = self.scanner_manager.get_scanner('gpu')
         self.kangaroo_scanner = self.scanner_manager.get_scanner('kangaroo')
         self.vanity_scanner = self.scanner_manager.get_scanner('vanity')
         self.matrix_scanner = self.scanner_manager.get_scanner('matrix')
+        print("STEP 4: ScannerManager OK", flush=True)
 
         # --- Вспомогательные окна ---
         self.matrix_window = None
@@ -115,34 +114,48 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.progress_tracker_window = None
 
         # --- UI ---
+        print("STEP 5: apply_dark_theme ...", flush=True)
         apply_dark_theme(self)
-        self.log_gpu_progress_signal.connect(self._save_gpu_progress)
+        print("STEP 5: apply_dark_theme OK", flush=True)
+
+        print("STEP 6: MainWindowUI ...", flush=True)
         self.ui = MainWindowUI(self)
         self.ui.setup_ui()
+        print("STEP 6b: setup_ui OK", flush=True)
+
+        print("STEP 7: setup_connections ...", flush=True)
         self.setup_connections()
+        print("STEP 7: setup_connections OK", flush=True)
+
+        print("STEP 8: load_settings ...", flush=True)
         self.load_settings()
+        print("STEP 8: load_settings OK", flush=True)
 
-        if self.gpu_monitor_available:
-            self.ui._populate_gpu_combo()
-        if hasattr(self, 'gpu_device_combo') and self.gpu_device_combo.count() > 0:
-            self.gpu_device_combo.setCurrentIndex(0)
-        self.ensure_file_exists(config.FOUND_KEYS_FILE)
+        print("STEP 9: apply_frameless ...", flush=True)
+        try:
+            from PyQt6.QtWidgets import QApplication as _QApp
+            app = _QApp.instance()
+            if app is not None:
+                style_app_popups(app)
+            force_non_native_dialogs()
+            apply_frameless(self)
+            print("STEP 9: apply_frameless OK", flush=True)
+        except Exception as _e:
+            print(f"STEP 9: apply_frameless FAILED: {_e}", flush=True)
 
-        # --- Таймеры ---
-        self.queue_timer = QTimer()
-        self.queue_timer.timeout.connect(self.process_all_queues)
-        self.queue_timer.start(self.QUEUE_TIMER_INTERVAL)
-
-        self.health_timer = QTimer()
-        self.health_timer.timeout.connect(self.health_check)
-        self.health_timer.start(self.HEALTH_CHECK_INTERVAL)
-
-        self.setWindowTitle("Bitcoin GPU/CPU Scanner")
-        self.resize(1200, 900)
-
-        logger.info(f"📁 Settings path: {self.settings.filepath}")
+        print("STEP 10: __init__ DONE", flush=True)
 
     # ==================== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ====================
+    def resizeEvent(self, event):
+        """Синхронизируем позицию «ручки» сайдбара при изменении размера окна."""
+        super().resizeEvent(event)
+        reposition = getattr(self, "_sidebar_handle_reposition", None)
+        if callable(reposition):
+            try:
+                reposition()
+            except Exception:
+                pass
+
     @staticmethod
     def ensure_file_exists(filepath: str) -> None:
         Path(filepath).touch(exist_ok=True)
@@ -250,6 +263,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
                 on_apply_callback=on_apply,
                 on_log_callback=self.append_log,
             )
+            try:
+                apply_frameless(dialog)
+            except Exception:
+                pass
             dialog.exec()
         except Exception as e:
             logger.exception("Ошибка открытия диалога случайного диапазона")
@@ -297,10 +314,28 @@ class BitcoinGPUCPUScanner(QMainWindow):
         # Vanity
         self.vanity_start_stop_btn.clicked.connect(self._toggle_vanity)
 
+        # Публикация найденного ключа: активна только при выбранной строке
+        self.found_keys_table.itemSelectionChanged.connect(
+            lambda: self.publish_key_btn.setEnabled(
+                bool(self.found_keys_table.selectedItems())
+            )
+        )
+
         # Общие
         self.clear_log_btn.clicked.connect(lambda: self.log_output.clear())
 
         # Таймеры
+        # КРИТИЧНО: таймер обработки очередей. Без него сообщения от CPU-воркеров
+        # (прогресс/статистика/логи) никогда не попадают в UI — выглядит как
+        # «нет прогресса и воркеров».
+        self.queue_timer = QTimer()
+        self.queue_timer.timeout.connect(self.process_all_queues)
+        self.queue_timer.start(self.QUEUE_TIMER_INTERVAL)
+
+        self.health_check_timer = QTimer()
+        self.health_check_timer.timeout.connect(self.health_check)
+        self.health_check_timer.start(self.HEALTH_CHECK_INTERVAL)
+
         self.gpu_stats_timer = QTimer()
         self.gpu_stats_timer.timeout.connect(self._update_gpu_time)
         self.gpu_stats_timer.start(self.GPU_STATS_TIMER_INTERVAL)
@@ -402,6 +437,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.gpu_start_stop_btn.setText("Запустить GPU поиск")
             self.gpu_start_stop_btn.setStyleSheet("background: #27ae60; font-weight: bold;")
             self.gpu_status_label.setText("Статус: Готов к работе")
+            self.gpu_progress_bar.setRange(0, 100)
+            self.gpu_progress_bar.setValue(0)
+            self.gpu_progress_bar.setFormat("Прогресс: %p%")
+            self.gpu_range_label.setText("📐 Диапазон: —")
         else:
             params = {
                 'target': self.gpu_target_edit.text().strip(),
@@ -479,11 +518,20 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.kang_status_label.setText("Статус: Готов к запуску")
             self.append_log("Kangaroo поиск остановлен", "warning")
         else:
+            _kang_exe = self.kang_exe_edit.text().strip()
+            # Если сохранённый путь устарел (файл лежал в корне проекта/в другой
+            # папке, а теперь все .exe перенесены в bin/) — автоматически
+            # исправить на актуальный путь.
+            if not os.path.exists(_kang_exe):
+                _fixed = config.migrate_binary_path(_kang_exe)
+                if os.path.exists(_fixed):
+                    _kang_exe = _fixed
+                    self.kang_exe_edit.setText(_fixed)
             params = {
                 'pubkey_hex': self.kang_pubkey_edit.text().strip(),
                 'rb_hex': self.kang_start_key_edit.text().strip(),
                 're_hex': self.kang_end_key_edit.text().strip(),
-                'etarkangaroo_exe': self.kang_exe_edit.text().strip(),
+                'etarkangaroo_exe': _kang_exe,
                 'temp_dir': self.kang_temp_dir_edit.text().strip(),
                 'dp': self.kang_dp_spin.value(),
                 'grid_params': self.kang_grid_edit.text().strip(),
@@ -528,13 +576,74 @@ class BitcoinGPUCPUScanner(QMainWindow):
         self.update_cpu_total_stats()
 
     def update_gpu_stats(self, stats: dict):
-        # Обновление GPU статистики
-        progress = stats.get('progress', 0)
+        bar = self.gpu_progress_bar
+        is_random = bool(stats.get('indeterminate', False))
+
+        if is_random:
+            # Busy state — анимированная полоса, никаких «100%»
+            if bar.minimum() != 0 or bar.maximum() != 0:
+                bar.setRange(0, 0)
+            bar.setFormat("🎲 Сканирование…")
+        else:
+            # Возврат из busy в нормальный режим
+            if bar.minimum() == 0 and bar.maximum() == 0:
+                bar.setRange(0, 100)
+            bar.setFormat("Прогресс: %p%")
+            bar.setValue(int(stats.get('progress', 0)))
+
         total_speed = stats.get('total_speed', 0)
         total_checked = stats.get('total_scanned', 0)
-        self.gpu_progress_bar.setValue(progress)
         self.gpu_speed_label.setText(f"Скорость: {total_speed:.2f} MKey/s")
         self.gpu_checked_label.setText(f"Проверено ключей: {total_checked:,}")
+
+        try:
+            self._update_gpu_range_label(stats)
+        except Exception:
+            logger.exception("Ошибка обновления gpu_range_label")
+
+    def _update_gpu_range_label(self, stats: dict) -> None:
+        """Заполняет метку '📐 Диапазон' под блоком статистики GPU."""
+        label = getattr(self, 'gpu_range_label', None)
+        if label is None:
+            return
+
+        target = (stats.get('target') or '').strip()
+        random_mode = bool(stats.get('random_mode', False))
+        ranges = stats.get('ranges') or {}
+        start_key = int(stats.get('start_key', 0) or 0)
+        end_key = int(stats.get('end_key', 0) or 0)
+
+        def fmt_short(k: int) -> str:
+            if k <= 0:
+                return '—'
+            h = format(k, 'X')
+            return h if len(h) <= 20 else f"{h[:10]}…{h[-8:]}"
+
+        tgt = (target if len(target) <= 22
+               else f"{target[:11]}…{target[-7:]}") or '—'
+
+        total_keys = max(0, end_key - start_key + 1) if end_key > start_key else 0
+
+        if random_mode:
+            worker_parts = []
+            for wid in sorted(ranges.keys()):
+                s, e = ranges[wid]
+                worker_parts.append(f"W{wid}: {fmt_short(s)}→{fmt_short(e)}")
+            workers_line = "  |  ".join(worker_parts) if worker_parts else "запуск…"
+            text = (
+                f"🎲 <b>Случайный режим</b> &nbsp;|&nbsp; 🎯 {tgt}<br>"
+                f"📐 Глобальный: {fmt_short(start_key)} → {fmt_short(end_key)} "
+                f"({total_keys:,} ключей)<br>"
+                f"{workers_line}"
+            )
+        else:
+            text = (
+                f"▶ <b>Последовательный</b> &nbsp;|&nbsp; 🎯 {tgt}<br>"
+                f"📐 {fmt_short(start_key)} → {fmt_short(end_key)} "
+                f"({total_keys:,} ключей)"
+            )
+
+        label.setText(text)
 
     def update_kangaroo_stats(self, stats: dict):
         speed = stats.get('total_speed', 0)
@@ -972,7 +1081,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.safe_set_text('cpu_usage', f"{psutil.cpu_percent()}%")
             if self.cpu_scanner.is_running():
                 status = "Работает" if not self.cpu_scanner._is_paused else "На паузе"
-                self.safe_set_text('cpu_status_label', f"{status} ({len(self.cpu_scanner._pm._processes)} воркеров)")
+                procs = self.cpu_scanner._pm._processes
+                alive = sum(1 for p in procs.values() if p.is_alive())
+                self.safe_set_text('cpu_status_label',
+                                   f"{status} ({alive}/{len(procs)} воркеров активно)")
             else:
                 self.safe_set_text('cpu_status_label', "Ожидание запуска")
             cpu_temp = self._get_cpu_temperature()
@@ -1162,6 +1274,8 @@ class BitcoinGPUCPUScanner(QMainWindow):
         else:
             self.gpu_time_label.setText("Время работы: 00:00:00")
             self.gpu_status_label.setText("Статус: Готов к работе")
+            self.gpu_range_label.setText("📐 Диапазон: —")
+
 
     # ==================== HEALTH CHECK ====================
     def health_check(self) -> None:
@@ -1210,6 +1324,10 @@ class BitcoinGPUCPUScanner(QMainWindow):
         copy_wif_action = menu.addAction("Копировать WIF ключ")
         copy_hex_action = menu.addAction("Копировать HEX ключ")
         copy_addr_action = menu.addAction("Копировать адрес")
+        menu.addSeparator()
+        publish_action = menu.addAction("🔺 Опубликовать")
+        publish_action.setEnabled(False)  # публикация отключена до подтверждения пользователя
+        publish_action.setToolTip("Публикация отключена до подтверждения")
         menu.addSeparator()
         save_all_action = menu.addAction("Сохранить все ключи в файл")
         clear_action = menu.addAction("Очистить таблицу")
@@ -1260,6 +1378,42 @@ class BitcoinGPUCPUScanner(QMainWindow):
             self.append_log(f"Ошибка сохранения ключей: {str(e)}")
         finally:
             self.set_busy(False)
+
+    def publish_found_key(self) -> None:
+        """🔺 Публикация выбранного найденного ключа.
+
+        Функция публикации отключена до подтверждения пользователя:
+        ключ никуда не отправляется, действие фиксируется только в журнале.
+        """
+        selected = self.found_keys_table.selectedItems()
+        if not selected:
+            self.append_log("Для публикации выберите строку с ключом", "warning")
+            return
+        row = selected[0].row()
+        addr_item = self.found_keys_table.item(row, 1)
+        address = addr_item.text() if addr_item else ""
+        reply = QMessageBox.question(
+            self,
+            "Подтверждение публикации",
+            f"Вы уверены, что хотите опубликовать ключ для адреса\n{address}?\n\n"
+            "⚠️ Публикация приватных ключей может привести к их компрометации.",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if reply != QMessageBox.StandardButton.Yes:
+            self.append_log("Публикация отменена пользователем", "normal")
+            return
+        # TODO: здесь будет реальная публикация (ждёт подтверждения функционала)
+        self.append_log(
+            f"🔺 Запрошена публикация ключа {address[:16]}... — "
+            f"функция отключена до подтверждения",
+            "warning",
+        )
+        QMessageBox.information(
+            self,
+            "Публикация",
+            "Функция публикации временно отключена до подтверждения.",
+        )
 
     def handle_found_key(self, key_data: Dict[str, Any]) -> None:
         try:

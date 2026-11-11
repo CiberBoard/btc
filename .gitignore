@@ -1,11 +1,5 @@
-*.pkg
-*.toc
+__pycache__/
 *.zip
-*.pyz
-/build
-/build/bild2
 /dist
-*.pyc
-*.pyc
-*.dat
-*.temp
+/build
+/ui/__pycache__

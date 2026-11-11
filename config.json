@@ -8,5 +8,5 @@
   "dp": 22,
   "grid_params": "88,128",
   "temp_dir": "./kangaroo_work/",
-  "etarkangaroo_exe": "Etarkangaroo.exe"
+  "etarkangaroo_exe": "bin/Etarkangaroo.exe"
 }

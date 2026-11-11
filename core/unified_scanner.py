@@ -382,12 +382,17 @@ class ProcessManager:
 #  CPU СКАНЕР
 # ============================================================
 class CPUScanner(BaseScanner):
+    # Если воркеры молчат дольше этого времени — шлём heartbeat-статистику,
+    # чтобы UI видел прогресс даже при медленных/зависших воркерах
+    HEARTBEAT_INTERVAL = 2.0
+
     def __init__(self, parent: Optional[QObject] = None):
         super().__init__(parent)
         self._pm = ProcessManager()
         self._worker_stats: Dict[int, dict] = {}
         self._total_scanned = 0
         self._total_found = 0
+        self._last_stats_time = 0.0
 
     def start(self, params: Dict[str, Any]) -> bool:
         if self._is_running:
@@ -416,6 +421,20 @@ class CPUScanner(BaseScanner):
         workers_count = params.get('workers', 4)
         mode = params.get('mode', 'sequential')
         attempts = params.get('attempts', 0)
+
+        # Предупреждаем сразу, если запуск явно некорректный — иначе UI
+        # выглядит «мёртвым»: воркеры стартуют и мгновенно завершаются
+        if mode == 'random' and attempts <= 0:
+            self.log_message.emit(
+                "⚠️ Режим «Случайный» выбран, но количество попыток = 0. "
+                "Укажите число попыток, иначе воркеры завершатся сразу.", "warning")
+            return False
+        if mode == 'sequential' and total_keys < workers_count:
+            self.log_message.emit(
+                f"⚠️ Диапазон слишком мал для {workers_count} воркеров: "
+                f"всего {total_keys:,} ключей. Уменьшите число воркеров или расширьте диапазон.",
+                "warning")
+
         prefix_len = params.get('prefix_len', 8)
         target_prefix = target[:prefix_len]
 
@@ -435,12 +454,29 @@ class CPUScanner(BaseScanner):
                 ),
                 worker_id=wid
             )
-            self._worker_stats[wid] = {'scanned': 0, 'found': 0, 'speed': 0.0, 'progress': 0}
+            self._worker_stats[wid] = {'scanned': 0, 'found': 0, 'speed': 0.0,
+                                       'progress': 0, 'last_update': time.time()}
 
         self._set_running(True)
         self._total_scanned = 0
         self._total_found = 0
-        self.log_message.emit(f"Запущено {workers_count} CPU воркеров в режиме {mode}", "info")
+        self._last_stats_time = time.time()
+        # Сразу рисуем строки воркеров в таблице — UI не выглядит «мёртвым»,
+        # даже пока процессы ещё не прислали первую статистику
+        self.stats_updated.emit({
+            'total_scanned': 0,
+            'total_found': 0,
+            'total_speed': 0.0,
+            'workers': dict(self._worker_stats),
+        })
+        if mode == 'random':
+            self.log_message.emit(
+                f"Запущено {workers_count} CPU воркеров в режиме {mode}. "
+                f"Всего попыток: {attempts:,}", "info")
+        else:
+            self.log_message.emit(
+                f"Запущено {workers_count} CPU воркеров в режиме {mode}. "
+                f"Диапазон: {start_hex} → {end_hex} ({total_keys:,} ключей)", "info")
         return True
 
     def stop(self) -> None:
@@ -464,27 +500,81 @@ class CPUScanner(BaseScanner):
 
     def process_queue(self) -> None:
         self._pm.process_messages(self._handle_message)
+        self._heartbeat()
+
+    def _heartbeat(self) -> None:
+        """Периодически обновляет UI и логирует «молчащие/мёртвые» воркеры,
+        чтобы при запуске на CPU всегда было видно, что происходит."""
+        if not self._is_running or self._is_paused:
+            return
+        now = time.time()
+        if now - self._last_stats_time < self.HEARTBEAT_INTERVAL:
+            return
+        self._last_stats_time = now
+
+        silent_workers: List[int] = []
+        dead_workers: List[int] = []
+        for wid, proc in list(self._pm._processes.items()):
+            alive = proc.is_alive()
+            if not alive:
+                dead_workers.append(wid)
+            last_ts = self._worker_stats.get(wid, {}).get('last_update', 0.0)
+            if now - last_ts > self.HEARTBEAT_INTERVAL * 2:
+                silent_workers.append(wid)
+
+        # принудительно обновляем прогресс по времени работы (защита от «зависшего» 0%)
+        elapsed = max(0.001, self.elapsed_time())
+        total_keys = (self._params or {}).get('total_keys', 0)
+        progress_by_time = min(99, int(self._total_scanned / total_keys * 100)) \
+            if total_keys > 0 else 0
+
+        self.stats_updated.emit({
+            'total_scanned': self._total_scanned,
+            'total_found': self._total_found,
+            'total_speed': sum(s.get('speed', 0.0) for s in self._worker_stats.values()),
+            'workers': dict(self._worker_stats),
+            'progress': progress_by_time,
+            'elapsed': elapsed,
+        })
+
+        if silent_workers and dead_workers and len(dead_workers) == len(self._pm._processes):
+            self.log_message.emit(
+                f"⚠️ Все {len(dead_workers)} CPU воркеров завершились без статистики. "
+                f"Возможно, диапазон слишком мал или процессы были остановлены ОС.", "warning")
+        elif silent_workers:
+            self.log_message.emit(
+                f"⏳ Воркеры {silent_workers} не присылают статистику более "
+                f"{self.HEARTBEAT_INTERVAL * 2:.0f} сек — они всё ещё работают "
+                f"(проверено всего: {self._total_scanned:,})", "warning")
 
     def _handle_message(self, msg: dict) -> None:
         typ = msg.get('type')
         if typ == 'stats':
             wid = msg['worker_id']
-            if wid in self._worker_stats:
-                self._worker_stats[wid].update({
-                    'scanned': msg.get('scanned', 0),
-                    'found': msg.get('found', 0),
-                    'speed': msg.get('speed', 0.0),
-                    'progress': msg.get('progress', 0),
-                })
-                self._total_scanned = sum(s['scanned'] for s in self._worker_stats.values())
-                self._total_found = sum(s['found'] for s in self._worker_stats.values())
-                total_speed = sum(s['speed'] for s in self._worker_stats.values())
-                self.stats_updated.emit({
-                    'total_scanned': self._total_scanned,
-                    'total_found': self._total_found,
-                    'total_speed': total_speed,
-                    'workers': self._worker_stats,
-                })
+            stats = self._worker_stats.setdefault(wid, {})
+            prev_scanned = stats.get('scanned', 0)
+            new_scanned = msg.get('scanned', 0)
+            # Воркеры шлют счётчик сканирований за свой запуск — суммируем,
+            # иначе прогресс «откатывается» и выглядит как отсутствие прогресса
+            if new_scanned < prev_scanned:
+                self._total_scanned -= prev_scanned
+            self._total_scanned += max(0, new_scanned - prev_scanned)
+            self._worker_stats[wid].update({
+                'scanned': msg.get('scanned', 0),
+                'found': msg.get('found', 0),
+                'speed': msg.get('speed', 0.0),
+                'progress': msg.get('progress', 0),
+                'last_update': time.time(),
+            })
+            total_speed = sum(s.get('speed', 0.0) for s in self._worker_stats.values())
+            self._total_found = sum(s.get('found', 0) for s in self._worker_stats.values())
+            self._last_stats_time = time.time()
+            self.stats_updated.emit({
+                'total_scanned': self._total_scanned,
+                'total_found': self._total_found,
+                'total_speed': total_speed,
+                'workers': self._worker_stats,
+            })
         elif typ == 'found':
             self.key_found.emit(msg)
         elif typ == 'log':
@@ -506,18 +596,40 @@ class CPUScanner(BaseScanner):
 class GPUScanner(BaseScanner):
     def __init__(self, parent: Optional[QObject] = None):
         super().__init__(parent)
-        self._processes: List[Tuple[subprocess.Popen, gpu_worker.OptimizedOutputReader]] = []
+        # ✅ active и retired — разделены, чтобы QThread не уничтожался в момент emit()
+        self._processes: Dict[int, Tuple[subprocess.Popen, gpu_worker.OptimizedOutputReader]] = {}
+        self._retired: List[Tuple[subprocess.Popen, gpu_worker.OptimizedOutputReader]] = []
         self._worker_stats: Dict[int, dict] = {}
+        self._worker_devices: Dict[int, str] = {}
+        self._worker_ranges: Dict[int, Tuple[int, int]] = {}  # ← ДОБАВИТЬ
         self._worker_counter = 0
         self._total_checked = 0
         self._total_speed = 0.0
-        self._last_update_time = 0.0
         self._start_key = 0
         self._end_key = 0
         self._total_keys_in_range = 0
         self._use_compressed = True
 
+        self._random_mode = False
+        self._restart_interval = 300
+        self._min_range_size = '134217728'
+        self._max_range_size = '536870912'
+        self._used_ranges: Set[str] = set()
+
+        # ✅ QTimer с parent=self — живёт столько же, сколько сканер
+        self._restart_timer = QTimer(self)
+        self._restart_timer.timeout.connect(self._restart_all_random_workers)
+
+    # ═══════════════════════════════════════════════
     def start(self, params: Dict[str, Any]) -> bool:
+        try:
+            return self._start_impl(params)
+        except Exception as e:
+            logger.exception("GPUScanner.start crashed")
+            self.log_message.emit(f"❌ Ошибка запуска GPU: {type(e).__name__}: {e}", "error")
+            return False
+
+    def _start_impl(self, params: Dict[str, Any]) -> bool:
         if self._is_running:
             return False
 
@@ -527,11 +639,13 @@ class GPUScanner(BaseScanner):
         if not target or not start_hex or not end_hex:
             self.log_message.emit("Не заполнены обязательные поля", "error")
             return False
+
         result, err = validate_key_range(start_hex, end_hex)
         if result is None:
             self.log_message.emit(f"Ошибка диапазона: {err}", "error")
             return False
         start_int, end_int, total_keys = result
+
         if not os.path.exists(config.CUBITCRACK_EXE):
             self.log_message.emit(f"cuBitcrack.exe не найден: {config.CUBITCRACK_EXE}", "error")
             return False
@@ -540,29 +654,41 @@ class GPUScanner(BaseScanner):
         self._start_key = start_int
         self._end_key = end_int
         self._total_keys_in_range = total_keys
-        self._use_compressed = params.get('use_compressed', True)
+        self._use_compressed = bool(params.get('use_compressed', True))
 
-        devices_input = params.get('devices', '0')
-        devices = self._parse_devices(devices_input)
+        self._random_mode = bool(params.get('random_mode', False))
+        try:
+            self._restart_interval = max(10, int(params.get('restart_interval', 300)))
+        except (TypeError, ValueError):
+            self._restart_interval = 300
+        self._min_range_size = str(params.get('min_range_size') or '134217728')
+        self._max_range_size = str(params.get('max_range_size') or '536870912')
+        self._used_ranges = set()
+
+        devices = self._parse_devices(params.get('devices', '0'))
         if not devices:
             self.log_message.emit("Не указаны корректные ID GPU", "error")
             return False
 
-        blocks = params.get('blocks', '256')
-        threads = params.get('threads', '128')
-        points = params.get('points', '256')
-        priority_index = params.get('priority_index', 0)
-        workers_per_device = params.get('workers_per_device', 1)
+        blocks = str(params.get('blocks', '256'))
+        threads = str(params.get('threads', '128'))
+        points = str(params.get('points', '256'))
+        priority_index = int(params.get('priority_index', 0))
+        workers_per_device = max(1, int(params.get('workers_per_device', 1)))
 
         total_workers = len(devices) * workers_per_device
         effective_workers = min(total_workers, total_keys) if total_keys > 0 else 0
-        if effective_workers == 0:
+        if effective_workers <= 0:
             self.log_message.emit("Некорректное количество воркеров", "error")
             return False
         keys_per_worker = max(1, total_keys // effective_workers)
 
+        # Очистка состояния
         self._processes.clear()
+        self._retired.clear()
         self._worker_stats.clear()
+        self._worker_devices.clear()
+        self._worker_ranges.clear()
         self._worker_counter = 0
 
         for device in devices:
@@ -570,84 +696,219 @@ class GPUScanner(BaseScanner):
                 if self._worker_counter >= effective_workers:
                     break
                 wid = self._worker_counter
-                worker_start = start_int + wid * keys_per_worker
-                worker_end = min(worker_start + keys_per_worker - 1, end_int)
+                self._worker_devices[wid] = device
+                self._worker_stats[wid] = {'checked': 0, 'base_checked': 0, 'speed': 0.0}
 
-                if worker_start > worker_end:
-                    continue
-
-                try:
-                    proc, reader = gpu_worker.start_gpu_search_with_range(
-                        target_address=target,
-                        start_key=worker_start,
-                        end_key=worker_end,
-                        device=device,
-                        blocks=blocks,
-                        threads=threads,
-                        points=points,
-                        priority_index=priority_index,
-                        parent_window=None,
-                        use_compressed=self._use_compressed
+                if self._random_mode:
+                    ok = self._spawn_random_worker(
+                        wid, device, target, blocks, threads, points, priority_index
                     )
-                    if proc is None or reader is None:
-                        raise RuntimeError("Не удалось запустить воркер")
-                    reader.log_message.connect(lambda msg, lvl: self.log_message.emit(msg, lvl))
-                    reader.stats_update.connect(lambda stats, wid=wid: self._handle_gpu_stats(wid, stats))
-                    reader.found_key.connect(self.key_found.emit)
-                    reader.process_finished.connect(lambda: self._handle_gpu_finished(wid))
-                    reader.start()
-                    self._processes.append((proc, reader))
-                    self._worker_stats[wid] = {'checked': 0, 'speed': 0.0}
-                    self._worker_counter += 1
-                except Exception as e:
-                    self.log_message.emit(f"Ошибка запуска воркера {wid}: {e}", "error")
+                else:
+                    w_start = start_int + wid * keys_per_worker
+                    w_end = end_int if wid == effective_workers - 1 else min(
+                        w_start + keys_per_worker - 1, end_int
+                    )
+                    if w_start > w_end:
+                        self._worker_counter += 1
+                        continue
+                    ok = self._spawn_worker(
+                        wid, device, w_start, w_end,
+                        target, blocks, threads, points, priority_index
+                    )
 
-        if self._processes:
-            self._set_running(True)
-            self._total_checked = 0
-            self._total_speed = 0.0
-            self.log_message.emit(f"Запущено {len(self._processes)} GPU воркеров", "success")
-            return True
-        else:
+                if not ok:
+                    self.log_message.emit(f"⚠️ Воркер {wid} не запустился", "warning")
+                self._worker_counter += 1
+
+        if not self._processes:
             self.log_message.emit("Не удалось запустить ни одного GPU воркера", "error")
             return False
 
-    def _parse_devices(self, devices_input: str) -> List[str]:
-        devices = []
-        for part in devices_input.split(','):
-            part = part.strip()
-            if not part:
-                continue
-            m = re.match(r'^(\d+)', part)
-            if m:
-                devices.append(m.group(1))
-        return devices
+        self._set_running(True)
+        self._total_checked = 0
+        self._total_speed = 0.0
 
-    def _handle_gpu_stats(self, wid: int, stats: dict):
-        if wid in self._worker_stats:
-            self._worker_stats[wid]['checked'] = stats.get('checked', 0)
-            self._worker_stats[wid]['speed'] = stats.get('speed', 0.0)
-            self._total_checked = sum(s['checked'] for s in self._worker_stats.values())
-            self._total_speed = sum(s['speed'] for s in self._worker_stats.values())
+        if self._random_mode:
+            self._restart_timer.start(self._restart_interval * 1000)
+            self.log_message.emit(
+                f"🎲 GPU СЛУЧАЙНЫЙ режим: {len(self._processes)} воркеров, "
+                f"размер {self._min_range_size}–{self._max_range_size}, "
+                f"рестарт каждые {self._restart_interval}с", "success"
+            )
+        else:
+            self.log_message.emit(
+                f"▶ GPU ПОСЛЕДОВАТЕЛЬНЫЙ: {len(self._processes)} воркеров, "
+                f"{start_hex} → {end_hex}", "success"
+            )
+        self._emit_stats_now()
+        return True
+
+    # ═══════════════════════════════════════════════
+    def _spawn_worker(
+            self, wid: int, device: str, start_key: int, end_key: int,
+            target: str, blocks: str, threads: str, points: str, priority_index: int
+    ) -> bool:
+        try:
+            proc, reader = gpu_worker.start_gpu_search_with_range(
+                target_address=target,
+                start_key=start_key,
+                end_key=end_key,
+                device=device,
+                blocks=blocks,
+                threads=threads,
+                points=points,
+                priority_index=priority_index,
+                parent_window=None,
+                use_compressed=self._use_compressed,
+            )
+            if proc is None or reader is None:
+                return False
+
+            reader.log_message.connect(lambda msg, lvl: self.log_message.emit(msg, lvl))
+            reader.stats_update.connect(lambda stats, w=wid: self._handle_gpu_stats(w, stats))
+            reader.found_key.connect(self.key_found.emit)
+            reader.process_finished.connect(lambda w=wid: self._handle_gpu_finished(w))
+            reader.start()
+            self._processes[wid] = (proc, reader)
+            self._worker_ranges[wid] = (start_key, end_key)  # ← ДОБАВИТЬ
+            return True
+        except Exception as e:
+            logger.exception(f"Ошибка spawn воркера {wid}")
+            self.log_message.emit(f"Ошибка запуска воркера {wid}: {e}", "error")
+            return False
+
+    def _spawn_random_worker(
+            self, wid: int, device: str, target: str,
+            blocks: str, threads: str, points: str, priority_index: int
+    ) -> bool:
+        try:
+            sub_start, sub_end, err = gpu_worker.generate_gpu_random_range(
+                hex(self._start_key)[2:],
+                hex(self._end_key)[2:],
+                self._min_range_size,
+                self._max_range_size,
+                self._used_ranges,
+                100,
+            )
+            if err or sub_start is None or sub_end is None:
+                self.log_message.emit(
+                    f"⚠️ Диапазон для воркера {wid}: {err or 'unknown'}", "warning"
+                )
+                return False
+            self.log_message.emit(
+                f"🎲 Воркер {wid}: {hex(sub_start)[2:12]}... → ...{hex(sub_end)[-8:]}", "info"
+            )
+            return self._spawn_worker(
+                wid, device, sub_start, sub_end, target,
+                blocks, threads, points, priority_index
+            )
+        except Exception as e:
+            logger.exception(f"Ошибка random-spawn воркера {wid}")
+            return False
+
+    # ═══════════════════════════════════════════════
+
+    def _emit_stats_now(self):
+        # В random-режиме "% покрытия" не имеет смысла: поддиапазоны
+        # перекрываются, и _total_checked может многократно превысить
+        # _total_keys_in_range → прогресс «залипает» на 100%.
+        # Отдаём indeterminate=True — UI покажет бегущую полосу.
+        if self._random_mode:
+            progress = 0
+        else:
             progress = 0
             if self._total_keys_in_range > 0:
                 progress = min(100, int((self._total_checked / self._total_keys_in_range) * 100))
-            self.stats_updated.emit({
-                'total_scanned': self._total_checked,
-                'total_found': 0,
-                'total_speed': self._total_speed,
-                'progress': progress,
-                'workers': self._worker_stats,
-            })
+
+        self.stats_updated.emit({
+            'total_scanned': self._total_checked,
+            'total_found': 0,
+            'total_speed': self._total_speed,
+            'progress': progress,
+            'indeterminate': self._random_mode,  # ← новый флаг
+            'workers': dict(self._worker_stats),
+            'ranges': dict(self._worker_ranges),
+            'random_mode': self._random_mode,
+            'start_key': self._start_key,
+            'end_key': self._end_key,
+            'target': (self._params or {}).get('target', ''),
+        })
+
+    def _handle_gpu_stats(self, wid: int, stats: dict):
+        if wid not in self._worker_stats:
+            return
+        old = self._worker_stats[wid].get('checked', 0)
+        new = stats.get('checked', 0)
+        if new < old:
+            self._worker_stats[wid]['base_checked'] = (
+                    self._worker_stats[wid].get('base_checked', 0) + old
+            )
+        self._worker_stats[wid]['checked'] = new
+        self._worker_stats[wid]['speed'] = stats.get('speed', 0.0)
+        self._total_checked = sum(
+            s.get('base_checked', 0) + s.get('checked', 0)
+            for s in self._worker_stats.values()
+        )
+        self._total_speed = sum(s.get('speed', 0.0) for s in self._worker_stats.values())
+        self._emit_stats_now()  # ← единая точка эмита
+
 
     def _handle_gpu_finished(self, wid: int):
+        # ✅ НЕ уничтожаем QThread в момент emit() — перемещаем в retired-список,
+        #    реальная очистка произойдёт в stop() когда ни один сигнал не активен
+        old = self._processes.pop(wid, None)
+        if old is not None:
+            self._retired.append(old)
+        self._worker_ranges.pop(wid, None)
+        if not self._is_running:
+            return
+
+        if self._random_mode:
+            device = self._worker_devices.get(wid, '0')
+            p = self._params or {}
+            ok = self._spawn_random_worker(
+                wid, device,
+                p.get('target', ''),
+                str(p.get('blocks', '256')),
+                str(p.get('threads', '128')),
+                str(p.get('points', '256')),
+                int(p.get('priority_index', 0)),
+            )
+            if not ok:
+                self.log_message.emit(
+                    f"⚠️ Воркер {wid}: не удалось перезапустить random-сессию", "warning"
+                )
+            return
+
         self.worker_finished.emit(wid)
-        if all(not reader.isRunning() for _, reader in self._processes):
+        if not self._processes:
             self._set_running(False)
             self.search_finished.emit(True)
 
+    def _restart_all_random_workers(self):
+        if not self._is_running or not self._random_mode:
+            return
+        # Мягко стопим только — перезапуск произойдёт через process_finished
+        for wid, (proc, reader) in list(self._processes.items()):
+            try:
+                reader.stop()
+                if proc.poll() is None:
+                    proc.terminate()
+            except Exception:
+                pass
+
+    # ═══════════════════════════════════════════════
     def stop(self) -> None:
-        gpu_worker.stop_gpu_search_internal(self._processes)
+        self._restart_timer.stop()
+        # ✅ Активные + retired стопим вместе
+        all_pairs = list(self._processes.values()) + self._retired
+        if all_pairs:
+            try:
+                gpu_worker.stop_gpu_search_internal(all_pairs)
+            except Exception:
+                logger.exception("Ошибка остановки GPU-воркеров")
+        self._processes.clear()
+        self._retired.clear()
         self._set_running(False)
         self.log_message.emit("GPU поиск остановлен", "warning")
 
@@ -655,17 +916,28 @@ class GPUScanner(BaseScanner):
         if self._is_running and not self._is_paused:
             self._is_paused = True
             self.stop()
-            self.log_message.emit("GPU поиск приостановлен (остановлен)", "warning")
+            self.log_message.emit("GPU поиск приостановлен", "warning")
 
     def resume(self) -> None:
         if not self._is_paused or self._params is None:
             return
         self._is_paused = False
         self.start(self._params)
-        self.log_message.emit("GPU поиск возобновлён", "info")
 
     def process_queue(self) -> None:
         pass
+
+    def _parse_devices(self, devices_input: str) -> List[str]:
+        """Парсит строку 'devices' из UI: '0', '0,1', '0 - RTX 3090', '0,1 (Multi-GPU)' и т.п."""
+        devices: List[str] = []
+        for part in str(devices_input).split(','):
+            part = part.strip()
+            if not part:
+                continue
+            m = re.match(r'^(\d+)', part)
+            if m:
+                devices.append(m.group(1))
+        return devices
 
 
 # ============================================================
@@ -686,14 +958,30 @@ class KangarooScanner(BaseScanner):
 
         exe = params.get('etarkangaroo_exe', '')
         if not os.path.exists(exe):
+            exe = config.migrate_binary_path(exe)
+            params = dict(params, etarkangaroo_exe=exe)
+        if not os.path.exists(exe):
             self.log_message.emit(f"Файл не найден: {exe}", "error")
             return False
+
         pubkey = params.get('pubkey_hex', '')
         rb = params.get('rb_hex', '')
         re = params.get('re_hex', '')
         if not pubkey or not rb or not re:
             self.log_message.emit("Не заполнены обязательные поля", "error")
             return False
+
+        # 🆕 Валидация temp_dir: должен быть под BASE_DIR (рядом с .exe)
+        temp_dir = (params.get('temp_dir') or '').strip()
+        if not temp_dir or not os.path.isabs(temp_dir):
+            temp_dir = os.path.join(config.BASE_DIR, 'kangaroo_temp')
+        try:
+            os.makedirs(temp_dir, exist_ok=True)
+        except (OSError, PermissionError) as e:
+            logger.warning(f"temp_dir {temp_dir} недоступен ({e}), откат на дефолт")
+            temp_dir = os.path.join(config.BASE_DIR, 'kangaroo_temp')
+            os.makedirs(temp_dir, exist_ok=True)
+        params = dict(params, temp_dir=temp_dir)
 
         self._params = params.copy()
 
@@ -793,7 +1081,7 @@ class VanityScanner(BaseScanner):
             self.log_message.emit("Укажите префикс", "error")
             return False
 
-        exe_path = os.path.join(config.BASE_DIR, "VanitySearch.exe")
+        exe_path = config.VANITYSEARCH_EXE  # лежит в bin/ (см. config.find_binary)
         if not os.path.exists(exe_path):
             self.log_message.emit("VanitySearch.exe не найден", "error")
             return False
@@ -843,7 +1131,7 @@ class VanityScanner(BaseScanner):
                 stdin=subprocess.PIPE,
                 text=True,
                 bufsize=1,
-                cwd=config.BASE_DIR,
+                cwd=config.BIN_DIR,  # внешние .exe/DLL перенесены в bin/
                 startupinfo=startupinfo,
                 creationflags=creationflags
             )
